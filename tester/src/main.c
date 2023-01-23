@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:36:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/22 22:55:53 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/22 22:58:01 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ Para cada arquivo de teste, vai ter um arquivo contatenando toda a saida esperad
 O obejtivo do tester é comparar a saida do usuario com a saida esperada.
 Ao iniciar outra rodada de testes, apagar os outputs de usuario anteriores.
 (No futura talvez seria interessante colocar uma flag no tester, para identificar qual etapa do codigo
-estamos testando)*/
+estamos testando)
+
+depois fazer uma rechecagem buscando vazamentos*/
 
 // void	input_loop(t_data *data)
 // {
