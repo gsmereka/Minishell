@@ -6,11 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/22 23:16:39 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 17:27:22 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/tester.h"
+
+void	set_files(t_data *data);
+void	open_files(t_data *data);
 
 void	initialize(t_data *data)
 {
