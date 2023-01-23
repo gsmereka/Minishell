@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:34:12 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/22 22:39:11 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/22 22:53:58 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 typedef struct s_data
 {
-	char **inputs;
+	int		input_tests_amount;
+	int		input_tests_fd;
+	char 	**input_tests_name;
 }	t_data;
 
 #endif
