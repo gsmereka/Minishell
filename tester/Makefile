@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/22 23:22:26 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/22 23:24:59 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ mk_obj_dir:
 git: fclean
 	git add . && clear && git status
 
-clear: $(NAME) clean
+clear: mk_obj_dir $(NAME) clean
 	clear
 
 clean:

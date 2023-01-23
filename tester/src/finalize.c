@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:16:42 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/22 23:23:44 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/22 23:26:20 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ static void free_list(void **list)
 	int	i;
 
 	i = 0;
-	while (list[i])
+	while (i < 3)
 	{
-		free(list[i]);
+		if (list[i])
+			free(list[i]);
 		i++;
 	}
 	free (list);

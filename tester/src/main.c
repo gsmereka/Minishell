@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:36:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/22 23:22:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/22 23:27:28 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	main(int argc, char *argv[])
 {
-	t_data *data;
+	t_data	data;
 
-	initialize(data);
-	finalize(data);
+	initialize(&data);
 	printf("Mundo Oi\n");
+	finalize(&data);
 }
 
 /* Da forma que o REPL funciona, cada comando termina numa quebra de linha,
