@@ -39,12 +39,12 @@ O Executor é a parte responsável por receber a lista de palavras-chave formata
 ## Fluxograma
 
 ## Funcionalidades esperadas:
-[] Exibição de um prompt quando esperando por um novo comando
-[] Armazenamento do histórico de comandos executados
-[] Manipulação de ctrl + C, ctrl + D e ctrl + \ durante a exibição do prompt.
-[] Manipulação de aspas simples e duplas
-[] Manipulação de variáveis de ambiente
-[] Implementação de redirecionamentos de entrada e saída e uso de pipes
-[] Implementação de comandos internos como echo, cd, pwd, export, unset, env e exit
-[] Procura e inicialização do programa correto
-[] Manipulação de ctrl + C, ctrl + D e ctrl + \ de acordo com o bash.
+- [ ] Exibição de um prompt quando esperando por um novo comando
+- [ ] Armazenamento do histórico de comandos executados
+- [ ] Manipulação de ctrl + C, ctrl + D e ctrl + \ durante a exibição do prompt.
+- [ ] Manipulação de aspas simples e duplas
+- [ ] Manipulação de variáveis de ambiente
+- [ ] Implementação de redirecionamentos de entrada e saída e uso de pipes
+- [ ] Implementação de comandos internos como echo, cd, pwd, export, unset, env e exit
+- [ ] Procura e inicialização do programa correto
+- [ ] Manipulação de ctrl + C, ctrl + D e ctrl + \ de acordo com o bash.
