@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 22:34:12 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/22 23:11:27 by gsmereka         ###   ########.fr       */
+/*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
+/*   Updated: 2023/01/22 23:16:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "../headers/tester.h"
 
-typedef struct s_data
+void	initialize(t_data *data)
 {
-	int		input_tests_amount;
-	int		*input_tests_fd;
-	char 	**input_tests_name;
-}	t_data;
+	data->input_tests_amount = 3;
+	data->input_tests_fd = calloc(data->input_tests_amount + 1, sizeof(int));
+	data->input_tests_name = calloc(data->input_tests_amount + 1, sizeof(char *));
 
-#endif
+	if (!data->input_tests_fd || !data->input_tests_name)
+		exit_error(12, "Fail at allocate initial memory\n", data);
+}
