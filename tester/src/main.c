@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:36:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/22 23:27:28 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 10:20:46 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,26 @@ estamos testando)
 
 depois fazer uma rechecagem buscando vazamentos*/
 
-// void	input_loop(t_data *data)
-// {
-// 	int	test;
+void	input_loop(t_data *data)
+{
+	int	test;
 
-// 	test = 0;
-// 	while (i < data->input_tests_amount)
-// 	{
-// 		execute_test(test, data);
-// 	}
-// }
+	test = 0;
+	while (test < data->input_tests_amount)
+	{
+		execute_test(test, data);
+		test++;
+	}
+}
 
+void	execute_test(int test, t_data *data)
+{
+	int pid = fork();
+
+	if (pid == 0)
+	{
+		redirecionar_entrada_do_teste()
+		redirecionar_saida_do_minishel()
+		execve("../minishell", NULL, NULL);
+	}
+}
