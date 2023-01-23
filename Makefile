@@ -6,7 +6,7 @@
 #    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/01/23 13:19:42 by gde-mora         ###   ########.fr        #
+#    Updated: 2023/01/23 15:30:30 by gde-mora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ = $(SRC:.c=.o)
 # MAKEFILE UTILS
 LIBFT_A = ./libft/libft.a
 
-HEADER = ./headers/minishell.h
+HEADERS = ./headers/minishell.h ./headers/functions.h ./headers/structs.h
 
 CCFLAGS = -Wall -Wextra -Werror
 
@@ -36,7 +36,7 @@ $(LIBFT_A):
 	make -C libft
 
 # MANDATORY COMPILE
-$(NAME): $(OBJ) $(HEADER) $(LIBFT_A)
+$(NAME): $(OBJ) $(HEADERS) $(LIBFT_A)
 	cc $(CCFLAGS) -o $(NAME) $(OBJ) $(LIBFT_A)
 
 # RULES CLEAN FCLEAN AND RE
