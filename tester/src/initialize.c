@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 21:36:40 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:46:07 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 void	set_files(t_data *data);
 void	open_files(t_data *data);
 
+static void allocate_memory(t_data *data);
+
 void	initialize(t_data *data)
+{
+	allocate_memory(data);
+	set_files(data);
+}
+
+static void allocate_memory(t_data *data)
 {
 	data->input_tests_amount = 3;
 	data->input_tests_fd = calloc(data->input_tests_amount + 1, sizeof(int));
@@ -44,13 +52,17 @@ void	set_files(t_data *data)
 	data->user_outputs_name[2] = strdup("./tests/user_outputs/test_2");
 }
 
-// void	open_files(t_data *data)
-// {
-// 	int i;
+void	open_files(t_data *data)
+{
+	int i;
 
-// 	i = 0;
-// 	while (i < data->input_tests_amount)
-// 	{
-// 		data->input
-// 	}
-// }
+	i = 0;
+	while (i < data->input_tests_amount)
+	{
+		data->input_tests_fd[i] = open(data->input_tests_name[i], O_RDONLY);
+		data->expected_outputs_fd[i] = open(data->expected_outputs_name[i], O_RDONLY);
+		data->user_outputs_fd[i] = open(data->user_outputs_name[i], O_RDWR | O_TRUNC);
+		if (data->input_tests_fd[i] < 0 || data->expected_outputs_fd[i] < 0 || data->user_outputs_fd[i] < 0)
+			exit_error(12, "Fail at allocate initial memory\n", data);
+	}
+}

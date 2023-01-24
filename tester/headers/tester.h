@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:35:53 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 21:30:46 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:46:35 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 
 // initialize
 void	initialize(t_data *data);
