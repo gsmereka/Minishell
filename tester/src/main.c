@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:36:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 20:45:48 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 22:40:18 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,21 @@ void	test_input_loop(t_data *data)
 
 void	execute_test(int test, t_data *data)
 {
-	int pid = fork();
+	int	pid;
 
+	pid = fork();
+	if (pid == -1)
+		exit_error(12, "Error at use fork() function", data);
 	if (pid == 0)
 	{
-		// redirecionar_entrada_do_teste()
-		// redirecionar_saida_do_minishel()
+		redirect_input(test, data);
+		redirect_output(test, data);
 		// execve("../minishell", NULL, NULL);
+	}
+	else
+	{
+		data->process.pid[test] = pid;
+		waitpid(data->process.pid[test],
+			&data->process.status[test], WNOHANG | WUNTRACED);
 	}
 }

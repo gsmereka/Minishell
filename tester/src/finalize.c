@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:16:42 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 21:58:06 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 22:33:31 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ static void	free_program_memory(t_data *data);
 
 void	finalize(t_data *data)
 {
-	close_files(data);
 	wait_tests(data);
+	close_files(data);
 	free_program_memory(data);
 	exit(0);
 }
 
 void	exit_error(int error, char *msg, t_data *data)
 {
-	close_files(data);
 	write(2, msg, strlen(msg));
 	free_program_memory(data);
 	exit(error);
