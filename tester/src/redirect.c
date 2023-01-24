@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 21:27:29 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 11:33:10 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:18:26 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	redirect_output(int test, t_data *data)
 	int	dup_work;
 
 	dup_work = dup2(data->user_outputs_fd[test], 1);
-	// write(1, "teste_1\n", 8);
 	if (dup_work == -1)
 		redirect_error(test, data);
 }
