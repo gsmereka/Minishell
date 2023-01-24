@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 21:58:53 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 22:49:28 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	initialize(t_data *data)
 
 static void allocate_memory(t_data *data)
 {
-	data->input_tests_amount = 3;
+	data->input_tests_amount = 40;
 	data->process.pid = calloc(data->input_tests_amount + 1, sizeof(int));
 	data->process.status = calloc(data->input_tests_amount + 1, sizeof(int));
 	data->input_tests_fd = calloc(data->input_tests_amount + 1, sizeof(int));

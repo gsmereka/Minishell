@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:36:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 22:40:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 22:48:48 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	execute_test(int test, t_data *data)
 	{
 		redirect_input(test, data);
 		redirect_output(test, data);
+		exit_error(0, "Testing\n", data);
 		// execve("../minishell", NULL, NULL);
 	}
 	else
