@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 21:46:07 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:56:45 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	initialize(t_data *data)
 static void allocate_memory(t_data *data)
 {
 	data->input_tests_amount = 3;
+	data->process.pid = calloc(data->input_tests_amount + 1, sizeof(int));
+	data->process.status = calloc(data->input_tests_amount + 1, sizeof(int));
 	data->input_tests_fd = calloc(data->input_tests_amount + 1, sizeof(int));
 	data->expected_outputs_fd = calloc(data->input_tests_amount + 1, sizeof(int));
 	data->user_outputs_fd = calloc(data->input_tests_amount + 1, sizeof(int));
@@ -33,7 +35,8 @@ static void allocate_memory(t_data *data)
 	data->expected_outputs_name = calloc(data->input_tests_amount + 1, sizeof(char *));
 	data->user_outputs_name = calloc(data->input_tests_amount + 1, sizeof(char *));
 	if (!data->input_tests_fd || !data->input_tests_name || !data->user_outputs_name
-		 || !data->expected_outputs_name || !data->expected_outputs_fd || !data->user_outputs_fd)
+		|| !data->expected_outputs_name || !data->expected_outputs_fd || !data->user_outputs_fd
+		|| !data->process.pid || !data->process.status)
 		exit_error(12, "Fail at allocate initial memory\n", data);
 }
 
