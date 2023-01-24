@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:16:42 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 20:42:36 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:29:53 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,25 @@ static void free_list(void **list)
 	int	i;
 
 	i = 0;
-	while (i < 3)
+	while (list[i])
 	{
 		if (list[i])
 			free(list[i]);
 		i++;
 	}
 	free (list);
+}
+
+void	wait_tests(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->input_tests_amount)
+	{
+		waitpid(data->process.pid[i], &data->process.status[i], WUNTRACED);
+		i++;
+	}
 }
 
 static void	free_program_memory(t_data *data)
