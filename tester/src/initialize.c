@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 21:56:45 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:58:53 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ void	open_files(t_data *data)
 		data->expected_outputs_fd[i] = open(data->expected_outputs_name[i], O_RDONLY);
 		data->user_outputs_fd[i] = open(data->user_outputs_name[i], O_RDWR | O_TRUNC);
 		if (data->input_tests_fd[i] < 0 || data->expected_outputs_fd[i] < 0 || data->user_outputs_fd[i] < 0)
-			exit_error(12, "Fail at allocate initial memory\n", data);
+			exit_error(1, "Fail at open files\n", data);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 21:27:29 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 21:32:02 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 22:19:07 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,35 +19,18 @@ void	redirect_input(int test, t_data *data)
 {
 	int	dup_work;
 
-	dup_work = 0;
-	if (cmd == 0)
-	{
-		if (data->files.infile_fd == -1)
-			exit_error(cmd, data->files.infile, data);
-		dup_work = dup2(data->files.infile_fd, STDIN_FILENO);
-	}
-	if (cmd > 0)
-		dup_work = dup2(data->files.pipes[cmd - 1][0], STDIN_FILENO);
+	dup_work = dup2(data->input_tests_fd[test], 0);
 	if (dup_work == -1)
-		finalize("Failed to execute dup2(2)", 24, data);
+		exit_error(24, "Failed to execute dup2(2)", data);
 }
 
 void	redirect_output(int test, t_data *data)
 {
 	int	dup_work;
 
-	dup_work = 0;
-	if (cmd != data->n_cmds - 1)
-		dup_work = dup2(data->files.pipes[cmd][1], STDOUT_FILENO);
-	if (cmd == data->n_cmds - 1)
-	{
-		if (data->files.outfile_fd == -1)
-			exit_error(cmd, data->files.outfile, data);
-		else
-			dup_work = dup2(data->files.outfile_fd, STDOUT_FILENO);
-	}
+	dup_work = dup2(data->user_outputs_fd[test], 1);
 	if (dup_work == -1)
-		finalize("Failed to execute dup2(2)", 24, data);
+		exit_error(24, "Failed to execute dup2(2)", data);
 }
 
 static void	exit_error(int cmd, char *file, t_data *data)
