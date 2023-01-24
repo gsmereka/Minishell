@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:35:53 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 20:04:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 20:24:59 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 // initialize
 void	initialize(char *envp[], t_data *data);
+char	*ft_itoa(int n);
 
 // finalize
 void	finalize(t_data *data);
