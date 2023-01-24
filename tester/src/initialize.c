@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 13:32:47 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 20:08:16 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	set_files(t_data *data);
 void	open_files(t_data *data);
 void	save_standart_input_and_output(t_data *data);
-
 static void allocate_memory(t_data *data);
 
-void	initialize(t_data *data)
+void	initialize(char *envp[], t_data *data)
 {
+	data->envp = envp;
 	allocate_memory(data);
 	set_files(data);
 	open_files(data);
