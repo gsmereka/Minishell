@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 13:12:47 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:32:47 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	open_files(t_data *data)
 	i = 0;
 	while (i < data->input_tests_amount)
 	{
+		if (!data->input_tests_name[i] || !data->expected_outputs_name[i] || !data->user_outputs_name[i])
+			exit_error(1, "Fail at open files\n", data);
 		data->input_tests_fd[i] = open(data->input_tests_name[i], O_RDONLY);
 		data->expected_outputs_fd[i] = open(data->expected_outputs_name[i], O_RDONLY);
 		data->user_outputs_fd[i] = open(data->user_outputs_name[i], O_RDWR | O_TRUNC);
