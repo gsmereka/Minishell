@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 11:05:28 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:45:23 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ void	initialize(t_data *data)
 {
 	allocate_memory(data);
 	set_files(data);
+	open_files(data);
 	save_standart_input_and_output(data);
 }
 
 static void allocate_memory(t_data *data)
 {
-	data->input_tests_amount = 40;
+	data->input_tests_amount = 3;
 	data->process.pid = calloc(data->input_tests_amount + 1, sizeof(int));
 	data->process.status = calloc(data->input_tests_amount + 1, sizeof(int));
 	data->input_tests_fd = calloc(data->input_tests_amount + 1, sizeof(int));
@@ -67,8 +68,10 @@ void	open_files(t_data *data)
 		data->input_tests_fd[i] = open(data->input_tests_name[i], O_RDONLY);
 		data->expected_outputs_fd[i] = open(data->expected_outputs_name[i], O_RDONLY);
 		data->user_outputs_fd[i] = open(data->user_outputs_name[i], O_RDWR | O_TRUNC);
+		// printf("i - %d\ne - %d\nu - %d\n", data->input_tests_fd[i], data->expected_outputs_fd[i], data->user_outputs_fd[i]);
 		if (data->input_tests_fd[i] < 0 || data->expected_outputs_fd[i] < 0 || data->user_outputs_fd[i] < 0)
 			exit_error(1, "Fail at open files\n", data);
+		i++;
 	}
 }
 
