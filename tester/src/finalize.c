@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:16:42 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 21:29:53 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:36:55 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ static void	free_program_memory(t_data *data)
 {
 	if (data->input_tests_fd)
 		free(data->input_tests_fd);
+	if (data->expected_outputs_fd)
+		free(data->expected_outputs_fd);
+	if (data->user_outputs_fd)
+		free(data->user_outputs_fd);
 	if (data->input_tests_name)
 		free_list((void **)data->input_tests_name);
 	if (data->expected_outputs_name)

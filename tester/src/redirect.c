@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 21:27:29 by gsmereka          #+#    #+#             */
-/*   Updated: 2022/12/29 14:05:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:32:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	exit_error(int cmd, char *file, t_data *data);
 static void	close_fds_at_error(int cmd, t_data *data);
 
-void	redirect_input(int cmd, t_data *data)
+void	redirect_input(int test, t_data *data)
 {
 	int	dup_work;
 
@@ -32,7 +32,7 @@ void	redirect_input(int cmd, t_data *data)
 		finalize("Failed to execute dup2(2)", 24, data);
 }
 
-void	redirect_output(int cmd, t_data *data)
+void	redirect_output(int test, t_data *data)
 {
 	int	dup_work;
 
