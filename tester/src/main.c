@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:36:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 10:20:46 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/23 22:48:48 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char *argv[])
 
 	initialize(&data);
 	printf("Mundo Oi\n");
+	test_input_loop(&data);
 	finalize(&data);
 }
 
@@ -31,7 +32,7 @@ estamos testando)
 
 depois fazer uma rechecagem buscando vazamentos*/
 
-void	input_loop(t_data *data)
+void	test_input_loop(t_data *data)
 {
 	int	test;
 
@@ -45,12 +46,22 @@ void	input_loop(t_data *data)
 
 void	execute_test(int test, t_data *data)
 {
-	int pid = fork();
+	int	pid;
 
+	pid = fork();
+	if (pid == -1)
+		exit_error(12, "Error at use fork() function", data);
 	if (pid == 0)
 	{
-		redirecionar_entrada_do_teste()
-		redirecionar_saida_do_minishel()
-		execve("../minishell", NULL, NULL);
+		redirect_input(test, data);
+		redirect_output(test, data);
+		exit_error(0, "Testing\n", data);
+		// execve("../minishell", NULL, NULL);
+	}
+	else
+	{
+		data->process.pid[test] = pid;
+		waitpid(data->process.pid[test],
+			&data->process.status[test], WNOHANG | WUNTRACED);
 	}
 }

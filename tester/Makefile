@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/22 23:24:59 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/23 22:40:54 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJ_DIR			=	./obj
 
 SRC_DIR			=	src
 
-SRC				=	main.c initialize.c finalize.c
+SRC				=	main.c initialize.c finalize.c redirect.c
 
 OBJ				=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
