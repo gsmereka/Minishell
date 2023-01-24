@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:52:57 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 13:18:07 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 20:10:41 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ void	execute_test(int test, t_data *data)
 	{
 		redirect_input(test, data);
 		redirect_output(test, data);
-		printf("test - %d\n", test);
-		finalize(data);
-		// exit_error(0, "Testing\n", data);
-		// execve("../minishell", NULL, NULL);
+		execve("../minishell", NULL, data->envp);
+		exit_error(0, "Error at execute Minishell\n", data);
 	}
 	else
 	{
