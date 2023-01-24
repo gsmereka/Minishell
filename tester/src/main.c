@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:36:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 22:48:48 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:07:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	test_input_loop(t_data *data)
 	}
 }
 
+void	restore_input_and_output(t_data *data);
+
 void	execute_test(int test, t_data *data)
 {
 	int	pid;
@@ -55,7 +57,9 @@ void	execute_test(int test, t_data *data)
 	{
 		redirect_input(test, data);
 		redirect_output(test, data);
-		exit_error(0, "Testing\n", data);
+		printf("Test\n");
+		finalize(data);
+		// exit_error(0, "Testing\n", data);
 		// execve("../minishell", NULL, NULL);
 	}
 	else
@@ -63,5 +67,17 @@ void	execute_test(int test, t_data *data)
 		data->process.pid[test] = pid;
 		waitpid(data->process.pid[test],
 			&data->process.status[test], WNOHANG | WUNTRACED);
+		restore_input_and_output(data);
 	}
+}
+
+void	restore_input_and_output(t_data *data)
+{
+	int	process_1;
+	int	process_2;
+
+	process_1 = dup2(data->original_stdin, 0);
+	process_2 = dup2(data->original_stdout, 1);
+	if (process_1 < 0 || process_2 < 0)
+		exit_error(2, "Fail at restore file descriptors\n", data);
 }

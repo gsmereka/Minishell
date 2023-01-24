@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 22:49:28 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:05:28 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	set_files(t_data *data);
 void	open_files(t_data *data);
+void	save_standart_input_and_output(t_data *data);
 
 static void allocate_memory(t_data *data);
 
@@ -21,6 +22,7 @@ void	initialize(t_data *data)
 {
 	allocate_memory(data);
 	set_files(data);
+	save_standart_input_and_output(data);
 }
 
 static void allocate_memory(t_data *data)
@@ -68,4 +70,10 @@ void	open_files(t_data *data)
 		if (data->input_tests_fd[i] < 0 || data->expected_outputs_fd[i] < 0 || data->user_outputs_fd[i] < 0)
 			exit_error(1, "Fail at open files\n", data);
 	}
+}
+
+void	save_standart_input_and_output(t_data *data)
+{
+	data->original_stdin = dup(0);
+	data->original_stdout = dup(1);
 }

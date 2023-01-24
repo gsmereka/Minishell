@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:34:12 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 21:34:25 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 10:53:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_process
 typedef struct s_data
 {
 	t_process	process;
+	int		original_stdin;
+	int		original_stdout;
 	int		input_tests_amount;
 	int		*input_tests_fd;
 	int		*expected_outputs_fd;
