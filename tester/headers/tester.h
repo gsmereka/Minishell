@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:35:53 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 20:24:59 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 22:00:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	test_input_loop(t_data *data);
 // redirections
 void	redirect_input(int test, t_data *data);
 void	redirect_output(int test, t_data *data);
+void	redirect_error(int test, t_data *data);
 
 // verify_results
 void	verify_results(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:16:42 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 13:34:47 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 22:04:30 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	close_files(t_data *data)
 {
 	int i;
 
-	if (!data->input_tests_fd || !data->expected_outputs_fd || !data->user_outputs_fd)
+	if (!data->input_tests_fd || !data->expected_outputs_fd || !data->user_outputs_fd || !data->user_error_fd)
 		return (-1);
 	i = 0;
 	while (i < data->input_tests_amount)
@@ -45,6 +45,8 @@ static int	close_files(t_data *data)
 			close(data->expected_outputs_fd[i]);
 		if (data->user_outputs_fd[i] >= 0)
 			close(data->user_outputs_fd[i]);
+		if (data->user_error_fd[i] >= 0)
+			close(data->user_error_fd[i]);
 		i++;
 	}
 	return (0);

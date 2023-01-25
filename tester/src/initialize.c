@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 21:25:21 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 22:08:55 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ static void allocate_memory(t_data *data)
 	data->process.status = calloc(data->input_tests_amount + 1, sizeof(int));
 	data->input_tests_fd = calloc(data->input_tests_amount + 1, sizeof(int));
 	data->expected_outputs_fd = calloc(data->input_tests_amount + 1, sizeof(int));
+	data->user_error_fd = calloc(data->input_tests_amount + 1, sizeof(int));
 	data->user_outputs_fd = calloc(data->input_tests_amount + 1, sizeof(int));
 	data->input_tests_name = calloc(data->input_tests_amount + 1, sizeof(char *));
 	data->expected_outputs_name = calloc(data->input_tests_amount + 1, sizeof(char *));
 	data->user_outputs_name = calloc(data->input_tests_amount + 1, sizeof(char *));
+	data->user_error_name = calloc(data->input_tests_amount + 1, sizeof(char *));
 	if (!data->input_tests_fd || !data->input_tests_name || !data->user_outputs_name
 		|| !data->expected_outputs_name || !data->expected_outputs_fd || !data->user_outputs_fd
-		|| !data->process.pid || !data->process.status)
+		|| !data->process.pid || !data->process.status || !data->user_error_fd || !data->user_error_name)
 		exit_error(12, "Fail at allocate initial memory\n", data);
 }
 
@@ -56,8 +58,9 @@ void	set_files(t_data *data)
 		data->input_tests_name[i] = ft_strjoin("./tests/input_tests/test_", ver);
 		data->expected_outputs_name[i] = ft_strjoin("./tests/expected_outputs/test_", ver);
 		data->user_outputs_name[i] = ft_strjoin("./tests/user_outputs/test_", ver);
+		data->user_error_name[i] = ft_strjoin("./tests/user_error/test_", ver);
 		free(ver);
-		if (!data->input_tests_name[i] || !data->expected_outputs_name[i] || !data->user_outputs_name[i])
+		if (!data->input_tests_name[i] || !data->expected_outputs_name[i] || !data->user_outputs_name[i] || !data->user_error_name[i])
 			exit_error(12, "Fail at allocate test_file paths\n", data);
 		i++;
 	}
@@ -74,9 +77,10 @@ void	open_files(t_data *data)
 			exit_error(1, "Fail at open files\n", data);
 		data->input_tests_fd[i] = open(data->input_tests_name[i], O_RDONLY);
 		data->expected_outputs_fd[i] = open(data->expected_outputs_name[i], O_RDONLY);
-		data->user_outputs_fd[i] = open(data->user_outputs_name[i], O_RDWR | O_TRUNC);
+		data->user_outputs_fd[i] = open(data->user_outputs_name[i], O_RDWR | O_CREAT | O_TRUNC, 0777);
+		data->user_error_fd[i] = open(data->user_error_name[i], O_RDWR | O_CREAT | O_TRUNC, 0777);
 		// printf("i - %d\ne - %d\nu - %d\n", data->input_tests_fd[i], data->expected_outputs_fd[i], data->user_outputs_fd[i]);
-		if (data->input_tests_fd[i] < 0 || data->expected_outputs_fd[i] < 0 || data->user_outputs_fd[i] < 0)
+		if (data->input_tests_fd[i] < 0 || data->expected_outputs_fd[i] < 0 || data->user_outputs_fd[i] < 0 || data->user_error_fd[i] < 0)
 			exit_error(1, "Fail at open files\n", data);
 		i++;
 	}
@@ -86,6 +90,7 @@ void	save_standart_input_and_output(t_data *data)
 {
 	data->original_stdin = dup(0);
 	data->original_stdout = dup(1);
+	data->original_stder = dup(2);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)

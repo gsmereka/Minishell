@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:52:57 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 20:10:41 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 21:59:52 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ estamos testando)
 
 depois fazer uma rechecagem buscando vazamentos*/
 
-void	restore_input_and_output(int test, t_data *data);
+void	restore_input_and_output_error(int test, t_data *data);
 void	execute_test(int test, t_data *data);
 
 void	test_input_loop(t_data *data)
@@ -48,25 +48,28 @@ void	execute_test(int test, t_data *data)
 	{
 		redirect_input(test, data);
 		redirect_output(test, data);
+		redirect_error(test, data);
 		execve("../minishell", NULL, data->envp);
-		exit_error(0, "Error at execute Minishell\n", data);
+		exit_error(1, "", data);
 	}
 	else
 	{
 		data->process.pid[test] = pid;
 		waitpid(data->process.pid[test],
 			&data->process.status[test], WNOHANG | WUNTRACED);
-		restore_input_and_output(test, data);
+		restore_input_and_output_error(test, data);
 	}
 }
 
-void	restore_input_and_output(int test, t_data *data)
+void	restore_input_and_output_error(int test, t_data *data)
 {
 	int	process_1;
 	int	process_2;
+	int	process_3;
 
 	process_1 = dup2(data->original_stdin, 0);
 	process_2 = dup2(data->original_stdout, 1);
-	if (process_1 < 0 || process_2 < 0)
+	process_3 = dup2(data->original_stder, 2);
+	if (process_1 < 0 || process_2 < 0 || process_3 < 0)
 		exit_error(2, "Fail at restore file descriptors\n", data);
 }
