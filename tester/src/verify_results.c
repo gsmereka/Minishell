@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:02:25 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/25 11:13:23 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 11:19:12 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,11 @@ static void	check_leaks(int test, t_data *data)
 	if (!content)
 		exit_error(12, "Fail at allocate user error memory\n", data);
 	read_content(content, size, test, data);
+	if (strstr(content, "All heap blocks were freed -- no leaks are possible") && strstr(content, "ERROR SUMMARY: 0 errors from 0 contexts"))
+		printf("No Leaks\n");
+	else
+		printf("Leaks\n");
 	free(content);
-	printf("Leaks\n");
-	// printf("No Leaks\n");
 }
 
 static long int	get_content_size(char *file_name, t_data *data)
