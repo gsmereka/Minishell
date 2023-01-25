@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:16:42 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 22:50:43 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:34:47 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 static int	close_files(t_data *data);
 static void free_list(void **list);
-void	wait_tests(t_data *data);
 static void	free_program_memory(t_data *data);
 
 void	finalize(t_data *data)
 {
-	wait_tests(data);
 	close_files(data);
 	free_program_memory(data);
 	exit(0);
@@ -41,11 +39,11 @@ static int	close_files(t_data *data)
 	i = 0;
 	while (i < data->input_tests_amount)
 	{
-		if (data->input_tests_fd[i])
+		if (data->input_tests_fd[i] >= 0)
 			close(data->input_tests_fd[i]);
-		if (data->expected_outputs_fd[i])
+		if (data->expected_outputs_fd[i] >=0)
 			close(data->expected_outputs_fd[i]);
-		if (data->user_outputs_fd[i])
+		if (data->user_outputs_fd[i] >= 0)
 			close(data->user_outputs_fd[i]);
 		i++;
 	}
@@ -84,20 +82,4 @@ static void free_list(void **list)
 		i++;
 	}
 	free (list);
-}
-
-void	wait_tests(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	if (data->process.pid && data->process.status)
-	{
-		while (i < data->input_tests_amount)
-		{
-			if (data->process.pid[i] && data->process.status[i])
-				waitpid(data->process.pid[i], &data->process.status[i], WUNTRACED);
-			i++;
-		}
-	}
 }

@@ -6,62 +6,37 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:36:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/23 22:48:48 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 20:04:20 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/tester.h"
 
-int	main(int argc, char *argv[])
+void	wait_tests(t_data *data);
+
+int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	data;
 
-	initialize(&data);
-	printf("Mundo Oi\n");
+	initialize(envp, &data);
 	test_input_loop(&data);
+	wait_tests(&data);
+	verify_results(&data);
 	finalize(&data);
 }
 
-/* Da forma que o REPL funciona, cada comando termina numa quebra de linha,
-entao todos os testes vão estar num unico arquivo de texto, separados por uma quebra de linha natural
-Para cada arquivo de teste, vai ter um arquivo contatenando toda a saida esperada.
-O obejtivo do tester é comparar a saida do usuario com a saida esperada.
-Ao iniciar outra rodada de testes, apagar os outputs de usuario anteriores.
-(No futura talvez seria interessante colocar uma flag no tester, para identificar qual etapa do codigo
-estamos testando)
-
-depois fazer uma rechecagem buscando vazamentos*/
-
-void	test_input_loop(t_data *data)
+void	wait_tests(t_data *data)
 {
-	int	test;
+	int	i;
 
-	test = 0;
-	while (test < data->input_tests_amount)
+	i = 0;
+	if (data->process.pid && data->process.status)
 	{
-		execute_test(test, data);
-		test++;
-	}
-}
-
-void	execute_test(int test, t_data *data)
-{
-	int	pid;
-
-	pid = fork();
-	if (pid == -1)
-		exit_error(12, "Error at use fork() function", data);
-	if (pid == 0)
-	{
-		redirect_input(test, data);
-		redirect_output(test, data);
-		exit_error(0, "Testing\n", data);
-		// execve("../minishell", NULL, NULL);
-	}
-	else
-	{
-		data->process.pid[test] = pid;
-		waitpid(data->process.pid[test],
-			&data->process.status[test], WNOHANG | WUNTRACED);
+		while (i < data->input_tests_amount)
+		{
+			if (data->process.pid[i] && data->process.status[i])
+				waitpid(data->process.pid[i], &data->process.status[i], WUNTRACED);
+			i++;
+		}
 	}
 }
