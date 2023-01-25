@@ -6,19 +6,16 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:02:25 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/25 12:59:05 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 14:15:41 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/tester.h"
+#include "../../headers/tester.h"
 
+static void reopen_user_outputs(t_data *data);
 static void	verification_loop(t_data *data);
 static int	compare_outputs(int test, t_data *data);
-static void	check_leaks(int test, t_data *data);
-static void	print_result(int result, int test, t_data *data);
-static void reopen_user_outputs(t_data *data);
-static long int	get_content_size(char *file_name, t_data *data);
-static int	read_content(char *content, int test, t_data *data);
+static void	print_result(int result, int leaks, int test, t_data *data);
 
 void	verify_results(t_data *data)
 {
@@ -30,13 +27,14 @@ static void	verification_loop(t_data *data)
 {
 	int	test;
 	int	result;
+	int leaks;
 
 	test = 0;
 	while (test < data->input_tests_amount)
 	{
 		result = compare_outputs(test, data);
-		print_result(result, test, data);
-		check_leaks(test, data);
+		leaks = check_leaks(test, data);
+		print_result(result, leaks, test, data);
 		test++;
 	}
 }
@@ -64,13 +62,17 @@ static int	compare_outputs(int test, t_data *data)
 	return (1);
 }
 
-static void	print_result(int result, int test, t_data *data)
+static void	print_result(int result, int leaks, int test, t_data *data)
 {
 	printf("Test %d:", test);
 	if (result)
-		printf(" OK\n");
+		printf(" OK /");
 	else
-		printf(" KO\n");
+		printf(" KO /");
+	if (leaks)
+		printf(" leaks\n");
+	else
+		printf(" No Leaks\n");
 }
 
 static void	reopen_user_outputs(t_data *data)
@@ -88,55 +90,4 @@ static void	reopen_user_outputs(t_data *data)
 			exit_error(2, "Fail at reopen file\n", data);
 		i++;
 	}
-}
-
-static void	check_leaks(int test, t_data *data)
-{
-	long int	size;
-	char		*content;
-
-	size = get_content_size(data->user_error_name[test], data);
-	content = calloc(size + 1, sizeof(char));
-	if (!content)
-		exit_error(12, "Fail at allocate user error memory\n", data);
-	read_content(content, test, data);
-	// printf("%s", content);
-	if (strstr(content, "All heap blocks were freed -- no leaks are possible") && strstr(content, "ERROR SUMMARY: 0 errors from 0 contexts"))
-		printf("No Leaks\n");
-	else
-		printf("Leaks\n");
-	free(content);
-}
-
-static long int	get_content_size(char *file_name, t_data *data)
-{
-	struct		stat st;
-	long int	size;
-
-	if (stat(file_name, &st) == 0)
-		size = st.st_size;
-	else
-		exit_error(1, "Fail at get file size\n", data);
-	if (!size)
-		exit_error(1, "Empty File\n", data);
-	return (size);
-}
-
-static int	read_content(char *content, int test, t_data *data)
-{
-	int		status_1;
-	char	expected[1];
-
-	expected[0] = 0;
-	status_1 = 1;
-	while (status_1)
-	{
-		status_1 = read(data->user_error_fd[test], &expected, 1);
-		if (status_1 < 0)
-			return (0);
-		if (expected[0] != '\0')
-			*content = expected[0];
-		content++;
-	}
-	return (1);
 }

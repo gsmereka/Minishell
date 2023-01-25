@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/25 12:45:52 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/25 14:17:35 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,10 @@ OBJ_DIR			=	./obj
 
 SRC_DIR			=	src
 
-SRC				=	main.c initialize.c finalize.c redirect.c  test_loop.c verify_results.c  set_valgrind_path.c \
+SRC				=	main.c initialize.c finalize.c redirect.c  test_loop.c \
+					set_valgrind_path.c \
+					verify_results/verify_results.c \
+					verify_results/check_leaks.c \
 					utils/ft_split.c \
 					utils/ft_substr.c \
 					utils/ft_itoa.c \
@@ -38,6 +41,7 @@ $(NAME): $(HEADERS) $(OBJ)
 mk_obj_dir:
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/utils
+	@mkdir -p $(OBJ_DIR)/verify_results
 
 git: fclean
 	git add . && clear && git status
