@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/24 20:23:55 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/24 23:00:14 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ OBJ_DIR			=	./obj
 
 SRC_DIR			=	src
 
-SRC				=	main.c initialize.c finalize.c redirect.c  test_loop.c verify_results.c ft_itoa.c
+SRC				=	main.c initialize.c finalize.c redirect.c  test_loop.c verify_results.c ft_itoa.c set_valgrind_path.c \
+					ft_split.c ft_substr.c \
 
 OBJ				=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

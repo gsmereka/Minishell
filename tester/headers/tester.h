@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:35:53 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 22:00:57 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 23:00:00 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 // initialize
 void	initialize(char *envp[], t_data *data);
 char	*ft_itoa(int n);
+
+// valgrind_path
+void	set_valgrind_path(t_data *data);
+char	**ft_split(char const *s, char c);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // finalize
 void	finalize(t_data *data);

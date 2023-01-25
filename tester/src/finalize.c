@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:16:42 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 22:12:00 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 22:49:50 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ static int	close_files(t_data *data)
 
 static void	free_program_memory(t_data *data)
 {
+	if (data->valgrind_path)
+		free(data->valgrind_path);
+	if (data->paths)
+		free(data->paths);
 	if (data->process.pid)
 		free(data->process.pid);
 	if (data->process.status)
