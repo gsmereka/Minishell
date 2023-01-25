@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 20:25:17 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 21:25:21 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	set_files(t_data *data)
 	{
 		ver = ft_itoa(i);
 		data->input_tests_name[i] = ft_strjoin("./tests/input_tests/test_", ver);
-		data->expected_outputs_name[i] = ft_strjoin("./tests/input_tests/test_", ver);
-		data->user_outputs_name[i] = ft_strjoin("./tests/input_tests/test_", ver);
+		data->expected_outputs_name[i] = ft_strjoin("./tests/expected_outputs/test_", ver);
+		data->user_outputs_name[i] = ft_strjoin("./tests/user_outputs/test_", ver);
 		free(ver);
-		if (!data->input_tests_name[i] || data->expected_outputs_name[i] || data->user_outputs_name[i])
+		if (!data->input_tests_name[i] || !data->expected_outputs_name[i] || !data->user_outputs_name[i])
 			exit_error(12, "Fail at allocate test_file paths\n", data);
 		i++;
 	}
