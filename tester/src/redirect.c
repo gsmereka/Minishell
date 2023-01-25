@@ -6,14 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 21:27:29 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 22:01:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:00:34 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/tester.h"
 
 static void	close_fds_at_error(int cmd, t_data *data);
-static void close_fds_at_error(int test, t_data *data);
+static void	close_fds_at_error(int test, t_data *data);
 
 void	redirect_input(int test, t_data *data)
 {

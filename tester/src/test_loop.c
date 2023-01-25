@@ -6,13 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:52:57 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/25 12:57:01 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 14:59:51 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/tester.h"
 
-static void	restore_input_and_output_error(int test, t_data *data);
+static void	restore_std_file_descriptors(t_data *data);
 static void	make_fork(int test, t_data *data);
 static void	execute_test(int test, t_data *data);
 static char	**set_valgrind_args(t_data *data);
@@ -46,11 +46,11 @@ static void	make_fork(int test, t_data *data)
 		data->process.pid[test] = pid;
 		waitpid(data->process.pid[test],
 			&data->process.status[test], WNOHANG | WUNTRACED);
-		restore_input_and_output_error(test, data);
+		restore_std_file_descriptors(data);
 	}
 }
 
-static void	restore_input_and_output_error(int test, t_data *data)
+static void	restore_std_file_descriptors(t_data *data)
 {
 	int	process_1;
 	int	process_2;

@@ -6,16 +6,16 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:02:25 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/25 14:15:41 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:04:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/tester.h"
 
-static void reopen_user_outputs(t_data *data);
+static void	reopen_user_outputs(t_data *data);
 static void	verification_loop(t_data *data);
 static int	compare_outputs(int test, t_data *data);
-static void	print_result(int result, int leaks, int test, t_data *data);
+static void	print_result(int result, int leaks, int test);
 
 void	verify_results(t_data *data)
 {
@@ -27,14 +27,14 @@ static void	verification_loop(t_data *data)
 {
 	int	test;
 	int	result;
-	int leaks;
+	int	leaks;
 
 	test = 0;
 	while (test < data->input_tests_amount)
 	{
 		result = compare_outputs(test, data);
 		leaks = check_leaks(test, data);
-		print_result(result, leaks, test, data);
+		print_result(result, leaks, test);
 		test++;
 	}
 }
@@ -62,7 +62,7 @@ static int	compare_outputs(int test, t_data *data)
 	return (1);
 }
 
-static void	print_result(int result, int leaks, int test, t_data *data)
+static void	print_result(int result, int leaks, int test)
 {
 	printf("Test %d:", test);
 	if (result)
@@ -77,7 +77,7 @@ static void	print_result(int result, int leaks, int test, t_data *data)
 
 static void	reopen_user_outputs(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->input_tests_amount)

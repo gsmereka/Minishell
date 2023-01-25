@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:18:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/25 14:12:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:00:12 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static char	*test_path(t_data *data)
 		ft_addstr(&final_path, "/");
 		ft_addstr(&final_path, "valgrind");
 		if (!final_path)
-			exit_error(12, "Failed to allocate memory for test a command path", data);
+			exit_error(12,
+				"Failed to allocate memory for test a command path\n", data);
 		if (access(final_path, X_OK) == 0)
 			return (final_path);
 		free(final_path);

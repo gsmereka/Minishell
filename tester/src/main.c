@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:36:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/25 13:59:23 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:04:05 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	data;
 
+	(void)argc;
+	(void)argv;
 	initialize(envp, &data);
 	set_valgrind_path(&data);
 	test_input_loop(&data);
@@ -37,7 +39,8 @@ void	wait_tests(t_data *data)
 		while (i < data->input_tests_amount)
 		{
 			if (data->process.pid[i] && data->process.status[i])
-				waitpid(data->process.pid[i], &data->process.status[i], WUNTRACED);
+				waitpid(data->process.pid[i],
+					&data->process.status[i], WUNTRACED);
 			i++;
 		}
 	}
