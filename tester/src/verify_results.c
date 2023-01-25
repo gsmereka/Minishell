@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:02:25 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 22:28:39 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 11:13:23 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	compare_outputs(int test, t_data *data);
 static void	check_leaks(int test, t_data *data);
 static void	print_result(int result, int test, t_data *data);
 static void reopen_user_outputs(t_data *data);
+static long int	get_content_size(char *file_name, t_data *data);
+static void	read_content(char *content, long int content_size, int test, t_data *data);
 
 void	verify_results(t_data *data)
 {
@@ -80,8 +82,10 @@ static void	reopen_user_outputs(t_data *data)
 	while (i < data->input_tests_amount)
 	{
 		close(data->user_outputs_fd[i]);
+		close(data->user_error_fd[i]);
 		data->user_outputs_fd[i] = open(data->user_outputs_name[i], O_RDONLY);
-		if (data->user_outputs_fd[i] < 0)
+		data->user_error_fd[i] = open(data->user_outputs_name[i], O_RDONLY);
+		if (data->user_outputs_fd[i] < 0 || data->user_error_fd[i] < 0)
 			exit_error(2, "Fail at reopen file\n", data);
 		i++;
 	}
@@ -89,6 +93,47 @@ static void	reopen_user_outputs(t_data *data)
 
 static void	check_leaks(int test, t_data *data)
 {
+	long int	size;
+	char		*content;
+
+	size = get_content_size(data->user_error_name[test], data);
+	content = calloc(size + 1, sizeof(char));
+	if (!content)
+		exit_error(12, "Fail at allocate user error memory\n", data);
+	read_content(content, size, test, data);
+	free(content);
 	printf("Leaks\n");
 	// printf("No Leaks\n");
+}
+
+static long int	get_content_size(char *file_name, t_data *data)
+{
+	struct		stat st;
+	long int	size;
+
+	if (stat(file_name, &st) == 0)
+		size = st.st_size;
+	else
+		exit_error(1, "Fail at get file size\n", data);
+	if (!size)
+		exit_error(1, "Empty File\n", data);
+	return (size);
+}
+
+static void	read_content(char *content, long int content_size, int test, t_data *data)
+{
+	unsigned char	current_char[1];
+	int				status;
+	long int		i;
+
+	i = 0;
+	current_char[0] = '\0';
+	while (i < content_size)
+	{
+		status = read(data->user_error_fd[test], current_char, 1);
+		if (status == -1)
+			exit_error(1, "Error at reading file\n", data);
+		content[i] = current_char[0];
+		i++;
+	}
 }
