@@ -6,20 +6,19 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:02:25 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 17:25:20 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:04:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/tester.h"
+#include "../../headers/tester.h"
 
+static void	reopen_user_outputs(t_data *data);
 static void	verification_loop(t_data *data);
 static int	compare_outputs(int test, t_data *data);
-static void	print_result(int result, int test, t_data *data);
-static void reopen_user_outputs(t_data *data);
+static void	print_result(int result, int leaks, int test);
 
 void	verify_results(t_data *data)
 {
-	sleep(3);
 	reopen_user_outputs(data);
 	verification_loop(data);
 }
@@ -28,12 +27,14 @@ static void	verification_loop(t_data *data)
 {
 	int	test;
 	int	result;
+	int	leaks;
 
 	test = 0;
 	while (test < data->input_tests_amount)
 	{
 		result = compare_outputs(test, data);
-		print_result(result, test, data);
+		leaks = check_leaks(test, data);
+		print_result(result, leaks, test);
 		test++;
 	}
 }
@@ -61,25 +62,31 @@ static int	compare_outputs(int test, t_data *data)
 	return (1);
 }
 
-static void	print_result(int result, int test, t_data *data)
+static void	print_result(int result, int leaks, int test)
 {
 	printf("Test %d:", test);
 	if (result)
-		printf(" OK\n");
+		printf(" OK /");
 	else
-		printf(" KO\n");
+		printf(" KO /");
+	if (leaks)
+		printf(" leaks\n");
+	else
+		printf(" No Leaks\n");
 }
 
 static void	reopen_user_outputs(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->input_tests_amount)
 	{
 		close(data->user_outputs_fd[i]);
+		close(data->user_error_fd[i]);
 		data->user_outputs_fd[i] = open(data->user_outputs_name[i], O_RDONLY);
-		if (data->user_outputs_fd[i] < 0)
+		data->user_error_fd[i] = open(data->user_error_name[i], O_RDONLY);
+		if (data->user_outputs_fd[i] < 0 || data->user_error_fd[i] < 0)
 			exit_error(2, "Fail at reopen file\n", data);
 		i++;
 	}
