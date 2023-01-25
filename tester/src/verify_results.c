@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:02:25 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 17:25:20 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 22:28:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	verification_loop(t_data *data);
 static int	compare_outputs(int test, t_data *data);
+static void	check_leaks(int test, t_data *data);
 static void	print_result(int result, int test, t_data *data);
 static void reopen_user_outputs(t_data *data);
 
@@ -34,6 +35,7 @@ static void	verification_loop(t_data *data)
 	{
 		result = compare_outputs(test, data);
 		print_result(result, test, data);
+		check_leaks(test, data);
 		test++;
 	}
 }
@@ -83,4 +85,10 @@ static void	reopen_user_outputs(t_data *data)
 			exit_error(2, "Fail at reopen file\n", data);
 		i++;
 	}
+}
+
+static void	check_leaks(int test, t_data *data)
+{
+	printf("Leaks\n");
+	// printf("No Leaks\n");
 }
