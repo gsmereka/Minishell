@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:36:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 20:04:20 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 23:02:48 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_data	data;
 
 	initialize(envp, &data);
+	set_valgrind_path(&data);
 	test_input_loop(&data);
 	wait_tests(&data);
 	verify_results(&data);

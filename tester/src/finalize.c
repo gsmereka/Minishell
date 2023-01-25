@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:16:42 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 22:49:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 23:04:53 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	free_program_memory(t_data *data)
 	if (data->valgrind_path)
 		free(data->valgrind_path);
 	if (data->paths)
-		free(data->paths);
+		free_list((void **)data->paths);
 	if (data->process.pid)
 		free(data->process.pid);
 	if (data->process.status)

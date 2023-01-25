@@ -6,16 +6,16 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:18:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 22:58:16 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 23:03:44 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/tester.h"
 
 static char	*test_path(t_data *data);
-void	set_pathfinder(char *envp[], t_data *data);
+static void	set_pathfinder(char *envp[], t_data *data);
 static char	*path_finder(char *envp[]);
-int	ft_addstr(char **s1, char *s2);
+static int	ft_addstr(char **s1, char *s2);
 
 void	set_valgrind_path(t_data *data)
 {
@@ -46,7 +46,7 @@ static char	*test_path(t_data *data)
 	return (NULL);
 }
 
-void	set_pathfinder(char *envp[], t_data *data)
+static void	set_pathfinder(char *envp[], t_data *data)
 {
 	char	*path_list;
 
@@ -72,7 +72,7 @@ static char	*path_finder(char *envp[])
 	return (envp[i] + 5);
 }
 
-int	ft_addstr(char **s1, char *s2)
+static int	ft_addstr(char **s1, char *s2)
 {
 	char	*new_s;
 	int		s1_size;
