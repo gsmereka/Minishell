@@ -6,11 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 21:55:25 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 20:24:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 12:44:24 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/tester.h"
+#include "../../headers/tester.h"
 
 static size_t	ft_calculate_str_size(int n, int is_negative);
 static char		*set_str(int is_negative, size_t str_size, int n);

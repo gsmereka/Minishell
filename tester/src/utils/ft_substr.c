@@ -6,11 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:24:31 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 23:01:00 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 12:44:37 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/tester.h"
+#include "../../headers/tester.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 

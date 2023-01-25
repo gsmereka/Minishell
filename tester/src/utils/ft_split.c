@@ -6,11 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 21:38:47 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 22:53:33 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 12:44:31 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/tester.h"
+#include "../../headers/tester.h"
 
 static size_t	ft_split_size(const char *s, char c)
 {
