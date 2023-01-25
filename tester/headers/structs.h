@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:34:12 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 22:44:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 23:09:52 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ typedef struct s_process
 typedef struct s_data
 {
 	t_process	process;
-	char		**paths; //need to start
+	char		**paths;
 	char		**envp;
-	char		*valgrind_path; //need to start
+	char		*valgrind_path;
 	int			original_stdin;
 	int			original_stdout;
 	int			original_stder;

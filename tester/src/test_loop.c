@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:52:57 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 22:28:51 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/24 23:14:13 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,27 @@ void	test_input_loop(t_data *data)
 
 void	execute_test(int test, t_data *data)
 {
-	int	pid;
+	int		pid;
 
 	pid = fork();
 	if (pid == -1)
-		exit_error(12, "Error at use fork() function", data);
+		exit_error(12, "Error at use fork() function\n", data);
 	if (pid == 0)
 	{
+		char	**args;
+
+		args = calloc(3, sizeof(char *));
+		if (!args)
+			exit_error(12, "Error at alloc valgrind args memory\n", data);
 		redirect_input(test, data);
 		redirect_output(test, data);
 		redirect_error(test, data);
-		execve("../minishell", NULL, data->envp);
+		args[0] = data->valgrind_path;
+		args[1] = strdup("../minishell");
+		args[2] = NULL;
+		execve(data->valgrind_path, args, data->envp);
+		free(args[1]);
+		free(args);
 		exit_error(1, "", data);
 	}
 	else
