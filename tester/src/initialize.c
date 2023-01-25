@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/24 22:49:07 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 12:58:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_files(t_data *data);
 void	open_files(t_data *data);
-void	save_standart_input_and_output(t_data *data);
+void	save_standart_file_descriptors(t_data *data);
 static void allocate_memory(t_data *data);
 char	*ft_strjoin(char const *s1, char const *s2);
 
@@ -24,7 +24,7 @@ void	initialize(char *envp[], t_data *data)
 	allocate_memory(data);
 	set_files(data);
 	open_files(data);
-	save_standart_input_and_output(data);
+	save_standart_file_descriptors(data);
 }
 
 static void allocate_memory(t_data *data)
@@ -88,7 +88,7 @@ void	open_files(t_data *data)
 	}
 }
 
-void	save_standart_input_and_output(t_data *data)
+void	save_standart_file_descriptors(t_data *data)
 {
 	data->original_stdin = dup(0);
 	data->original_stdout = dup(1);

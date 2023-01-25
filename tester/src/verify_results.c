@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:02:25 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/25 12:27:54 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/25 12:59:05 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int	read_content(char *content, int test, t_data *data);
 
 void	verify_results(t_data *data)
 {
-	sleep(3);
 	reopen_user_outputs(data);
 	verification_loop(data);
 }
