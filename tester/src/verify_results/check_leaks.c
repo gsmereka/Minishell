@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:14:38 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/26 13:29:34 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:43:21 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	check_leaks(int test, t_data *data)
 	content = get_valgrind_test_content(test, data);
 	if (content)
 	{
-		if (!strstr(content, "All heap blocks were freed -- no leaks are possible"))
+		if (!strstr(content,
+				"All heap blocks were freed -- no leaks are possible"))
 			leaks = 1;
 		if (!strstr(content, "ERROR SUMMARY: 0 errors from 0 contexts"))
 			leaks = 1;
