@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/26 12:07:09 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/26 12:14:36 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC				=	main.c initialize.c finalize.c redirect.c  test_loop.c \
 
 OBJ				=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-GET_TESTS_AMOUNT	=	$(shell find tests/input_tests/ -type f | wc -l)
+## Esta regra define a quantidade de testes realizados dependendo do numero de arquivos na pasta
+GET_TESTS_AMOUNT	=	$(shell find tests/input_tests/ -type f | wc -l) 
 
 all: mk_obj_dir $(NAME)
 
