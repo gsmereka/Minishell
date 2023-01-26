@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:10:37 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/25 15:03:32 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:41:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	initialize(char *envp[], t_data *data)
 
 static void	allocate_memory(t_data *data)
 {
-	data->input_tests_amount = 3;
 	data->valgrind_path = NULL;
 	data->paths = NULL;
 	data->process.pid = calloc(data->input_tests_amount + 1, sizeof(int));
