@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:36:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/26 11:50:41 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:11:40 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void)argc;
 	(void)argv;
-	printf("%d\n", TESTS_AMOUNT);
-	data.input_tests_amount = TESTS_AMOUNT;
+	data.input_tests_amount = TESTS_AMOUNT; // Variavel definida no Makefile, depende de quantos arquivos existem na pasta tests/input_tests/
 	initialize(envp, &data);
 	set_valgrind_path(&data);
 	test_input_loop(&data);
