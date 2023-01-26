@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/25 14:55:03 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/26 12:14:36 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=	my_tester
 
 HEADERS			=	./headers/tester.h ./headers/structs.h
 
-CFLAGS			=	-Wall -Wextra -Werror
+# CFLAGS			=	-Wall -Wextra -Werror
 
 OBJ_DIR			=	./obj
 
@@ -30,13 +30,16 @@ SRC				=	main.c initialize.c finalize.c redirect.c  test_loop.c \
 
 OBJ				=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
+## Esta regra define a quantidade de testes realizados dependendo do numero de arquivos na pasta
+GET_TESTS_AMOUNT	=	$(shell find tests/input_tests/ -type f | wc -l) 
+
 all: mk_obj_dir $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	cc $(CFLAGS) -c $< -o $@
+	cc $(CFLAGS) -D TESTS_AMOUNT=$(GET_TESTS_AMOUNT) -c $< -o $@
 
 $(NAME): $(HEADERS) $(OBJ)
-	cc $(CFLAGS) -o $(NAME) $(OBJ)
+	cc $(CFLAGS) -D TESTS_AMOUNT=$(GET_TESTS_AMOUNT) -o $(NAME) $(OBJ)
 
 mk_obj_dir:
 	@mkdir -p $(OBJ_DIR)
