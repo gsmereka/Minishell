@@ -3,11 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/01/23 15:31:02 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:11:09 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // :)
+#include "../headers/minishell.h"
+#include "../libft/libft.h"
+
+int	main(void)
+{
+	ft_printf("Hello Mundo\n");
+}

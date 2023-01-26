@@ -3,33 +3,35 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/01/23 15:30:30 by gde-mora         ###   ########.fr        #
+#    Updated: 2023/01/26 14:11:22 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+NAME 	=	minishell
 
-SRC = ./main.c
+SRC 	=	src/main.c
 
-OBJ = $(SRC:.c=.o)
+OBJ 	=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+
+OBJ_DIR	=	./obj
 
 # MAKEFILE UTILS
-LIBFT_A = ./libft/libft.a
+LIBFT_A =	./libft/libft.a
 
-HEADERS = ./headers/minishell.h ./headers/functions.h ./headers/structs.h
+HEADERS =	./headers/minishell.h ./headers/functions.h ./headers/structs.h
 
-CCFLAGS = -Wall -Wextra -Werror
+CCFLAGS =	-Wall -Wextra -Werror
 
-RM = rm -f
+RM		=	rm -f
 
 # RULES
-all: $(NAME)
+all: create_obj_dir $(NAME)
 
-.c.o:
-	cc $(CCFLAGS) -c $< -o $(<:.c=.o) 
+$(OBJ_DIR)/%.o: %.c
+	cc $(CCFLAGS) -c $< -o $@
 
 # LIBFT COMPILE
 $(LIBFT_A):
@@ -42,6 +44,7 @@ $(NAME): $(OBJ) $(HEADERS) $(LIBFT_A)
 # RULES CLEAN FCLEAN AND RE
 clean:
 	$(RM) $(OBJ)
+	$(RM) -r $(OBJ_DIR)
 	make clean -C libft
 
 fclean: clean
@@ -50,4 +53,14 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+# CREATE OBJECTS DIR
+create_obj_dir:
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/src
+	@mkdir -p $(OBJ_DIR)/src/repl
+	@mkdir -p $(OBJ_DIR)/src/lexer
+	@mkdir -p $(OBJ_DIR)/src/parser
+	@mkdir -p $(OBJ_DIR)/src/expanser
+	@mkdir -p $(OBJ_DIR)/src/executor
+
+.PHONY: all clean fclean re create_obj_dir
