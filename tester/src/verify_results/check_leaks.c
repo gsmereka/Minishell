@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:14:38 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/25 15:05:26 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:29:34 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ int	check_leaks(int test, t_data *data)
 
 	leaks = 0;
 	content = get_valgrind_test_content(test, data);
-	if (!strstr(content, "All heap blocks were freed -- no leaks are possible"))
-		leaks = 1;
-	if (!strstr(content, "ERROR SUMMARY: 0 errors from 0 contexts"))
-		leaks = 1;
-	free(content);
+	if (content)
+	{
+		if (!strstr(content, "All heap blocks were freed -- no leaks are possible"))
+			leaks = 1;
+		if (!strstr(content, "ERROR SUMMARY: 0 errors from 0 contexts"))
+			leaks = 1;
+		free(content);
+	}
 	return (leaks);
 }
 
@@ -51,7 +54,7 @@ static char	*get_valgrind_test_content(int test, t_data *data)
 	char		*content;
 
 	size = get_content_size(data->user_error_name[test], data);
-	content = calloc(size + 1, sizeof(char));
+	content = calloc(size + 2, sizeof(char));
 	if (!content)
 		exit_error(12, "Fail at allocate user error memory\n", data);
 	read_content(content, test, data);

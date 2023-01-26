@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/26 12:14:36 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/26 13:25:01 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=	my_tester
 
 HEADERS			=	./headers/tester.h ./headers/structs.h
 
-# CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror
 
 OBJ_DIR			=	./obj
 
