@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/01/27 18:20:51 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/27 18:22:12 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ create_obj_dir:
 	@mkdir -p $(OBJ_DIR)/src/expanser
 	@mkdir -p $(OBJ_DIR)/src/executor
 
+## FULL CLEAN ALL OBJECTS AND TESTERS
 git: fclean
 	make fclean -C tester
 	git add . && clear && git status
