@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/01/26 14:11:22 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/27 12:56:05 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,10 @@ CCFLAGS =	-Wall -Wextra -Werror
 RM		=	rm -f
 
 # RULES
-all: create_obj_dir $(NAME)
+all: $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
+	make create_obj_dir
 	cc $(CCFLAGS) -c $< -o $@
 
 # LIBFT COMPILE

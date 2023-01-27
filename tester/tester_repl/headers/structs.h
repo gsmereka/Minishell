@@ -5,33 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 15:23:49 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/01/27 12:58:23 by gsmereka         ###   ########.fr       */
+/*   Created: 2023/01/22 22:34:12 by gsmereka          #+#    #+#             */
+/*   Updated: 2023/01/25 14:06:16 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_token
+typedef struct s_process
 {
-	char			*type;
-	char			*content;
-	char			**args;
-	struct s_token	*next;
-}	t_token;
-
-typedef struct s_env
-{
-	char			*name;
-	char			*content;
-	struct s_env	*next;
-}	t_env;
+	int		*status;
+	int		*pid;
+}	t_process;
 
 typedef struct s_data
 {
-	t_token	*tokens;
-	t_env	*envp;
+	t_process	process;
+
+	char		**paths;
+	char		**envp;
+	char		*valgrind_path;
+
+	int			original_stdin;
+	int			original_stdout;
+	int			original_stder;
+
+	int			input_tests_amount;
+
+	int			*input_tests_fd;
+	int			*expected_outputs_fd;
+	int			*user_outputs_fd;
+	int			*user_error_fd;
+
+	char		**input_tests_name;
+	char		**expected_outputs_name;
+	char		**user_outputs_name;
+	char		**user_error_name;
 }	t_data;
 
 #endif
