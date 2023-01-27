@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/26 13:25:01 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/27 18:18:26 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ OBJ				=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 ## Esta regra define a quantidade de testes realizados dependendo do numero de arquivos na pasta
 GET_TESTS_AMOUNT	=	$(shell find tests/input_tests/ -type f | wc -l) 
+
+## Esta regra define o Local Padrão dos arquivos
 
 all: mk_obj_dir $(NAME)
 
