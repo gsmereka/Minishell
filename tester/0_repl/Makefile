@@ -6,11 +6,11 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/27 18:43:24 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/27 19:07:10 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			=	my_tester
+NAME			=	../0_tester_repl
 
 HEADERS			=	./headers/tester.h ./headers/structs.h
 
