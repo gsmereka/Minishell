@@ -6,13 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:16:42 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/27 22:35:09 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/27 22:38:26 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/tester.h"
 
 static int	close_files(t_data *data);
+static void	close_std_fds(t_data *data);
 
 void	finalize(t_data *data)
 {
@@ -36,17 +37,9 @@ static int	close_files(t_data *data)
 		|| !data->user_outputs_fd || !data->user_error_fd)
 		return (-1);
 	i = 0;
+	close_std_fds(data);
 	while (i < data->input_tests_amount)
 	{
-		close(0);
-		close(1);
-		close(2);
-		if (data->original_stdin >= 0)
-			close(data->original_stdin);
-		if (data->original_stdout >= 0)
-			close(data->original_stdout);
-		if (data->original_stder >= 0)
-			close(data->original_stder);
 		if (data->input_tests_fd[i] >= 0)
 			close(data->input_tests_fd[i]);
 		if (data->expected_outputs_fd[i] >= 0)
@@ -58,4 +51,17 @@ static int	close_files(t_data *data)
 		i++;
 	}
 	return (0);
+}
+
+static void	close_std_fds(t_data *data)
+{
+	close(0);
+	close(1);
+	close(2);
+	if (data->original_stdin >= 0)
+		close(data->original_stdin);
+	if (data->original_stdout >= 0)
+		close(data->original_stdout);
+	if (data->original_stder >= 0)
+		close(data->original_stder);
 }
