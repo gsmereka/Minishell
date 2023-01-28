@@ -6,27 +6,24 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/27 12:56:10 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/27 19:00:29 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/27 23:06:49 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-TESTERS_DIR		=	0_repl \
-					# 1_lexer	\
+all:
+	for dir in */; do \
+		$(MAKE) -C $$dir; \
+	done
 
-$(MAKE_ALL):
-	make -C $(TESTERS_DIR)
+clean:
+	for dir in */; do \
+		$(MAKE) clean -C $$dir; \
+	done
 
-all: $(TESTERS_DIR)
-	make -C 0_repl
-	# make -C 1_lexer
-
-clean: $(TESTERS_DIR)
-	make clean -C 0_repl
-	# make clean -C 1_lexer
-
-fclean: $(TESTERS_DIR)
-	make fclean -C 0_repl
-	# make fclean -C 1_lexer
+fclean:
+	for dir in */; do \
+		$(MAKE) fclean -C $$dir; \
+	done
 
 git: fclean
 	git add . && clear && git status
