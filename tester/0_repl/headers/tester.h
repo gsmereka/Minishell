@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:35:53 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/27 22:27:07 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/27 22:34:34 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void		set_valgrind_path(t_data *data);
 // finalize
 void		finalize(t_data *data);
 void		exit_error(int error, char *msg, t_data *data);
+
+// free_program_memory
+void		free_program_memory(t_data *data);
 
 // test_loop
 void		test_input_loop(t_data *data);

@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/27 22:30:21 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/27 22:35:44 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ OBJ_DIR			=	./obj
 SRC_DIR			=	src
 
 SRC				=	main.c finalize.c redirect.c  test_loop.c \
+					free_program_memory.c \
 					set_valgrind_path.c \
 					initialize/initialize.c \
 					initialize/set_files.c \
