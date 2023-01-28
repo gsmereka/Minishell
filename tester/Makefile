@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/27 12:56:10 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/27 23:06:49 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/28 10:09:32 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,3 +27,8 @@ fclean:
 
 git: fclean
 	git add . && clear && git status
+
+new: $(TESTER)
+	cp -R  ./0_0_base/ ./$(TESTER)
+
+.PHONY: all clean fclean re git new
