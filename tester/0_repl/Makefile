@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/27 19:07:10 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/27 20:53:16 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ GET_TESTS_AMOUNT	=	$(shell find $(GET_LOCAL_PATH)/tests/input_tests/ -type f | w
 GET_LOCAL_PATH			=	$(shell pwd)
 
 ## Esta regra define as variaveis utilizadas
-VARIABLE_FLAGS		=	 -D TESTS_AMOUNT=$(GET_TESTS_AMOUNT) -D LOCAL_PATH=$(GET_LOCAL_PATH)
+VARIABLE_FLAGS		=	-D LOCAL_PATH='"$(GET_LOCAL_PATH)"' -D TESTS_AMOUNT=$(GET_TESTS_AMOUNT) 
 
 all: mk_obj_dir $(NAME)
 
