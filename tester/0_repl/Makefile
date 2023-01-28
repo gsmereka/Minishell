@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/27 20:53:16 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/27 22:30:21 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,16 @@ OBJ_DIR			=	./obj
 
 SRC_DIR			=	src
 
-SRC				=	main.c initialize.c finalize.c redirect.c  test_loop.c \
+SRC				=	main.c finalize.c redirect.c  test_loop.c \
 					set_valgrind_path.c \
+					initialize/initialize.c \
+					initialize/set_files.c \
 					verify_results/verify_results.c \
 					verify_results/check_leaks.c \
 					utils/ft_split.c \
 					utils/ft_substr.c \
 					utils/ft_itoa.c \
+					utils/ft_strjoin.c \
 
 OBJ				=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
@@ -49,6 +52,7 @@ $(NAME): $(HEADERS) $(OBJ)
 
 mk_obj_dir:
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/initialize
 	@mkdir -p $(OBJ_DIR)/utils
 	@mkdir -p $(OBJ_DIR)/verify_results
 

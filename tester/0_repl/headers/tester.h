@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:35:53 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/26 12:08:09 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/27 22:27:07 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 // initialize
 void		initialize(char *envp[], t_data *data);
+void		set_files(t_data *data);
 
 // valgrind_path
 void		set_valgrind_path(t_data *data);
@@ -48,5 +49,6 @@ int			check_leaks(int test, t_data *data);
 char		*ft_itoa(int n);
 char		**ft_split(char const *s, char c);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_strjoin(char const *s1, char const *s2);
 
 #endif
