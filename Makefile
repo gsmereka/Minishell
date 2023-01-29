@@ -6,13 +6,14 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/01/27 18:22:12 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/28 23:12:17 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	=	minishell
 
-SRC 	=	src/main.c
+SRC 	=	src/main.c \
+			src/repl/init_repl.c \
 
 OBJ 	=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
