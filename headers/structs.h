@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:49 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/01/29 23:44:34 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/30 12:27:14 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_token	*tokens;
-	t_env	*envps;
-	char	**envp;
+	t_env	*envp;
+	char	**original_envp;
 }	t_data;
 
 #endif
