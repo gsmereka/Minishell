@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/30 12:04:49 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/30 13:11:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 // static void	repl_loop(t_data *data);
 
-void	init_repl(char *envp[], t_data *data)
+void	init_repl(t_data *data)
 {
-	(void)envp;
-	data->envp = envp;
+	(void)data;
 	ft_printf("Hello Mundo\n");
 	exit(0);
 }
