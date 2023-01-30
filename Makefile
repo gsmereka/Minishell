@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/01/30 11:18:42 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/30 11:39:01 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,6 @@ git: fclean
 	git add . && clear && git status
 
 valgrind: $(NAME)
-	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all  ./minishell
+	valgrind --suppressions=tester/readline.supp --leak-check=full --show-leak-kinds=all  ./minishell
 
 .PHONY: all clean fclean re create_obj_dir git valgrind
