@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/28 23:32:21 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/30 00:29:28 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	repl_loop(t_data *data);
 void	init_repl(char *envp[], t_data *data)
 {
 	(void)envp;
-	(void)data;
+	data->envp = envp;
 	repl_loop(data);
 	ft_printf("Hello Mundo\n");
 	exit(0);
@@ -30,16 +30,23 @@ static void	repl_loop(t_data *data)
 
 	i = 0;
 	(void)data;
-	int	pid;
-
-	pid = fork();
-	if (pid != 0)
-		exit(0);
+	// close(0);
+	// str = readline(NULL);
+	// // 	// ft_printf("%s\n", str);
+	// add_history(str);
+	// free(str);
 	while (i < 3)
 	{
-		str = readline("");
+		str = readline("Jose Carlos e Compania:");
+		// int	pid;
+
+		// pid = fork();
+		// if (pid == 0)
+		// 	execve("/bin/clear", NULL, data->envp);
+		add_history(str);
 		// ft_printf("%s\n", str);
 		free(str);
 		i++;
 	}
+	rl_clear_history();
 }
