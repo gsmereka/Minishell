@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/01/30 11:39:01 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/30 12:10:46 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,9 @@ LIBFT_A =	./libft/libft.a
 
 HEADERS =	./headers/minishell.h ./headers/functions.h ./headers/structs.h
 
-# CCFLAGS =	-Wall -Wextra -Werror -lreadline
-CCFLAGS =	 -lreadline
+CCFLAGS =	-Wall -Wextra -Werror
+
+READLINE_FLAG	=	-lreadline
 
 RM		=	rm -f
 
@@ -42,7 +43,7 @@ $(LIBFT_A):
 
 # MANDATORY COMPILE
 $(NAME): $(OBJ) $(HEADERS) $(LIBFT_A)
-	cc $(CCFLAGS) -o $(NAME) $(OBJ) $(LIBFT_A) -lreadline
+	cc $(CCFLAGS) -o $(NAME) $(OBJ) $(LIBFT_A) $(READLINE_FLAG)
 
 # RULES CLEAN FCLEAN AND RE
 clean:
