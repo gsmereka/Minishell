@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/01/29 23:43:03 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/30 11:18:42 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,4 +71,7 @@ git: fclean
 	make fclean -C tester
 	git add . && clear && git status
 
-.PHONY: all clean fclean re create_obj_dir git
+valgrind: $(NAME)
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all  ./minishell
+
+.PHONY: all clean fclean re create_obj_dir git valgrind
