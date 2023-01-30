@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:52:57 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/27 19:07:49 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/30 11:36:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,15 @@ static char	**set_valgrind_args(t_data *data)
 {
 	char	**valgrind_args;
 
-	valgrind_args = calloc(3, sizeof(char *));
+	valgrind_args = calloc(4, sizeof(char *));
 	if (!valgrind_args)
 		exit_error(12, "Error at alloc valgrind_args memory\n", data);
 	valgrind_args[0] = data->valgrind_path;
-	valgrind_args[1] = strdup("../minishell");
+	valgrind_args[1] = strdup("--suppressions=readline.supp");
 	if (!valgrind_args[1])
+		exit_error(12, "Error at alloc valgrind_args memory\n", data);
+	valgrind_args[2] = strdup("../minishell");
+	if (!valgrind_args[2])
 		exit_error(12, "Error at alloc valgrind_args memory\n", data);
 	return (valgrind_args);
 }

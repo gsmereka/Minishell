@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:14:38 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/26 13:43:21 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/30 12:02:44 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static long int	get_content_size(char *file_name, t_data *data);
 static int		read_content(char *content, int test, t_data *data);
 static char		*get_valgrind_test_content(int test, t_data *data);
+static int		readline_leaks(char *content);
 
 int	check_leaks(int test, t_data *data)
 {
@@ -28,6 +29,8 @@ int	check_leaks(int test, t_data *data)
 		if (!strstr(content,
 				"All heap blocks were freed -- no leaks are possible"))
 			leaks = 1;
+		if (leaks && !readline_leaks(content) != 0)
+			leaks = 0;
 		if (!strstr(content, "ERROR SUMMARY: 0 errors from 0 contexts"))
 			leaks = 1;
 		free(content);
@@ -79,4 +82,20 @@ static int	read_content(char *content, int test, t_data *data)
 		content++;
 	}
 	return (1);
+}
+
+static int	readline_leaks(char *content)
+{
+	int	leaks;
+
+	leaks = 0;
+	if (!strstr(content, "definitely lost: 0 bytes in 0 blocks"))
+		leaks = 1;
+	if (!strstr(content, "indirectly lost: 0 bytes in 0 blocks"))
+		leaks = 1;
+	if (!strstr(content, "possibly lost: 0 bytes in 0 blocks"))
+		leaks = 1;
+	if (!strstr(content, "still reachable: 0 bytes in 0 blocks"))
+		leaks = 1;
+	return (leaks);
 }

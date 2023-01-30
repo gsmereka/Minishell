@@ -6,13 +6,13 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 18:51:25 by gsmereka          #+#    #+#              #
-#    Updated: 2023/01/27 22:59:15 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/01/27 23:41:02 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	$(GET_NAME)
 
-## ESTA REGRA ENCONTRA O NOME DO DIRETORIO ATUAL E CONCATENA COM "../tester_" PARA COMPORO O NOME DO TESTER
+## ESTA REGRA ENCONTRA O NOME DO DIRETORIO ATUAL E CONCATENA COM "../tester_" PARA COMPOR O NOME DO TESTER
 GET_NAME		=	../tester_$(lastword $(subst /, ,$(GET_LOCAL_PATH)))
 
 HEADERS			=	./headers/tester.h ./headers/structs.h
