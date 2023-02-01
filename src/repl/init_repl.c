@@ -6,13 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/31 12:41:15 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:24:03 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static void	init_loop(t_data *data);
+static void	save_history(char *str);
 
 void	init_repl(t_data *data)
 {
@@ -35,10 +36,20 @@ static void	init_loop(t_data *data)
 			free(str);
 			break ;
 		}
-		if (strlen(str) > 0)
-			add_history(str);
+		save_history(str);
 		free(str);
 		i++;
 	}
 	rl_clear_history();
+}
+
+static void	save_history(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == '\t' || str[i] == ' ')
+		i++;
+	if (str[i] != '\0')
+		add_history(str);
 }
