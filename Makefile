@@ -19,7 +19,7 @@ OBJ 	=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 OBJ_DIR	=	./obj
 
-# MAKEFILE UTILS
+# MAKEFILE UTILS 
 LIBFT_A =	./libft/libft.a
 
 HEADERS =	./headers/minishell.h ./headers/functions.h ./headers/structs.h
