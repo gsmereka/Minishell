@@ -31,11 +31,17 @@ static void	init_loop(t_data *data)
 	while (1)
 	{
 		str = readline("Hopeshell:$ ");
+		if (!str)
+		{
+			ft_printf("exit\n");
+			break ;
+		}
 		if (!ft_strncmp("exit", str, 4))
 		{
 			free(str);
 			break ;
 		}
+		rl_on_new_line();
 		save_history(str);
 		free(str);
 		i++;
