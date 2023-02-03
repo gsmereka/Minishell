@@ -13,6 +13,7 @@
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 # include "structs.h"
+# include <signal.h>
 
 // REPL
 # include <stdio.h>
@@ -22,6 +23,5 @@
 void	init_repl(t_data *data);
 
 // Signals
-# include <signal.h>
 
 #endif

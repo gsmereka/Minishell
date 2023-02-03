@@ -31,8 +31,10 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_token	*tokens;
-	t_env	*envp;
-	char	**original_envp;
+	t_env	*linked_envp;
+	char	**envp;
+	char	*prompt;
+	char	*readline_buffer;
 }	t_data;
 
 #endif

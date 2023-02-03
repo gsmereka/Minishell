@@ -13,53 +13,54 @@
 #include "../../headers/minishell.h"
 
 static void	init_loop(t_data *data);
-static void	save_history(char *str);
+static void	save_history(char *readline_buffer);
 static void	init_repl_signals(t_data *data);
-static void	signal_handler(int signal);
+static void	handle_ctrl_c(int signal);
 
 void	init_repl(t_data *data)
 {
+	data->prompt = "HopeShell:$ ";
+	data->readline_buffer = NULL;
+	init_repl_signals(data);
 	init_loop(data);
 	exit(0);
 }
 
 static void	init_loop(t_data *data)
 {
-	char	*str;
-	int		i;
+	int	i;
 
 	i = 0;
-	init_repl_signals(data);
 	while (1)
 	{
-		str = readline("Hopeshell:$ ");
-		if (!str)
+		data->readline_buffer = readline(data->prompt);
+		if (!data->readline_buffer)
 		{
 			ft_printf("exit\n");
 			break ;
 		}
-		if (!ft_strncmp("exit", str, 4))
+		if (!ft_strncmp("exit", data->readline_buffer, 4))
 		{
-			free(str);
 			break ;
 		}
 		rl_on_new_line();
-		save_history(str);
-		free(str);
+		save_history(data->readline_buffer);
+		if (data->readline_buffer)
+			free(data->readline_buffer);
 		i++;
 	}
 	rl_clear_history();
 }
 
-static void	save_history(char *str)
+static void	save_history(char *readline_buffer)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] == '\t' || str[i] == ' ')
+	while (readline_buffer[i] == '\t' || readline_buffer[i] == ' ')
 		i++;
-	if (str[i] != '\0')
-		add_history(str);
+	if (readline_buffer[i] != '\0')
+		add_history(readline_buffer);
 }
 
 static void	init_repl_signals(t_data *data)
@@ -68,17 +69,19 @@ static void	init_repl_signals(t_data *data)
 	struct sigaction	ctrl_backsslash;
 
 	(void)data;
-	ctrl_c.sa_handler = signal_handler;
-	ctrl_backsslash.sa_handler = signal_handler;
+	ctrl_c.sa_handler = handle_ctrl_c;
+	ctrl_backsslash.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &ctrl_c, NULL);
 	sigaction(SIGQUIT, &ctrl_backsslash, NULL);
-	ft_printf("init signals\n");
 }
 
-static void	signal_handler(int signal)
+static void	handle_ctrl_c(int signal)
 {
 	if (signal == SIGINT)
-		ft_printf("Buenos Dias\n");
-	else
-		ft_printf("Bolos");
+	{
+		ft_putchar_fd('\n', 1);
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
