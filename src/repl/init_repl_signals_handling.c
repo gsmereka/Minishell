@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_repl_signals.c                                :+:      :+:    :+:   */
+/*   init_repl_signals_handling.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 12:15:30 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/03 13:22:51 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/03 14:14:13 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	handle_ctrl_c(int signal);
 
-void	init_repl_signals(t_data *data)
+void	init_repl_signals_handling(t_data *data)
 {
 	struct sigaction	ctrl_c;
 	struct sigaction	ctrl_backsslash;

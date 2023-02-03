@@ -6,43 +6,36 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/03 13:59:28 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/03 14:14:18 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static void	init_loop(t_data *data);
-static void	save_input_on_history(char *user_input);
+static bool	get_user_input(t_data *data);
 static bool	is_valid(char *user_input);
+static void	save_input_on_history(char *user_input);
+static void	free_user_input(t_data *data);
 
 void	init_repl(t_data *data)
-{
-	data->prompt = "HopeShell:$ ";
-	init_repl_signals(data);
-	init_loop(data);
-}
-
-static void	init_loop(t_data *data)
 {
 	int	i;
 
 	i = 0;
+	data->prompt = "HopeShell:$ ";
+	init_repl_signals_handling(data);
 	while (1)
 	{
-		data->user_input = readline(data->prompt);
-		if (!is_valid(data->user_input))
+		if (!get_user_input(data))
 			break ;
 		save_input_on_history(data->user_input);
 		init_expander(data);
 		init_lexer(data);
 		init_parser(data);
 		init_executor(data);
-		if (data->user_input)
-			free(data->user_input);
+		free_user_input(data);
 		i++;
 	}
-	rl_clear_history();
 }
 
 static void	save_input_on_history(char *user_input)
@@ -64,9 +57,24 @@ static bool	is_valid(char *user_input)
 		return (false);
 	}
 	else if (!ft_strncmp("exit", user_input, 4))
+		return (false);
+	return (true);
+}
+
+static bool	get_user_input(t_data *data)
+{
+	data->user_input = readline(data->prompt);
+	if (!is_valid(data->user_input))
 	{
-		free(user_input);
+		free_user_input(data);
+		rl_clear_history();
 		return (false);
 	}
 	return (true);
+}
+
+static void	free_user_input(t_data *data)
+{
+	if (data->user_input)
+		free(data->user_input);
 }
