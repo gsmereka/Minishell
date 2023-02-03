@@ -6,15 +6,15 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/03 13:30:34 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:39:30 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static void	init_loop(t_data *data);
-static void	save_history(char *readline_buffer);
-static bool	is_valid(char *readline_buffer);
+static void	save_history(char *user_input);
+static bool	is_valid(char *user_input);
 
 void	init_repl(t_data *data)
 {
@@ -30,38 +30,38 @@ static void	init_loop(t_data *data)
 	i = 0;
 	while (1)
 	{
-		data->readline_buffer = readline(data->prompt);
-		if (!is_valid(data->readline_buffer))
+		data->user_input = readline(data->prompt);
+		if (!is_valid(data->user_input))
 			break ;
-		save_history(data->readline_buffer);
-		if (data->readline_buffer)
-			free(data->readline_buffer);
+		save_history(data->user_input);
+		if (data->user_input)
+			free(data->user_input);
 		i++;
 	}
 	rl_clear_history();
 }
 
-static void	save_history(char *readline_buffer)
+static void	save_history(char *user_input)
 {
 	int	i;
 
 	i = 0;
-	while (readline_buffer[i] == '\t' || readline_buffer[i] == ' ')
+	while (user_input[i] == '\t' || user_input[i] == ' ')
 		i++;
-	if (readline_buffer[i] != '\0')
-		add_history(readline_buffer);
+	if (user_input[i] != '\0')
+		add_history(user_input);
 }
 
-static bool	is_valid(char *readline_buffer)
+static bool	is_valid(char *user_input)
 {
-	if (!readline_buffer)
+	if (!user_input)
 	{
 		ft_printf("exit\n");
 		return (false);
 	}
-	else if (!ft_strncmp("exit", readline_buffer, 4))
+	else if (!ft_strncmp("exit", user_input, 4))
 	{
-		free(readline_buffer);
+		free(user_input);
 		return (false);
 	}
 	return (true);
