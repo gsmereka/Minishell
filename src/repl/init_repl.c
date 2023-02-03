@@ -14,6 +14,7 @@
 
 static void	init_loop(t_data *data);
 static void	save_history(char *str);
+static void	init_repl_signals(t_data *data);
 
 void	init_repl(t_data *data)
 {
@@ -27,7 +28,7 @@ static void	init_loop(t_data *data)
 	int		i;
 
 	i = 0;
-	(void)data;
+	init_repl_signals(data);
 	while (1)
 	{
 		str = readline("Hopeshell:$ ");
@@ -58,4 +59,10 @@ static void	save_history(char *str)
 		i++;
 	if (str[i] != '\0')
 		add_history(str);
+}
+
+static void	init_repl_signals(t_data *data)
+{
+	(void)data;
+	ft_printf("init signals\n");
 }
