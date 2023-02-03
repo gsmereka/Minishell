@@ -6,14 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/03 13:39:30 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:59:28 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static void	init_loop(t_data *data);
-static void	save_history(char *user_input);
+static void	save_input_on_history(char *user_input);
 static bool	is_valid(char *user_input);
 
 void	init_repl(t_data *data)
@@ -33,7 +33,11 @@ static void	init_loop(t_data *data)
 		data->user_input = readline(data->prompt);
 		if (!is_valid(data->user_input))
 			break ;
-		save_history(data->user_input);
+		save_input_on_history(data->user_input);
+		init_expander(data);
+		init_lexer(data);
+		init_parser(data);
+		init_executor(data);
 		if (data->user_input)
 			free(data->user_input);
 		i++;
@@ -41,7 +45,7 @@ static void	init_loop(t_data *data)
 	rl_clear_history();
 }
 
-static void	save_history(char *user_input)
+static void	save_input_on_history(char *user_input)
 {
 	int	i;
 

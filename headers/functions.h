@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/03 12:28:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:54:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,17 @@
 
 void	init_repl(t_data *data);
 void	init_repl_signals(t_data *data);
+
+// expander
+void	init_expander(t_data *data);
+
+// lexer
+void	init_lexer(t_data *data);
+
+// parser
+void	init_parser(t_data *data);
+
+// executor
+void	init_executor(t_data *data);
 
 #endif
