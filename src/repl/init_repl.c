@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/03 12:31:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:30:34 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static bool	is_valid(char *readline_buffer);
 void	init_repl(t_data *data)
 {
 	data->prompt = "HopeShell:$ ";
-	data->readline_buffer = NULL;
 	init_repl_signals(data);
 	init_loop(data);
 }
