@@ -6,14 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/03 14:14:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/03 17:31:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static bool	get_user_input(t_data *data);
-static bool	is_valid(char *user_input);
+static int	get_user_input(t_data *data);
+static int	is_valid(char *user_input);
 static void	save_input_on_history(char *user_input);
 static void	free_user_input(t_data *data);
 
@@ -49,28 +49,28 @@ static void	save_input_on_history(char *user_input)
 		add_history(user_input);
 }
 
-static bool	is_valid(char *user_input)
+static int	is_valid(char *user_input)
 {
 	if (!user_input)
 	{
 		ft_printf("exit\n");
-		return (false);
+		return (0);
 	}
 	else if (!ft_strncmp("exit", user_input, 4))
-		return (false);
-	return (true);
+		return (0);
+	return (1);
 }
 
-static bool	get_user_input(t_data *data)
+static int	get_user_input(t_data *data)
 {
 	data->user_input = readline(data->prompt);
 	if (!is_valid(data->user_input))
 	{
 		free_user_input(data);
 		rl_clear_history();
-		return (false);
+		return (0);
 	}
-	return (true);
+	return (1);
 }
 
 static void	free_user_input(t_data *data)
