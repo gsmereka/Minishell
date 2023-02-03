@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/31 13:24:03 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/03 12:16:44 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void	init_loop(t_data *data);
 static void	save_history(char *readline_buffer);
-static void	init_repl_signals(t_data *data);
-static void	handle_ctrl_c(int signal);
 
 void	init_repl(t_data *data)
 {
@@ -40,10 +38,7 @@ static void	init_loop(t_data *data)
 			break ;
 		}
 		if (!ft_strncmp("exit", data->readline_buffer, 4))
-		{
 			break ;
-		}
-		rl_on_new_line();
 		save_history(data->readline_buffer);
 		if (data->readline_buffer)
 			free(data->readline_buffer);
@@ -61,27 +56,4 @@ static void	save_history(char *readline_buffer)
 		i++;
 	if (readline_buffer[i] != '\0')
 		add_history(readline_buffer);
-}
-
-static void	init_repl_signals(t_data *data)
-{
-	struct sigaction	ctrl_c;
-	struct sigaction	ctrl_backsslash;
-
-	(void)data;
-	ctrl_c.sa_handler = handle_ctrl_c;
-	ctrl_backsslash.sa_handler = SIG_IGN;
-	sigaction(SIGINT, &ctrl_c, NULL);
-	sigaction(SIGQUIT, &ctrl_backsslash, NULL);
-}
-
-static void	handle_ctrl_c(int signal)
-{
-	if (signal == SIGINT)
-	{
-		ft_putchar_fd('\n', 1);
-		rl_replace_line("", 1);
-		rl_on_new_line();
-		rl_redisplay();
-	}
 }

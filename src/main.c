@@ -19,7 +19,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void)argc;
 	(void)argv;
-	data.original_envp = envp;
+	data.envp = envp;
 	init_repl(&data);
 	ft_printf("Hello Mundo\n");
 }
