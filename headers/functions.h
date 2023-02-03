@@ -21,4 +21,7 @@
 
 void	init_repl(t_data *data);
 
+// Signals
+# include <signal.h>
+
 #endif
