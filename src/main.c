@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/17 23:36:59 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/02/18 00:02:38 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	set_initial_envp(char **envp, t_data *data)
 		ft_strlcpy(key, envp[i], j + 1); // --tamanho
 		value = ft_strdup(&envp[i][j + 1]); //  -- posição    -- j == '='
 		dict_add_back(&data->dict_envp, key, value); //front ou back?
+		//ft_printf("%s : ", key);
+		//ft_printf("%s\n", value);
 		free(key);
 		free(value); //sera q é por causa dos free?
 		i++;
