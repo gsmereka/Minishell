@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_lexer.c                                       :+:      :+:    :+:   */
+/*   get_envp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/14 18:02:15 by gde-mora         ###   ########.fr       */
+/*   Created: 2023/02/14 17:51:10 by gde-mora          #+#    #+#             */
+/*   Updated: 2023/02/14 17:57:20 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	init_lexer(t_data *data)
+//get_envp(data); // --- util chamar quando cria os tokens
+void	get_envp(t_data *data) //envp ja é uma matriz
 {
-	(void)data;
-	//cria os tokens
-	//expansor em mais tokens ($) ---isso vem antes do lexer   ---identifica se tem env na entrada, transforma em tokens no expansor e dps vem pra cá? ou expansor é chamado dentro do lexer? acho q expansor chama o lexer dps de pegar oq é a var de ambiente -> e transforma em token
-	//vars de ambiente?
+//	char	**dict_envp;
+	//percorrer por nome? até o '='  strcmp com a entrada dada por $.  e se algo vier com miau='sla' é uma nova env
+	while (data->)
 }

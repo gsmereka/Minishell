@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_repl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/03 17:31:36 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:43:04 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ static void	free_user_input(t_data *data);
 
 void	init_repl(t_data *data)
 {
-	int	i;
-
-	i = 0;
 	data->prompt = "HopeShell:$ ";
 	init_repl_signals_handling(data);
 	while (1)
@@ -29,12 +26,11 @@ void	init_repl(t_data *data)
 		if (!get_user_input(data))
 			break ;
 		save_input_on_history(data->user_input);
-		init_expander(data);
+		init_expander(data); //se o usuário mandou alguma var de ambiente
 		init_lexer(data);
 		init_parser(data);
 		init_executor(data);
 		free_user_input(data);
-		i++;
 	}
 }
 
@@ -56,7 +52,7 @@ static int	is_valid(char *user_input)
 		ft_printf("exit\n");
 		return (0);
 	}
-	else if (!ft_strncmp("exit", user_input, 4))
+	else if (!ft_strncmp("exit", user_input, 4)) //cuidado com o exit. Se tiver um minishell dentro de outro, só deve sair do atual
 		return (0);
 	return (1);
 }
