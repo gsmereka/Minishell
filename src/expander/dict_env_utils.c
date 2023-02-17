@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 19:02:23 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/17 23:36:21 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/02/18 00:10:36 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_env	*create_dict_env(char *key, char *value)
 	new_node = (t_env *)malloc(sizeof(t_env));
 	if (!new_node)
 		return (NULL);
-	new_node->key = key;
-	new_node->value = value;
+	new_node->key = ft_strdup(key);
+	new_node->value = ft_strdup(value);
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -63,6 +63,8 @@ void	dictclear(t_env *envp)
 	if (envp)
 	{
 		dictclear(envp->next);
+		free(envp->key);
+		free(envp->value);
 		free(envp);
 	}
 }
