@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/03 17:30:59 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/17 22:33:32 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	init_repl_signals_handling(t_data *data);
 
 // expander
 void	init_expander(t_data *data);
+t_env	*create_dict_env(char *key, char *value);
+void	dict_add_back(t_env **dict_env, char *key, char *value);
+void	dictclear(t_env *envp);
 
 // lexer
 void	init_lexer(t_data *data);
