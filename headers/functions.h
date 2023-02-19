@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/19 17:39:48 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/19 18:06:29 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	ft_unset(t_data *data);
 
 // end_program
 void	end_program(t_data *data);
-void	exit_error(t_data *data);
+void	exit_error(int error_value, char *msg, t_data *data);
 
 #endif

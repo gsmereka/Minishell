@@ -6,13 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/19 17:57:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/19 18:08:31 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int	get_user_input(t_data *data);
+static void	get_user_input(t_data *data);
 static int	is_valid(char *user_input);
 static void	save_input_on_history(char *user_input);
 
@@ -57,7 +57,7 @@ static int	is_valid(char *user_input)
 	return (1);
 }
 
-static int	get_user_input(t_data *data)
+static void	get_user_input(t_data *data)
 {
 	data->user_input = readline(data->prompt);
 }
