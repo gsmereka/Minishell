@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/17 22:33:32 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/02/19 18:06:29 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,18 @@ void	init_parser(t_data *data);
 
 // executor
 void	init_executor(t_data *data);
+
+// built_in
+void	ft_cd(t_data *data);
+void	ft_echo(t_data *data);
+void	ft_env(t_data *data);
+void	ft_exit(t_data *data);
+void	ft_export(t_data *data);
+void	ft_pwd(t_data *data);
+void	ft_unset(t_data *data);
+
+// end_program
+void	end_program(t_data *data);
+void	exit_error(int error_value, char *msg, t_data *data);
 
 #endif

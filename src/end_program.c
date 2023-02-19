@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   end_program.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 15:23:49 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/19 17:18:52 by gsmereka         ###   ########.fr       */
+/*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
+/*   Updated: 2023/02/19 18:07:56 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "../headers/minishell.h"
 
-typedef struct s_token
+static void	free_program_memory(t_data *data);
+
+void	end_program(t_data *data)
 {
-	char			*type;
-	char			*content;
-	char			**args;
-	struct s_token	*next;
-}	t_token;
+	free_program_memory(data);
+	exit(0);
+}
 
-typedef struct s_env
+void	exit_error(int error_value, char *msg, t_data *data)
 {
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
+	ft_printf(msg);
+	free_program_memory(data);
+	exit(error_value);
+}
 
-typedef struct s_data
+static void	free_program_memory(t_data *data)
 {
-	t_token	*tokens;
-	t_env	*dict_envp;
-	char	**envp;
-	char	*prompt;
-	char	*user_input;
-}	t_data;
-
-#endif
+	if (data->user_input)
+		free(data->user_input);
+	rl_clear_history();
+}
