@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/02/14 19:05:34 by gde-mora         ###   ########.fr        #
+#    Updated: 2023/02/19 17:01:38 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,13 @@ SRC 	=	src/main.c \
 			src/lexer/init_lexer.c \
 			src/parser/init_parser.c \
 			src/executor/init_executor.c \
+			src/built_in/ft_cd.c \
+			src/built_in/ft_echo.c \
+			src/built_in/ft_env.c \
+			src/built_in/ft_exit.c \
+			src/built_in/ft_export.c \
+			src/built_in/ft_pwd.c \
+			src/built_in/ft_unset.c \
 
 OBJ 	=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
@@ -72,6 +79,7 @@ create_obj_dir:
 	@mkdir -p $(OBJ_DIR)/src/parser
 	@mkdir -p $(OBJ_DIR)/src/expander
 	@mkdir -p $(OBJ_DIR)/src/executor
+	@mkdir -p $(OBJ_DIR)/src/built_in
 
 ## FULL CLEAN ALL OBJECTS AND TESTERS
 git: fclean
