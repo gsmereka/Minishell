@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_repl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/17 20:43:04 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/02/19 17:51:46 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	get_user_input(t_data *data);
 static int	is_valid(char *user_input);
 static void	save_input_on_history(char *user_input);
-static void	free_user_input(t_data *data);
 
 void	init_repl(t_data *data)
 {
@@ -23,14 +22,15 @@ void	init_repl(t_data *data)
 	init_repl_signals_handling(data);
 	while (1)
 	{
-		if (!get_user_input(data))
+		get_user_input(data);
+		if (!is_valid(data->user_input))
 			break ;
 		save_input_on_history(data->user_input);
 		init_expander(data); //se o usuário mandou alguma var de ambiente
 		init_lexer(data);
 		init_parser(data);
 		init_executor(data);
-		free_user_input(data);
+		free(data->user_input);
 	}
 }
 
@@ -60,17 +60,4 @@ static int	is_valid(char *user_input)
 static int	get_user_input(t_data *data)
 {
 	data->user_input = readline(data->prompt);
-	if (!is_valid(data->user_input))
-	{
-		free_user_input(data);
-		rl_clear_history();
-		return (0);
-	}
-	return (1);
-}
-
-static void	free_user_input(t_data *data)
-{
-	if (data->user_input)
-		free(data->user_input);
 }
