@@ -6,13 +6,14 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/02/19 17:01:38 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/02/19 17:39:34 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	=	minishell
 
 SRC 	=	src/main.c \
+			src/end_program.c \
 			src/repl/init_repl.c \
 			src/repl/init_repl_signals_handling.c \
 			src/expander/init_expander.c \
