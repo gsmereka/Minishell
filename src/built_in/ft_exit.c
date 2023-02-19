@@ -1,40 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 15:23:49 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/19 17:18:52 by gsmereka         ###   ########.fr       */
+/*   Created: 2023/02/19 17:02:50 by gsmereka          #+#    #+#             */
+/*   Updated: 2023/02/19 17:07:38 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "../../headers/minishell.h"
 
-typedef struct s_token
+void	ft_exit(t_data *data)
 {
-	char			*type;
-	char			*content;
-	char			**args;
-	struct s_token	*next;
-}	t_token;
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
-
-typedef struct s_data
-{
-	t_token	*tokens;
-	t_env	*dict_envp;
-	char	**envp;
-	char	*prompt;
-	char	*user_input;
-}	t_data;
-
-#endif
+	(void)data;
+}
