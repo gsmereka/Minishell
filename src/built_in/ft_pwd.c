@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:59 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/20 15:23:49 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:43:21 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 // #include <unistd.h>
 
 // char *getcwd(char *buf, size_t size);
-void	ft_pwd(t_data *data)
+void	ft_pwd(char **args, t_data *data)
 {
+	(void)args;
 	(void)data;
 }

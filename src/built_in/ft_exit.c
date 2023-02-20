@@ -6,13 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:50 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/19 18:03:52 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:43:15 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	ft_exit(t_data *data)
+void	ft_exit(char **args, t_data *data)
 {
+	(void)args;
 	end_program(data);
 }
