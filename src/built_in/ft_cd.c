@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/20 14:43:31 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:31:47 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	dir_exist(char *dir);
 void	ft_cd(char **args, t_data *data)
 {
 	char	*dir;
+	int		result;
 
 	if (!args || !args[1])
 		return ;
@@ -26,7 +27,9 @@ void	ft_cd(char **args, t_data *data)
 	dir = ft_strdup(args[1]);
 	if (!dir)
 		exit_error(12, "Fail at alloc dir value at cd", data);
-	change_dir_at_pwd(dir, data);
+	result = chdir(dir);
+	if (result != -1)
+		change_dir_at_pwd(dir, data);
 	free(dir);
 }
 
