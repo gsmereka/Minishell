@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/19 18:06:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:44:12 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+//built in
+# include <sys/types.h>
+# include <dirent.h>
+
+// REPL
 void	init_repl(t_data *data);
 void	init_repl_signals_handling(t_data *data);
 
@@ -39,11 +44,11 @@ void	init_parser(t_data *data);
 void	init_executor(t_data *data);
 
 // built_in
-void	ft_cd(t_data *data);
+void	ft_cd(char **args, t_data *data);
 void	ft_echo(t_data *data);
 void	ft_env(t_data *data);
 void	ft_exit(t_data *data);
-void	ft_export(t_data *data);
+void	ft_export(char **args, t_data *data);
 void	ft_pwd(t_data *data);
 void	ft_unset(t_data *data);
 
