@@ -6,34 +6,34 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/20 15:31:47 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:35:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static void	change_dir_at_pwd(char	*dir, t_data *data);
+static void	change_dir_at_dict_envp(char	*dir, t_data *data);
 static int	dir_exist(char *dir);
 
 void	ft_cd(char **args, t_data *data)
 {
 	char	*dir;
-	int		result;
+	int		dir_changed;
 
-	if (!args || !args[1])
+	if (!args || !args[1]) //verifica se tem argumentos
 		return ;
-	if (!dir_exist(args[1]))
+	if (!dir_exist(args[1])) // verifica se o diretório existe
 		return ;
 	dir = ft_strdup(args[1]);
 	if (!dir)
 		exit_error(12, "Fail at alloc dir value at cd", data);
-	result = chdir(dir);
-	if (result != -1)
-		change_dir_at_pwd(dir, data);
+	dir_changed = chdir(dir); // tenta alterar o diretório atual
+	if (dir_changed != -1) 
+		change_dir_at_dict_envp(dir, data); // se alterou, altera a variavel de ambiente no dicionario.
 	free(dir);
 }
 
-static void	change_dir_at_pwd(char	*dir, t_data *data)
+static void	change_dir_at_dict_envp(char	*dir, t_data *data)
 {
 	t_env	*pwd;
 
