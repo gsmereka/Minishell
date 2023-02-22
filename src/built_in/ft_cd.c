@@ -6,14 +6,15 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/20 15:35:57 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:52:44 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static void	change_dir_at_dict_envp(char	*dir, t_data *data);
+static void	change_dir_at_dict_envp(t_data *data);
 static int	dir_exist(char *dir);
+static char	*get_pwd(int buffer_size);
 
 void	ft_cd(char **args, t_data *data)
 {
@@ -29,11 +30,11 @@ void	ft_cd(char **args, t_data *data)
 		exit_error(12, "Fail at alloc dir value at cd", data);
 	dir_changed = chdir(dir); // tenta alterar o diretório atual
 	if (dir_changed != -1) 
-		change_dir_at_dict_envp(dir, data); // se alterou, altera a variavel de ambiente no dicionario.
+		change_dir_at_dict_envp(data); // se alterou, altera a variavel de ambiente no dicionario.
 	free(dir);
 }
 
-static void	change_dir_at_dict_envp(char	*dir, t_data *data)
+static void	change_dir_at_dict_envp(t_data *data)
 {
 	t_env	*pwd;
 
@@ -46,7 +47,7 @@ static void	change_dir_at_dict_envp(char	*dir, t_data *data)
 	{
 		if (pwd->value)
 			free(pwd->value);
-		pwd->value = ft_strdup(dir);
+		pwd->value = get_pwd(1024);
 		if (!pwd->value)
 			exit_error(12, "Fail at alloc pwd value at cd", data);
 	}
@@ -63,4 +64,14 @@ static int	dir_exist(char *dir)
 		return (1);
 	}
 	return (0);
+}
+
+static char	*get_pwd(int buffer_size)
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, buffer_size);
+	if (!pwd)
+		pwd = get_pwd(buffer_size + 1024);
+	return (pwd);
 }

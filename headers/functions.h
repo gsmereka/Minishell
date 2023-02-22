@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/20 15:42:06 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/20 21:42:31 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 //built in
 # include <sys/types.h>
 # include <dirent.h>
+# include <fcntl.h>
 
 // REPL
 void	init_repl(t_data *data);
