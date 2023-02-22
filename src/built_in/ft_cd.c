@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/22 00:18:00 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/22 00:29:58 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	change_dir_at_dict_envp(t_data *data)
 	int		buffer_size;
 
 	pwd = data->dict_envp;
-	while (pwd && ft_strncmp(pwd->key, "PWD", 4) != 0)
+	while (pwd && ft_strncmp(pwd->key, "PWD", 4) != 0) // busca a variavel de ambiente PWD
 	{
 		pwd = pwd->next;
 	}
@@ -50,7 +50,7 @@ static void	change_dir_at_dict_envp(t_data *data)
 		if (pwd->value)
 			free(pwd->value);
 		buffer_size = 1024;
-		pwd->value = get_pwd(buffer_size);
+		pwd->value = get_pwd(buffer_size); // atualiza o endereço do diretorio atual na variavel de ambiente.
 		if (!pwd->value)
 			exit_error(12, "Fail at alloc pwd value at cd", data);
 	}
@@ -60,8 +60,8 @@ static int	dir_exist(char *dir)
 {
 	DIR	*path;
 
-	path = opendir(dir);
-	if (path)
+	path = opendir(dir); // tenta abrir o diretorio
+	if (path) // se abrir, o diretório existe e tem acesso.
 	{
 		closedir(path);
 		return (1);
