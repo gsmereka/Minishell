@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/21 18:31:06 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/22 00:22:53 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int argc, char *argv[], char *envp[])
 	args[0] = "";
 	args[1] = "..";
 	ft_cd(args, &data);
+	ft_pwd(NULL, &data);
 	free(args);
 	print_envp(&data);
 	free_data(&data); //a cada exit tem q liberar tbm
