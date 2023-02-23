@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/23 13:19:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:40:13 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,6 @@
 #include "../headers/minishell.h"
 
 static void	print_envp(t_data *data);
-
-void	set_initial_envp(char **envp, t_data *data)
-{
-	int	i;
-	int	j;
-	char	*key;
-	char	*value;
-
-	i = 0;
-	while (envp[i])
-	{
-		j = 0;
-		while (envp[i][j] != '=')
-			j++;
-		key = malloc(j + 2); // +2 ou +1?       --tamanho
-		ft_strlcpy(key, envp[i], j + 1); // --tamanho
-		value = ft_strdup(&envp[i][j + 1]); //  -- posição    -- j == '='
-		dict_add_back(&data->dict_envp, key, value); //front ou back?
-		free(key);
-		free(value); //sera q é por causa dos free?
-		i++;
-	}
-
-	print_envp(data);
-	//ft_printf("%s\n", data->dict_envp->key);
-}
 
 void	free_data(t_data *data)
 {
@@ -59,13 +33,15 @@ int	main(int argc, char *argv[], char *envp[])
 //	init_repl(&data);
 	char	**args;
 
-	args = ft_calloc(3, sizeof(char *));
+	args = ft_calloc(4, sizeof(char *));
 	args[0] = "";
 	args[1] = "..";
+	args[2] = "src2";
 	ft_cd(args, &data);
 	ft_pwd(NULL, &data);
+	ft_echo(args, &data);
 	free(args);
-	print_envp(&data);
+	// print_envp(&data);
 	free_data(&data); //a cada exit tem q liberar tbm
 }
 

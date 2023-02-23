@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/22 00:29:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:28:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	change_dir_at_dict_envp(t_data *data)
 	}
 }
 
-static int	dir_exist(char *dir)
+static int	dir_exist(char *dir) //falta verificar permissões
 {
 	DIR	*path;
 
