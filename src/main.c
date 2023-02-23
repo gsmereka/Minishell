@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/23 20:40:13 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:49:25 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	main(int argc, char *argv[], char *envp[])
 	(void)envp;
 	ft_bzero(&data, sizeof(t_data));
 	set_initial_envp(envp, &data);
-//	init_repl(&data);
+	init_repl(&data);
 	char	**args;
 
 	args = ft_calloc(4, sizeof(char *));
 	args[0] = "";
-	args[1] = "..";
+	args[1] = "";
 	args[2] = "src2";
 	ft_cd(args, &data);
 	ft_pwd(NULL, &data);
@@ -43,6 +43,7 @@ int	main(int argc, char *argv[], char *envp[])
 	free(args);
 	// print_envp(&data);
 	free_data(&data); //a cada exit tem q liberar tbm
+	end_program(&data);
 }
 
 static void	print_envp(t_data *data)
