@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
+#    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/02/19 17:39:34 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/02/23 04:11:58 by gde-mora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ SRC 	=	src/main.c \
 			src/end_program.c \
 			src/repl/init_repl.c \
 			src/repl/init_repl_signals_handling.c \
+			src/envp/dict_env_utils.c \
+			src/envp/set_initial_envp.c \
 			src/expander/init_expander.c \
-			src/expander/dict_env_utils.c \
 			src/lexer/init_lexer.c \
 			src/parser/init_parser.c \
 			src/executor/init_executor.c \
@@ -76,6 +77,7 @@ create_obj_dir:
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/src
 	@mkdir -p $(OBJ_DIR)/src/repl
+	@mkdir -p $(OBJ_DIR)/src/envp
 	@mkdir -p $(OBJ_DIR)/src/lexer
 	@mkdir -p $(OBJ_DIR)/src/parser
 	@mkdir -p $(OBJ_DIR)/src/expander
