@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/20 21:42:31 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:20:22 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@
 void	init_repl(t_data *data);
 void	init_repl_signals_handling(t_data *data);
 
-// expander
-void	init_expander(t_data *data);
-t_env	*create_dict_env(char *key, char *value);
+// envp
+void	set_initial_envp(char **envp, t_data *data);
+t_env	*create_dict_env(char *key, char *value); //n precisa desse aqui(?)
 void	dict_add_back(t_env **dict_env, char *key, char *value);
 void	dictclear(t_env *envp);
+
+// expander
+void	init_expander(t_data *data);
 
 // lexer
 void	init_lexer(t_data *data);
