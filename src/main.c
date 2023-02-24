@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/24 09:49:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/24 12:42:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int	main(int argc, char *argv[], char *envp[])
 	args = ft_calloc(4, sizeof(char *));
 	args[0] = "abobora";
 	args[1] = "..";
-	args[2] = "src2";
+	args[2] = "=";
 	ft_cd(args, &data);
+	ft_export(args, &data);
 	ft_pwd(NULL, &data);
 	ft_echo(args, &data);
 	free(args);
