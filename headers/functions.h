@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/23 04:05:57 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:20:22 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+//built in
+# include <sys/types.h>
+# include <dirent.h>
+# include <fcntl.h>
+
+// REPL
 void	init_repl(t_data *data);
 void	init_repl_signals_handling(t_data *data);
 
@@ -42,13 +48,13 @@ void	init_parser(t_data *data);
 void	init_executor(t_data *data);
 
 // built_in
-void	ft_cd(t_data *data);
-void	ft_echo(t_data *data);
-void	ft_env(t_data *data);
-void	ft_exit(t_data *data);
-void	ft_export(t_data *data);
-void	ft_pwd(t_data *data);
-void	ft_unset(t_data *data);
+void	ft_cd(char **args, t_data *data);
+void	ft_echo(char **args, t_data *data);
+void	ft_env(char **args, t_data *data);
+void	ft_exit(char **args, t_data *data);
+void	ft_export(char **args, t_data *data);
+void	ft_pwd(char **args, t_data *data);
+void	ft_unset(char **args, t_data *data);
 
 // end_program
 void	end_program(t_data *data);
