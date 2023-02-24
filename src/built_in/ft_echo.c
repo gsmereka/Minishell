@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/23 20:40:52 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/24 09:48:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,10 @@ static void	display_text_line(int *n_flag, char **args)
 	while (args[i])
 	{
 		write(1, args[i], ft_strlen(args[i]));
-		if (args[i + 1])							 // se não for a ultima palavra
+		if (args[i + 1])							 // se ainda não for a ultima palavra
 			write(1, " ", 1);
-		else 										// se for a ultima palavra
-		{
-			if (*n_flag == 0) 						// se o primeiro argumento for -n
-				write(1, "\n", 1);
-		}
 		i++;
 	}
+	if (*n_flag == 0) 						// se o primeiro argumento for -n
+		write(1, "\n", 1);
 }
