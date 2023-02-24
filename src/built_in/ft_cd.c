@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/23 19:28:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:20:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	*get_pwd(int buffer_size)
 	pwd = getcwd(NULL, buffer_size);
 	if (!pwd)
 	{
-		if(!buffer_size_overflow(buffer_size))
+		if (!buffer_size_overflow(buffer_size))
 			pwd = get_pwd(buffer_size * 2);
 	}
 	return (pwd);

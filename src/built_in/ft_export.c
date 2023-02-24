@@ -6,16 +6,16 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/24 12:42:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:20:01 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static void		add_new_environment_variable(char *str, t_data *data);
-static t_env	*is_repeated(char *str, t_data *data);
-static void		att_variable(t_env *new_var, char *str, t_data *data);
 static int		is_valid(char *str, t_data *data);
+static t_env	*is_repeated(char *str, t_data *data);
+static void		add_new_environment_variable(char *str, t_data *data);
+static void		att_variable(t_env *new_var, char *str, t_data *data);
 
 void	ft_export(char **args, t_data *data)
 {
