@@ -6,14 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/26 18:55:57 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/26 18:58:44 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // :)
 #include "../headers/minishell.h"
 
-static void	print_envp(t_data *data);
+// static void	print_envp(t_data *data);
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -29,17 +29,17 @@ int	main(int argc, char *argv[], char *envp[])
 	end_program(&data);
 }
 
-static void	print_envp(t_data *data)
-{
-	int	i;
+// static void	print_envp(t_data *data)
+// {
+// 	int	i;
 
-	t_env *aux_print = data->dict_envp;
-	i = 0;
-	while (aux_print)
-	{
-		if (ft_strncmp(aux_print->key, "PWD", 4) == 0)
-			ft_printf("key: %s\nvalor:%s\n", aux_print->key, aux_print->value);
-		aux_print = aux_print->next;
-		i++;
-	}
-}
+// 	t_env *aux_print = data->dict_envp;
+// 	i = 0;
+// 	while (aux_print)
+// 	{
+// 		if (ft_strncmp(aux_print->key, "PWD", 4) == 0)
+// 			ft_printf("key: %s\nvalor:%s\n", aux_print->key, aux_print->value);
+// 		aux_print = aux_print->next;
+// 		i++;
+// 	}
+// }
