@@ -6,13 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/24 13:20:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/26 18:09:00 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static void	change_dir_at_dict_envp(t_data *data);
+static void	change_dir_envp(t_data *data);
 static int	dir_exist(char *dir);
 static char	*get_pwd(int buffer_size);
 static int	buffer_size_overflow(int buffer_size);
@@ -30,12 +30,15 @@ void	ft_cd(char **args, t_data *data)
 	if (!dir)
 		exit_error(12, "Fail at alloc dir value at cd", data);
 	dir_changed = chdir(dir); // tenta alterar o diretório atual
-	if (dir_changed != -1) 
-		change_dir_at_dict_envp(data); // se alterou, altera a variavel de ambiente no dicionario.
+	if (dir_changed != -1)
+	{
+		change_dir_envp(data); // se alterou, altera a variavel de ambiente no dicionario.
+		att_virtual_envp(data); // Tambem atualiza a virtual_envp
+	}
 	free(dir);
 }
 
-static void	change_dir_at_dict_envp(t_data *data)
+static void	change_dir_envp(t_data *data)
 {
 	t_env	*pwd;
 	int		buffer_size;
