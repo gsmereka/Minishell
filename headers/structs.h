@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:49 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/26 15:14:11 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/26 16:36:56 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_data
 {
 	t_token	*tokens;
 	t_env	*dict_envp;
-	char	**envp;
+	char	**virtual_envp;
 	char	*prompt;
 	char	*user_input;
 	int		exit_status;

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/25 22:48:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/26 18:10:15 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_export(char **args, t_data *data)
 		att_variable(new_var, args[1], data);
 	if (!new_var)
 		add_new_environment_variable(args[1], data);
+	att_virtual_envp(data);
 }
 
 static void	add_new_environment_variable(char *str, t_data *data)
