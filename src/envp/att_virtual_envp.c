@@ -1,41 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   att_virtual_envp.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 15:23:49 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/26 16:36:56 by gsmereka         ###   ########.fr       */
+/*   Created: 2023/02/26 16:43:24 by gsmereka          #+#    #+#             */
+/*   Updated: 2023/02/26 16:43:55 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "../../headers/minishell.h"
 
-typedef struct s_token
+void	att_virtual_envp(t_data *data)
 {
-	char			*type;
-	char			*content;
-	char			**args;
-	struct s_token	*next;
-}	t_token;
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
-
-typedef struct s_data
-{
-	t_token	*tokens;
-	t_env	*dict_envp;
-	char	**virtual_envp;
-	char	*prompt;
-	char	*user_input;
-	int		exit_status;
-}	t_data;
-
-#endif
+	(void)data;
+}
