@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/24 13:20:01 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/25 22:33:32 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	ft_export(char **args, t_data *data)
 {
 	t_env	*new_var;
 
-	if (!is_valid(args[2], data))
+	if (!is_valid(args[1], data))
 		return ;
-	new_var = is_repeated(args[2], data);
+	new_var = is_repeated(args[1], data);
 	if (new_var)
-		att_variable(new_var, args[2], data);
+		att_variable(new_var, args[1], data);
 	if (!new_var)
-		add_new_environment_variable(args[2], data);
+		add_new_environment_variable(args[1], data);
 }
 
 static void	add_new_environment_variable(char *str, t_data *data)
@@ -83,18 +83,29 @@ static void	att_variable(t_env *new_var, char *str, t_data *data)
 	new_var->value = value;
 }
 
+// Utilizo a verificação do parsing dos nomes de variaveis,
+// segundo o manual do bash "A word consisting solely of letters,
+// numbers, and underscores, and beginning with a letter or underscore.
+// Names are used as shell variable and function names. Also referred to as an identifier."
 static int	is_valid(char *str, t_data *data)
 {
 	int	i;
 
-	i = 0;
-	if (str[i] == '=')
+	if (!ft_isalpha(str[0]) && str[1] != '_')
+	{
+		write(2, "Error at export msg\n", ft_strlen("Error at export msg\n"));
 		return (0);
-	i++;
+	}
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '=')
 			return (1);
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+		{
+			write(2, "Error at export msg\n", ft_strlen("Error at export msg\n"));
+			return (0);
+		}
 		i++;
 	}
 	return (0);
