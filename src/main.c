@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/25 22:32:28 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/26 15:13:45 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 #include "../headers/minishell.h"
 
 static void	print_envp(t_data *data);
-
-void	free_data(t_data *data)
-{
-	if (data->dict_envp)
-		dictclear(data->dict_envp);
-}
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -36,8 +30,7 @@ int	main(int argc, char *argv[], char *envp[])
 	args[1] = "aaaaa=";
 	args[2] = NULL;
 	ft_export(args, &data);
-	free_data(&data); //a cada exit tem q liberar tbm
-	// end_program(&data);
+	end_program(&data);
 }
 
 static void	print_envp(t_data *data)
