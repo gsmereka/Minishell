@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/26 15:30:59 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/26 17:03:14 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,20 @@ static void	free_data(t_data *data)
 		dictclear(data->dict_envp);
 	if (data->user_input)
 		free(data->user_input);
+	if (data->virtual_envp)
+		free_array_list(data->virtual_envp);
 	rl_clear_history();
+}
+
+void	free_array_list(void **list)
+{
+	int i;
+
+	i = 0;
+	while (list[i])
+	{
+		free(list[i]);
+		i++;
+	}
+	free(list);
 }
