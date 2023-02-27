@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:49 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/19 17:18:52 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/23 05:44:12 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_token
+typedef struct s_token //inicializar com bzero no lexer
 {
 	char			*type;
-	char			*content;
+	char			*content; //o "token" na real seria só isso. O resto quem faz é o parser, n?
 	char			**args;
 	struct s_token	*next;
 }	t_token;

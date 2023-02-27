@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/23 04:07:56 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/02/23 05:40:08 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	main(int argc, char *argv[], char *envp[])
 	(void)argv;
 	ft_bzero(&data, sizeof(t_data));
 	set_initial_envp(envp, &data);
-//	init_repl(&data);
+	init_repl(&data); //ta com leak
 	free_data(&data); //a cada exit tem q liberar tbm
 }
+
+/* quando o export cria uma env nova, ele coloca no começo? pq no final é sempre o caminho /env
+*/

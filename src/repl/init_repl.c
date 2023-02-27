@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_repl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/19 18:08:31 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/23 05:35:42 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_repl(t_data *data)
 		if (!is_valid(data->user_input))
 			break ;
 		save_input_on_history(data->user_input);
-		init_expander(data); //se o usuário mandou alguma var de ambiente
+		init_expander(data); //se o usuário mandou alguma var de ambiente  --- $
 		init_lexer(data);
 		init_parser(data);
 		init_executor(data);
@@ -39,17 +39,17 @@ static void	save_input_on_history(char *user_input)
 	int	i;
 
 	i = 0;
-	while (user_input[i] == '\t' || user_input[i] == ' ')
+	while (user_input[i] == '\t' || user_input[i] == ' ') //esse while ta fazendo oq?
 		i++;
 	if (user_input[i] != '\0')
-		add_history(user_input);
+		add_history(user_input); // n ta salvando dps de avançar   -- ent ta vendo se n é vazio?  -- aah, e só p salvar no historico, n pra receber no lexer
 }
 
 static int	is_valid(char *user_input)
 {
 	if (!user_input)
 	{
-		ft_printf("exit\n");
+		ft_printf("exit\n"); //ele deve printar exit?
 		return (0);
 	}
 	else if (!ft_strncmp("exit", user_input, 4)) //cuidado com o exit. Se tiver um minishell dentro de outro, só deve sair do atual
@@ -59,5 +59,5 @@ static int	is_valid(char *user_input)
 
 static void	get_user_input(t_data *data)
 {
-	data->user_input = readline(data->prompt);
+	data->user_input = readline(data->prompt); // o tratamento dos espaços vai ser no lexer
 }
