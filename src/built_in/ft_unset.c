@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:03:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/26 18:10:57 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:12:01 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	ft_unset(char **args, t_data *data)
 {
 	t_env	*variable;
 
-	if (!args[0])
+	if (!args[1])
 		return ;
 	variable = data->dict_envp;
 	while (variable)
 	{
-		if (ft_strncmp(variable->key, args[0], ft_strlen(variable->key)) == 0)
+		if (ft_strncmp(variable->key, args[1], ft_strlen(variable->key)) == 0)
 		{
 			remove_variable(variable, data);
 			att_virtual_envp(data);
