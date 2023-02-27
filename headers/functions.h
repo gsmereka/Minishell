@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/26 18:55:57 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/27 10:49:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_parser(t_data *data);
 
 // executor
 void	init_executor(t_data *data);
+void	execute_built_in(t_data *data);
 
 // built_in
 void	ft_cd(char **args, t_data *data);
