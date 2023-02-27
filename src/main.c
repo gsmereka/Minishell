@@ -29,6 +29,9 @@ int	main(int argc, char *argv[], char *envp[])
 	end_program(&data);
 }
 
+/* quando o export cria uma env nova, ele coloca no começo? pq no final é sempre o caminho /env
+*/
+
 // static void	print_envp(t_data *data)
 // {
 // 	int	i;
