@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/02/26 18:58:49 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/02/27 10:48:44 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC 	=	src/main.c \
 			src/expander/init_expander.c \
 			src/lexer/init_lexer.c \
 			src/parser/init_parser.c \
+			src/executor/execute_built_in.c \
 			src/executor/init_executor.c \
 			src/built_in/ft_cd.c \
 			src/built_in/ft_echo.c \

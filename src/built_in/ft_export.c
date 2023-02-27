@@ -6,26 +6,26 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/26 18:10:15 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:19:04 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int		is_valid(char *str, t_data *data);
+static int		is_valid(char *str);
 static t_env	*is_repeated(char *str, t_data *data);
 static void		add_new_environment_variable(char *str, t_data *data);
-static void		att_variable(t_env *new_var, char *str, t_data *data);
+static void		att_variable(t_env *new_var, char *str);
 
 void	ft_export(char **args, t_data *data)
 {
 	t_env	*new_var;
 
-	if (!is_valid(args[1], data))
+	if (!is_valid(args[1]))
 		return ;
 	new_var = is_repeated(args[1], data);
 	if (new_var)
-		att_variable(new_var, args[1], data);
+		att_variable(new_var, args[1]);
 	if (!new_var)
 		add_new_environment_variable(args[1], data);
 	att_virtual_envp(data);
@@ -33,12 +33,10 @@ void	ft_export(char **args, t_data *data)
 
 static void	add_new_environment_variable(char *str, t_data *data)
 {
-	int		i;
 	int		j;
 	char	*key;
 	char	*value;
 
-	i = 0;
 	j = 0;
 	while (str[j] != '=')
 		j++;
@@ -64,14 +62,12 @@ static t_env	*is_repeated(char *str, t_data *data)
 	return (NULL);
 }
 
-static void	att_variable(t_env *new_var, char *str, t_data *data)
+static void	att_variable(t_env *new_var, char *str)
 {
-	int		i;
 	int		j;
 	char	*key;
 	char	*value;
 
-	i = 0;
 	j = 0;
 	while (str[j] != '=')
 		j++;
@@ -84,18 +80,29 @@ static void	att_variable(t_env *new_var, char *str, t_data *data)
 	new_var->value = value;
 }
 
-static int	is_valid(char *str, t_data *data)
+// Utilizo a verificação do parsing dos nomes de variaveis,
+// segundo o manual do bash "A word consisting solely of letters,
+// numbers, and underscores, and beginning with a letter or underscore.
+// Names are used as shell variable and function names. Also referred to as an identifier."
+static int	is_valid(char *str)
 {
 	int	i;
 
-	i = 0;
-	if (str[i] == '=')
+	if (!ft_isalpha(str[0]) && str[1] != '_')
+	{
+		write(2, "Error at export msg\n", ft_strlen("Error at export msg\n"));
 		return (0);
-	i++;
+	}
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '=')
 			return (1);
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+		{
+			write(2, "Error at export msg\n", ft_strlen("Error at export msg\n"));
+			return (0);
+		}
 		i++;
 	}
 	return (0);
