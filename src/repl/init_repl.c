@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/23 20:49:00 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:46:19 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ void	init_repl(t_data *data)
 		if (!is_valid(data->user_input))
 			break ;
 		save_input_on_history(data->user_input);
-		init_expander(data); //se o usuário mandou alguma var de ambiente
-		init_lexer(data);
-		init_parser(data);
-		init_executor(data);
+		execute_built_in(data);
+		// init_expander(data); //se o usuário mandou alguma var de ambiente
+		// init_lexer(data);
+		// init_parser(data);
+		// init_executor(data);
 		free(data->user_input);
 	}
 }
@@ -52,8 +53,6 @@ static int	is_valid(char *user_input)
 		ft_printf("exit\n");
 		return (0);
 	}
-	else if (!ft_strncmp("exit", user_input, 4)) //cuidado com o exit. Se tiver um minishell dentro de outro, só deve sair do atual
-		return (0);
 	return (1);
 }
 
