@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:03:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/27 22:55:37 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/27 23:15:18 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_unset(char **args, t_data *data)
 		search_variable(args[i], data);
 		i++;
 	}
-	// att_virtual_envp(data);
+	att_virtual_envp(data);
 }
 
 static void	search_variable(char *str, t_data *data)
@@ -39,7 +39,7 @@ static void	search_variable(char *str, t_data *data)
 	variable = data->dict_envp;
 	while (variable)
 	{
-		if (ft_strncmp(variable->key, str, ft_strlen(variable->key)) == 0)
+		if (ft_strncmp(variable->key, str, ft_strlen(str)) == 0)
 		{
 			remove_variable(variable, data);
 			break ;
@@ -58,7 +58,7 @@ static void	remove_variable(t_env *variable, t_data *data)
 	else
 	{
 		variable_in_the_back = data->dict_envp;
-		while (variable_in_the_back->next)
+		while (variable_in_the_back)
 		{
 			if (ft_strncmp(variable_in_the_back->next->key,
 					variable->key, ft_strlen(variable->key)) == 0)

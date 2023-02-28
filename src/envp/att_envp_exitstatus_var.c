@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp_exitstatus_var.c                              :+:      :+:    :+:   */
+/*   att_envp_exitstatus_var.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:31:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/26 18:56:19 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/27 23:02:20 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_env	*is_repeated(char *str, t_data *data)
 	variable = data->dict_envp;
 	while (variable)
 	{
-		if (ft_strncmp(variable->key, str, ft_strlen(variable->key)) == 0)
+		if (ft_strncmp(variable->key, str, ft_strlen(str)) == 0)
 			return (variable);
 		variable = variable->next;
 	}
@@ -55,6 +55,7 @@ static t_env	*is_repeated(char *str, t_data *data)
 
 static void	att_variable(t_env *new_var, t_data *data)
 {
-	free(new_var->value);
+	if (new_var->value)
+		free(new_var->value);
 	new_var->value = ft_itoa(data->exit_status);
 }
