@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/27 12:19:04 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:39:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,21 @@ static void		att_variable(t_env *new_var, char *str);
 void	ft_export(char **args, t_data *data)
 {
 	t_env	*new_var;
+	int		i;
 
-	if (!is_valid(args[1]))
-		return ;
-	new_var = is_repeated(args[1], data);
-	if (new_var)
-		att_variable(new_var, args[1]);
-	if (!new_var)
-		add_new_environment_variable(args[1], data);
+	i = 1;
+	while (args[i])
+	{
+		if (is_valid(args[i]))
+		{
+			new_var = is_repeated(args[i], data);
+			if (new_var)
+				att_variable(new_var, args[i]);
+			if (!new_var)
+				add_new_environment_variable(args[i], data);
+		}
+		i++;
+	}
 	att_virtual_envp(data);
 }
 

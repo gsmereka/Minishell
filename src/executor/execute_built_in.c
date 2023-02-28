@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:46:14 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/27 16:09:37 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:46:16 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ void	execute_built_in(t_data *data)
 	char	**args;
 
 	args = ft_split(data->user_input, ' ');
-	if (!args)
-		return ;
-	else if (!args[0])
+	if (!args || !args[0])
 	{
-		free(args);
+		if (args)
+			free(args);
 		return ;
 	}
 	else if (ft_strncmp(args[0], "echo", ft_strlen(args[0])) == 0)
