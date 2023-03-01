@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/26 18:09:00 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:30:26 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,30 @@ static int	buffer_size_overflow(int buffer_size);
 
 void	ft_cd(char **args, t_data *data)
 {
-	char	*dir;
 	int		dir_changed;
 
-	if (!args || !args[1]) //verifica se tem argumentos
+	if (args[1] && args[2])
+	{
+		data->error_msg = "bash: cd: too many arguments";
+		write(2, data->error_msg, ft_strlen(data->error_msg));
+		data->exit_status = 1;
 		return ;
+	}
+	if (!args[1] || (ft_strlen(args[1]) == 1 && args[1][0] == '~'))
+	{
+		ft_printf("go home\n");
+		data->exit_status = 0;
+		return ;
+	}
 	if (!dir_exist(args[1])) // verifica se o diretório existe
 		return ;
-	dir = ft_strdup(args[1]);
-	if (!dir)
-		exit_error(12, "Fail at alloc dir value at cd", data);
-	dir_changed = chdir(dir); // tenta alterar o diretório atual
+	dir_changed = chdir(args[1]); // tenta alterar o diretório atual
 	if (dir_changed != -1)
 	{
+		// change_oldpwd
 		change_dir_envp(data); // se alterou, altera a variavel de ambiente no dicionario.
 		att_virtual_envp(data); // Tambem atualiza a virtual_envp
 	}
-	free(dir);
 }
 
 static void	change_dir_envp(t_data *data)
