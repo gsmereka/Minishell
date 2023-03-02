@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/02/27 10:48:44 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/02 11:11:18 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC 	=	src/main.c \
 			src/repl/init_repl.c \
 			src/repl/init_repl_signals_handling.c \
 			src/envp/dict_env_utils.c \
+			src/envp/find_env.c \
 			src/envp/set_initial_envp.c \
 			src/envp/att_virtual_envp.c \
 			src/envp/att_envp_exitstatus_var.c \
