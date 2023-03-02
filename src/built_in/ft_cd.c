@@ -6,13 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/02 11:12:03 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/02 11:43:52 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static void		att_dictionary(t_data *data);
+static void		att_envp_dictionary(char *save_pwd, t_data *data);
 static int		dir_exist(char *dir);
 static char		*get_pwd(int buffer_size);
 static int		buffer_size_overflow(int buffer_size);
@@ -20,6 +20,7 @@ static int		buffer_size_overflow(int buffer_size);
 void	ft_cd(char **args, t_data *data)
 {
 	int		dir_changed;
+	char	*save_pwd;
 
 	if (args[1] && args[2])
 	{
@@ -32,12 +33,14 @@ void	ft_cd(char **args, t_data *data)
 		return ;
 	if (!dir_exist(args[1])) // verifica se o diretório existe
 		return ;
+	save_pwd = get_pwd(1024);
 	dir_changed = chdir(args[1]); // tenta alterar o diretório atual
 	if (dir_changed != -1)
 	{
-		att_dictionary(data);
+		att_envp_dictionary(save_pwd, data);
 		att_virtual_envp(data); // Tambem atualiza a virtual_envp
 	}
+	free(save_pwd);
 }
 
 static int	dir_exist(char *dir) //falta verificar permissões
@@ -73,24 +76,28 @@ static int	buffer_size_overflow(int buffer_size)
 	return (1);
 }
 
-static void	att_dictionary(t_data *data)
+static void	att_envp_dictionary(char *save_pwd, t_data *data)
 {
-	if (find_env("OLDPWD", data))
+	static int	first_time;
+	t_env		*oldpwd;
+	t_env		*pwd;
+
+	oldpwd	= find_env("OLDPWD", data);
+	pwd = find_env("PWD", data);
+	if (pwd)
 	{
-		free(find_env("OLDPWD", data)->value);
-		if (find_env("PWD", data))
-		{
-			if (find_env("PWD", data)->value)
-				find_env("OLDPWD", data)->value = ft_strdup(find_env("PWD", data)->value);
-			else
-				find_env("OLDPWD", data)->value = ft_strdup("");
-		}
+		free(pwd->value);
+		pwd->value = get_pwd(1024);
 	}
-	if (find_env("PWD", data))
+	if (oldpwd)
 	{
-		free(find_env("PWD", data)->value);
-		find_env("PWD", data)->value = get_pwd(1024);
-		if (!find_env("PWD", data)->value)
-			exit_error(12, "Fail at alloc envp value at cd", data);
+		free(oldpwd->value);
+		oldpwd->value = ft_strdup(save_pwd);
+	}
+	if (first_time == 0)
+	{
+		if (!oldpwd)
+			dict_add_back(&data->dict_envp, ft_strdup("OLDPWD"), ft_strdup(save_pwd));
+		first_time++;
 	}
 }

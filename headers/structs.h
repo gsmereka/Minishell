@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:49 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/01 20:27:36 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/02 11:27:23 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_data
 	char	*prompt;
 	char	*user_input;
 	char	*error_msg;
-	char	*last_pwd;
 	int		exit_status;
 }	t_data;
 
