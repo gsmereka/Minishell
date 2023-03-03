@@ -6,13 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/03 20:23:09 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/03 20:42:52 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int		is_valid(char *str);
+static int		is_valid(char *str, t_data *data);
 static t_env	*is_repeated(char *str, t_data *data);
 static void		add_new_environment_variable(char *str, t_data *data);
 static void		att_variable(t_env *new_var, char *str);
@@ -25,7 +25,7 @@ void	ft_export(char **args, t_data *data)
 	i = 1;
 	while (args[i])
 	{
-		if (is_valid(args[i]))
+		if (is_valid(args[i], data))
 		{
 			new_var = is_repeated(args[i], data);
 			if (new_var)
@@ -91,15 +91,13 @@ static void	att_variable(t_env *new_var, char *str)
 // segundo o manual do bash "A word consisting solely of letters,
 // numbers, and underscores, and beginning with a letter or underscore.
 // Names are used as shell variable and function names. Also referred to as an identifier."
-static int	is_valid(char *str)
+static int	is_valid(char *str, t_data *data)
 {
 	int		i;
-	char	*error_msg;
 
 	if (!ft_isalpha(str[0]) && str[1] != '_')
 	{
-		// error_msg = 
-		write(2, "Error at export msg\n", ft_strlen("Error at export msg\n"));
+		ft_export_error_msg(1, str, data);
 		return (0);
 	}
 	i = 0;
@@ -109,7 +107,7 @@ static int	is_valid(char *str)
 			return (1);
 		if (!ft_isalnum(str[i]) && str[i] != '_')
 		{
-			write(2, "Error at export msg\n", ft_strlen("Error at export msg\n"));
+			ft_export_error_msg(1, str, data);
 			return (0);
 		}
 		i++;
