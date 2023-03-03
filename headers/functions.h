@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/02 11:10:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/03 19:37:24 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 //built in
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <dirent.h>
 # include <fcntl.h>
 

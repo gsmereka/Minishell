@@ -6,14 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/02 11:43:52 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/03 19:50:22 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static void		att_envp_dictionary(char *save_pwd, t_data *data);
-static int		dir_exist(char *dir);
+static int		validate_dir(char *dir, t_data *data);
 static char		*get_pwd(int buffer_size);
 static int		buffer_size_overflow(int buffer_size);
 
@@ -24,14 +24,14 @@ void	ft_cd(char **args, t_data *data)
 
 	if (args[1] && args[2])
 	{
-		data->error_msg = "bash: cd: too many arguments";
+		data->error_msg = "bash: cd: too many arguments\n"; //incluir nome
 		write(2, data->error_msg, ft_strlen(data->error_msg));
 		data->exit_status = 1;
 		return ;
 	}
 	if (!args[1])
 		return ;
-	if (!dir_exist(args[1])) // verifica se o diretório existe
+	if (!validate_dir(args[1], data)) // verifica se o diretório existe
 		return ;
 	save_pwd = get_pwd(1024);
 	dir_changed = chdir(args[1]); // tenta alterar o diretório atual
@@ -43,17 +43,27 @@ void	ft_cd(char **args, t_data *data)
 	free(save_pwd);
 }
 
-static int	dir_exist(char *dir) //falta verificar permissões
+static int	validate_dir(char *dir, t_data *data) //falta verificar permissões
 {
-	DIR	*path;
+	struct stat	dir_info;
 
-	path = opendir(dir); // tenta abrir o diretorio
-	if (path) // se abrir, o diretório existe e tem acesso.
+	stat(dir, &dir_info);
+	if (!S_ISDIR(dir_info.st_mode))
 	{
-		closedir(path);
-		return (1);
+		data->error_msg = "bash: cd: Not a directory\n"; //incluir nome
+		write(2, data->error_msg, ft_strlen(data->error_msg));
+		data->exit_status = 1;
+		return (0);		
 	}
-	return (0);
+	if (access(dir, X_OK) == -1)
+	{
+		// bash: cd: Makefile: Not a directory
+		data->error_msg = "bash: cd: Permission denied\n"; //incluir nome
+		write(2, data->error_msg, ft_strlen(data->error_msg));
+		data->exit_status = 1;
+		return (0);		
+	}
+	return (1);
 }
 
 static char	*get_pwd(int buffer_size)
@@ -82,7 +92,7 @@ static void	att_envp_dictionary(char *save_pwd, t_data *data)
 	t_env		*oldpwd;
 	t_env		*pwd;
 
-	oldpwd	= find_env("OLDPWD", data);
+	oldpwd = find_env("OLDPWD", data);
 	pwd = find_env("PWD", data);
 	if (pwd)
 	{
@@ -97,7 +107,7 @@ static void	att_envp_dictionary(char *save_pwd, t_data *data)
 	if (first_time == 0)
 	{
 		if (!oldpwd)
-			dict_add_back(&data->dict_envp, ft_strdup("OLDPWD"), ft_strdup(save_pwd));
+			dict_add_back(&data->dict_envp, "OLDPWD", save_pwd);
 		first_time++;
 	}
 }
