@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/27 22:39:36 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/03 20:23:09 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,12 @@ static void	att_variable(t_env *new_var, char *str)
 // Names are used as shell variable and function names. Also referred to as an identifier."
 static int	is_valid(char *str)
 {
-	int	i;
+	int		i;
+	char	*error_msg;
 
 	if (!ft_isalpha(str[0]) && str[1] != '_')
 	{
+		// error_msg = 
 		write(2, "Error at export msg\n", ft_strlen("Error at export msg\n"));
 		return (0);
 	}

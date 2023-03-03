@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/03 20:05:54 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/03 20:12:59 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_cd(char **args, t_data *data)
 {
 	int		dir_changed;
 	char	*save_pwd;
+	char	*error_msg;
 
 	if (args[1] && args[2])
 	{

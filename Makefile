@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/03 19:09:58 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/03 20:29:37 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,10 @@ SRC 	=	src/main.c \
 			src/executor/execute_built_in.c \
 			src/executor/init_executor.c \
 			src/built_in/ft_cd.c \
+			src/built_in/ft_cd_error_msg.c \
 			src/built_in/ft_echo.c \
 			src/built_in/ft_env.c \
+			src/built_in/ft_export_error_msg.c \
 			src/built_in/ft_exit.c \
 			src/built_in/ft_export.c \
 			src/built_in/ft_pwd.c \

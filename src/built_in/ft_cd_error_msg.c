@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_cd_error_msg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 17:02:44 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/03 20:20:33 by gsmereka         ###   ########.fr       */
+/*   Created: 2023/03/03 20:27:57 by gsmereka          #+#    #+#             */
+/*   Updated: 2023/03/03 20:30:52 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	ft_env(char **args, t_data *data)
+void	ft_cd_error_msg(int	error, char *name)
 {
-	char	**envp;
-	int		i;
-
-	(void)args;
-	i = 0;
-	envp = data->virtual_envp;
-	while (envp[i])
-	{
-		if (envp[i][0] == '?' && envp[i][1] == '=')
-			i++;
-		else
-		{
-			ft_printf("%s\n", envp[i]);
-			i++;
-		}
-	}
+	ft_printf("OK\n");
 }
