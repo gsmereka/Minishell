@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/03 19:50:22 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/03 20:05:54 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_cd(char **args, t_data *data)
 
 	if (args[1] && args[2])
 	{
-		data->error_msg = "bash: cd: too many arguments\n"; //incluir nome
-		write(2, data->error_msg, ft_strlen(data->error_msg));
+		error_msg = "bash: cd: too many arguments\n"; //incluir nome
+		write(2, error_msg, ft_strlen(error_msg));
 		data->exit_status = 1;
 		return ;
 	}
@@ -46,20 +46,21 @@ void	ft_cd(char **args, t_data *data)
 static int	validate_dir(char *dir, t_data *data) //falta verificar permissões
 {
 	struct stat	dir_info;
+	char		*error_msg;
 
 	stat(dir, &dir_info);
 	if (!S_ISDIR(dir_info.st_mode))
 	{
-		data->error_msg = "bash: cd: Not a directory\n"; //incluir nome
-		write(2, data->error_msg, ft_strlen(data->error_msg));
+		error_msg = "bash: cd: Not a directory\n"; //incluir nome
+		write(2, error_msg, ft_strlen(error_msg));
 		data->exit_status = 1;
 		return (0);		
 	}
-	if (access(dir, X_OK) == -1)
+	else if (access(dir, X_OK) == -1)
 	{
 		// bash: cd: Makefile: Not a directory
-		data->error_msg = "bash: cd: Permission denied\n"; //incluir nome
-		write(2, data->error_msg, ft_strlen(data->error_msg));
+		error_msg = "bash: cd: Permission denied\n"; //incluir nome
+		write(2, error_msg, ft_strlen(error_msg));
 		data->exit_status = 1;
 		return (0);		
 	}
