@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/27 10:49:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/04 21:07:33 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	init_expander(t_data *data);
 
 // lexer
 void	init_lexer(t_data *data);
+void	add_token(t_token **tokens, char *content);
+void	token_clear(t_token *tokens);
 
 // parser
 void	init_parser(t_data *data);

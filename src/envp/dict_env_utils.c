@@ -6,14 +6,14 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 19:02:23 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/20 00:01:47 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/04 21:18:24 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 t_env	*create_dict_env(char *key, char *value);
-void	dict_add_back(t_env **dict_env, char *key, char *value); //
+void	dict_add_back(t_env **dict_env, char *key, char *value);
 void	dictclear(t_env *envp);
 
 t_env	*create_dict_env(char *key, char *value)
@@ -37,13 +37,11 @@ t_env	*dictlast(t_env *dict_env)
 	if (!dict_env)
 		return (dict_env);
 	while (last_env->next)
-	{
 		last_env = last_env->next;
-	}
 	return (last_env);
 }
 
-void	dict_add_back(t_env **dict_env, char *key, char *value) //front vai ficar ao contrário --mas gasta menos tempo pq n percorre... a n ser q pegue o tamanho 1 vez só e ja salve... --n da, pq vai ser sempre o tam anterior + 1... --mas da de fazer assim com tam + 1, consome medio, e fica igual
+void	dict_add_back(t_env **dict_env, char *key, char *value)
 {
 	t_env	*last_node;
 	t_env	*new_node;
