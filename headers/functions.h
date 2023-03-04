@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/04 21:07:33 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/04 23:04:55 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	init_repl_signals_handling(t_data *data);
 
 // envp
 void	set_initial_envp(char **envp, t_data *data);
-t_env	*create_dict_env(char *key, char *value); //n precisa desse aqui(?)
 void	dict_add_back(t_env **dict_env, char *key, char *value);
 void	dictclear(t_env *envp);
 void	att_virtual_envp(t_data *data);
@@ -43,7 +42,7 @@ void	init_expander(t_data *data);
 // lexer
 void	init_lexer(t_data *data);
 void	add_token(t_token **tokens, char *content);
-void	token_clear(t_token *tokens);
+void	token_clear(t_token **tokens);
 
 // parser
 void	init_parser(t_data *data);

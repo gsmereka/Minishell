@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 04:17:35 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/04 21:35:48 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/04 23:11:34 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_token	*create_token(char *content);
 void	add_token(t_token **tokens, char *content);
-void	token_clear(t_token *tokens);
+void	token_clear(t_token **tokens);
 
 t_token	*create_token(char *content)
 {
@@ -57,12 +57,13 @@ void	add_token(t_token **tokens, char *content)
 	}
 }
 
-void	token_clear(t_token *tokens)
+void	token_clear(t_token **tokens)
 {
-	if (tokens)
+	if (*tokens)
 	{
-		token_clear(tokens->next);
-		//free(tokens->content);
-		free(tokens);
+		token_clear(&(*tokens)->next);
+		free((*tokens)->content);
+		free(*tokens);
+		*tokens = NULL;
 	}
 }

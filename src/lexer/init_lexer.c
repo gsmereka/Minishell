@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/04 21:24:02 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/04 23:15:38 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ void	init_lexer(t_data *data) //oq faz: separar a string por palavras   --- aten
 	free_mat_user_input(user_input);
 	
 	//p printar --teste
-	t_token *aux_print;
+/*	t_token *aux_print;
 	aux_print = data->tokens;
 	while (aux_print)
 	{
 		ft_printf("%s\n", aux_print->content);
 		aux_print = aux_print->next;
-	}
+	}*/
 	//ver expansor dps -- fazer lexer basico antes
 	//expansor em mais tokens ($) ---isso vem antes do lexer   ---identifica se tem env na entrada, transforma em tokens no expansor e dps vem pra cá? ou expansor é chamado dentro do lexer? acho q expansor chama o lexer dps de pegar oq é a var de ambiente -> e transforma em token
 	//vars de ambiente?
