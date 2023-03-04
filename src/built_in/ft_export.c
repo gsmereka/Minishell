@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/03 20:42:52 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/04 19:43:18 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	ft_export(char **args, t_data *data)
 	int		i;
 
 	i = 1;
+	if (!args || !args[i])
+		return ;
 	while (args[i])
 	{
 		if (is_valid(args[i], data))
