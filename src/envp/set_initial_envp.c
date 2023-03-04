@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:51:10 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/02/23 04:31:27 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/04 21:17:54 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,12 @@ void	set_initial_envp(char **envp, t_data *data)
 		j = 0;
 		while (envp[i][j] != '=')
 			j++;
-		key = malloc(j + 2); // +2 ou +1?       --tamanho
-		ft_strlcpy(key, envp[i], j + 1); // --tamanho
-		value = ft_strdup(&envp[i][j + 1]); //  -- posição    -- j == '='
-		dict_add_back(&data->dict_envp, key, value); //front ou back?
-		//ft_printf("%s : ", key);
-		//ft_printf("%s\n", value);
+		key = malloc(j + 2);
+		ft_strlcpy(key, envp[i], j + 1);
+		value = ft_strdup(&envp[i][j + 1]);
+		dict_add_back(&data->dict_envp, key, value);
 		free(key);
-		free(value); //sera q é por causa dos free?
+		free(value);
 		i++;
 	}
-
-	/*t_env *aux_print = data->dict_envp;
-	i = 0;
-	while (i < 5)
-	{
-		ft_printf("%s\n", aux_print->value);
-		aux_print = aux_print->next;
-		i++;
-	}*/
-	//ft_printf("%s\n", data->dict_envp->key);
 }
