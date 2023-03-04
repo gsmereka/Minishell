@@ -17,6 +17,7 @@ SRC 	=	src/main.c \
 			src/repl/init_repl.c \
 			src/repl/init_repl_signals_handling.c \
 			src/envp/dict_env_utils.c \
+			src/envp/find_env.c \
 			src/envp/set_initial_envp.c \
 			src/envp/att_virtual_envp.c \
 			src/envp/att_envp_exitstatus_var.c \
@@ -27,8 +28,10 @@ SRC 	=	src/main.c \
 			src/executor/execute_built_in.c \
 			src/executor/init_executor.c \
 			src/built_in/ft_cd.c \
+			src/built_in/ft_cd_error_msg.c \
 			src/built_in/ft_echo.c \
 			src/built_in/ft_env.c \
+			src/built_in/ft_export_error_msg.c \
 			src/built_in/ft_exit.c \
 			src/built_in/ft_export.c \
 			src/built_in/ft_pwd.c \
@@ -43,7 +46,7 @@ LIBFT_A =	./libft/libft.a
 
 HEADERS =	./headers/minishell.h ./headers/functions.h ./headers/structs.h
 
-CCFLAGS =	-Wall -Wextra -Werror
+# CCFLAGS =	-Wall -Wextra -Werror
 
 READLINE_FLAG	=	-lreadline
 

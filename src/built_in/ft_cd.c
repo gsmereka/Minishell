@@ -6,70 +6,54 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/26 18:09:00 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/03 20:38:10 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static void	change_dir_envp(t_data *data);
-static int	dir_exist(char *dir);
-static char	*get_pwd(int buffer_size);
-static int	buffer_size_overflow(int buffer_size);
+static void		att_envp_dictionary(char *save_pwd, t_data *data);
+static int		validate_dir(char *dir, t_data *data);
+static char		*get_pwd(int buffer_size);
+static int		buffer_size_overflow(int buffer_size);
 
 void	ft_cd(char **args, t_data *data)
 {
-	char	*dir;
 	int		dir_changed;
+	char	*save_pwd;
 
-	if (!args || !args[1]) //verifica se tem argumentos
+	if (args[1] && args[2])
+		ft_cd_error_msg(1, NULL, data);
+	if (!args[1])
 		return ;
-	if (!dir_exist(args[1])) // verifica se o diretório existe
+	if (!validate_dir(args[1], data)) // verifica se o diretório existe
 		return ;
-	dir = ft_strdup(args[1]);
-	if (!dir)
-		exit_error(12, "Fail at alloc dir value at cd", data);
-	dir_changed = chdir(dir); // tenta alterar o diretório atual
+	save_pwd = get_pwd(1024);
+	dir_changed = chdir(args[1]); // tenta alterar o diretório atual
 	if (dir_changed != -1)
 	{
-		change_dir_envp(data); // se alterou, altera a variavel de ambiente no dicionario.
+		att_envp_dictionary(save_pwd, data);
 		att_virtual_envp(data); // Tambem atualiza a virtual_envp
 	}
-	free(dir);
+	free(save_pwd);
 }
 
-static void	change_dir_envp(t_data *data)
+static int	validate_dir(char *dir, t_data *data) //falta verificar permissões
 {
-	t_env	*pwd;
-	int		buffer_size;
+	struct stat	dir_info;
 
-	pwd = data->dict_envp;
-	while (pwd && ft_strncmp(pwd->key, "PWD", 4) != 0) // busca a variavel de ambiente PWD
+	stat(dir, &dir_info);
+	if (!S_ISDIR(dir_info.st_mode))
 	{
-		pwd = pwd->next;
+		ft_cd_error_msg(2, dir, data);
+		return (0);
 	}
-	if (pwd)
+	else if (access(dir, X_OK) == -1)
 	{
-		if (pwd->value)
-			free(pwd->value);
-		buffer_size = 1024;
-		pwd->value = get_pwd(buffer_size); // atualiza o endereço do diretorio atual na variavel de ambiente.
-		if (!pwd->value)
-			exit_error(12, "Fail at alloc pwd value at cd", data);
+		ft_cd_error_msg(3, dir, data);
+		return (0);
 	}
-}
-
-static int	dir_exist(char *dir) //falta verificar permissões
-{
-	DIR	*path;
-
-	path = opendir(dir); // tenta abrir o diretorio
-	if (path) // se abrir, o diretório existe e tem acesso.
-	{
-		closedir(path);
-		return (1);
-	}
-	return (0);
+	return (1);
 }
 
 static char	*get_pwd(int buffer_size)
@@ -90,4 +74,30 @@ static int	buffer_size_overflow(int buffer_size)
 	if (buffer_size > 0)
 		return (0);
 	return (1);
+}
+
+static void	att_envp_dictionary(char *save_pwd, t_data *data)
+{
+	static int	first_time;
+	t_env		*oldpwd;
+	t_env		*pwd;
+
+	oldpwd = find_env("OLDPWD", data);
+	pwd = find_env("PWD", data);
+	if (pwd)
+	{
+		free(pwd->value);
+		pwd->value = get_pwd(1024);
+	}
+	if (oldpwd)
+	{
+		free(oldpwd->value);
+		oldpwd->value = ft_strdup(save_pwd);
+	}
+	if (first_time == 0)
+	{
+		if (!oldpwd)
+			dict_add_back(&data->dict_envp, "OLDPWD", save_pwd);
+		first_time++;
+	}
 }

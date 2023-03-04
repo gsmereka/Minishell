@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_export_error_msg.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 17:02:44 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/03 20:20:33 by gsmereka         ###   ########.fr       */
+/*   Created: 2023/03/03 20:29:03 by gsmereka          #+#    #+#             */
+/*   Updated: 2023/03/04 19:37:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	ft_env(char **args, t_data *data)
+void	ft_export_error_msg(int error, char *name, t_data *data)
 {
-	char	**envp;
-	int		i;
+	char		*error_msg;
 
-	(void)args;
-	i = 0;
-	envp = data->virtual_envp;
-	while (envp[i])
+	if (error == 1)
 	{
-		if (envp[i][0] == '?' && envp[i][1] == '=')
-			i++;
-		else
-		{
-			ft_printf("%s\n", envp[i]);
-			i++;
-		}
+		error_msg = "bash: export: `1=9': not a valid identifier\n";
+		write(2, error_msg, ft_strlen(error_msg));
+		data->exit_status = 1;
+		return ;
 	}
+	ft_printf("OK\n");
 }

@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   find_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 17:02:44 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/03 20:20:33 by gsmereka         ###   ########.fr       */
+/*   Created: 2023/03/02 11:10:06 by gsmereka          #+#    #+#             */
+/*   Updated: 2023/03/02 11:10:58 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	ft_env(char **args, t_data *data)
+t_env	*find_env(char *key, t_data *data)
 {
-	char	**envp;
-	int		i;
+	t_env	*envp;
 
-	(void)args;
-	i = 0;
-	envp = data->virtual_envp;
-	while (envp[i])
+	envp = data->dict_envp;
+	while (envp) // busca a variavel de ambiente
 	{
-		if (envp[i][0] == '?' && envp[i][1] == '=')
-			i++;
-		else
-		{
-			ft_printf("%s\n", envp[i]);
-			i++;
-		}
+		if (ft_strncmp(envp->key, key, ft_strlen(key)) == 0)
+			break ;
+		envp = envp->next;
 	}
+	return (envp);
 }

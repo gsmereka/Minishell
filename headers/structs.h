@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:49 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/04 21:42:29 by gde-mora         ###   ########.fr       */
-/*                                                                            */
+/*   Updated: 2023/03/04 21:42:29 by gde-mora         ###   ########.fr       */                                                                   */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
@@ -35,6 +34,7 @@ typedef struct s_data
 	char	**virtual_envp;
 	char	*prompt;
 	char	*user_input;
+	char	*error_msg;
 	int		exit_status;
 }	t_data;
 

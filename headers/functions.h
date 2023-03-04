@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/04 23:04:55 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/03 20:33:13 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 //built in
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <dirent.h>
 # include <fcntl.h>
 
@@ -35,6 +36,7 @@ void	dict_add_back(t_env **dict_env, char *key, char *value);
 void	dictclear(t_env *envp);
 void	att_virtual_envp(t_data *data);
 void	att_envp_exitstatus_var(t_data *data);
+t_env	*find_env(char *key, t_data *data);
 
 // expander
 void	init_expander(t_data *data);
@@ -59,6 +61,8 @@ void	ft_exit(char **args, t_data *data);
 void	ft_export(char **args, t_data *data);
 void	ft_pwd(char **args, t_data *data);
 void	ft_unset(char **args, t_data *data);
+void	ft_cd_error_msg(int	error, char *name, t_data *data);
+void	ft_export_error_msg(int	error, char *name, t_data *data);
 
 // end_program
 void	end_program(t_data *data);
