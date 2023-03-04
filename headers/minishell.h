@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:26:56 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/01/27 12:58:15 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/04 21:42:11 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include "functions.h"
 # include "structs.h"
 
-//C headers
+//C headers   --- colocar os headers de functions aqui?
 
 #endif

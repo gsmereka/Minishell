@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end_program.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/26 18:57:45 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/04 19:36:39 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	free_data(t_data *data);
 
 // Saida normal do minishell, atraves do ctrl + D ou do comando exit.
-void	end_program(t_data *data)
+void	end_program(t_data *data) //comentarios em portugues
 {
 	int	exit_status;
 

@@ -6,17 +6,16 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:49 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/02 11:27:23 by gsmereka         ###   ########.fr       */
-/*                                                                            */
+/*   Updated: 2023/03/04 21:42:29 by gde-mora         ###   ########.fr       */                                                                   */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_token //inicializar com bzero no lexer
+typedef struct s_token
 {
 	char			*type;
-	char			*content; //o "token" na real seria só isso. O resto quem faz é o parser, n?
+	char			*content;
 	char			**args;
 	struct s_token	*next;
 }	t_token;
