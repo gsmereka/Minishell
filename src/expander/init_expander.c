@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/05 00:26:50 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/05 01:13:12 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,23 @@ int	ft_strcmp(char *s1, char *s2)
 	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }
 
-int	creck_token_in_envp(t_data *data, char *content, t_token **env_token)
+int	creck_token_in_envp(t_data *data, char *token_content, t_token **env_token)
 {
 	t_env	*aux_env;
 
 	aux_env = data->dict_envp;
 	while (aux_env)
 	{
-		if (ft_strcmp(aux_env->key, content) == 0) //qual ft_strlen é apropriado?? de content ou do key? --nenhum! 
+		if (ft_strcmp(aux_env->key, token_content) == 0) //qual ft_strlen é apropriado?? de content ou do key? --nenhum! 
 		{
+			(*env_token)->env_key = ft_strdup(token_content);
 			free((*env_token)->content);
 			(*env_token)->content = ft_strdup(aux_env->value); //e se alterar a env?
 			return (1);
 		}
 		aux_env = aux_env->next;
 	}
+	(*env_token)->env_key = ft_strdup(token_content);
 	free((*env_token)->content);
 	(*env_token)->content = ft_strdup(" ");
 	return (0);

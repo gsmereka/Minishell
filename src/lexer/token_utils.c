@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 04:17:35 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/04 23:11:34 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/05 01:13:49 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_token	*create_token(char *content)
 		return (NULL);
 	new_node->type = NULL;
 	new_node->content = ft_strdup(content);
+	new_node->env_key = NULL;
 	new_node->args = NULL;
 	new_node->next = NULL;
 	return (new_node);
@@ -63,6 +64,8 @@ void	token_clear(t_token **tokens)
 	{
 		token_clear(&(*tokens)->next);
 		free((*tokens)->content);
+		if ((*tokens)->env_key)
+			free((*tokens)->env_key); //precisa colocar = NULL?
 		free(*tokens);
 		*tokens = NULL;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/04 20:14:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/05 01:08:59 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct s_token
 {
 	char			*type;
 	char			*content;
+	char			*env_key; //p types envp
 	char			**args;
 	struct s_token	*next;
 }	t_token;
