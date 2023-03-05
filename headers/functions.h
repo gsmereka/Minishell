@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/03 20:33:13 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/05 13:37:54 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ void	init_parser(t_data *data);
 // executor
 void	init_executor(t_data *data);
 void	execute_built_in(t_data *data);
+void	get_commands_info(t_data *data);
+void	add_cmd(t_cmd **cmds, char *content);
+void	cmd_clear(t_cmd **cmds);
 
 // built_in
 void	ft_cd(char **args, t_data *data);

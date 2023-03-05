@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/04 20:14:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/05 13:35:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 }	t_env;
+
+typedef	struct s_cmd
+{
+	char			*name;
+	char			**args;
+	int				input_fd;
+	int				output_fd;
+	struct s_cmd	*next;
+} t_cmd;
 
 typedef struct s_data
 {
