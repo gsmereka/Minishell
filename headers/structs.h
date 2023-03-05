@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/05 13:35:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:17:27 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ typedef	struct s_cmd
 	int				input_fd;
 	int				output_fd;
 	struct s_cmd	*next;
-} t_cmd;
+}	t_cmd;
 
 typedef struct s_data
 {
 	t_token	*tokens;
 	t_env	*dict_envp;
+	t_cmd	*cmds;
 	char	**virtual_envp;
 	char	*prompt;
 	char	*user_input;

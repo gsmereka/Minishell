@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end_program.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/04 19:36:39 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:19:30 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ static void	free_data(t_data *data)
 		free(data->user_input);
 	if (data->virtual_envp)
 		free_array_list((void **)data->virtual_envp);
+	if (data->cmds)
+		cmd_clear(&data->cmds);
+	if (data->tokens)
+		token_clear(&data->tokens);
 	rl_clear_history();
 }
 
