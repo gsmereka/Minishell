@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:11:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/07 15:59:43 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/07 18:13:47 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_token	*format_cmd(t_token *token, t_cmd *cmd, t_data *data)
 
 	cmd_token = find_the_command(token);
 	set_cmd_composition(cmd_token, cmd);
-	// check_inputs(token, cmd, data);
-	// check_outputs(token, cmd, data);
+	get_inputs(token, cmd, data);
+	get_outputs(token, cmd, data);
 }
 
 static void	set_cmd_composition(t_token *token, t_cmd *cmd)
