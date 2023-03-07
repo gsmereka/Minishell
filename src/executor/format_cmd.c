@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:11:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/07 15:54:33 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/07 15:59:43 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 //  < arquivo_1 > arquivo_2 ---- Podem existir Comandos Que não existem.
 static t_token	*find_the_command(t_token *token);
-static void	set_cmd_composition(t_token *token, t_cmd *cmd);
+static void		set_cmd_composition(t_token *token, t_cmd *cmd);
+static int		count_args(t_token *token);
 
 t_token	*format_cmd(t_token *token, t_cmd *cmd, t_data *data)
 {
@@ -31,10 +32,10 @@ static void	set_cmd_composition(t_token *token, t_cmd *cmd)
 	int	args_amount;
 	int	index;
 
-	cmd->name = ft_strdup(token->content);
-	// args_amount = count_args(token);
+	args_amount = count_args(token);
 	if (!args_amount)
 		return ;
+	cmd->name = ft_strdup(token->content);
 	cmd->args = ft_calloc(args_amount + 1, sizeof(char *));
 	index = 0;
 	while (index < args_amount)
@@ -43,6 +44,33 @@ static void	set_cmd_composition(t_token *token, t_cmd *cmd)
 		index++;
 		token = token->next;
 	}
+}
+
+static int	count_args(t_token *token)
+{
+	int	args_amount;
+
+	args_amount = 0;
+	while (token)
+	{
+		if (ft_strncmp(token->content, "<", ft_strlen(token->content)) == 0)
+			break ;
+		else if (ft_strncmp(token->content,
+				"<<", ft_strlen(token->content)) == 0)
+			break ;
+		else if (ft_strncmp(token->content,
+				">", ft_strlen(token->content)) == 0)
+			break ;
+		else if (ft_strncmp(token->content,
+				">>", ft_strlen(token->content)) == 0)
+			break ;
+		else if (ft_strncmp(token->content,
+				"|", ft_strlen(token->content)) == 0)
+			break ;
+		args_amount++;
+		token = token->next;
+	}
+	return (args_amount);
 }
 
 static t_token	*find_the_command(t_token *token)
