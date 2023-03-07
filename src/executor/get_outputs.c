@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:12:36 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/07 18:41:09 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/07 18:43:37 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	get_outputs(t_token *token, t_cmd *cmd, t_data *data)
 	get_outputs_details(token, cmd);
 }
 
-// DICIONARIO DE outPUT MODES
-// 0 = Normal output '<'
-// 1s = here doc '<<'
+// DICIONARIO DE OUTPUT MODES
+// 0 = Normal output '>'
+// 1 = append mode '>>'
 
 static void	get_outputs_details(t_token *token, t_cmd *cmd)
 {
@@ -38,14 +38,14 @@ static void	get_outputs_details(t_token *token, t_cmd *cmd)
 	output = 0;
 	while (token)
 	{
-		if (ft_strncmp(token->content, "<", ft_strlen(token->content)) == 0)
+		if (ft_strncmp(token->content, ">", ft_strlen(token->content)) == 0)
 		{
 			cmd->outfiles[output] = ft_strdup(token->next->content);
 			cmd->outputs_modes[output] = 0;
 			output++;
 		}
 		else if (ft_strncmp(token->content,
-				"<<", ft_strlen(token->content)) == 0)
+				">>", ft_strlen(token->content)) == 0)
 		{
 			cmd->outfiles[output] = ft_strdup(token->next->content);
 			cmd->outputs_modes[output] = 1;
@@ -65,10 +65,10 @@ static int	count_outputs(t_token *token)
 	size = 0;
 	while (token)
 	{
-		if (ft_strncmp(token->content, "<", ft_strlen(token->content)) == 0)
+		if (ft_strncmp(token->content, ">", ft_strlen(token->content)) == 0)
 			size++;
 		else if (ft_strncmp(token->content,
-				"<<", ft_strlen(token->content)) == 0)
+				">>", ft_strlen(token->content)) == 0)
 			size++;
 		else if (ft_strncmp(token->content,
 				"|", ft_strlen(token->content)) == 0)
