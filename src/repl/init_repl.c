@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_repl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/05 01:28:16 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:22:22 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ void	init_repl(t_data *data)
 			aux_print = aux_print->next;
 		}*/
 		//
+		init_executor(data);
 		token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
+		cmd_clear(&data->cmds);
 		// init_parser(data);
-		// init_executor(data);
 		free(data->user_input);
 	}
 }

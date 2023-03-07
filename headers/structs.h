@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/05 20:17:27 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:01:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,26 @@ typedef struct s_env
 
 typedef	struct s_cmd
 {
-	char			*name;
-	char			**args;
-	int				input_fd;
-	int				output_fd;
-	struct s_cmd	*next;
+	char	*name;
+	char	**args;
+	int		infile_fd;
+	int		outfile_fd;
+	char	**infile;
+	char	**outfile;
 }	t_cmd;
+
+typedef	struct s_exec
+{
+	t_cmd	**cmds;
+	int		cmds_amount;
+	int		**pipes;
+}	t_exec;
 
 typedef struct s_data
 {
 	t_token	*tokens;
 	t_env	*dict_envp;
-	t_cmd	*cmds;
+	t_exec	*exec;
 	char	**virtual_envp;
 	char	*prompt;
 	char	*user_input;
