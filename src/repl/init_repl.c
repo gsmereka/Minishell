@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/05 20:22:22 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/07 15:41:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_repl(t_data *data)
 		//
 		init_executor(data);
 		token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
-		cmd_clear(&data->cmds);
+		// cmd_clear(&data->cmds);
 		// init_parser(data);
 		free(data->user_input);
 	}
