@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:11:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/07 20:24:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/07 21:49:20 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_token	*format_cmd(t_token *token, t_cmd *cmd, t_data *data)
 	t_token	*cmd_token;
 
 	cmd_token = find_the_command(token);
-	ft_printf("%s\n", cmd_token->content);
 	set_cmd_composition(cmd_token, cmd);
 	get_inputs(token, cmd, data);
 	get_outputs(token, cmd, data);
@@ -37,13 +36,9 @@ static void	set_cmd_composition(t_token *token, t_cmd *cmd)
 	args_amount = count_args(token);
 	if (!args_amount)
 		return ;
-	ft_printf("carlos\n");
-	ft_printf("%s\n", token->content);
 	cmd->name = ft_strdup(token->content);
-	ft_printf("carlos\n");
 	cmd->args = ft_calloc(args_amount + 1, sizeof(char *));
 	index = 0;
-	ft_printf("carlos\n");
 	while (index < args_amount)
 	{
 		cmd->args[index] = ft_strdup(token->content);

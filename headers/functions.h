@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/07 18:13:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/07 22:18:31 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,10 @@ void	init_parser(t_data *data);
 
 // executor
 void	init_executor(t_data *data);
+void	clear_commands(t_data *data);
 void	execute_built_in(t_data *data);
 void	get_commands_info(t_data *data);
 t_token	*format_cmd(t_token *token, t_cmd *cmd, t_data *data);
-void	add_cmd(t_cmd **cmds, char *content);
-void	cmd_clear(t_cmd **cmds);
 void	get_outputs(t_token *token, t_cmd *cmd, t_data *data);
 void	get_inputs(t_token *token, t_cmd *cmd, t_data *data);
 

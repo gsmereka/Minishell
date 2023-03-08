@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/07 18:38:27 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/07 22:08:10 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ typedef	struct s_cmd
 {
 	char	*name;
 	char	**args;
-	int		infile_fd;
-	int		outfile_fd;
+	int		*infiles_fd;
+	int		*outfiles_fd;
 	char	**infiles;
-	int		*inputs_modes;
 	char	**outfiles;
+	int		*inputs_modes;
 	int		*outputs_modes;
 }	t_cmd;
 
