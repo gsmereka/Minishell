@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 01:50:42 by gde-mora          #+#    #+#             */
-/*   Updated: 2022/09/06 06:22:53 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/08 00:12:39 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	*ft_itoa_u(unsigned int n);
 char	*ft_itoa_hex(unsigned long int n);
 int		ft_putstr(char *s);
 int		ft_putchar(char c);
+int		ft_strcmp(char *s1, char *s2);
 
 //ft_printf functions
 int		ft_printf(const char *str, ...);

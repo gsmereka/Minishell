@@ -6,7 +6,7 @@
 #    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/04 20:45:23 by gde-mora         ###   ########.fr        #
+#    Updated: 2023/03/08 01:50:54 by gde-mora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC 	=	src/main.c \
 			src/expander/init_expander.c \
 			src/lexer/init_lexer.c \
 			src/lexer/token_utils.c \
+			src/lexer/special_token_utils.c \
 			src/parser/init_parser.c \
 			src/executor/execute_built_in.c \
 			src/executor/init_executor.c \

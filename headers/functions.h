@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/03 20:33:13 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 02:49:54 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	att_virtual_envp(t_data *data);
 void	att_envp_exitstatus_var(t_data *data);
 t_env	*find_env(char *key, t_data *data);
 
-// expander
-void	init_expander(t_data *data);
-
 // lexer
-void	init_lexer(t_data *data);
+int		init_lexer(t_data *data);
 void	add_token(t_token **tokens, char *content);
 void	token_clear(t_token **tokens);
+
+// expander
+void	init_expander(t_data *data);
 
 // parser
 void	init_parser(t_data *data);

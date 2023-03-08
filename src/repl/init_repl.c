@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/05 01:28:16 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/08 02:48:48 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	get_user_input(t_data *data);
 static int	is_valid(char *user_input);
 static void	save_input_on_history(char *user_input);
+static int	is_closed_quotes(char *user_input);
 
 void	init_repl(t_data *data)
 {
@@ -23,23 +24,25 @@ void	init_repl(t_data *data)
 	while (1)
 	{
 		get_user_input(data);
-		if (!is_valid(data->user_input))
+		if (!is_valid(data->user_input)) //isso faz oq?
 			break ;
-		save_input_on_history(data->user_input);
-		init_lexer(data);
-		init_expander(data); //se o usuário mandou alguma var de ambiente  --- $
-		execute_built_in(data);
-		//print p teste
-	/*	t_token *aux_print = data->tokens;
-		while (aux_print)
+		save_input_on_history(data->user_input); //ele salva só se for valido
+		if (init_lexer(data))
 		{
-			ft_printf("%s\n", aux_print->content);
-			aux_print = aux_print->next;
-		}*/
-		//
-		token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
-		// init_parser(data);
-		// init_executor(data);
+		//	init_expander(data); //se o usuário mandou alguma var de ambiente  --- $
+			execute_built_in(data);
+			//print p teste
+		/*	t_token *aux_print = data->tokens;
+			while (aux_print)
+			{
+				ft_printf("%s\n", aux_print->content);
+				aux_print = aux_print->next;
+			}*/
+			//
+			token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
+			// if (init_parser(data) == 1)
+			// init_executor(data);
+		}
 		free(data->user_input);
 	}
 }
