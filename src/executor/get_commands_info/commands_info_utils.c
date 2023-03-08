@@ -6,11 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 21:50:32 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 01:07:14 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:02:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 static void	clear_cmd(t_cmd *cmd);
 static void	free_intern_cmds(t_data *data);

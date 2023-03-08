@@ -6,11 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:12:36 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/07 18:43:37 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:03:04 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 static int	count_outputs(t_token *token);
 static void	get_outputs_details(t_token *token, t_cmd *cmd);

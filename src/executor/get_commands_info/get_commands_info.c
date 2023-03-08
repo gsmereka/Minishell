@@ -6,11 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:29:33 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 00:59:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:02:53 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 static void	get_execution_info(t_data *data);
 static int	count_cmds(t_data *data);

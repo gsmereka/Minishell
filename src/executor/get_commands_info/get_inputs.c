@@ -6,11 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:12:05 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/07 18:39:52 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:02:58 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 static int	count_inputs(t_token *token);
 static void	get_inputs_details(t_token *token, t_cmd *cmd);
@@ -29,7 +29,7 @@ void	get_inputs(t_token *token, t_cmd *cmd, t_data *data)
 
 // DICIONARIO DE INPUT MODES
 // 0 = Normal input '<'
-// 1s = here doc '<<'
+// 1 = here doc '<<'
 
 static void	get_inputs_details(t_token *token, t_cmd *cmd)
 {

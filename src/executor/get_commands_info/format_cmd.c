@@ -6,11 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:11:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 00:19:47 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:02:46 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 //  < arquivo_1 > arquivo_2 ---- Podem existir Comandos Que não existem.
 static t_token	*find_next_command(t_token *token);
