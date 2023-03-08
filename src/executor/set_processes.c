@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 13:14:16 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:20:53 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	set_processes(t_data *data)
 	cmd = 0;
 	while (cmd < data->exec->cmds_amount)
 	{
-		set_pipes(cmd, data);
+		// set_pipes(cmd, data);
 		set_files(cmd, data);
 		set_fork(cmd, data);
 		cmd++;
@@ -73,7 +73,7 @@ static void	set_fork(int cmd, t_data *data)
 	}
 	else
 	{
-		// wait(NULL);
+		wait(NULL);
 		// data->process.pid[cmd] = pid;
 		// waitpid(data->process.pid[cmd],
 		// 	&data->process.status[cmd], WNOHANG | WUNTRACED);

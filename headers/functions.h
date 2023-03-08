@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/08 13:08:53 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 20:53:49 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <fcntl.h>
+
+// Executor
+#include <sys/wait.h>
 
 // REPL
 void	init_repl(t_data *data);
@@ -70,8 +73,8 @@ void	ft_exit(char **args, t_data *data);
 void	ft_export(char **args, t_data *data);
 void	ft_pwd(char **args, t_data *data);
 void	ft_unset(char **args, t_data *data);
-void	ft_cd_error_msg(int	error, char *name, t_data *data);
-void	ft_export_error_msg(int	error, char *name, t_data *data);
+void	ft_cd_error_msg(int error, char *name, t_data *data);
+void	ft_export_error_msg(int error, char *name, t_data *data);
 
 // end_program
 void	end_program(t_data *data);

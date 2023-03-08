@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:18:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 11:18:25 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 20:54:11 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_cmds_paths(t_data *data)
 			free(data->exec->cmds[cmd]->name);
 			data->exec->cmds[cmd]->name = cmd_path;
 		}
-		ft_printf("caminho do programa: %s\n", data->exec->cmds[cmd]->name);
+		// ft_printf("caminho do programa: %s\n", data->exec->cmds[cmd]->name);
 		cmd++;
 	}
 }
@@ -44,9 +44,11 @@ static char	*test_path(int cmd, t_data *data)
 	{
 		final_path = ft_strdup(data->exec->env_paths[i]);
 		final_path = ft_strjoin_with_free(final_path, "/");
-		final_path = ft_strjoin_with_free(final_path, data->exec->cmds[cmd]->name);
+		final_path = ft_strjoin_with_free
+			(final_path, data->exec->cmds[cmd]->name);
 		if (!final_path)
-			exit_error(12, "Failed to allocate memory for test a command path", data);
+			exit_error(12,
+				"Failed to allocate memory for test a command path", data);
 		if (access(final_path, X_OK) == 0)
 			return (final_path);
 		free(final_path);
