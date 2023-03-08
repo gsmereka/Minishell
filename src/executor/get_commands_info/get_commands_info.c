@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:29:33 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 11:00:28 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 11:07:10 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	get_commands_info(t_data *data)
 {
 	init_execution_structure(data);
 	set_cmd_tokens(data);
+	get_env_paths(data);
+	set_cmds_paths(data);
 }
 
 static void	init_execution_structure(t_data *data)

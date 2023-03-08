@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 21:50:32 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 10:02:39 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 11:04:14 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	clear_commands(t_data *data)
 		return ;
 	free_intern_cmds(data);
 	free_intern_pipes(data);
+	if (data->exec->env_paths)
+		free_array_list((void **)data->exec->env_paths);
 	free(data->exec);
 	data->exec = NULL;
 }
