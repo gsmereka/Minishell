@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:11:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 10:02:46 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 11:10:07 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //  < arquivo_1 > arquivo_2 ---- Podem existir Comandos Que não existem.
 static t_token	*find_next_command(t_token *token);
-static t_token	*find_the_command(t_token *token);
+static t_token	*find_actual_command(t_token *token);
 static void		set_cmd_composition(t_token *token, t_cmd *cmd);
 static int		count_args(t_token *token);
 
@@ -22,7 +22,7 @@ t_token	*format_cmd(t_token *token, t_cmd *cmd, t_data *data)
 {
 	t_token	*cmd_token;
 
-	cmd_token = find_the_command(token);
+	cmd_token = find_actual_command(token);
 	set_cmd_composition(cmd_token, cmd);
 	get_inputs(token, cmd, data);
 	get_outputs(token, cmd, data);
@@ -90,7 +90,7 @@ static int	count_args(t_token *token)
 	return (args_amount);
 }
 
-static t_token	*find_the_command(t_token *token)
+static t_token	*find_actual_command(t_token *token)
 {
 	while (token)
 	{
