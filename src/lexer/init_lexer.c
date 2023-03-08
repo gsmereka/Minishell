@@ -6,51 +6,50 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 03:26:19 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/08 03:28:26 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int	substitute_spaces_and_check_closed(t_data *data, char quote, int i)
-{
-	while (data->user_input[++i] && data->user_input[i] != quote)
-	{
-		if (data->user_input[i] == ' ')
-			data->user_input[i] = (char)1;
-	}
-	if (data->user_input[i] != quote)
-	{
-		ft_printf("minishell: syntax error: quotes `%c' was expected to close\n", quote); //ou bash: ?
-		return (0);
-	}
-	return (i);
-}
-
 static int	handle_quotes(t_data *data) // + de 25 linhas
 {
 	int	i;
-	int	position;
 
-	i = -1;
-	while (data->user_input[++i])
+	i = 0;
+	while (data->user_input[i])
 	{
-		position = 0; //isso é aq ou antes do while? --acho q aq pq é um auxiliar...?
 		if (data->user_input[i] == '"')
 		{
-			position = substitute_spaces_and_check_closed(data, '"', i);
-			if (!position)
+			i++;
+			while (data->user_input[i] && data->user_input[i] != '"')
+			{
+				if (data->user_input[i] == ' ')
+					data->user_input[i] = (char)1;
+				i++;
+			}
+			if (data->user_input[i] != '"')
+			{
+				ft_printf("minishell: syntax error: quotes `\"' was expected to close\n"); //ou bash: ?
 				return (0);
-			i += position;
-			
+			}
 		}
 		if (data->user_input[i] == '\'')
 		{
-			position = substitute_spaces_and_check_closed(data, '\'', i);
-			if (!position)
+			i++;
+			while (data->user_input[i] && data->user_input[i] != '\'')
+			{
+				if (data->user_input[i] == ' ')
+					data->user_input[i] = (char)1;
+				i++;
+			}
+			if (data->user_input[i] != '\'')
+			{
+				ft_printf("minishell: syntax error: quotes `\'' was expected to close\n"); //ou bash: ?
 				return (0);
-			i += position;
+			}
 		}
+		i++;
 	}
 	return (1);
 }
