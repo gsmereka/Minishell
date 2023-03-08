@@ -6,13 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:11:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/07 21:49:20 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 00:19:47 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 //  < arquivo_1 > arquivo_2 ---- Podem existir Comandos Que não existem.
+static t_token	*find_next_command(t_token *token);
 static t_token	*find_the_command(t_token *token);
 static void		set_cmd_composition(t_token *token, t_cmd *cmd);
 static int		count_args(t_token *token);
@@ -25,7 +26,21 @@ t_token	*format_cmd(t_token *token, t_cmd *cmd, t_data *data)
 	set_cmd_composition(cmd_token, cmd);
 	get_inputs(token, cmd, data);
 	get_outputs(token, cmd, data);
-	// return ()
+	token = find_next_command(token);
+	return (token);
+}
+
+static t_token	*find_next_command(t_token *token)
+{
+	while (token)
+	{
+		if (ft_strncmp(token->content, "|", ft_strlen(token->content)) == 0)
+		{
+			return(token->next);
+		}
+		token = token->next;
+	}
+	return (token);
 }
 
 static void	set_cmd_composition(t_token *token, t_cmd *cmd)
@@ -34,6 +49,7 @@ static void	set_cmd_composition(t_token *token, t_cmd *cmd)
 	int	index;
 
 	args_amount = count_args(token);
+	ft_printf("args: %d\n", args_amount);
 	if (!args_amount)
 		return ;
 	cmd->name = ft_strdup(token->content);
@@ -42,8 +58,8 @@ static void	set_cmd_composition(t_token *token, t_cmd *cmd)
 	while (index < args_amount)
 	{
 		cmd->args[index] = ft_strdup(token->content);
-		index++;
 		token = token->next;
+		index++;
 	}
 }
 

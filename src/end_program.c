@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/07 22:19:55 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 00:04:38 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ static void	free_data(t_data *data)
 		free(data->user_input);
 	if (data->virtual_envp)
 		free_array_list((void **)data->virtual_envp);
-	// if (data->cmds)
-	// 	cmd_clear(&data->cmds);
 	if (data->tokens)
 		token_clear(&data->tokens);
 	if (data->exec)
