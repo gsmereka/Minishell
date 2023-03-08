@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/08 10:41:45 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 13:08:53 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	get_outputs(t_token *token, t_cmd *cmd, t_data *data);
 void	get_inputs(t_token *token, t_cmd *cmd, t_data *data);
 void	get_env_paths(t_data *data);
 void	set_cmds_paths(t_data *data);
+int		set_processes(t_data *data);
+void	execute(int cmd, char **cmd_args, t_data *data);
 
 // built_in
 void	ft_cd(char **args, t_data *data);

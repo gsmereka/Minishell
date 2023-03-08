@@ -6,27 +6,27 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2022/12/29 14:21:34 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 13:14:16 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/pipex.h"
+#include "../../headers/minishell.h"
 
 static void	set_pipes(int cmd, t_data *data);
 static void	set_files(int cmd, t_data *data);
-static void	set_fork(int cmd, char **envp, t_data *data);
+static void	set_fork(int cmd, t_data *data);
 static void	close_fds(int cmd, t_data *data);
 
-int	set_processes(char **envp, t_data *data)
+int	set_processes(t_data *data)
 {
 	int	cmd;
 
 	cmd = 0;
-	while (cmd < data->n_cmds)
+	while (cmd < data->exec->cmds_amount)
 	{
 		set_pipes(cmd, data);
 		set_files(cmd, data);
-		set_fork(cmd, envp, data);
+		set_fork(cmd, data);
 		cmd++;
 	}
 	return (0);
@@ -34,77 +34,78 @@ int	set_processes(char **envp, t_data *data)
 
 static void	set_pipes(int cmd, t_data *data)
 {
-	if (pipe(data->files.pipes[cmd]) == -1)
-		finalize("Too much commands to pipe", 24, data);
+	if (pipe(data->exec->pipes[cmd]) == -1)
+		exit_error(24, "Too much commands to pipe", data);
 }
 
 static void	set_files(int cmd, t_data *data)
 {
-	if (cmd == 0)
-	{
-		if (data->files.here_doc == 0)
-			data->files.infile_fd = open(data->files.infile, O_RDWR);
-		else
-			data->files.infile_fd = data->files.here_doc_pipe[0];
-	}
-	if (cmd == data->n_cmds - 1)
-	{
-		if (data->files.here_doc == 0)
-			data->files.outfile_fd = open(data->files.outfile,
-					O_RDWR | O_CREAT | O_TRUNC, 0777);
-		if (data->files.here_doc == 1)
-			data->files.outfile_fd = open(data->files.outfile,
-					O_RDWR | O_CREAT | O_APPEND, 0777);
-	}
+	// if (cmd == 0)
+	// {
+	// 	if (data->exec->here_doc == 0)
+	// 		data->exec->infile_fd = open(data->exec->infile, O_RDWR);
+	// 	else
+	// 		data->exec->infile_fd = data->exec->here_doc_pipe[0];
+	// }
+	// if (cmd == data->exec->cmds_amount - 1)
+	// {
+	// 	if (data->exec->here_doc == 0)
+	// 		data->exec->outfile_fd = open(data->exec->outfile,
+	// 				O_RDWR | O_CREAT | O_TRUNC, 0777);
+	// 	if (data->exec->here_doc == 1)
+	// 		data->exec->outfile_fd = open(data->exec->outfile,
+	// 				O_RDWR | O_CREAT | O_APPEND, 0777);
+	// }
 }
 
-static void	set_fork(int cmd, char **envp, t_data *data)
+static void	set_fork(int cmd, t_data *data)
 {
 	int	pid;
 
 	pid = fork();
 	if (pid == -1)
-		finalize("Error at use fork() function", 12, data);
+		exit_error(24, "Error at use fork() function", data);
 	if (pid == 0)
 	{
-		redirect_input(cmd, data);
-		redirect_output(cmd, data);
-		execute(cmd, data->cmd_arg[cmd], envp, data);
+		// redirect_input(cmd, data);
+		// redirect_output(cmd, data);
+		execute(cmd, data->exec->cmds[cmd]->args, data);
 	}
 	else
 	{
-		data->process.pid[cmd] = pid;
-		waitpid(data->process.pid[cmd],
-			&data->process.status[cmd], WNOHANG | WUNTRACED);
-		close_fds(cmd, data);
+		// wait(NULL);
+		// data->process.pid[cmd] = pid;
+		// waitpid(data->process.pid[cmd],
+		// 	&data->process.status[cmd], WNOHANG | WUNTRACED);
+		// close_fds(cmd, data);
 	}
 }
 
 static void	close_fds(int cmd, t_data *data)
 {
-	if (cmd == 1)
-	{
-		if (data->files.infile_fd != -1)
-		{
-			if (close(data->files.infile_fd) == -1)
-				finalize("Fail at close file_1", 1, data);
-		}
-	}
-	if (cmd > 0)
-	{
-		if (close(data->files.pipes[cmd - 1][0]) == -1)
-			finalize("Fail at close a pipe output_fd", 1, data);
-	}
-	if (cmd == data->n_cmds - 1)
-	{
-		if (close(data->files.pipes[cmd][0]) == -1)
-			finalize("Fail at close a pipe output_fd", 1, data);
-		if (data->files.outfile_fd != -1)
-		{
-			if (close(data->files.outfile_fd) == -1)
-				finalize("Fail at close file_2", 1, data);
-		}
-	}
-	if (close(data->files.pipes[cmd][1]) == -1)
-		finalize("Fail at close a pipe input_fd", 1, data);
+	// if (cmd == 1)
+	// {
+	// 	if (data->exec->infile_fd != -1)
+	// 	{
+	// 		if (close(data->exec->infile_fd) == -1)
+	// 			exit_error(24, "Fail at close file_1", data);
+	// 	}
+	// }
+	// if (cmd > 0)
+	// {
+	// 	if (close(data->exec->pipes[cmd - 1][0]) == -1)
+	// 		exit_error(24, "Fail at close a pipe output_fd", data);
+	// }
+	// if (cmd == data->exec->cmds_amount - 1)
+	// {
+	// 	if (close(data->exec->pipes[cmd][0]) == -1)
+	// 		exit_error(24, "Fail at close a pipe output_fd", data);
+	// 	if (data->exec->outfile_fd != -1)
+	// 	{
+	// 		if (close(data->exec->outfile_fd) == -1)
+	// 			exit_error(24, "Fail at close file_2", data);
+	// 	}
+	// }
+	// if (close(data->exec->pipes[cmd][1]) == -1)
+	// 	exit_error(24, "Fail at close a pipe input_fd", data);
 }
