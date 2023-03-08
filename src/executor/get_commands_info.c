@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:29:33 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 00:45:24 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 00:59:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int	count_cmds(t_data *data);
 void	get_commands_info(t_data *data)
 {
 	data->exec = ft_calloc(1, sizeof(t_exec));
-	// data->exec->cmds_amount = count_cmds(data);
-	// data->exec->cmds = ft_calloc(data->exec->cmds_amount + 1, sizeof(t_cmd));
-	// data->exec->pipes = ft_calloc(data->exec->cmds_amount + 1, sizeof(int *));
+	data->exec->cmds_amount = count_cmds(data);
+	data->exec->cmds = ft_calloc(data->exec->cmds_amount + 1, sizeof(t_cmd));
+	data->exec->pipes = ft_calloc(data->exec->cmds_amount + 1, sizeof(int *));
 }
 
 static int	count_cmds(t_data *data)
@@ -39,6 +39,5 @@ static int	count_cmds(t_data *data)
 		}
 		token = token->next;
 	}
-	ft_printf("comands amount: %d\n", size);
 	return (size);
 }

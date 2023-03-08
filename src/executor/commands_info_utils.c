@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 21:50:32 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 00:49:28 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 01:07:14 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static void	clear_cmd(t_cmd *cmd)
 		free(cmd->inputs_modes);
 	if (cmd->outputs_modes)
 		free(cmd->outputs_modes);
+	if (cmd)
+		free(cmd);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 00:39:41 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/08 00:54:37 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_repl(t_data *data)
 		save_input_on_history(data->user_input);
 		init_lexer(data);
 		init_expander(data); //se o usuário mandou alguma var de ambiente  --- $
+		init_executor(data);
 		execute_built_in(data);
 		//print p teste
 	/*	t_token *aux_print = data->tokens;
@@ -37,7 +38,6 @@ void	init_repl(t_data *data)
 			aux_print = aux_print->next;
 		}*/
 		//
-		init_executor(data);
 		clear_commands(data);
 		token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
 		// cmd_clear(&data->cmds);
