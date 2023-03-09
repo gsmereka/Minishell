@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:49:58 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/09 19:29:59 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:46:38 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void	redirect_input(int cmd, t_data *data)
 
 void	redirect_output(int cmd, t_data *data)
 {
-	if (cmd != data->exec->cmds_amount - 1)
-		dup2(data->exec->pipes[cmd][1], STDOUT_FILENO);
+	if (data->exec->cmds[cmd]->outfiles)
+	{
+		// open
+	}
+	else
+	{
+		if (cmd != data->exec->cmds_amount - 1)
+			dup2(data->exec->pipes[cmd][1], STDOUT_FILENO);
+	}
 }

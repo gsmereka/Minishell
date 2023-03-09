@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/09 19:35:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:40:20 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ static void	close_fds(int cmd, t_data *data)
 	// 		if (close(data->exec->infile_fd) == -1)
 	// 			exit_error(24, "Fail at close file_1", data);
 	// 	}
-	// }
-	// {
 	if (cmd > 0)
 	{
 		if (close(data->exec->pipes[cmd - 1][0]) == -1)
