@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/08 20:53:49 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:02:58 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ void	token_clear(t_token **tokens);
 // parser
 void	init_parser(t_data *data);
 
+int		is_reserved(char *word, char *reserved_word);
 // executor
 void	init_executor(t_data *data);
 void	clear_commands(t_data *data);
-void	execute_built_in(t_data *data);
+void	execute_built_in(int cmd, t_data *data);
 void	get_commands_info(t_data *data);
 t_token	*format_cmd(t_token *token, t_cmd *cmd, t_data *data);
 void	get_outputs(t_token *token, t_cmd *cmd, t_data *data);

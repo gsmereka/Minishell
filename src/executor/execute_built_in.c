@@ -6,17 +6,17 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:46:14 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 20:59:14 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:06:07 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	execute_built_in(t_data *data)
+void	execute_built_in(int cmd, t_data *data)
 {
 	char	**args;
 
-	args = data->exec->cmds[0]->args;
+	args = data->exec->cmds[cmd]->args;
 	if (!args || !args[0])
 		return ;
 	else if (ft_strncmp(args[0], "echo", ft_strlen(args[0])) == 0)

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 21:19:22 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:03:50 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_executor(t_data *data)
 	if (!data->exec)
 		return ;
 	if (is_only_one_built_in(data))
-		execute_built_in(data);
+		execute_built_in(0, data);
 	else
 		set_processes(data);
 }
