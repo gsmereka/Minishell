@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/08 13:15:20 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/09 15:55:38 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ SRC 	=	src/main.c \
 			src/executor/init_executor.c \
 			src/executor/set_processes.c \
 			src/executor/execute.c \
+			src/executor/set_files.c \
+			src/executor/redirect.c \
 			src/executor/get_commands_info/commands_info_utils.c \
 			src/executor/get_commands_info/format_cmd.c \
 			src/executor/get_commands_info/get_commands_info.c \

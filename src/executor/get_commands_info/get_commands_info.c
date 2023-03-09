@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:29:33 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 11:09:23 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:57:03 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,18 @@ void	get_commands_info(t_data *data)
 
 static void	init_execution_structure(t_data *data)
 {
+	int	i;
+
 	data->exec = ft_calloc(1, sizeof(t_exec));
 	data->exec->cmds_amount = count_cmds(data);
 	data->exec->cmds = ft_calloc(data->exec->cmds_amount + 1, sizeof(t_cmd));
 	data->exec->pipes = ft_calloc(data->exec->cmds_amount + 1, sizeof(int *));
+	i = 0;
+	while (i < data->exec->cmds_amount)
+	{
+		data->exec->pipes[i] = ft_calloc(2, sizeof(int));
+		i++;
+	}
 }
 
 static int	count_cmds(t_data *data)
