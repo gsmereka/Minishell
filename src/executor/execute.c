@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:17:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/09 12:12:14 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:28:46 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	close_fds_at_error(int cmd, t_data *data);
 static int	is_built_in(int cmd, t_data *data);
+static void	normal_execution(int cmd, char **cmd_args, t_data *data);
 static char	*ft_strjoin_with_free(char *s1, char *s2);
 
 void	execute(int cmd, char **cmd_args, t_data *data)
@@ -26,20 +27,24 @@ void	execute(int cmd, char **cmd_args, t_data *data)
 		end_program(data);
 	}
 	else
+		normal_execution(cmd, cmd_args, data);
+}
+
+static void	normal_execution(int cmd, char **cmd_args, t_data *data)
+{
+	int exec;
+
+	exec = execve(data->exec->cmds[cmd]->name,
+			cmd_args, data->virtual_envp);
+	if (exec == -1)
 	{
-		exec = execve(data->exec->cmds[cmd]->name,
-				cmd_args, data->virtual_envp);
-		if (exec == -1)
-		{
-			close_fds_at_error(cmd, data);
-			data->error_msg = ft_strjoin_with_free
-				(ft_strdup(data->exec->cmds[cmd]->args[0]),
-					": command not found");
-			write(2, data->error_msg, ft_strlen(data->error_msg));
-			free(data->error_msg);
-			exit_error(127, "", data);
-			ft_printf("Command not founded\n");
-		}
+		close_fds_at_error(cmd, data);
+		data->error_msg = ft_strjoin_with_free
+			(ft_strdup(data->exec->cmds[cmd]->args[0]),
+				": command not found");
+		write(2, data->error_msg, ft_strlen(data->error_msg));
+		free(data->error_msg);
+		exit_error(127, "", data);
 	}
 }
 
@@ -85,7 +90,6 @@ static char	*ft_strjoin_with_free(char *s1, char *s2)
 	free(s1);
 	return ((char *)new_s);
 }
-
 
 static int	is_built_in(int cmd, t_data *data)
 {
