@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:17:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/09 15:28:46 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/09 22:15:40 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	execute(int cmd, char **cmd_args, t_data *data)
 	if (is_built_in(cmd, data))
 	{
 		execute_built_in(cmd, data);
+		close_fds_at_error(cmd, data);
 		end_program(data);
 	}
 	else
@@ -50,16 +51,16 @@ static void	normal_execution(int cmd, char **cmd_args, t_data *data)
 
 static void	close_fds_at_error(int cmd, t_data *data)
 {
-	// if (cmd == data->n_cmds - 1 && data->files.outfile_fd != -1)
-	// 	close(data->files.outfile_fd);
-	// if (data->files.infile_fd != -1)
-	// 	close(data->files.infile_fd);
-	// if (cmd > 0)
-	// 	close(data->files.pipes[cmd - 1][0]);
-	// close(data->files.pipes[cmd][1]);
-	// close(data->files.pipes[cmd][0]);
-	// close(1);
-	// close(0);
+	// if (cmd == data->n_cmds - 1 && data->exec->outfile_fd != -1)
+	// 	close(data->exec->outfile_fd);
+	// if (data->exec->infile_fd != -1)
+	// 	close(data->exec->infile_fd);
+	if (cmd > 0)
+		close(data->exec->pipes[cmd - 1][0]);
+	close(data->exec->pipes[cmd][1]);
+	close(data->exec->pipes[cmd][0]);
+	close(1);
+	close(0);
 }
 
 static char	*ft_strjoin_with_free(char *s1, char *s2)

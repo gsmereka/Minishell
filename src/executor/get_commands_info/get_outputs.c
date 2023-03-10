@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:12:36 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 10:03:04 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 01:20:25 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	get_outputs(t_token *token, t_cmd *cmd, t_data *data)
 	if (!outputs_amount)
 		return ;
 	cmd->outfiles = ft_calloc(outputs_amount + 1, sizeof (char *));
+	cmd->outfiles_fd = ft_calloc(outputs_amount + 1, sizeof (int));
 	cmd->outputs_modes = ft_calloc(outputs_amount + 1, sizeof (int));
 	get_outputs_details(token, cmd);
 }
