@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_built_in.c                                 :+:      :+:    :+:   */
+/*   is_built_in.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 10:46:14 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 10:14:28 by gsmereka         ###   ########.fr       */
+/*   Created: 2023/03/10 16:37:49 by gsmereka          #+#    #+#             */
+/*   Updated: 2023/03/10 16:39:09 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	execute_built_in(t_cmd *cmd, t_data *data)
+int	is_built_in(t_cmd *cmd)
 {
 	char	**args;
 
 	args = cmd->args;
 	if (!args || !args[0])
-		return ;
+		return (0);
 	else if (ft_strncmp(args[0], "echo", ft_strlen(args[0])) == 0)
-		ft_echo(args, data);
+		return (1);
 	else if (ft_strncmp(args[0], "cd", ft_strlen(args[0])) == 0)
-		ft_cd(args, data);
+		return (1);
 	else if (ft_strncmp(args[0], "env", ft_strlen(args[0])) == 0)
-		ft_env(args, data);
+		return (1);
 	else if (ft_strncmp(args[0], "exit", ft_strlen(args[0])) == 0)
-		ft_exit(args, data);
+		return (1);
 	else if (ft_strncmp(args[0], "pwd", ft_strlen(args[0])) == 0)
-		ft_pwd(args, data);
+		return (1);
 	else if (ft_strncmp(args[0], "export", ft_strlen(args[0])) == 0)
-		ft_export(args, data);
+		return (1);
 	else if (ft_strncmp(args[0], "unset", ft_strlen(args[0])) == 0)
-		ft_unset(args, data);
+		return (1);
+	return (0);
 }

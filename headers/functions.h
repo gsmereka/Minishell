@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/03 20:33:13 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 16:38:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <fcntl.h>
+
+// Executor
+#include <sys/wait.h>
 
 // REPL
 void	init_repl(t_data *data);
@@ -49,9 +52,22 @@ void	token_clear(t_token **tokens);
 // parser
 void	init_parser(t_data *data);
 
+int		is_reserved(char *word, char *reserved_word);
 // executor
 void	init_executor(t_data *data);
-void	execute_built_in(t_data *data);
+void	clear_commands(t_data *data);
+void	execute_built_in(t_cmd *cmd, t_data *data);
+void	get_commands_info(t_data *data);
+void	format_cmd(t_token *token, t_cmd *cmd, t_data *data);
+void	get_outputs(t_token *token, t_cmd *cmd, t_data *data);
+void	get_inputs(t_token *token, t_cmd *cmd, t_data *data);
+void	get_env_paths(t_data *data);
+void	set_cmds_paths(t_data *data);
+int		set_processes(t_data *data);
+void	set_files(t_cmd *cmd, t_data *data);
+int		redirect_input(int cmd, t_data *data);
+int		redirect_output(int cmd, t_data *data);
+void	execute(t_cmd *cmd, t_data *data);
 
 // built_in
 void	ft_cd(char **args, t_data *data);
@@ -61,8 +77,9 @@ void	ft_exit(char **args, t_data *data);
 void	ft_export(char **args, t_data *data);
 void	ft_pwd(char **args, t_data *data);
 void	ft_unset(char **args, t_data *data);
-void	ft_cd_error_msg(int	error, char *name, t_data *data);
-void	ft_export_error_msg(int	error, char *name, t_data *data);
+void	ft_cd_error_msg(int error, char *name, t_data *data);
+void	ft_export_error_msg(int error, char *name, t_data *data);
+int		is_built_in(t_cmd *cmd);
 
 // end_program
 void	end_program(t_data *data);
