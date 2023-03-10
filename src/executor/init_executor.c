@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 16:41:02 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 16:41:35 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	is_only_one_built_in(t_data *data)
 
 	if (data->exec->cmds_amount > 1)
 		return (0);
-	first_cmd = data->exec->cmds[0]->args;
+	first_cmd = data->exec->cmds[0];
 	if (is_built_in(first_cmd))
 		return (1);
 	return (0);

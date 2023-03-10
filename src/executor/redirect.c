@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:49:58 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 14:56:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 17:14:18 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	redirect_input(int cmd_index, t_data *data)
 	cmd = data->exec->cmds[cmd_index];
 	if (cmd->infiles)
 	{
+		if (cmd_index > 0)
+			close(data->exec->pipes[cmd_index - 1][1]);
 		last_infile = last_fd(cmd->infiles,
 			cmd->infiles_fd);
 		if (last_infile != -1)

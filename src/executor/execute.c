@@ -6,12 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:17:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 16:38:26 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 16:43:12 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+static void	close_files(int *files);
 static void	close_fds(t_cmd *cmd, t_data *data);
 static void	normal_execution(t_cmd *cmd, t_data *data);
 static char	*ft_strjoin_with_free(char *s1, char *s2);
@@ -61,12 +62,8 @@ static void	close_fds(t_cmd *cmd, t_data *data)
 		close(data->exec->pipes[i][0]);
 		i++;
 	}
-	i = 0;
-	while (cmd->infiles_fd)
-	// if (cmd == data->n_cmds - 1 && cmd->outfile_fd != -1)
-	// 	close(cmd->outfile_fd);
-	// if (cmd->infile_fd != -1)
-	// 	close(cmd->infile_fd);
+	close_files(cmd->infiles_fd);
+	close_files(cmd->outfiles_fd);
 	close(1);
 	close(0);
 }
@@ -98,4 +95,20 @@ static char	*ft_strjoin_with_free(char *s1, char *s2)
 	}
 	free(s1);
 	return ((char *)new_s);
+}
+
+static void	close_files(int *files)
+{
+	int	i;
+
+	i = 0;
+	if (files)
+	{
+		while (files[i])
+		{
+			if (files[i] != -1)
+				close (files[i]);
+			i++;
+		}
+	}
 }
