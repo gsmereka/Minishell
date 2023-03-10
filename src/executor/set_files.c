@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 01:27:47 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 10:12:19 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void set_infiles(t_cmd *cmd);
 static void set_outfiles(t_cmd *cmd);
 
-void	set_files(int cmd, t_data *data)
+void	set_files(t_cmd *cmd, t_data *data)
 {
-	set_infiles(data->exec->cmds[cmd]);
-	set_outfiles(data->exec->cmds[cmd]);
+	set_infiles(cmd);
+	set_outfiles(cmd);
 }
 
 static void set_infiles(t_cmd *cmd)
