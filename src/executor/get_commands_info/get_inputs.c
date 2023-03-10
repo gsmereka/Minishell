@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:12:05 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 10:02:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 01:32:06 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	get_inputs(t_token *token, t_cmd *cmd, t_data *data)
 	if (!inputs_amount)
 		return ;
 	cmd->infiles = ft_calloc(inputs_amount + 1, sizeof (char *));
+	cmd->infiles_fd = ft_calloc(inputs_amount + 1, sizeof (int));
 	cmd->inputs_modes = ft_calloc(inputs_amount + 1, sizeof (int));
 	get_inputs_details(token, cmd);
 }
