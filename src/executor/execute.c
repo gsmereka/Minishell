@@ -6,14 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:17:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 15:37:40 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 16:38:26 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static void	close_fds(t_cmd *cmd, t_data *data);
-static int	is_built_in(t_cmd *cmd);
 static void	normal_execution(t_cmd *cmd, t_data *data);
 static char	*ft_strjoin_with_free(char *s1, char *s2);
 
@@ -62,6 +61,8 @@ static void	close_fds(t_cmd *cmd, t_data *data)
 		close(data->exec->pipes[i][0]);
 		i++;
 	}
+	i = 0;
+	while (cmd->infiles_fd)
 	// if (cmd == data->n_cmds - 1 && cmd->outfile_fd != -1)
 	// 	close(cmd->outfile_fd);
 	// if (cmd->infile_fd != -1)
@@ -97,28 +98,4 @@ static char	*ft_strjoin_with_free(char *s1, char *s2)
 	}
 	free(s1);
 	return ((char *)new_s);
-}
-
-static int	is_built_in(t_cmd *cmd)
-{
-	char	**args;
-
-	args = cmd->args;
-	if (!args || !args[0])
-		return (0);
-	else if (ft_strncmp(args[0], "echo", ft_strlen(args[0])) == 0)
-		return (1);
-	else if (ft_strncmp(args[0], "cd", ft_strlen(args[0])) == 0)
-		return (1);
-	else if (ft_strncmp(args[0], "env", ft_strlen(args[0])) == 0)
-		return (1);
-	else if (ft_strncmp(args[0], "exit", ft_strlen(args[0])) == 0)
-		return (1);
-	else if (ft_strncmp(args[0], "pwd", ft_strlen(args[0])) == 0)
-		return (1);
-	else if (ft_strncmp(args[0], "export", ft_strlen(args[0])) == 0)
-		return (1);
-	else if (ft_strncmp(args[0], "unset", ft_strlen(args[0])) == 0)
-		return (1);
-	return (0);
 }

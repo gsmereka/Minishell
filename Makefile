@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/09 15:55:38 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/10 16:38:55 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC 	=	src/main.c \
 			src/built_in/ft_export.c \
 			src/built_in/ft_pwd.c \
 			src/built_in/ft_unset.c \
+			src/built_in/is_built_in.c \
 
 OBJ 	=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

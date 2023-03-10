@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/10 15:24:43 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 16:38:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	ft_pwd(char **args, t_data *data);
 void	ft_unset(char **args, t_data *data);
 void	ft_cd_error_msg(int error, char *name, t_data *data);
 void	ft_export_error_msg(int error, char *name, t_data *data);
+int		is_built_in(t_cmd *cmd);
 
 // end_program
 void	end_program(t_data *data);
