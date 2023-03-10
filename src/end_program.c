@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 00:04:38 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 12:13:25 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	end_program(t_data *data) //comentarios em portugues
 // como falha na alocação de memorioa e etc...
 void	exit_error(int error_value, char *msg, t_data *data)
 {
-	ft_printf("%s\n", msg);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\n", 1);
 	free_data(data);
 	exit(error_value);
 }
