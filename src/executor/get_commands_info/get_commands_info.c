@@ -6,15 +6,16 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:29:33 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/09 15:57:03 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:24:31 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-static int	count_cmds(t_data *data);
-static void	init_execution_structure(t_data *data);
-static void	set_cmd_tokens(t_data *data);
+static t_token	*find_next_command(t_token *token);
+static int		count_cmds(t_data *data);
+static void		init_execution_structure(t_data *data);
+static void		set_cmd_tokens(t_data *data);
 
 void	get_commands_info(t_data *data)
 {
@@ -71,7 +72,21 @@ static void	set_cmd_tokens(t_data *data)
 	while (token)
 	{
 		cmd[cmd_index] = ft_calloc(1, sizeof(t_cmd));
-		token = format_cmd(token, cmd[cmd_index], data);
+		format_cmd(token, cmd[cmd_index], data);
+		token = find_next_command(token);
 		cmd_index++;
 	}
+}
+
+static t_token	*find_next_command(t_token *token)
+{
+	while (token)
+	{
+		if (ft_strncmp(token->content, "|", ft_strlen(token->content)) == 0)
+		{
+			return(token->next);
+		}
+		token = token->next;
+	}
+	return (token);
 }
