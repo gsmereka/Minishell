@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:17:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 15:32:52 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:37:40 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ static char	*ft_strjoin_with_free(char *s1, char *s2);
 
 void	execute(t_cmd *cmd, t_data *data)
 {
-	if (is_built_in(cmd))
+	if (!cmd->name)
+	{
+		close_fds(cmd, data);
+		end_program(data);
+	}
+	else if (is_built_in(cmd))
 	{
 		execute_built_in(cmd, data);
 		close_fds(cmd, data);
@@ -33,11 +38,6 @@ static void	normal_execution(t_cmd *cmd, t_data *data)
 {
 	int exec;
 
-	if (!cmd->name)
-	{
-		close_fds(cmd, data);
-		end_program(data);
-	}
 	exec = execve(cmd->name, cmd->args, data->virtual_envp);
 	if (exec == -1)
 	{
