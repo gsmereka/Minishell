@@ -6,23 +6,23 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 14:35:45 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/11 13:19:53 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static void set_infiles(t_cmd *cmd, t_data *data);
-static void set_outfiles(t_cmd *cmd, t_data *data);
+static int set_infiles(t_cmd *cmd, t_data *data);
+static int set_outfiles(t_cmd *cmd, t_data *data);
 static void	error_msg(char *file, t_data *data);
 
 void	set_files(t_cmd *cmd, t_data *data)
 {
-	set_infiles(cmd, data);
-	set_outfiles(cmd, data);
+	if (set_infiles(cmd, data))
+		set_outfiles(cmd, data);
 }
 
-static void set_infiles(t_cmd *cmd, t_data *data)
+static int set_infiles(t_cmd *cmd, t_data *data)
 {
 	int	i;
 
@@ -35,13 +35,17 @@ static void set_infiles(t_cmd *cmd, t_data *data)
 		{
 			cmd->infiles_fd[i] = open(cmd->infiles[i], O_RDWR);
 			if (cmd->infiles_fd[i] == -1)
+			{
 				error_msg(cmd->infiles[i], data);
+				return (0);
+			}
 		}
 		i++;
 	}
+	return (1);
 }
 
-static void set_outfiles(t_cmd *cmd, t_data *data)
+static int set_outfiles(t_cmd *cmd, t_data *data)
 {
 	int	i;
 
@@ -57,9 +61,13 @@ static void set_outfiles(t_cmd *cmd, t_data *data)
 			cmd->outfiles_fd[i] = open(cmd->outfiles[i],
 					O_RDWR | O_CREAT | O_APPEND, 0777);
 		if (cmd->outfiles_fd[i] == -1)
+		{
 			error_msg(cmd->outfiles[i], data);
+			return (0);
+		}
 		i++;
 	}
+	return (1);
 }
 
 static void	error_msg(char *file, t_data *data)
