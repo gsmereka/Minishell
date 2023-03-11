@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 16:43:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 17:24:26 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/02/26 18:05:10 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,14 @@ static void	fill_virtual_envp(t_data *data)
 	dict_envp = data->dict_envp;
 	while (dict_envp)
 	{
-		if (ft_strncmp("?", dict_envp->key, 2) != 0)
-		{
-			key = ft_strdup(dict_envp->key);
-			data->virtual_envp[i] = ft_strjoin_with_free(key, "=");
-			data->virtual_envp[i]
-				= ft_strjoin_with_free(data->virtual_envp[i], dict_envp->value);
-			if (!data->virtual_envp[i])
-				exit_error(12, "Fail at fill virtual envp memory", data);
-			i++;
-		}
+		key = ft_strdup(dict_envp->key);
+		data->virtual_envp[i] = ft_strjoin_with_free(key, "=");
+		data->virtual_envp[i]
+			= ft_strjoin_with_free(data->virtual_envp[i], dict_envp->value);
+		if (!data->virtual_envp[i])
+			exit_error(12, "Fail at fill virtual envp memory", data);
 		dict_envp = dict_envp->next;
+		i++;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_repl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 21:00:02 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/05 01:28:16 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,18 @@ void	init_repl(t_data *data)
 		save_input_on_history(data->user_input);
 		init_lexer(data);
 		init_expander(data); //se o usuário mandou alguma var de ambiente  --- $
-		// init_parser(data);
-		init_executor(data);
-		clear_commands(data);
+		execute_built_in(data);
+		//print p teste
+	/*	t_token *aux_print = data->tokens;
+		while (aux_print)
+		{
+			ft_printf("%s\n", aux_print->content);
+			aux_print = aux_print->next;
+		}*/
+		//
 		token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
+		// init_parser(data);
+		// init_executor(data);
 		free(data->user_input);
 	}
 }
