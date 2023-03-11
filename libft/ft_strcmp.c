@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_env.c                                         :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/02 11:10:06 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 00:14:41 by gde-mora         ###   ########.fr       */
+/*   Created: 2023/03/08 00:11:41 by gde-mora          #+#    #+#             */
+/*   Updated: 2023/03/08 00:12:08 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "libft.h"
 
-t_env	*find_env(char *key, t_data *data) //usar ft_strncmp é perigoso, troquei pra ft_strcmp //  e acho q tenho uma func q faz isso--na vdd é meio diferente
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_env	*envp;
+	int	i;
 
-	envp = data->dict_envp;
-	while (envp) // busca a variavel de ambiente
-	{
-		if (ft_strcmp(envp->key, key) == 0)
-			break ;
-		envp = envp->next;
-	}
-	return (envp);
+	i = 0;
+	while ((s1[i] == s2[i]) && (s1[i]) && (s2[i]))
+		i++;
+	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }

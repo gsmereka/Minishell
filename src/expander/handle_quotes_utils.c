@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_env.c                                         :+:      :+:    :+:   */
+/*   handle_quotes_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/02 11:10:06 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 00:14:41 by gde-mora         ###   ########.fr       */
+/*   Created: 2023/03/11 04:13:09 by gde-mora          #+#    #+#             */
+/*   Updated: 2023/03/11 04:13:53 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-t_env	*find_env(char *key, t_data *data) //usar ft_strncmp é perigoso, troquei pra ft_strcmp //  e acho q tenho uma func q faz isso--na vdd é meio diferente
+void	free_mat(char **mat)
 {
-	t_env	*envp;
+	int	i;
 
-	envp = data->dict_envp;
-	while (envp) // busca a variavel de ambiente
+	i = 0;
+	while (mat[i])
 	{
-		if (ft_strcmp(envp->key, key) == 0)
-			break ;
-		envp = envp->next;
+		free(mat[i]);
+		i++;
 	}
-	return (envp);
+	free(mat);
+	mat = NULL;
+}
+
+size_t mat_len(char **mat)
+{
+	size_t	i;
+
+	i = 0;
+	while (mat[i])
+		i++;
+	return (i);
 }
