@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 21:50:32 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 11:04:14 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:26:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ static void	clear_cmd(t_cmd *cmd)
 		free(cmd->inputs_modes);
 	if (cmd->outputs_modes)
 		free(cmd->outputs_modes);
+	if (cmd->heredocs_pipes)
+		free_array_list((void **)cmd->heredocs_pipes);
 	if (cmd)
 		free(cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/11 13:31:35 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:31:22 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ static int set_infiles(t_cmd *cmd, t_data *data)
 				error_msg(cmd->infiles[i], data);
 				return (0);
 			}
+		}
+		else if (cmd->inputs_modes[i] == 1)
+		{
+			// todas as entradas dos pipes vao ser fechadas na hora da leitura dos heredocs.
+			if (cmd->heredocs_pipes[i][0])
+				cmd->infiles_fd[i] = cmd->heredocs_pipes[i][0];
 		}
 		i++;
 	}
