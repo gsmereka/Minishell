@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 01:05:13 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/11 04:13:38 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/11 04:29:51 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	check_envp_position_in_token(char **content)
 	char	**mat_token;
 
 	mat_content = ft_split(*content, '$');
+	if (!mat_content)
+		return ;
 	mat_token = NULL;
 	i = 0;
 	if (mat_len(mat_content) > 1) // ** e *... warning
