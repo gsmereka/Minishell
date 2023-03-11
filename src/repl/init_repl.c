@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_repl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/11 01:27:51 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/08 21:00:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	init_repl(t_data *data)
 		if (init_lexer(data))
 		{
 			init_expander(data);
-			execute_built_in(data);
-			//print p teste
+			
+      //print p teste
 		/*	t_token *aux_print = data->tokens;
 			while (aux_print)
 			{
@@ -39,9 +39,11 @@ void	init_repl(t_data *data)
 				aux_print = aux_print->next;
 			}*/
 			//
-			token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
-			// if (init_parser(data) == 1)
-			// init_executor(data);
+      
+      // if (init_parser(data) == 1)
+			init_executor(data);
+      clear_commands(data);
+			token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error	
 		}
 		free(data->user_input);
 	}

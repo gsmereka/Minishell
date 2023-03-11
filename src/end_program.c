@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end_program.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 02:06:12 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/10 12:13:25 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	end_program(t_data *data) //comentarios em portugues
 // como falha na alocação de memorioa e etc...
 void	exit_error(int error_value, char *msg, t_data *data)
 {
-	ft_printf("%s\n", msg);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\n", 1);
 	free_data(data);
 	exit(error_value);
 }
@@ -41,12 +42,16 @@ static void	free_data(t_data *data)
 		free(data->user_input);
 	if (data->virtual_envp)
 		free_array_list((void **)data->virtual_envp);
+	if (data->tokens)
+		token_clear(&data->tokens);
+	if (data->exec)
+		clear_commands(data);
 	rl_clear_history();
 }
 
 void	free_array_list(void **list)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (list[i])

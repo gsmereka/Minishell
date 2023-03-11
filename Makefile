@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/11 04:14:56 by gde-mora         ###   ########.fr        #
+#    Updated: 2023/03/10 16:38:55 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,17 @@ SRC 	=	src/main.c \
 			src/parser/init_parser.c \
 			src/executor/execute_built_in.c \
 			src/executor/init_executor.c \
+			src/executor/set_processes.c \
+			src/executor/execute.c \
+			src/executor/set_files.c \
+			src/executor/redirect.c \
+			src/executor/get_commands_info/commands_info_utils.c \
+			src/executor/get_commands_info/format_cmd.c \
+			src/executor/get_commands_info/get_commands_info.c \
+			src/executor/get_commands_info/get_inputs.c \
+			src/executor/get_commands_info/get_outputs.c \
+			src/executor/get_commands_info/get_env_paths.c \
+			src/executor/get_commands_info/set_cmds_paths.c \
 			src/built_in/ft_cd.c \
 			src/built_in/ft_cd_error_msg.c \
 			src/built_in/ft_echo.c \
@@ -40,6 +51,7 @@ SRC 	=	src/main.c \
 			src/built_in/ft_export.c \
 			src/built_in/ft_pwd.c \
 			src/built_in/ft_unset.c \
+			src/built_in/is_built_in.c \
 
 OBJ 	=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
@@ -94,6 +106,7 @@ create_obj_dir:
 	@mkdir -p $(OBJ_DIR)/src/expander
 	@mkdir -p $(OBJ_DIR)/src/executor
 	@mkdir -p $(OBJ_DIR)/src/built_in
+	@mkdir -p $(OBJ_DIR)/src/executor/get_commands_info
 
 ## FULL CLEAN ALL OBJECTS AND TESTERS
 git: fclean

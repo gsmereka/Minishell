@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   get_env_paths.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 17:02:50 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 23:15:06 by gsmereka         ###   ########.fr       */
+/*   Created: 2022/11/19 16:19:58 by gsmereka          #+#    #+#             */
+/*   Updated: 2022/12/29 14:06:22 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
-void	ft_exit(char **args, t_data *data)
+void	get_env_paths(t_data *data)
 {
-	end_program(data);
+	char	*path_list;
+
+	// FALTA TRAATAR QUANDO ALGUEM DA UNSET NO PATH
+	path_list = find_env("PATH", data)->value;
+	data->exec->env_paths = ft_split(path_list, ':');
+	if (!data->exec->env_paths)
+		exit_error(2, "Environment pointer have not a PATH", data);
 }
