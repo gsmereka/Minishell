@@ -6,11 +6,21 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/11 04:08:09 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/05 00:26:50 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while ((s1[i] == s2[i]) && (s1[i]) && (s2[i]))
+		i++;
+	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+}
 
 int	creck_token_in_envp(t_data *data, char *content, t_token **env_token)
 {
@@ -19,7 +29,7 @@ int	creck_token_in_envp(t_data *data, char *content, t_token **env_token)
 	aux_env = data->dict_envp;
 	while (aux_env)
 	{
-		if (ft_strcmp(aux_env->key, content) == 0) 
+		if (ft_strcmp(aux_env->key, content) == 0) //qual ft_strlen é apropriado?? de content ou do key? --nenhum! 
 		{
 			free((*env_token)->content);
 			(*env_token)->content = ft_strdup(aux_env->value); //e se alterar a env?
@@ -40,16 +50,7 @@ void	init_expander(t_data *data)
 	while (aux_token)
 	{
 		if (aux_token->content[0] == '$')
-			creck_token_in_envp(data, &aux_token->content[1], &aux_token);
-		else if (aux_token->content[0] == '"')
-			check_envp_position_in_token(&aux_token->content);
-			//remove as aspas (só as de fora?) ft_strtrim?
-		// ---atenção para "''" e '""'
+			creck_token_in_envp(data, &aux_token->content[1], &aux_token); //coloco o +1 aq ja p avançar o $? --sim
 		aux_token = aux_token->next;
 	}
 }
-
-//parser só vai testar os redirects -- syntax errors...
-
-//echo teste >| ls      --cria o arquivo ls  ---mas isso é um tipo de redirect, n vms aceitar (vms tratar como 2)
-//echo teste > | ls     --bash: syntax error near unexpected token `|'   --são dois redirects

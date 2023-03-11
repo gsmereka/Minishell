@@ -22,12 +22,8 @@ SRC 	=	src/main.c \
 			src/envp/att_virtual_envp.c \
 			src/envp/att_envp_exitstatus_var.c \
 			src/expander/init_expander.c \
-			src/expander/handle_quotes.c \
-			src/expander/handle_quotes_utils.c \
 			src/lexer/init_lexer.c \
-			src/lexer/handle_quotes.c \
 			src/lexer/token_utils.c \
-			src/lexer/redirect_token_utils.c \
 			src/parser/init_parser.c \
 			src/executor/execute_built_in.c \
 			src/executor/init_executor.c \

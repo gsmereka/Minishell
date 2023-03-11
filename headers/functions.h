@@ -41,17 +41,13 @@ void	att_virtual_envp(t_data *data);
 void	att_envp_exitstatus_var(t_data *data);
 t_env	*find_env(char *key, t_data *data);
 
-// lexer
-int		init_lexer(t_data *data);
-int		handle_quotes_and_spaces(t_data *data);
-void	add_token(t_token **tokens, char *content);
-void	token_clear(t_token **tokens);
-
 // expander
 void	init_expander(t_data *data);
-void	check_envp_position_in_token(char **content);
-void	free_mat(char **mat);
-size_t	mat_len(char **mat);
+
+// lexer
+void	init_lexer(t_data *data);
+void	add_token(t_token **tokens, char *content);
+void	token_clear(t_token **tokens);
 
 // parser
 void	init_parser(t_data *data);
