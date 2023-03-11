@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/11 13:19:53 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/11 13:31:35 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static void	error_msg(char *file, t_data *data);
 
 void	set_files(t_cmd *cmd, t_data *data)
 {
-	if (set_infiles(cmd, data))
-		set_outfiles(cmd, data);
+	if (!set_infiles(cmd, data))
+		return ;
+	if (!set_outfiles(cmd, data));
+		return ;
 }
 
 static int set_infiles(t_cmd *cmd, t_data *data)
@@ -28,7 +30,7 @@ static int set_infiles(t_cmd *cmd, t_data *data)
 
 	i = 0;
 	if (!cmd->infiles)
-		return ;
+		return (0);
 	while (cmd->infiles[i])
 	{
 		if (cmd->inputs_modes[i] == 0)
@@ -51,7 +53,7 @@ static int set_outfiles(t_cmd *cmd, t_data *data)
 
 	i = 0;
 	if (!cmd->outfiles)
-		return ;
+		return (0);
 	while (cmd->outfiles[i])
 	{
 		if (cmd->outputs_modes[i] == 0)
