@@ -15,7 +15,6 @@
 static void	get_user_input(t_data *data);
 static int	is_valid(char *user_input);
 static void	save_input_on_history(char *user_input);
-static int	is_closed_quotes(char *user_input);
 
 void	init_repl(t_data *data)
 {
@@ -24,27 +23,15 @@ void	init_repl(t_data *data)
 	while (1)
 	{
 		get_user_input(data);
-		if (!is_valid(data->user_input)) //isso faz oq?
+		if (!is_valid(data->user_input))
 			break ;
-		save_input_on_history(data->user_input); //ele salva só se for valido
-		if (init_lexer(data))
-		{
-			init_expander(data);
-			
-      //print p teste
-		/*	t_token *aux_print = data->tokens;
-			while (aux_print)
-			{
-				ft_printf("%s\n", aux_print->content);
-				aux_print = aux_print->next;
-			}*/
-			//
-      
-      // if (init_parser(data) == 1)
-			init_executor(data);
-      clear_commands(data);
-			token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error	
-		}
+		save_input_on_history(data->user_input);
+		init_lexer(data);
+		init_expander(data); //se o usuário mandou alguma var de ambiente  --- $
+		// init_parser(data);
+		init_executor(data);
+		clear_commands(data);
+		token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
 		free(data->user_input);
 	}
 }

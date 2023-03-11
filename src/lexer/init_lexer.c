@@ -6,13 +6,44 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/11 01:06:35 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/04 23:29:55 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static char	**set_spaces(char **user_input)
+void	handle_quotes(t_data *data) //+ de 25 linhas
+{
+	int	i;
+
+	i = 0;
+	while (data->user_input[i])
+	{
+		if (data->user_input[i] == '"')
+		{
+			i++;
+			while (data->user_input[i] && data->user_input[i] != '"')
+			{
+				if (data->user_input[i] == ' ')
+					data->user_input[i] = (char)1;
+				i++;
+			}
+		}
+		if (data->user_input[i] == '\'')
+		{
+			i++;
+			while (data->user_input[i] && data->user_input[i] != '\'')
+			{
+				if (data->user_input[i] == ' ')
+					data->user_input[i] = (char)1;
+				i++;
+			}
+		}
+		i++; //
+	}
+}
+
+char	**set_spaces(char **user_input)
 {
 	int	i;
 	int j;
@@ -34,7 +65,7 @@ static char	**set_spaces(char **user_input)
 	return (user_input);
 }
 
-static void	free_mat_user_input(char **user_input)
+void	free_mat_user_input(char **user_input)
 {
 	int	i;
 
@@ -48,13 +79,12 @@ static void	free_mat_user_input(char **user_input)
 	user_input = NULL;
 }
 
-int	init_lexer(t_data *data) //oq faz: separar a string por palavras   --- atenção nas aspas!   
+void	init_lexer(t_data *data) //oq faz: separar a string por palavras   --- atenção nas aspas!   
 {
 	char	**user_input;
 	int		i;
 
-	if (!handle_quotes_and_spaces(data))
-		return (0);
+	handle_quotes(data);
 	user_input = ft_split(data->user_input, ' ');
 	user_input = set_spaces(user_input);
 	i = 0;
@@ -64,7 +94,4 @@ int	init_lexer(t_data *data) //oq faz: separar a string por palavras   --- aten�
 		i++;
 	}
 	free_mat_user_input(user_input);
-//	check_special_tokens(data);
-//	create_new_tokens(data);
-	return (1);
 }
