@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/03 20:38:10 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/11 12:47:28 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static int	validate_dir(char *dir, t_data *data) //falta verificar permissões
 {
 	struct stat	dir_info;
 
+	dir_info = (struct stat){0};
 	stat(dir, &dir_info);
 	if (!S_ISDIR(dir_info.st_mode))
 	{
