@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/10 16:38:55 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/12 12:51:24 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ SRC 	=	src/main.c \
 			src/executor/get_commands_info/get_outputs.c \
 			src/executor/get_commands_info/get_env_paths.c \
 			src/executor/get_commands_info/set_cmds_paths.c \
+			src/executor/get_commands_info/get_next_line_with_free.c \
+			src/executor/get_commands_info/set_here_doc.c \
 			src/built_in/ft_cd.c \
 			src/built_in/ft_cd_error_msg.c \
 			src/built_in/ft_echo.c \
