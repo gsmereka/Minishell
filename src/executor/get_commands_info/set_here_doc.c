@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:05:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/12 14:28:02 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:34:34 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static int	need_interrupt(char *input, char *limiter)
 
 	if (input != NULL)
 		return (0);
-	msg = ft_strdup("bash: warning: here-document at line "\
+	msg = ft_strdup("bash: warning: here-document "\
 		"delimited by end-of-file (wanted `");
 	msg = ft_strjoin_with_free(msg, limiter);
 	msg = ft_strjoin_with_free(msg, "')\n");
