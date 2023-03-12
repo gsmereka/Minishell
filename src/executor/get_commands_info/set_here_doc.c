@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:05:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/12 13:09:26 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/12 14:08:13 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,15 @@ void	set_here_doc(t_data *data)
 	cmd = data->exec->cmds;
 	while (cmd_index < data->exec->cmds_amount)
 	{
-		fd_index = 0;
-		while (cmd[cmd_index]->infiles[fd_index])
+		if (cmd[cmd_index]->infiles)
 		{
-			init_heredoc_pipe(cmd[cmd_index], fd_index, data);
-			set_here_doc_content(cmd[cmd_index], fd_index, data);
-			fd_index;
+			fd_index = 0;
+			while (cmd[cmd_index]->infiles[fd_index])
+			{
+				init_heredoc_pipe(cmd[cmd_index], fd_index, data);
+				set_here_doc_content(cmd[cmd_index], fd_index, data);
+				fd_index++;
+			}
 		}
 		cmd_index++;
 	}
@@ -43,8 +46,8 @@ static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *data)
 {
 	int	*heredoc_pipe;
 
+	cmd->heredocs_pipes[fd_index] = ft_calloc(2, sizeof(int));
 	heredoc_pipe = cmd->heredocs_pipes[fd_index];
-	heredoc_pipe = ft_calloc(2, sizeof(int));
 	if (!heredoc_pipe)
 		exit_error(12, "Fail allocating memory for here_doc", data);
 	pipe(heredoc_pipe);
@@ -64,15 +67,16 @@ static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data)
 	while (i >= 0)
 	{
 		write(1, "> ", 2);
-		input = get_next_line_with_free(0, 0);
+		input = get_next_line(0);
 		if (need_interrupt(input, limiter))
 			break ;
 		if (compare_input_with_limiter(input, limiter, data))
 			break ;
 		write(heredoc_pipe[1], input, ft_strlen(input));
 		free(input);
+		i++;
 	}
-	get_next_line_with_free(0, 1);
+	get_next_line(0);
 	close(heredoc_pipe[1]);
 }
 

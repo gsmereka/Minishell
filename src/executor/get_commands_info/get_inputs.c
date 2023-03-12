@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:12:05 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/11 13:16:13 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/12 14:07:47 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	get_inputs(t_token *token, t_cmd *cmd, t_data *data)
 	cmd->infiles_fd = ft_calloc(inputs_amount + 1, sizeof (int));
 	init_fds(cmd->infiles_fd, inputs_amount);
 	cmd->inputs_modes = ft_calloc(inputs_amount + 1, sizeof (int));
+	cmd->heredocs_pipes = ft_calloc(inputs_amount + 1, sizeof(int *));
 	get_inputs_details(token, cmd);
 }
 
