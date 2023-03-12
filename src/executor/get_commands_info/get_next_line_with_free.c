@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:16:23 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/12 14:18:16 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/12 14:27:19 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,12 @@ char	*get_next_line_with_free(int fd, int stop)
 	char		*line;
 
 	if (stop)
+	{
 		free(save);
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024 || stop)
+		save = NULL;
+		return (NULL);
+	}
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
 	save = read_file(fd, save);
 	if (!save)
