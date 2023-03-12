@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:05:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/12 14:08:13 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/12 14:18:44 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	set_here_doc(t_data *data)
 			while (cmd[cmd_index]->infiles[fd_index])
 			{
 				init_heredoc_pipe(cmd[cmd_index], fd_index, data);
-				set_here_doc_content(cmd[cmd_index], fd_index, data);
+				if (cmd[cmd_index]->inputs_modes[fd_index] == 1)
+					set_here_doc_content(cmd[cmd_index], fd_index, data);
 				fd_index++;
 			}
 		}
@@ -67,7 +68,7 @@ static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data)
 	while (i >= 0)
 	{
 		write(1, "> ", 2);
-		input = get_next_line(0);
+		input = get_next_line_with_free(0, 0);
 		if (need_interrupt(input, limiter))
 			break ;
 		if (compare_input_with_limiter(input, limiter, data))
@@ -76,7 +77,7 @@ static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data)
 		free(input);
 		i++;
 	}
-	get_next_line(0);
+	get_next_line_with_free(0, 1);
 	close(heredoc_pipe[1]);
 }
 
