@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/12 12:51:24 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/13 21:06:51 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,10 @@ NAME 	=	minishell
 
 SRC 	=	src/main.c \
 			src/end_program.c \
+			src/signals/init_repl_signals_handling.c \
+			src/signals/heredoc_signals_handling.c \
+			src/signals/child_signals_handling.c \
 			src/repl/init_repl.c \
-			src/repl/init_repl_signals_handling.c \
 			src/envp/dict_env_utils.c \
 			src/envp/find_env.c \
 			src/envp/set_initial_envp.c \
@@ -105,6 +107,7 @@ create_obj_dir:
 	@mkdir -p $(OBJ_DIR)/src/executor
 	@mkdir -p $(OBJ_DIR)/src/built_in
 	@mkdir -p $(OBJ_DIR)/src/executor/get_commands_info
+	@mkdir -p $(OBJ_DIR)/src/signals
 
 ## FULL CLEAN ALL OBJECTS AND TESTERS
 git: fclean
