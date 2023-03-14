@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/04 19:36:08 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:49:48 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
+t_data	data;
+
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_data	data;
-
 	(void)argc;
 	(void)argv;
 	ft_bzero(&data, sizeof(t_data));

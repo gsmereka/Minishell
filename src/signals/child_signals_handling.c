@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:51 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/13 21:09:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:12:13 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,25 @@ static void	handle_ctrl_c(int signal);
 
 void	child_signals_handling(t_data *data)
 {
-	int i = 0;
+	struct sigaction	ctrl_c;
+	struct sigaction	ctrl_backsslash;
+
+	(void)data;
+	ft_bzero(&ctrl_c, sizeof(struct sigaction));
+	ft_bzero(&ctrl_backsslash, sizeof(struct sigaction));
+	ctrl_c.sa_handler = handle_ctrl_c;
+	ctrl_backsslash.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &ctrl_c, NULL);
+	sigaction(SIGQUIT, &ctrl_backsslash, NULL);
+}
+
+static void	handle_ctrl_c(int signal)
+{
+	if (signal == SIGINT)
+	{
+		ft_putchar_fd('\n', 1);
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }

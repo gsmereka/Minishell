@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:05:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/12 16:34:34 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 17:24:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	set_here_doc(t_data *data)
 
 	cmd_index = 0;
 	cmd = data->exec->cmds;
+	heredoc_signals_handling(data);
 	while (cmd_index < data->exec->cmds_amount)
 	{
 		if (cmd[cmd_index]->infiles)

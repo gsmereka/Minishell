@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/13 21:10:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:45:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #include <sys/wait.h>
 
 // SIGNALS
-void	heredoc_signals_handling(t_data *data);
+void	heredoc_signals_handling(void);
 void	child_signals_handling(t_data *data);
 void	init_repl_signals_handling(t_data *data);
 
