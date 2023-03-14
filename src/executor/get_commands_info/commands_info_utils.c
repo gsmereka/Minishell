@@ -6,59 +6,59 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 21:50:32 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
 static void	clear_cmd(t_cmd *cmd);
-static void	free_intern_cmds(t_data *g_data);
-static void	free_intern_pipes(t_data *g_data);
+static void	free_intern_cmds(t_data *data);
+static void	free_intern_pipes(t_data *data);
 
-void	clear_commands(t_data *g_data)
+void	clear_commands(t_data *data)
 {
-	if (!g_data->exec)
+	if (!data->exec)
 		return ;
-	free_intern_cmds(g_data);
-	free_intern_pipes(g_data);
-	if (g_data->exec->env_paths)
-		free_array_list((void **)g_data->exec->env_paths);
-	free(g_data->exec);
-	g_data->exec = NULL;
+	free_intern_cmds(data);
+	free_intern_pipes(data);
+	if (data->exec->env_paths)
+		free_array_list((void **)data->exec->env_paths);
+	free(data->exec);
+	data->exec = NULL;
 }
 
-static void	free_intern_cmds(t_data *g_data)
+static void	free_intern_cmds(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	if (!g_data->exec->cmds)
+	if (!data->exec->cmds)
 		return ;
-	while (i < g_data->exec->cmds_amount)
+	while (i < data->exec->cmds_amount)
 	{
-		if (g_data->exec->cmds[i])
-			clear_cmd(g_data->exec->cmds[i]);
+		if (data->exec->cmds[i])
+			clear_cmd(data->exec->cmds[i]);
 		i++;
 	}
-	if (g_data->exec->cmds)
-		free(g_data->exec->cmds);
+	if (data->exec->cmds)
+		free(data->exec->cmds);
 }
 
-static void	free_intern_pipes(t_data *g_data)
+static void	free_intern_pipes(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	if (!g_data->exec->pipes)
+	if (!data->exec->pipes)
 		return ;
-	while (i < g_data->exec->cmds_amount)
+	while (i < data->exec->cmds_amount)
 	{
-		if (g_data->exec->pipes[i])
-			free(g_data->exec->pipes[i]);
+		if (data->exec->pipes[i])
+			free(data->exec->pipes[i]);
 		i++;
 	}
-	free(g_data->exec->pipes);
+	free(data->exec->pipes);
 }
 
 static void	clear_cmd(t_cmd *cmd)

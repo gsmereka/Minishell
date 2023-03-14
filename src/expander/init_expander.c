@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	ft_strcmp(char *s1, char *s2)
 	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }
 
-int	creck_token_in_envp(t_data *g_data, char *content, t_token **env_token)
+int	creck_token_in_envp(t_data *data, char *content, t_token **env_token)
 {
 	t_env	*aux_env;
 
-	aux_env = g_data->dict_envp;
+	aux_env = data->dict_envp;
 	while (aux_env)
 	{
 		if (ft_strcmp(aux_env->key, content) == 0) //qual ft_strlen é apropriado?? de content ou do key? --nenhum! 
@@ -42,15 +42,15 @@ int	creck_token_in_envp(t_data *g_data, char *content, t_token **env_token)
 	return (0);
 }
 
-void	init_expander(t_data *g_data)
+void	init_expander(t_data *data)
 {
 	t_token	*aux_token;
 
-	aux_token = g_data->tokens;
+	aux_token = data->tokens;
 	while (aux_token)
 	{
 		if (aux_token->content[0] == '$')
-			creck_token_in_envp(g_data, &aux_token->content[1], &aux_token); //coloco o +1 aq ja p avançar o $? --sim
+			creck_token_in_envp(data, &aux_token->content[1], &aux_token); //coloco o +1 aq ja p avançar o $? --sim
 		aux_token = aux_token->next;
 	}
 }

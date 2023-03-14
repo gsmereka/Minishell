@@ -6,33 +6,33 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static void	get_user_input(t_data *g_data);
+static void	get_user_input(t_data *data);
 static int	is_valid(char *user_input);
 static void	save_input_on_history(char *user_input);
 
-void	init_repl(t_data *g_data)
+void	init_repl(t_data *data)
 {
-	g_data->prompt = "HopeShell:$ ";
+	data->prompt = "HopeShell:$ ";
 	while (1)
 	{
-		init_repl_signals_handling(g_data);
-		get_user_input(g_data);
-		if (!is_valid(g_data->user_input))
+		init_repl_signals_handling(data);
+		get_user_input(data);
+		if (!is_valid(data->user_input))
 			break ;
-		save_input_on_history(g_data->user_input);
-		init_lexer(g_data);
-		init_expander(g_data); //se o usuário mandou alguma var de ambiente  --- $
-		// init_parser(g_data);
-		init_executor(g_data);
-		clear_commands(g_data);
-		token_clear(&g_data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
-		free(g_data->user_input);
+		save_input_on_history(data->user_input);
+		init_lexer(data);
+		init_expander(data); //se o usuário mandou alguma var de ambiente  --- $
+		// init_parser(data);
+		init_executor(data);
+		clear_commands(data);
+		token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
+		free(data->user_input);
 	}
 }
 
@@ -57,7 +57,7 @@ static int	is_valid(char *user_input)
 	return (1);
 }
 
-static void	get_user_input(t_data *g_data)
+static void	get_user_input(t_data *data)
 {
-	g_data->user_input = readline(g_data->prompt);
+	data->user_input = readline(data->prompt);
 }

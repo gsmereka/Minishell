@@ -6,39 +6,39 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:18:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/tester.h"
 
-static char	*test_path(t_data *g_data);
-static void	set_pathfinder(char *envp[], t_data *g_data);
+static char	*test_path(t_data *data);
+static void	set_pathfinder(char *envp[], t_data *data);
 static char	*path_finder(char *envp[]);
 static int	ft_addstr(char **s1, char *s2);
 
-void	set_valgrind_path(t_data *g_data)
+void	set_valgrind_path(t_data *data)
 {
-	set_pathfinder(g_data->envp, g_data);
-	g_data->valgrind_path = test_path(g_data);
-	if (!g_data->valgrind_path)
-		exit_error(12, "Fail at find valgrind path\n", g_data);
+	set_pathfinder(data->envp, data);
+	data->valgrind_path = test_path(data);
+	if (!data->valgrind_path)
+		exit_error(12, "Fail at find valgrind path\n", data);
 }
 
-static char	*test_path(t_data *g_data)
+static char	*test_path(t_data *data)
 {
 	char	*final_path;
 	int		i;
 
 	i = 0;
-	while (g_data->paths[i])
+	while (data->paths[i])
 	{
-		final_path = strdup(g_data->paths[i]);
+		final_path = strdup(data->paths[i]);
 		ft_addstr(&final_path, "/");
 		ft_addstr(&final_path, "valgrind");
 		if (!final_path)
 			exit_error(12,
-				"Failed to allocate memory for test a command path\n", g_data);
+				"Failed to allocate memory for test a command path\n", data);
 		if (access(final_path, X_OK) == 0)
 			return (final_path);
 		free(final_path);
@@ -47,14 +47,14 @@ static char	*test_path(t_data *g_data)
 	return (NULL);
 }
 
-static void	set_pathfinder(char *envp[], t_data *g_data)
+static void	set_pathfinder(char *envp[], t_data *data)
 {
 	char	*path_list;
 
 	path_list = path_finder(envp);
-	g_data->paths = ft_split(path_list, ':');
-	if (!g_data->paths)
-		exit_error(2, "Environment pointer have not a PATH\n", g_data);
+	data->paths = ft_split(path_list, ':');
+	if (!data->paths)
+		exit_error(2, "Environment pointer have not a PATH\n", data);
 }
 
 static char	*path_finder(char *envp[])
