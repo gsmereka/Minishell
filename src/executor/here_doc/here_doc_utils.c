@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_here_doc.c                                     :+:      :+:    :+:   */
+/*   set_here_doc copy.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:05:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:43:43 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:58:10 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../../../../headers/minishell.h"
 
 static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *data);
 static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data);
@@ -111,7 +111,7 @@ static int	need_interrupt(char *input, char *limiter)
 
 	if (input != NULL)
 		return (0);
-	msg = ft_strdup("bash: warning: here-document "\
+	msg = ft_strdup("\nbash: warning: here-document "\
 		"delimited by end-of-file (wanted `");
 	msg = ft_strjoin_with_free(msg, limiter);
 	msg = ft_strjoin_with_free(msg, "')\n");

@@ -6,13 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/14 19:42:14 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:44:59 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-t_data *g_aux_data;
+t_data	*g_aux_data;
 
 int	main(int argc, char *argv[], char *envp[])
 {

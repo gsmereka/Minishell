@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 20:15:28 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	init_executor(t_data *data)
 	get_commands_info(data);
 	if (!data->exec)
 		return ;
-	set_here_doc(data);
+	if (!set_here_doc(data))
+		return ;
 	if (is_only_one_built_in(data))
 		execute_built_in(data->exec->cmds[0], data);
 	else
