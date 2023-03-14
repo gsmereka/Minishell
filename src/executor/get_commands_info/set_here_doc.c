@@ -6,37 +6,37 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:05:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 17:24:02 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:53:55 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *data);
-static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data);
-static int	compare_input_with_limiter(char *input, char *limiter, t_data *data);
+static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *g_data);
+static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *g_data);
+static int	compare_input_with_limiter(char *input, char *limiter, t_data *g_data);
 static int	need_interrupt(char *str, char *limiter);
 static char	*ft_strjoin_with_free(char *s1, char *s2);
 
-void	set_here_doc(t_data *data)
+void	set_here_doc(t_data *g_data)
 {
 	t_cmd	**cmd;
 	int 	cmd_index;
 	int		fd_index;
 
 	cmd_index = 0;
-	cmd = data->exec->cmds;
-	heredoc_signals_handling(data);
-	while (cmd_index < data->exec->cmds_amount)
+	cmd = g_data->exec->cmds;
+	heredoc_signals_handling();
+	while (cmd_index < g_data->exec->cmds_amount)
 	{
 		if (cmd[cmd_index]->infiles)
 		{
 			fd_index = 0;
 			while (cmd[cmd_index]->infiles[fd_index])
 			{
-				init_heredoc_pipe(cmd[cmd_index], fd_index, data);
+				init_heredoc_pipe(cmd[cmd_index], fd_index, g_data);
 				if (cmd[cmd_index]->inputs_modes[fd_index] == 1)
-					set_here_doc_content(cmd[cmd_index], fd_index, data);
+					set_here_doc_content(cmd[cmd_index], fd_index, g_data);
 				fd_index++;
 			}
 		}
@@ -44,18 +44,18 @@ void	set_here_doc(t_data *data)
 	}
 }
 
-static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *data)
+static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *g_data)
 {
 	int	*heredoc_pipe;
 
 	cmd->heredocs_pipes[fd_index] = ft_calloc(2, sizeof(int));
 	heredoc_pipe = cmd->heredocs_pipes[fd_index];
 	if (!heredoc_pipe)
-		exit_error(12, "Fail allocating memory for here_doc", data);
+		exit_error(12, "Fail allocating memory for here_doc", g_data);
 	pipe(heredoc_pipe);
 }
 
-static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data)
+static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *g_data)
 {
 	int		*heredoc_pipe;
 	char	*input;
@@ -72,7 +72,7 @@ static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data)
 		input = get_next_line_with_free(0, 0);
 		if (need_interrupt(input, limiter))
 			break ;
-		if (compare_input_with_limiter(input, limiter, data))
+		if (compare_input_with_limiter(input, limiter, g_data))
 			break ;
 		write(heredoc_pipe[1], input, ft_strlen(input));
 		free(input);
@@ -82,7 +82,7 @@ static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data)
 	close(heredoc_pipe[1]);
 }
 
-static int	compare_input_with_limiter(char *input, char *limiter, t_data *data)
+static int	compare_input_with_limiter(char *input, char *limiter, t_data *g_data)
 {
 	int		diff;
 	int		size;

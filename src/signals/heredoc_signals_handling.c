@@ -6,13 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:47 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 18:49:30 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-extern t_data	data;
+extern t_data	g_data;
 
 static void	handle_ctrl_c(int signal);
 
@@ -34,7 +34,7 @@ static void	handle_ctrl_c(int signal)
 	if (signal == SIGINT)
 	{
 		ft_putstr_fd("\1\n", STDIN_FILENO);
-		end_program(&data);
+		end_program(&g_data);
 		// ft_putstr_fd("\n", 1);
 		// rl_replace_line("", 1);
 		// rl_on_new_line();

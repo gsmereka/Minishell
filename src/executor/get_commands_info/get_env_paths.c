@@ -12,13 +12,13 @@
 
 #include "../../../headers/minishell.h"
 
-void	get_env_paths(t_data *data)
+void	get_env_paths(t_data *g_data)
 {
 	char	*path_list;
 
 	// FALTA TRAATAR QUANDO ALGUEM DA UNSET NO PATH
-	path_list = find_env("PATH", data)->value;
-	data->exec->env_paths = ft_split(path_list, ':');
-	if (!data->exec->env_paths)
-		exit_error(2, "Environment pointer have not a PATH", data);
+	path_list = find_env("PATH", g_data)->value;
+	g_data->exec->env_paths = ft_split(path_list, ':');
+	if (!g_data->exec->env_paths)
+		exit_error(2, "Environment pointer have not a PATH", g_data);
 }

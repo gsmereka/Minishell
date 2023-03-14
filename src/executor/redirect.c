@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:49:58 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 19:58:53 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static int last_fd(char **files, int *files_fd);
 
-int	redirect_input(int cmd_index, t_data *data)
+int	redirect_input(int cmd_index, t_data *g_data)
 {
 	int		last_infile;
 	t_cmd	*cmd;
 
-	cmd = data->exec->cmds[cmd_index];
+	cmd = g_data->exec->cmds[cmd_index];
 	if (cmd->infiles)
 	{
 		// if (cmd_index > 0)
-		// 	close(data->exec->pipes[cmd_index - 1][0]);
+		// 	close(g_data->exec->pipes[cmd_index - 1][0]);
 		last_infile = last_fd(cmd->infiles,
 			cmd->infiles_fd);
 		if (last_infile != -1)
@@ -34,17 +34,17 @@ int	redirect_input(int cmd_index, t_data *data)
 	else
 	{
 		if (cmd_index > 0)
-			dup2(data->exec->pipes[cmd_index - 1][0], STDIN_FILENO);
+			dup2(g_data->exec->pipes[cmd_index - 1][0], STDIN_FILENO);
 	}
 	return (1);
 }
 
-int	redirect_output(int cmd_index, t_data *data)
+int	redirect_output(int cmd_index, t_data *g_data)
 {
 	int		last_outfile;
 	t_cmd	*cmd;
 
-	cmd = data->exec->cmds[cmd_index];
+	cmd = g_data->exec->cmds[cmd_index];
 	if (cmd->outfiles)
 	{
 		last_outfile = last_fd(cmd->outfiles,
@@ -56,8 +56,8 @@ int	redirect_output(int cmd_index, t_data *data)
 	}
 	else
 	{
-		if (cmd_index != data->exec->cmds_amount - 1)
-			dup2(data->exec->pipes[cmd_index][1], STDOUT_FILENO);
+		if (cmd_index != g_data->exec->cmds_amount - 1)
+			dup2(g_data->exec->pipes[cmd_index][1], STDOUT_FILENO);
 	}
 	return (1);
 }

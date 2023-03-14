@@ -6,18 +6,18 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/04 19:43:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int		is_valid(char *str, t_data *data);
-static t_env	*is_repeated(char *str, t_data *data);
-static void		add_new_environment_variable(char *str, t_data *data);
+static int		is_valid(char *str, t_data *g_data);
+static t_env	*is_repeated(char *str, t_data *g_data);
+static void		add_new_environment_variable(char *str, t_data *g_data);
 static void		att_variable(t_env *new_var, char *str);
 
-void	ft_export(char **args, t_data *data)
+void	ft_export(char **args, t_data *g_data)
 {
 	t_env	*new_var;
 	int		i;
@@ -27,20 +27,20 @@ void	ft_export(char **args, t_data *data)
 		return ;
 	while (args[i])
 	{
-		if (is_valid(args[i], data))
+		if (is_valid(args[i], g_data))
 		{
-			new_var = is_repeated(args[i], data);
+			new_var = is_repeated(args[i], g_data);
 			if (new_var)
 				att_variable(new_var, args[i]);
 			if (!new_var)
-				add_new_environment_variable(args[i], data);
+				add_new_environment_variable(args[i], g_data);
 		}
 		i++;
 	}
-	att_virtual_envp(data);
+	att_virtual_envp(g_data);
 }
 
-static void	add_new_environment_variable(char *str, t_data *data)
+static void	add_new_environment_variable(char *str, t_data *g_data)
 {
 	int		j;
 	char	*key;
@@ -52,16 +52,16 @@ static void	add_new_environment_variable(char *str, t_data *data)
 	key = ft_calloc(j + 1, sizeof(char));
 	ft_strlcpy(key, str, j + 1);
 	value = ft_strdup(&str[j + 1]);
-	dict_add_back(&data->dict_envp, key, value);
+	dict_add_back(&g_data->dict_envp, key, value);
 	free(key);
 	free(value);
 }
 
-static t_env	*is_repeated(char *str, t_data *data)
+static t_env	*is_repeated(char *str, t_data *g_data)
 {
 	t_env	*variable;
 
-	variable = data->dict_envp;
+	variable = g_data->dict_envp;
 	while (variable)
 	{
 		if (ft_strncmp(variable->key, str, ft_strlen(variable->key)) == 0)
@@ -93,13 +93,13 @@ static void	att_variable(t_env *new_var, char *str)
 // segundo o manual do bash "A word consisting solely of letters,
 // numbers, and underscores, and beginning with a letter or underscore.
 // Names are used as shell variable and function names. Also referred to as an identifier."
-static int	is_valid(char *str, t_data *data)
+static int	is_valid(char *str, t_data *g_data)
 {
 	int		i;
 
 	if (!ft_isalpha(str[0]) && str[1] != '_')
 	{
-		ft_export_error_msg(1, str, data);
+		ft_export_error_msg(1, str, g_data);
 		return (0);
 	}
 	i = 0;
@@ -109,7 +109,7 @@ static int	is_valid(char *str, t_data *data)
 			return (1);
 		if (!ft_isalnum(str[i]) && str[i] != '_')
 		{
-			ft_export_error_msg(1, str, data);
+			ft_export_error_msg(1, str, g_data);
 			return (0);
 		}
 		i++;

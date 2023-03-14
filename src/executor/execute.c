@@ -6,60 +6,60 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:17:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 16:43:12 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static void	close_files(int *files);
-static void	close_fds(t_cmd *cmd, t_data *data);
-static void	normal_execution(t_cmd *cmd, t_data *data);
+static void	close_fds(t_cmd *cmd, t_data *g_data);
+static void	normal_execution(t_cmd *cmd, t_data *g_data);
 static char	*ft_strjoin_with_free(char *s1, char *s2);
 
-void	execute(t_cmd *cmd, t_data *data)
+void	execute(t_cmd *cmd, t_data *g_data)
 {
 	if (!cmd->name)
 	{
-		close_fds(cmd, data);
-		end_program(data);
+		close_fds(cmd, g_data);
+		end_program(g_data);
 	}
 	else if (is_built_in(cmd))
 	{
-		execute_built_in(cmd, data);
-		close_fds(cmd, data);
-		end_program(data);
+		execute_built_in(cmd, g_data);
+		close_fds(cmd, g_data);
+		end_program(g_data);
 	}
 	else
-		normal_execution(cmd, data);
+		normal_execution(cmd, g_data);
 }
 
-static void	normal_execution(t_cmd *cmd, t_data *data)
+static void	normal_execution(t_cmd *cmd, t_data *g_data)
 {
 	int exec;
 
-	exec = execve(cmd->name, cmd->args, data->virtual_envp);
+	exec = execve(cmd->name, cmd->args, g_data->virtual_envp);
 	if (exec == -1)
 	{
-		close_fds(cmd, data);
-		data->error_msg = ft_strjoin_with_free
+		close_fds(cmd, g_data);
+		g_data->error_msg = ft_strjoin_with_free
 			(ft_strdup(cmd->args[0]),
 				": command not found");
-		write(2, data->error_msg, ft_strlen(data->error_msg));
-		free(data->error_msg);
-		exit_error(127, "", data);
+		write(2, g_data->error_msg, ft_strlen(g_data->error_msg));
+		free(g_data->error_msg);
+		exit_error(127, "", g_data);
 	}
 }
 
-static void	close_fds(t_cmd *cmd, t_data *data)
+static void	close_fds(t_cmd *cmd, t_data *g_data)
 {
 	int	i;
 
 	i = 0;
-	while (data->exec->pipes[i])
+	while (g_data->exec->pipes[i])
 	{
-		close(data->exec->pipes[i][1]);
-		close(data->exec->pipes[i][0]);
+		close(g_data->exec->pipes[i][1]);
+		close(g_data->exec->pipes[i][0]);
 		i++;
 	}
 	close_files(cmd->infiles_fd);

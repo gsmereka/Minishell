@@ -6,51 +6,51 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:18:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/10 15:30:13 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-static char	*test_path(int cmd, t_data *data);
+static char	*test_path(int cmd, t_data *g_data);
 static char	*ft_strjoin_with_free(char *s1, char *s2);
 
-void	set_cmds_paths(t_data *data)
+void	set_cmds_paths(t_data *g_data)
 {
 	int		cmd;
 	char	*cmd_path;
 
 	cmd = 0;
-	while (cmd < data->exec->cmds_amount)
+	while (cmd < g_data->exec->cmds_amount)
 	{
-		cmd_path = test_path(cmd, data);
+		cmd_path = test_path(cmd, g_data);
 		if (cmd_path != NULL)
 		{
-			free(data->exec->cmds[cmd]->name);
-			data->exec->cmds[cmd]->name = cmd_path;
+			free(g_data->exec->cmds[cmd]->name);
+			g_data->exec->cmds[cmd]->name = cmd_path;
 		}
-		// ft_printf("caminho do programa: %s\n", data->exec->cmds[cmd]->name);
+		// ft_printf("caminho do programa: %s\n", g_data->exec->cmds[cmd]->name);
 		cmd++;
 	}
 }
 
-static char	*test_path(int cmd, t_data *data)
+static char	*test_path(int cmd, t_data *g_data)
 {
 	char	*final_path;
 	int		i;
 
 	i = 0;
-	if (!data->exec->cmds[cmd]->name)
+	if (!g_data->exec->cmds[cmd]->name)
 		return (NULL);
-	while (data->exec->env_paths[i])
+	while (g_data->exec->env_paths[i])
 	{
-		final_path = ft_strdup(data->exec->env_paths[i]);
+		final_path = ft_strdup(g_data->exec->env_paths[i]);
 		final_path = ft_strjoin_with_free(final_path, "/");
 		final_path = ft_strjoin_with_free
-			(final_path, data->exec->cmds[cmd]->name);
+			(final_path, g_data->exec->cmds[cmd]->name);
 		if (!final_path)
 			exit_error(12,
-				"Failed to allocate memory for test a command path", data);
+				"Failed to allocate memory for test a command path", g_data);
 		if (access(final_path, X_OK) == 0)
 			return (final_path);
 		free(final_path);

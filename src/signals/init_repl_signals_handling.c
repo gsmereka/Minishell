@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 12:15:30 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 17:10:09 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	handle_ctrl_c(int signal);
 
-void	init_repl_signals_handling(t_data *data)
+void	init_repl_signals_handling(t_data *g_data)
 {
 	struct sigaction	ctrl_c;
 	struct sigaction	ctrl_backsslash;
 
-	(void)data;
+	(void)g_data;
 	ft_bzero(&ctrl_c, sizeof(struct sigaction));
 	ft_bzero(&ctrl_backsslash, sizeof(struct sigaction));
 	ctrl_c.sa_handler = handle_ctrl_c;

@@ -6,24 +6,24 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:14:38 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/01/30 12:02:44 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/tester.h"
 
-static long int	get_content_size(char *file_name, t_data *data);
-static int		read_content(char *content, int test, t_data *data);
-static char		*get_valgrind_test_content(int test, t_data *data);
+static long int	get_content_size(char *file_name, t_data *g_data);
+static int		read_content(char *content, int test, t_data *g_data);
+static char		*get_valgrind_test_content(int test, t_data *g_data);
 static int		readline_leaks(char *content);
 
-int	check_leaks(int test, t_data *data)
+int	check_leaks(int test, t_data *g_data)
 {
 	char	*content;
 	int		leaks;
 
 	leaks = 0;
-	content = get_valgrind_test_content(test, data);
+	content = get_valgrind_test_content(test, g_data);
 	if (content)
 	{
 		if (!strstr(content,
@@ -38,7 +38,7 @@ int	check_leaks(int test, t_data *data)
 	return (leaks);
 }
 
-static long int	get_content_size(char *file_name, t_data *data)
+static long int	get_content_size(char *file_name, t_data *g_data)
 {
 	struct stat	st;
 	long int	size;
@@ -46,26 +46,26 @@ static long int	get_content_size(char *file_name, t_data *data)
 	if (stat(file_name, &st) == 0)
 		size = st.st_size;
 	else
-		exit_error(1, "Fail at get file size\n", data);
+		exit_error(1, "Fail at get file size\n", g_data);
 	if (!size)
-		exit_error(1, "Empty File\n", data);
+		exit_error(1, "Empty File\n", g_data);
 	return (size);
 }
 
-static char	*get_valgrind_test_content(int test, t_data *data)
+static char	*get_valgrind_test_content(int test, t_data *g_data)
 {
 	long int	size;
 	char		*content;
 
-	size = get_content_size(data->user_error_name[test], data);
+	size = get_content_size(g_data->user_error_name[test], g_data);
 	content = calloc(size + 2, sizeof(char));
 	if (!content)
-		exit_error(12, "Fail at allocate user error memory\n", data);
-	read_content(content, test, data);
+		exit_error(12, "Fail at allocate user error memory\n", g_data);
+	read_content(content, test, g_data);
 	return (content);
 }
 
-static int	read_content(char *content, int test, t_data *data)
+static int	read_content(char *content, int test, t_data *g_data)
 {
 	int		status_1;
 	char	expected[1];
@@ -74,7 +74,7 @@ static int	read_content(char *content, int test, t_data *data)
 	status_1 = 1;
 	while (status_1)
 	{
-		status_1 = read(data->user_error_fd[test], &expected, 1);
+		status_1 = read(g_data->user_error_fd[test], &expected, 1);
 		if (status_1 < 0)
 			return (0);
 		if (expected[0] != '\0')

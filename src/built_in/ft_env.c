@@ -6,20 +6,20 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:44 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/03 20:20:33 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	ft_env(char **args, t_data *data)
+void	ft_env(char **args, t_data *g_data)
 {
 	char	**envp;
 	int		i;
 
 	(void)args;
 	i = 0;
-	envp = data->virtual_envp;
+	envp = g_data->virtual_envp;
 	while (envp[i])
 	{
 		if (envp[i][0] == '?' && envp[i][1] == '=')

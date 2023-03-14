@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/08 21:56:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	identify_flags(int *n_flag, char **args);
 static void	display_text_line(int *n_flag, char **args);
 
 // Se o primeiro argumento for -n, ele retira a quebra de linha no final.
-void	ft_echo(char **args, t_data *data)
+void	ft_echo(char **args, t_data *g_data)
 {
 	int	n_flag;
 

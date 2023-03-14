@@ -6,25 +6,25 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/11 17:31:22 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:53:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int set_infiles(t_cmd *cmd, t_data *data);
-static int set_outfiles(t_cmd *cmd, t_data *data);
-static void	error_msg(char *file, t_data *data);
+static int set_infiles(t_cmd *cmd, t_data *g_data);
+static int set_outfiles(t_cmd *cmd, t_data *g_data);
+static void	error_msg(char *file, t_data *g_data);
 
-void	set_files(t_cmd *cmd, t_data *data)
+void	set_files(t_cmd *cmd, t_data *g_data)
 {
-	if (!set_infiles(cmd, data))
+	if (!set_infiles(cmd, g_data))
 		return ;
-	if (!set_outfiles(cmd, data));
+	if (!set_outfiles(cmd, g_data));
 		return ;
 }
 
-static int set_infiles(t_cmd *cmd, t_data *data)
+static int set_infiles(t_cmd *cmd, t_data *g_data)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ static int set_infiles(t_cmd *cmd, t_data *data)
 			cmd->infiles_fd[i] = open(cmd->infiles[i], O_RDWR);
 			if (cmd->infiles_fd[i] == -1)
 			{
-				error_msg(cmd->infiles[i], data);
+				error_msg(cmd->infiles[i], g_data);
 				return (0);
 			}
 		}
@@ -53,7 +53,7 @@ static int set_infiles(t_cmd *cmd, t_data *data)
 	return (1);
 }
 
-static int set_outfiles(t_cmd *cmd, t_data *data)
+static int set_outfiles(t_cmd *cmd, t_data *g_data)
 {
 	int	i;
 
@@ -70,7 +70,7 @@ static int set_outfiles(t_cmd *cmd, t_data *data)
 					O_RDWR | O_CREAT | O_APPEND, 0777);
 		if (cmd->outfiles_fd[i] == -1)
 		{
-			error_msg(cmd->outfiles[i], data);
+			error_msg(cmd->outfiles[i], g_data);
 			return (0);
 		}
 		i++;
@@ -78,14 +78,14 @@ static int set_outfiles(t_cmd *cmd, t_data *data)
 	return (1);
 }
 
-static void	error_msg(char *file, t_data *data)
+static void	error_msg(char *file, t_data *g_data)
 {
 	char	*prefix;
 
 	prefix = ft_strdup("bash: ");
-	data->error_msg = ft_strjoin(prefix, file);
+	g_data->error_msg = ft_strjoin(prefix, file);
 	free(prefix);
-	perror(data->error_msg);
-	free(data->error_msg);
-	data->error_msg = NULL;
+	perror(g_data->error_msg);
+	free(g_data->error_msg);
+	g_data->error_msg = NULL;
 }
