@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:47 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 22:40:27 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 23:16:21 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	handle_ctrl_c(int signal)
 {
 	if (signal == SIGINT)
 	{
+		ft_printf("\n");
 		close_heredoc_pipes(g_aux_data);
 		g_aux_data->exec->need_interrupt = 1;
 	}
