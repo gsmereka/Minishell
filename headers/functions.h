@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/14 20:19:24 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 21:39:50 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@
 # include <fcntl.h>
 
 // Executor
-#include <sys/wait.h>
+# include <sys/wait.h>
+
+// general
+char	*ft_strjoin_with_free(char *s1, char *s2);
 
 // SIGNALS
 void	heredoc_signals_handling(t_data *data);
@@ -76,6 +79,8 @@ char	*get_next_line_with_free(int fd, int stop);
 
 // here_doc
 int		set_here_doc(t_data *data);
+int		heredoc_cmd_loop(t_data *data);
+int		heredoc_interrupt(char *input, char *limiter);
 
 // built_in
 void	ft_cd(char **args, t_data *data);
