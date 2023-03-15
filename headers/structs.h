@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/11 17:24:11 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:38:15 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-typedef	struct s_cmd
+typedef struct s_cmd
 {
 	char	*name;
 	char	**args;
@@ -41,12 +41,13 @@ typedef	struct s_cmd
 	int		*outputs_modes;
 }	t_cmd;
 
-typedef	struct s_exec
+typedef struct s_exec
 {
 	t_cmd	**cmds;
 	int		cmds_amount;
 	int		**pipes;
 	char	**env_paths;
+	int		need_interrupt;
 }	t_exec;
 
 typedef struct s_data

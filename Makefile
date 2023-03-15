@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/14 21:44:59 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/14 22:36:54 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC 	=	src/main.c \
 			src/executor/heredoc/set_heredoc.c \
 			src/executor/heredoc/heredoc_cmd_loop.c \
 			src/executor/heredoc/heredoc_interrupt.c \
+			src/executor/heredoc/close_heredoc_pipes.c \
 			src/built_in/ft_cd.c \
 			src/built_in/ft_cd_error_msg.c \
 			src/built_in/ft_echo.c \
