@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/14 22:41:13 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:50:59 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*get_next_line_with_free(int fd, int stop);
 // heredoc
 int		set_heredoc(t_data *data);
 int		heredoc_cmd_loop(t_data *data);
-int		heredoc_interrupt(char *input, char *limiter);
+int		heredoc_interrupt(char *input, char *limiter, t_data *data);
 void	close_heredoc_pipes(t_data *data);
 
 // built_in

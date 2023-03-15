@@ -6,17 +6,19 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 21:36:18 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 21:37:31 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:52:27 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-int	heredoc_interrupt(char *input, char *limiter)
+int	heredoc_interrupt(char *input, char *limiter, t_data *data)
 {
 	char	*msg;
 
 	if (input != NULL)
+		return (0);
+	if (data->exec->need_interrupt)
 		return (0);
 	msg = ft_strdup("\nbash: warning: here-document "\
 		"delimited by end-of-file (wanted `");
