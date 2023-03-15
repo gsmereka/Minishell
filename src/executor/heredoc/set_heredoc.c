@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_here_doc.c                                     :+:      :+:    :+:   */
+/*   set_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../../../headers/minishell.h"
 
-int	set_here_doc(t_data *data)
+int	set_heredoc(t_data *data)
 {
 	heredoc_signals_handling(data);
 	if (!heredoc_cmd_loop(data))

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:50:23 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 21:37:33 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 21:44:59 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	heredoc_infiles_loop(t_cmd *cmd, t_data *data);
 static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *data);
-static int	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data);
+static int	set_heredoc_content(t_cmd *cmd, int fd_index, t_data *data);
 static int	compare_input_with_limiter(char *input,
 				char *limiter, t_data *data);
 
@@ -47,7 +47,7 @@ static int	heredoc_infiles_loop(t_cmd *cmd, t_data *data)
 		init_heredoc_pipe(cmd, fd_index, data);
 		if (cmd->inputs_modes[fd_index] == 1)
 		{
-			if (!set_here_doc_content(cmd, fd_index, data))
+			if (!set_heredoc_content(cmd, fd_index, data))
 				return (0);
 		}
 		fd_index++;
@@ -62,11 +62,11 @@ static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *data)
 	cmd->heredocs_pipes[fd_index] = ft_calloc(2, sizeof(int));
 	heredoc_pipe = cmd->heredocs_pipes[fd_index];
 	if (!heredoc_pipe)
-		exit_error(12, "Fail allocating memory for here_doc", data);
+		exit_error(12, "Fail allocating memory for heredoc", data);
 	pipe(heredoc_pipe);
 }
 
-static int	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data)
+static int	set_heredoc_content(t_cmd *cmd, int fd_index, t_data *data)
 {
 	int		*heredoc_pipe;
 	char	*input;
@@ -101,7 +101,7 @@ static int	compare_input_with_limiter(char *input, char *limiter, t_data *data)
 	if (!limiter_with_new_line)
 	{
 		free(input);
-		write(2, "Error at simulate here_doc", ft_strlen("Error at simulate here_doc"));
+		write(2, "Error at simulate heredoc", ft_strlen("Error at simulate heredoc"));
 		// definir erro 12
 		return (1);
 	}

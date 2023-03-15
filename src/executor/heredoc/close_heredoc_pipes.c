@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc_utils.c                                   :+:      :+:    :+:   */
+/*   close_heredoc_pipes.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:05:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 20:48:14 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/14 21:44:59 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../headers/minishell.h"
 
 static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *data);
-static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data);
+static void	set_heredoc_content(t_cmd *cmd, int fd_index, t_data *data);
 static int	compare_input_with_limiter(char *input, char *limiter, t_data *data);
 static int	need_interrupt(char *str, char *limiter);
-static char	*ft_strjoin_with_free(char *s1, char *s2);
 
-void	set_here_doc(t_data *data)
+void	set_heredoc(t_data *data)
 {
 	t_cmd	**cmd;
 	int 	cmd_index;
@@ -36,7 +35,7 @@ void	set_here_doc(t_data *data)
 			{
 				init_heredoc_pipe(cmd[cmd_index], fd_index, data);
 				if (cmd[cmd_index]->inputs_modes[fd_index] == 1)
-					set_here_doc_content(cmd[cmd_index], fd_index, data);
+					set_heredoc_content(cmd[cmd_index], fd_index, data);
 				fd_index++;
 			}
 		}
@@ -51,11 +50,11 @@ static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *data)
 	cmd->heredocs_pipes[fd_index] = ft_calloc(2, sizeof(int));
 	heredoc_pipe = cmd->heredocs_pipes[fd_index];
 	if (!heredoc_pipe)
-		exit_error(12, "Fail allocating memory for here_doc", data);
+		exit_error(12, "Fail allocating memory for heredoc", data);
 	pipe(heredoc_pipe);
 }
 
-static void	set_here_doc_content(t_cmd *cmd, int fd_index, t_data *data)
+static void	set_heredoc_content(t_cmd *cmd, int fd_index, t_data *data)
 {
 	int		*heredoc_pipe;
 	char	*input;
@@ -92,7 +91,7 @@ static int	compare_input_with_limiter(char *input, char *limiter, t_data *data)
 	if (!limiter_with_new_line)
 	{
 		free(input);
-		write(2, "Error at simulate here_doc", ft_strlen("Error at simulate here_doc"));
+		write(2, "Error at simulate heredoc", ft_strlen("Error at simulate heredoc"));
 		// definir erro 12
 		return (1);
 	}
@@ -121,33 +120,4 @@ static int	need_interrupt(char *input, char *limiter)
 		free(msg);
 	}
 	return (1);
-}
-
-static char	*ft_strjoin_with_free(char *s1, char *s2)
-{
-	char	*new_s;
-	int		s1_size;
-	int		s2_size;
-	int		i;
-
-	if (!s1)
-		s1 = ft_strdup("");
-	if (!s1 | !s2)
-		return (NULL);
-	i = 0;
-	s1_size = ft_strlen(s1);
-	s2_size = ft_strlen(s2);
-	new_s = (char *)malloc((s1_size + s2_size + 1) * sizeof(char));
-	if (new_s == NULL)
-		return (NULL);
-	while (i < (s1_size + s2_size + 1))
-	{
-		if (i < s1_size)
-			new_s[i] = s1[i];
-		else
-			new_s[i] = s2[i - s1_size];
-		i++;
-	}
-	free(s1);
-	return ((char *)new_s);
 }

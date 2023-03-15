@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/14 21:40:40 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/14 21:44:59 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,9 @@ SRC 	=	src/main.c \
 			src/executor/get_commands_info/get_env_paths.c \
 			src/executor/get_commands_info/set_cmds_paths.c \
 			src/executor/get_commands_info/get_next_line_with_free.c \
-			src/executor/here_doc/set_here_doc.c \
-			src/executor/here_doc/heredoc_cmd_loop.c \
-			src/executor/here_doc/heredoc_interrupt.c \
+			src/executor/heredoc/set_heredoc.c \
+			src/executor/heredoc/heredoc_cmd_loop.c \
+			src/executor/heredoc/heredoc_interrupt.c \
 			src/built_in/ft_cd.c \
 			src/built_in/ft_cd_error_msg.c \
 			src/built_in/ft_echo.c \
@@ -110,7 +110,7 @@ create_obj_dir:
 	@mkdir -p $(OBJ_DIR)/src/executor
 	@mkdir -p $(OBJ_DIR)/src/built_in
 	@mkdir -p $(OBJ_DIR)/src/executor/get_commands_info
-	@mkdir -p $(OBJ_DIR)/src/executor/here_doc
+	@mkdir -p $(OBJ_DIR)/src/executor/heredoc
 	@mkdir -p $(OBJ_DIR)/src/signals
 
 ## FULL CLEAN ALL OBJECTS AND TESTERS
