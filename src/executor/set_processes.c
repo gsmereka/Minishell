@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/16 11:13:58 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ static void	set_fork(int cmd, t_data *data)
 
 static void	close_pipes(int cmd_index, t_data *data)
 {
-	t_cmd *cmd;
+	t_cmd	*cmd;
 
-	cmd	= data->exec->cmds[cmd_index];
+	cmd = data->exec->cmds[cmd_index];
 	if (cmd_index > 0)
 	{
 		if (close(data->exec->pipes[cmd_index - 1][0]) == -1)
