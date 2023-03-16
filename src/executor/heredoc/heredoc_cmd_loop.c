@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:50:23 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/15 16:01:20 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/16 10:02:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static int	set_heredoc_content(t_cmd *cmd, int fd_index, t_data *data)
 	char	*input;
 	char	*limiter;
 
-	input = NULL;
 	limiter = cmd->infiles[fd_index];
 	heredoc_pipe = cmd->heredocs_pipes[fd_index];
 	while (cmd)
@@ -82,7 +81,6 @@ static int	set_heredoc_content(t_cmd *cmd, int fd_index, t_data *data)
 		if (data->exec->need_interrupt)
 		{
 			free(input);
-			close_heredoc_pipes(data);
 			return (0);
 		}
 		if (heredoc_interrupt(input, limiter, data))
