@@ -6,11 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 12:15:30 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/16 11:40:46 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
+extern t_data	*g_aux_data;
 
 static void	handle_ctrl_c(int signal);
 
@@ -32,6 +34,8 @@ static void	handle_ctrl_c(int signal)
 {
 	if (signal == SIGINT)
 	{
+		if (g_aux_data->exec)
+			g_aux_data->exec->need_interrupt = 1;
 		ft_putchar_fd('\n', 1);
 		rl_replace_line("", 1);
 		rl_on_new_line();

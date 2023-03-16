@@ -6,25 +6,25 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/16 11:18:58 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int set_infiles(t_cmd *cmd, t_data *data);
-static int set_outfiles(t_cmd *cmd, t_data *data);
+static int	set_infiles(t_cmd *cmd, t_data *data);
+static int	set_outfiles(t_cmd *cmd, t_data *data);
 static void	error_msg(char *file, t_data *data);
 
 void	set_files(t_cmd *cmd, t_data *data)
 {
 	if (!set_infiles(cmd, data))
 		return ;
-	if (!set_outfiles(cmd, data));
+	if (!set_outfiles(cmd, data))
 		return ;
 }
 
-static int set_infiles(t_cmd *cmd, t_data *data)
+static int	set_infiles(t_cmd *cmd, t_data *data)
 {
 	int	i;
 
@@ -53,7 +53,7 @@ static int set_infiles(t_cmd *cmd, t_data *data)
 	return (1);
 }
 
-static int set_outfiles(t_cmd *cmd, t_data *data)
+static int	set_outfiles(t_cmd *cmd, t_data *data)
 {
 	int	i;
 

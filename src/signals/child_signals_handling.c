@@ -6,11 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:51 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/16 11:39:58 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
+extern t_data	*g_aux_data;
 
 static void	handle_ctrl_c(int signal);
 
@@ -19,7 +21,7 @@ void	child_signals_handling(t_data *data)
 	struct sigaction	ctrl_c;
 	struct sigaction	ctrl_backsslash;
 
-	(void)data;
+	g_aux_data = data;
 	ft_bzero(&ctrl_c, sizeof(struct sigaction));
 	ft_bzero(&ctrl_backsslash, sizeof(struct sigaction));
 	ctrl_c.sa_handler = handle_ctrl_c;
@@ -32,9 +34,6 @@ static void	handle_ctrl_c(int signal)
 {
 	if (signal == SIGINT)
 	{
-		ft_putchar_fd('\n', 1);
-		rl_replace_line("", 1);
-		rl_on_new_line();
-		rl_redisplay();
+		end_program(g_aux_data);
 	}
 }
