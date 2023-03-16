@@ -6,13 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 21:44:59 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/16 10:21:04 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int	is_only_one_built_in(t_data *data);
+static int	do_not_need_fork(t_data *data);
 
 void	init_executor(t_data *data)
 {
@@ -23,19 +23,22 @@ void	init_executor(t_data *data)
 		return ;
 	if (!set_heredoc(data))
 		return ;
-	if (is_only_one_built_in(data))
+	if (do_not_need_fork(data))
 		execute_built_in(data->exec->cmds[0], data);
 	else
 		set_processes(data);
 }
 
-static int	is_only_one_built_in(t_data *data)
+static int	do_not_need_fork(t_data *data)
 {
 	t_cmd	*first_cmd;
 
 	if (data->exec->cmds_amount > 1)
 		return (0);
 	first_cmd = data->exec->cmds[0];
+	if (ft_strncmp(first_cmd->args[0], "env",
+			ft_strlen(first_cmd->args[0])) == 0)
+		return (0);
 	if (is_built_in(first_cmd))
 		return (1);
 	return (0);
