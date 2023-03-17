@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/16 11:40:10 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/17 12:04:32 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	set_pipes(int cmd, t_data *data);
 static void	set_fork(int cmd, t_data *data);
 static void	close_pipes(int cmd, t_data *data);
 static void	close_files(int *files);
+static void	close_all_fds(t_data *data);
 
 int	set_processes(t_data *data)
 {
@@ -24,8 +25,11 @@ int	set_processes(t_data *data)
 	cmd = 0;
 	while (cmd < data->exec->cmds_amount)
 	{
-		if (data->exec->need_interrupt)
-			return (0);
+		// if (data->exec->need_interrupt)
+		// {
+		// 	close_all_fds(data);
+		// 	return (0);
+		// }
 		set_pipes(cmd, data);
 		set_files(data->exec->cmds[cmd], data);
 		set_fork(cmd, data);
@@ -49,7 +53,7 @@ static void	set_fork(int cmd, t_data *data)
 		exit_error(24, "Error at use fork() function", data);
 	if (pid == 0)
 	{
-		child_signals_handling(data);
+		// child_signals_handling(data);
 		if (!redirect_input(cmd, data))
 			end_program(data);
 		if (!redirect_output(cmd, data))
@@ -101,4 +105,23 @@ static void	close_files(int *files)
 			i++;
 		}
 	}
+}
+
+static void	close_all_fds(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (!data->exec)
+		return ;
+	while (data->exec->pipes[i])
+	{
+		close(data->exec->pipes[i][1]);
+		close(data->exec->pipes[i][0]);
+		close_files(data->exec->cmds[i]->infiles_fd);
+		close_files(data->exec->cmds[i]->outfiles_fd);
+		i++;
+	}
+	close(0);
+	close(1);
 }

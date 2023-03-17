@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:51 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/16 11:39:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/16 13:32:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 extern t_data	*g_aux_data;
 
 static void	handle_ctrl_c(int signal);
+static void	close_files(int *files);
+static void	close_all_fds(t_data *data);
 
 void	child_signals_handling(t_data *data)
 {
@@ -34,6 +36,40 @@ static void	handle_ctrl_c(int signal)
 {
 	if (signal == SIGINT)
 	{
+		close_all_fds(g_aux_data);
 		end_program(g_aux_data);
+	}
+}
+
+static void	close_all_fds(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->exec->pipes[i])
+	{
+		close(data->exec->pipes[i][1]);
+		close(data->exec->pipes[i][0]);
+		close_files(data->exec->cmds[i]->infiles_fd);
+		close_files(data->exec->cmds[i]->outfiles_fd);
+		i++;
+	}
+	close(1);
+	close(0);
+}
+
+static void	close_files(int *files)
+{
+	int	i;
+
+	i = 0;
+	if (files)
+	{
+		while (files[i])
+		{
+			if (files[i] != -1)
+				close (files[i]);
+			i++;
+		}
 	}
 }
