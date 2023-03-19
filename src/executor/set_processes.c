@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 11:44:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:51:05 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	set_fork(int cmd, t_data *data)
 {
 	int	pid;
 
-	// child_signals_handling(data);
+	child_signals_handling(data);
 	pid = fork();
 	if (pid == -1)
 		exit_error(24, "Error at use fork() function", data);
