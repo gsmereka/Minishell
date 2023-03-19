@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:50:23 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 13:10:24 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 13:15:31 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	heredoc_cmd_loop(t_data *data)
 	heredoc_signals_handling(data);
 	while (cmd_index < data->exec->cmds_amount)
 	{
-		ft_printf("%d\n", cmd_index);
 		if (!heredoc_infiles_loop(cmd[cmd_index], data))
 			return (0);
 		cmd_index++;
@@ -46,9 +45,9 @@ static int	heredoc_infiles_loop(t_cmd *cmd, t_data *data)
 		return (1);
 	while (cmd->infiles[fd_index])
 	{
+		init_heredoc_pipe(cmd, fd_index, data);
 		if (cmd->inputs_modes[fd_index] == 1)
 		{
-			init_heredoc_pipe(cmd, fd_index, data);
 			if (!set_heredoc_content(cmd, fd_index, data))
 				return (0);
 		}
@@ -61,6 +60,8 @@ static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *data)
 {
 	int	*heredoc_pipe;
 
+	if (!cmd->heredocs_pipes)
+		return ;
 	cmd->heredocs_pipes[fd_index] = ft_calloc(2, sizeof(int));
 	heredoc_pipe = cmd->heredocs_pipes[fd_index];
 	if (!heredoc_pipe)
@@ -74,6 +75,8 @@ static int	set_heredoc_content(t_cmd *cmd, int fd_index, t_data *data)
 	char	*input;
 	char	*limiter;
 
+	if (!cmd->heredocs_pipes)
+		return (1);
 	limiter = cmd->infiles[fd_index];
 	heredoc_pipe = cmd->heredocs_pipes[fd_index];
 	while (cmd)

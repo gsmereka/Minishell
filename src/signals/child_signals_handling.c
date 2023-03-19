@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:51 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 12:04:33 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 13:11:56 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ static void	close_all_fds(t_data *data)
 	}
 	// close(1);
 	close(0);
-	ft_putstr_fd("CARLOS\n", 0);
-	dup2(data->input_fd_save, 0);
-	ft_putstr_fd("CARLOS\n", 0);
 }
 
 static void	close_files(int *files)
