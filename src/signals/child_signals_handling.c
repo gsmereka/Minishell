@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:51 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 11:51:13 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:56:54 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	handle_ctrl_c(int signal)
 {
 	if (signal == SIGINT)
 	{
-		ft_putstr_fd("\n", 0);
+		ft_putstr_fd("\n", 1);
 		// close_all_fds(g_aux_data);
 	}
 }

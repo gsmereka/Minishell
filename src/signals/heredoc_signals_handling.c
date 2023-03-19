@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:47 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 11:43:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 12:00:47 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	handle_ctrl_c(int signal)
 	{
 		if (!g_aux_data->exec)
 			return ;
-		// ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", 1);
 		get_next_line_with_free(0, 1);
 		close_heredoc_pipes(g_aux_data);
 		g_aux_data->exec->need_interrupt = 1;
