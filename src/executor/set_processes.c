@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 11:39:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:44:50 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ static void	set_fork(int cmd, t_data *data)
 	}
 	else
 	{
-		wait(NULL);
-		// data->exec->pid[cmd] = pid;
-		// waitpid(data->exec->pid[cmd],
-		// 	&data->exec->status[cmd], WNOHANG);
+		data->exec->pid[cmd] = pid;
+		waitpid(data->exec->pid[cmd],
+			&data->exec->status[cmd], WUNTRACED);
 			// &data->exec->status[cmd], WNOHANG | WUNTRACED);
 		close_files(data->exec->cmds[cmd]->infiles_fd);
 		close_files(data->exec->cmds[cmd]->outfiles_fd);
