@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 00:24:10 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 12:17:07 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	init_repl(t_data *data)
 	while (1)
 	{
 		init_repl_signals_handling(data);
-		data->input_fd_save = dup(0);
 		get_user_input(data);
 		if (!is_valid(data->user_input))
 			break ;
@@ -34,7 +33,6 @@ void	init_repl(t_data *data)
 		clear_commands(data);
 		token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
 		free(data->user_input);
-		dup2(0, data->input_fd_save);
 	}
 }
 
