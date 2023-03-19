@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 01:05:13 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/19 20:22:16 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/19 20:34:26 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	set_env_value(char *mat_token, t_env *aux_env, int flag_env)
 {
 
 	
-	check_spaces();
+	//check_spaces();
 	
 	while (aux_env) // toda a parte da substituição q funciona. O problema é quando tem espaços // e se tiver aspas???? eu tenho q tirar elas antes? e ignorar elas tbm 
 	{
