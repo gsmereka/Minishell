@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/11 04:08:09 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/14 03:49:58 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ void	init_expander(t_data *data)
 		if (aux_token->content[0] == '$')
 			creck_token_in_envp(data, &aux_token->content[1], &aux_token);
 		else if (aux_token->content[0] == '"')
-			check_envp_position_in_token(&aux_token->content);
+			check_envp_position_in_token(data, &aux_token->content);
 			//remove as aspas (só as de fora?) ft_strtrim?
 		// ---atenção para "''" e '""'
+		ft_printf("%s\n", aux_token->content);
 		aux_token = aux_token->next;
 	}
 }
