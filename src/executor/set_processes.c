@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 12:08:48 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 12:35:51 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	set_processes(t_data *data)
 		set_fork(cmd, data);
 		cmd++;
 	}
+	close_all_fds(data);
 	return (0);
 }
 
@@ -79,12 +80,15 @@ static void	close_pipes(int cmd_index, t_data *data)
 	if (cmd_index > 0)
 	{
 		close(data->exec->pipes[cmd_index - 1][0]);
+		// data->exec->pipes[cmd_index - 1][0] = -1;
 	}
 	if (cmd_index == data->exec->cmds_amount - 1)
 	{
 		close(data->exec->pipes[cmd_index][0]);
+		// data->exec->pipes[cmd_index][0] = -1;
 	}
 	close(data->exec->pipes[cmd_index][1]);
+	// data->exec->pipes[cmd_index][1] = -1;
 }
 
 static void	close_files(int *files)
@@ -112,8 +116,10 @@ static int	close_all_fds(t_data *data)
 		return (0);
 	while (data->exec->pipes[i])
 	{
-		close(data->exec->pipes[i][1]);
-		close(data->exec->pipes[i][0]);
+		if (data->exec->pipes[i][1] != -1)
+			close(data->exec->pipes[i][1]);
+		if (data->exec->pipes[i][0] != -1)
+			close(data->exec->pipes[i][0]);
 		close_files(data->exec->cmds[i]->infiles_fd);
 		close_files(data->exec->cmds[i]->outfiles_fd);
 		i++;
