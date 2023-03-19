@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/17 12:04:32 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:39:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@ int	set_processes(t_data *data)
 	int	cmd;
 
 	cmd = 0;
+	data->exec->pid = ft_calloc(data->exec->cmds_amount + 1, sizeof(int));
+	data->exec->status = ft_calloc(data->exec->cmds_amount + 1, sizeof(int));
 	while (cmd < data->exec->cmds_amount)
 	{
-		// if (data->exec->need_interrupt)
-		// {
-		// 	close_all_fds(data);
-		// 	return (0);
-		// }
 		set_pipes(cmd, data);
 		set_files(data->exec->cmds[cmd], data);
 		set_fork(cmd, data);
@@ -48,12 +45,12 @@ static void	set_fork(int cmd, t_data *data)
 {
 	int	pid;
 
+	// child_signals_handling(data);
 	pid = fork();
 	if (pid == -1)
 		exit_error(24, "Error at use fork() function", data);
 	if (pid == 0)
 	{
-		// child_signals_handling(data);
 		if (!redirect_input(cmd, data))
 			end_program(data);
 		if (!redirect_output(cmd, data))
@@ -63,9 +60,10 @@ static void	set_fork(int cmd, t_data *data)
 	else
 	{
 		wait(NULL);
-		// data->process.pid[cmd] = pid;
-		// waitpid(data->process.pid[cmd],
-		// 	&data->process.status[cmd], WNOHANG | WUNTRACED);
+		// data->exec->pid[cmd] = pid;
+		// waitpid(data->exec->pid[cmd],
+		// 	&data->exec->status[cmd], WNOHANG);
+			// &data->exec->status[cmd], WNOHANG | WUNTRACED);
 		close_files(data->exec->cmds[cmd]->infiles_fd);
 		close_files(data->exec->cmds[cmd]->outfiles_fd);
 		close_pipes(cmd, data);
@@ -79,16 +77,13 @@ static void	close_pipes(int cmd_index, t_data *data)
 	cmd = data->exec->cmds[cmd_index];
 	if (cmd_index > 0)
 	{
-		if (close(data->exec->pipes[cmd_index - 1][0]) == -1)
-			exit_error(24, "Fail at close a pipe output_fd", data);
+		close(data->exec->pipes[cmd_index - 1][0]);
 	}
 	if (cmd_index == data->exec->cmds_amount - 1)
 	{
-		if (close(data->exec->pipes[cmd_index][0]) == -1)
-			exit_error(24, "Fail at close a pipe output_fd", data);
+		close(data->exec->pipes[cmd_index][0]);
 	}
-	if (close(data->exec->pipes[cmd_index][1]) == -1)
-		exit_error(24, "Fail at close a pipe input_fd", data);
+	close(data->exec->pipes[cmd_index][1]);
 }
 
 static void	close_files(int *files)
@@ -124,4 +119,5 @@ static void	close_all_fds(t_data *data)
 	}
 	close(0);
 	close(1);
+	close(data->input_fd_save);
 }

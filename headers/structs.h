@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 22:38:15 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:34:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ typedef struct s_exec
 {
 	t_cmd	**cmds;
 	int		cmds_amount;
+	int		*pid;
+	int		*status;
 	int		**pipes;
 	char	**env_paths;
 	int		need_interrupt;
+	int		is_child;
 }	t_exec;
 
 typedef struct s_data
@@ -60,6 +63,7 @@ typedef struct s_data
 	char	*user_input;
 	char	*error_msg;
 	int		exit_status;
+	int		input_fd_save;
 }	t_data;
 
 #endif

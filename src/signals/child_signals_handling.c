@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:51 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/16 13:32:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:19:54 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	handle_ctrl_c(int signal)
 {
 	if (signal == SIGINT)
 	{
-		close_all_fds(g_aux_data);
-		end_program(g_aux_data);
+		// ft_putstr_fd("CARLOS\n", 0);
+		// close_all_fds(g_aux_data);
 	}
 }
 
@@ -54,8 +54,11 @@ static void	close_all_fds(t_data *data)
 		close_files(data->exec->cmds[i]->outfiles_fd);
 		i++;
 	}
-	close(1);
+	// close(1);
 	close(0);
+	ft_putstr_fd("CARLOS\n", 0);
+	dup2(data->input_fd_save, 0);
+	ft_putstr_fd("CARLOS\n", 0);
 }
 
 static void	close_files(int *files)

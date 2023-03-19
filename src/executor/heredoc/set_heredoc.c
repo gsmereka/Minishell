@@ -18,7 +18,8 @@ static int	alloc_individual_heredoc_pipes(t_cmd *cmd);
 
 int	set_heredoc(t_data *data)
 {
-	heredoc_signals_handling(data);
+	
+	// heredoc_signals_handling(data);
 	alloc_heredoc_pipes(data);
 	if (!heredoc_cmd_loop(data))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 21:50:32 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:30:12 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	clear_commands(t_data *data)
 {
 	if (!data->exec)
 		return ;
+	if (data->exec->pid)
+		free(data->exec->pid);
+	if (data->exec->status)
+		free(data->exec->status);
 	free_intern_cmds(data);
 	free_intern_pipes(data);
 	if (data->exec->env_paths)
