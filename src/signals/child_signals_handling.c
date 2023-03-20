@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:51 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 13:11:56 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/19 21:23:55 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,20 @@
 extern t_data	*g_aux_data;
 
 static void	handle_ctrl_c(int signal);
-static void	close_files(int *files);
-static void	close_all_fds(t_data *data);
+static void	handle_backslash(int signal);
 
 void	child_signals_handling(t_data *data)
 {
 	struct sigaction	ctrl_c;
-	struct sigaction	ctrl_backsslash;
+	struct sigaction	ctrl_backslash;
 
 	g_aux_data = data;
 	ft_bzero(&ctrl_c, sizeof(struct sigaction));
-	ft_bzero(&ctrl_backsslash, sizeof(struct sigaction));
+	ft_bzero(&ctrl_backslash, sizeof(struct sigaction));
 	ctrl_c.sa_handler = handle_ctrl_c;
-	ctrl_backsslash.sa_handler = SIG_IGN;
+	ctrl_backslash.sa_handler = handle_backslash;
 	sigaction(SIGINT, &ctrl_c, NULL);
-	sigaction(SIGQUIT, &ctrl_backsslash, NULL);
+	sigaction(SIGQUIT, &ctrl_backslash, NULL);
 }
 
 static void	handle_ctrl_c(int signal)
@@ -42,35 +41,12 @@ static void	handle_ctrl_c(int signal)
 	}
 }
 
-static void	close_all_fds(t_data *data)
+static void	handle_backslash(int signal)
 {
-	int	i;
-
-	i = 0;
-	while (data->exec->pipes[i])
+	if (signal == SIGQUIT)
 	{
-		close(data->exec->pipes[i][1]);
-		close(data->exec->pipes[i][0]);
-		close_files(data->exec->cmds[i]->infiles_fd);
-		close_files(data->exec->cmds[i]->outfiles_fd);
-		i++;
-	}
-	// close(1);
-	close(0);
-}
-
-static void	close_files(int *files)
-{
-	int	i;
-
-	i = 0;
-	if (files)
-	{
-		while (files[i])
-		{
-			if (files[i] != -1)
-				close (files[i]);
-			i++;
-		}
+		ft_putstr_fd("Quit (core dumped)\n", 1);
+		if (g_aux_data->exec)
+			g_aux_data->exec->need_interrupt = 1;
 	}
 }
