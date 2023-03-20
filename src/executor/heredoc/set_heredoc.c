@@ -18,8 +18,6 @@ static int	alloc_individual_heredoc_pipes(t_cmd *cmd);
 
 int	set_heredoc(t_data *data)
 {
-	
-	// heredoc_signals_handling(data);
 	alloc_heredoc_pipes(data);
 	if (!heredoc_cmd_loop(data))
 		return (0);
@@ -52,7 +50,7 @@ static int	alloc_individual_heredoc_pipes(t_cmd *cmd)
 
 	size = 0;
 	if (!cmd->infiles)
-		return (0);
+		return (1);
 	while (cmd->infiles[size])
 		size++;
 	cmd->heredocs_pipes = ft_calloc(size + 1, sizeof(int *));
@@ -67,7 +65,7 @@ static int	setup_individual_heredoc_pipes(t_cmd *cmd)
 
 	doc = 0;
 	if (!cmd->heredocs_pipes)
-		return (0);
+		return (1);
 	while (cmd->heredocs_pipes[doc])
 	{
 		cmd->heredocs_pipes[doc] = ft_calloc(2, sizeof(int));
