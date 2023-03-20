@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/16 11:18:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:51:40 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	set_infiles(t_cmd *cmd, t_data *data)
 
 	i = 0;
 	if (!cmd->infiles)
-		return (0);
+		return (1);
 	while (cmd->infiles[i])
 	{
 		if (cmd->inputs_modes[i] == 0)
@@ -59,7 +59,7 @@ static int	set_outfiles(t_cmd *cmd, t_data *data)
 
 	i = 0;
 	if (!cmd->outfiles)
-		return (0);
+		return (1);
 	while (cmd->outfiles[i])
 	{
 		if (cmd->outputs_modes[i] == 0)
