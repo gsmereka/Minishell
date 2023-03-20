@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 12:32:39 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:28:55 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_data
 	char	*user_input;
 	char	*error_msg;
 	int		exit_status;
+	int		lines;
 }	t_data;
 
 #endif

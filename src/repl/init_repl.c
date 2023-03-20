@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 18:19:53 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:29:52 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	get_user_input(t_data *data);
 static int	is_valid(char *user_input);
-static void	save_input_on_history(char *user_input);
+static void	save_input_on_history(char *user_input, t_data *data);
 
 void	init_repl(t_data *data)
 {
@@ -25,7 +25,7 @@ void	init_repl(t_data *data)
 		get_user_input(data);
 		if (!is_valid(data->user_input))
 			break ;
-		save_input_on_history(data->user_input);
+		save_input_on_history(data->user_input, data);
 		init_lexer(data);
 		init_expander(data); //se o usuário mandou alguma var de ambiente  --- $
 		// init_parser(data);
@@ -36,7 +36,7 @@ void	init_repl(t_data *data)
 	}
 }
 
-static void	save_input_on_history(char *user_input)
+static void	save_input_on_history(char *user_input, t_data *data)
 {
 	int	i;
 
@@ -44,7 +44,10 @@ static void	save_input_on_history(char *user_input)
 	while (user_input[i] == '\t' || user_input[i] == ' ')
 		i++;
 	if (user_input[i] != '\0')
-		add_history(user_input); //p n salvar historico vazio
+	{
+		data->lines++;
+		add_history(user_input);
+	}
 }
 
 static int	is_valid(char *user_input)

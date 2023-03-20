@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 21:36:18 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 18:25:49 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:28:29 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	heredoc_interrupt(char *input, char *limiter, t_data *data)
 		return (0);
 	if (data->exec->need_interrupt)
 		return (0);
-	line = ft_strdup("113");
+	line = ft_itoa(data->lines);
 	msg = ft_strjoin("\nbash: warning: here-document "\
 		"at line ", line);
 	free(line);
