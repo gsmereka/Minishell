@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/20 12:33:32 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/20 18:09:37 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,6 @@ SRC 	=	src/main.c \
 			src/parser/init_parser.c \
 			src/executor/execute_built_in.c \
 			src/executor/init_executor.c \
-			src/executor/set_processes.c \
-			src/executor/execute.c \
-			src/executor/set_files.c \
-			src/executor/redirect.c \
 			src/executor/get_commands_info/commands_info_utils.c \
 			src/executor/get_commands_info/format_cmd.c \
 			src/executor/get_commands_info/get_commands_info.c \
@@ -46,6 +42,10 @@ SRC 	=	src/main.c \
 			src/executor/heredoc/heredoc_cmd_loop.c \
 			src/executor/heredoc/heredoc_interrupt.c \
 			src/executor/heredoc/close_heredoc_pipes.c \
+			src/executor/set_processes/set_processes.c \
+			src/executor/set_processes/execute.c \
+			src/executor/set_processes/set_files.c \
+			src/executor/set_processes/redirect.c \
 			src/built_in/ft_cd.c \
 			src/built_in/ft_cd_error_msg.c \
 			src/built_in/ft_echo.c \
@@ -112,6 +112,7 @@ create_obj_dir:
 	@mkdir -p $(OBJ_DIR)/src/built_in
 	@mkdir -p $(OBJ_DIR)/src/executor/get_commands_info
 	@mkdir -p $(OBJ_DIR)/src/executor/heredoc
+	@mkdir -p $(OBJ_DIR)/src/executor/set_processes
 	@mkdir -p $(OBJ_DIR)/src/signals
 
 ## FULL CLEAN ALL OBJECTS AND TESTERS

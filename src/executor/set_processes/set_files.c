@@ -6,11 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 17:25:15 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:07:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../../headers/minishell.h"
 
 static int	set_infiles(t_cmd *cmd, t_data *data);
 static int	set_outfiles(t_cmd *cmd, t_data *data);
