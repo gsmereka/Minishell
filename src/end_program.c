@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 20:52:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:49:00 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	end_program(t_data *data) //comentarios em portugues
 	int	exit_status;
 
 	exit_status = data->exit_status;
+	close_all_fds(data);
 	free_data(data);
 	exit(exit_status);
 }
@@ -32,6 +33,7 @@ void	exit_error(int error_value, char *msg, t_data *data)
 {
 	write(2, msg, ft_strlen(msg));
 	write(2, "\n", 1);
+	close_all_fds(data);
 	free_data(data);
 	exit(error_value);
 }

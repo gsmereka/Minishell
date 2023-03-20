@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 12:35:51 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:53:09 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,12 @@ static void	close_pipes(int cmd_index, t_data *data)
 	if (cmd_index > 0)
 	{
 		close(data->exec->pipes[cmd_index - 1][0]);
-		// data->exec->pipes[cmd_index - 1][0] = -1;
 	}
 	if (cmd_index == data->exec->cmds_amount - 1)
 	{
 		close(data->exec->pipes[cmd_index][0]);
-		// data->exec->pipes[cmd_index][0] = -1;
 	}
 	close(data->exec->pipes[cmd_index][1]);
-	// data->exec->pipes[cmd_index][1] = -1;
 }
 
 static void	close_files(int *files)
