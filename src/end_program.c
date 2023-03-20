@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 11:49:00 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:19:53 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	free_data(t_data *data)
 	if (data->tokens)
 		token_clear(&data->tokens);
 	if (data->exec)
-		clear_commands(data);
+		clear_execution_data(data);
 	rl_clear_history();
 }
 

@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/20 18:09:37 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/20 18:20:28 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,14 +30,14 @@ SRC 	=	src/main.c \
 			src/parser/init_parser.c \
 			src/executor/execute_built_in.c \
 			src/executor/init_executor.c \
-			src/executor/get_commands_info/commands_info_utils.c \
-			src/executor/get_commands_info/format_cmd.c \
-			src/executor/get_commands_info/get_commands_info.c \
-			src/executor/get_commands_info/get_inputs.c \
-			src/executor/get_commands_info/get_outputs.c \
-			src/executor/get_commands_info/get_env_paths.c \
-			src/executor/get_commands_info/set_cmds_paths.c \
-			src/executor/get_commands_info/get_next_line_with_free.c \
+			src/executor/get_commands_info/clear_execution_data.c \
+			src/executor/get_commands_info/1_format_cmd.c \
+			src/executor/get_commands_info/0_get_commands_info.c \
+			src/executor/get_commands_info/2_get_inputs.c \
+			src/executor/get_commands_info/3_get_outputs.c \
+			src/executor/get_commands_info/4_get_env_paths.c \
+			src/executor/get_commands_info/5_set_cmds_paths.c \
+			src/executor/heredoc/get_next_line_with_free.c \
 			src/executor/heredoc/set_heredoc.c \
 			src/executor/heredoc/heredoc_cmd_loop.c \
 			src/executor/heredoc/heredoc_interrupt.c \

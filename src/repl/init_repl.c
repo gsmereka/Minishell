@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 12:17:07 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:19:53 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_repl(t_data *data)
 		init_expander(data); //se o usuário mandou alguma var de ambiente  --- $
 		// init_parser(data);
 		init_executor(data);
-		clear_commands(data);
+		clear_execution_data(data);
 		token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
 		free(data->user_input);
 	}

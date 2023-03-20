@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_cmd.c                                       :+:      :+:    :+:   */
+/*   1_format_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:11:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/16 16:49:06 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:13:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-//  < arquivo_1 > arquivo_2 ---- Podem existir Comandos Que não existem.
 static t_token	*find_actual_command(t_token *token);
 static void		set_cmd_composition(t_token *token, t_cmd *cmd);
 static int		count_args(t_token *token);

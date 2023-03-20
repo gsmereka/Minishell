@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands_info_utils.c                              :+:      :+:    :+:   */
+/*   clear_execution_data.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 21:50:32 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 11:30:12 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:19:53 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	clear_cmd(t_cmd *cmd);
 static void	free_intern_cmds(t_data *data);
 static void	free_intern_pipes(t_data *data);
 
-void	clear_commands(t_data *data)
+void	clear_execution_data(t_data *data)
 {
 	if (!data->exec)
 		return ;

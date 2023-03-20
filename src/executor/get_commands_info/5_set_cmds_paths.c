@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:18:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 21:51:32 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:15:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	set_cmds_paths(t_data *data)
 			free(data->exec->cmds[cmd]->name);
 			data->exec->cmds[cmd]->name = cmd_path;
 		}
-		// ft_printf("caminho do programa: %s\n", data->exec->cmds[cmd]->name);
 		cmd++;
 	}
 }
