@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:49:58 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/21 14:59:56 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:06:15 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	redirect_input(int cmd_index, t_data *data)
 		if (last_infile != -1)
 			dup2(last_infile, STDIN_FILENO);
 		else
+		{
+			att_exit_status(1, data);
 			return (0);
+		}
 	}
 	else
 	{
@@ -52,7 +55,10 @@ int	redirect_output(int cmd_index, t_data *data)
 		if (last_outfile != -1)
 			dup2(last_outfile, STDOUT_FILENO);
 		else
+		{
+			att_exit_status(1, data);
 			return (0);
+		}
 	}
 	else
 	{
