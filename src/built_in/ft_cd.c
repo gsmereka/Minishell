@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:43:52 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		att_envp_dictionary(char *save_pwd, t_data *data);
 static int		validate_dir(char *dir, t_data *data);
-static char		*get_pwd(int buffer_size);
+static char		*get_pwd(int buffer_size, t_data *data);
 static int		buffer_size_overflow(int buffer_size);
 
 void	ft_cd(char **args, t_data *data)
@@ -26,19 +26,19 @@ void	ft_cd(char **args, t_data *data)
 		ft_cd_error_msg(1, NULL, data);
 	if (!args[1])
 		return ;
-	if (!validate_dir(args[1], data)) // verifica se o diretório existe
+	if (!validate_dir(args[1], data))
 		return ;
-	save_pwd = get_pwd(1024);
-	dir_changed = chdir(args[1]); // tenta alterar o diretório atual
+	save_pwd = get_pwd(1024, data);
+	dir_changed = chdir(args[1]);
 	if (dir_changed != -1)
 	{
 		att_envp_dictionary(save_pwd, data);
-		att_virtual_envp(data); // Tambem atualiza a virtual_envp
+		att_virtual_envp(data);
 	}
 	free(save_pwd);
 }
 
-static int	validate_dir(char *dir, t_data *data) //falta verificar permissões
+static int	validate_dir(char *dir, t_data *data)
 {
 	struct stat	dir_info;
 
@@ -57,7 +57,7 @@ static int	validate_dir(char *dir, t_data *data) //falta verificar permissões
 	return (1);
 }
 
-static char	*get_pwd(int buffer_size)
+static char	*get_pwd(int buffer_size, t_data *data)
 {
 	char	*pwd;
 
@@ -65,7 +65,14 @@ static char	*get_pwd(int buffer_size)
 	if (!pwd)
 	{
 		if (!buffer_size_overflow(buffer_size))
-			pwd = get_pwd(buffer_size * 2);
+			pwd = get_pwd(buffer_size * 2, data);
+		else
+		{
+			data->error_msg = "path too long\n";
+			write(2, data->error_msg, ft_strlen(data->error_msg));
+			att_exit_status(1, data);
+			return (NULL);
+		}
 	}
 	return (pwd);
 }
@@ -88,7 +95,7 @@ static void	att_envp_dictionary(char *save_pwd, t_data *data)
 	if (pwd)
 	{
 		free(pwd->value);
-		pwd->value = get_pwd(1024);
+		pwd->value = get_pwd(1024, data);
 	}
 	if (oldpwd)
 	{
