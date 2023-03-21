@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:44 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:08:41 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_env(char **args, t_data *data)
 	(void)args;
 	i = 0;
 	envp = data->virtual_envp;
+	if (!envp)
+		return ;
 	while (envp[i])
 	{
 		if (envp[i][0] == '?' && envp[i][1] == '=')
