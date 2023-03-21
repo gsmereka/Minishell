@@ -6,36 +6,34 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 20:27:57 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:29:50 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	ft_cd_error_msg(int	error, char *name, t_data *data)
+void	ft_cd_error_msg(int error, char *name, t_data *data)
 {
 	char		*error_msg;
 
 	if (error == 1)
 	{
-		error_msg = "bash: cd: too many arguments\n"; //incluir nome
+		error_msg = "bash: cd: too many arguments\n";
 		write(2, error_msg, ft_strlen(error_msg));
-		data->exit_status = 1;
-		return ;
 	}
-	if (error == 2)
+	else if (error == 2)
 	{
-		error_msg = "bash: cd: Not a directory\n"; //incluir nome
+		error_msg = ft_strjoin("bash: cd: ", name);
 		write(2, error_msg, ft_strlen(error_msg));
-		data->exit_status = 1;
-		return ;
+		error_msg = ": Not a directory\n";
+		write(2, error_msg, ft_strlen(error_msg));
 	}
-	if (error == 3)
+	else if (error == 3)
 	{
-		// bash: cd: Makefile: Not a directory
-		error_msg = "bash: cd: Permission denied\n"; //incluir nome
+		error_msg = ft_strjoin("bash: cd: ", name);
 		write(2, error_msg, ft_strlen(error_msg));
-		data->exit_status = 1;
-		return ;
+		error_msg = ": Permission denied\n";
+		write(2, error_msg, ft_strlen(error_msg));
 	}
+	att_exit_status(1, data);
 }
