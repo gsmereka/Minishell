@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_interrupt.c                                :+:      :+:    :+:   */
+/*   heredoc_delimitation.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 21:36:18 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 18:28:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:37:09 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-int	heredoc_interrupt(char *input, char *limiter, t_data *data)
+int	heredoc_eof_delimitation(char *input, char *limiter, t_data *data)
 {
 	char	*msg;
 	char	*line;
