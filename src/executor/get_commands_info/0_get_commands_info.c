@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_commands_info.c                                :+:      :+:    :+:   */
+/*   0_get_commands_info.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:29:33 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 18:12:32 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:14:09 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static t_token	*find_next_command(t_token *token)
 	{
 		if (ft_strncmp(token->content, "|", ft_strlen(token->content)) == 0)
 		{
-			return(token->next);
+			return (token->next);
 		}
 		token = token->next;
 	}

@@ -15,8 +15,14 @@
 void	get_env_paths(t_data *data)
 {
 	char	*path_list;
+	t_env	*env_paths;
 
-	// FALTA TRAATAR QUANDO ALGUEM DA UNSET NO PATH
+	env_paths = find_env("PATH", data);
+	if (!env_paths)
+	{
+		data->exec->env_paths = NULL;
+		return ;
+	}
 	path_list = find_env("PATH", data)->value;
 	data->exec->env_paths = ft_split(path_list, ':');
 	if (!data->exec->env_paths)
