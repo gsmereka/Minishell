@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:19:11 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 22:27:49 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:28:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,19 @@ int	close_all_fds(t_data *data)
 	i = 0;
 	if (!data->exec)
 		return (0);
+	if (!data->exec->pipes)
+		return (0);
 	while (data->exec->pipes[i])
 	{
 		if (data->exec->pipes[i][1] != -1)
 			close(data->exec->pipes[i][1]);
 		if (data->exec->pipes[i][0] != -1)
 			close(data->exec->pipes[i][0]);
-		close_files_fds(data->exec->cmds[i]->infiles_fd);
-		close_files_fds(data->exec->cmds[i]->outfiles_fd);
+		if (data->exec->cmds)
+		{
+			close_files_fds(data->exec->cmds[i]->infiles_fd);
+			close_files_fds(data->exec->cmds[i]->outfiles_fd);
+		}
 		i++;
 	}
 	return (0);

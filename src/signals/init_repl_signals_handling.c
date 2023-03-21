@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 12:15:30 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 21:02:31 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:32:04 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	handle_ctrl_c(int signal)
 {
 	if (signal != SIGINT)
 		return ;
+	att_envp_exitstatus_var(130, g_aux_data);
 	ft_putchar_fd('\n', 0);
 	rl_replace_line("", 0);
 	rl_on_new_line();

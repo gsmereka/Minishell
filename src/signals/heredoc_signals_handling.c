@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:47 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 21:02:46 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:31:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	handle_ctrl_c(int signal)
 	{
 		if (!g_aux_data->exec)
 			return ;
+		att_envp_exitstatus_var(130, g_aux_data);
 		ft_putstr_fd("\n", 1);
 		get_next_line_with_free(0, 1);
 		close_heredoc_pipes(g_aux_data);
