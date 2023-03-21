@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/21 14:44:26 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:11:49 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ char	*get_next_line_with_free(int fd, int stop);
 
 // close_fds
 void	close_child_pipes_fds(int cmd_index, t_data *data);
+void	close_all_child_files_fds(int cmd_index, t_data *data);
 void	close_parent_pipes_fds(int cmd, t_data *data);
 void	close_files_fds(int *files);
 int		close_all_fds(t_data *data);
