@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 22:24:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:46:37 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static void	free_data(t_data *data);
 
-// Saida normal do minishell, atraves do ctrl + D ou do comando exit.
-void	end_program(t_data *data) //comentarios em portugues
+void	end_program(t_data *data)
 {
 	int	exit_status;
 
@@ -25,8 +24,6 @@ void	end_program(t_data *data) //comentarios em portugues
 	exit(exit_status);
 }
 
-// Saída pra quando houver algum erro interno,
-// como falha na alocação de memorioa e etc...
 void	exit_error(int error_value, char *msg, t_data *data)
 {
 	write(2, msg, ft_strlen(msg));

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 16:43:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 21:50:37 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:45:51 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	att_virtual_envp(t_data *data)
 	size = calculate_envp_size(data);
 	data->virtual_envp = ft_calloc(size + 1, sizeof(char *));
 	if (!data->virtual_envp)
-		exit_error(12, "Fail at alloc virtual envp memory", data);
+		exit_error(12, "fail at alloc virtual envp memory", data);
 	fill_virtual_envp(data);
 }
 
@@ -60,7 +60,7 @@ static void	fill_virtual_envp(t_data *data)
 			data->virtual_envp[i]
 				= ft_strjoin_with_free(data->virtual_envp[i], dict_envp->value);
 			if (!data->virtual_envp[i])
-				exit_error(12, "Fail at fill virtual envp memory", data);
+				exit_error(12, "fail at fill virtual envp memory", data);
 			i++;
 		}
 		dict_envp = dict_envp->next;
