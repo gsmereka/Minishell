@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:31:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 22:05:15 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:17:03 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	att_envp_exitstatus_var(int exit_status, t_data *data)
 {
 	t_env	*exit_status_var;
 
+	data->exit_status = exit_status;
 	exit_status_var = find_env("?", data);
 	if (exit_status_var)
 		att_variable(exit_status, exit_status_var, data);

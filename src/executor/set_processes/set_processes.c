@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 18:07:54 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:25:29 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 static void	set_pipes(int cmd, t_data *data);
 static void	set_fork(int cmd, t_data *data);
-static void	close_pipes(int cmd, t_data *data);
-static void	close_files(int *files);
-static int	close_all_fds(t_data *data);
+
 
 int	set_processes(t_data *data)
 {
@@ -66,60 +64,8 @@ static void	set_fork(int cmd, t_data *data)
 		waitpid(data->exec->pid[cmd],
 			&data->exec->status[cmd], WUNTRACED);
 			// &data->exec->status[cmd], WNOHANG | WUNTRACED);
-		close_files(data->exec->cmds[cmd]->infiles_fd);
-		close_files(data->exec->cmds[cmd]->outfiles_fd);
-		close_pipes(cmd, data);
+		close_files_fds(data->exec->cmds[cmd]->infiles_fd);
+		close_files_fds(data->exec->cmds[cmd]->outfiles_fd);
+		close_parent_pipes_fds(cmd, data);
 	}
-}
-
-static void	close_pipes(int cmd_index, t_data *data)
-{
-	t_cmd	*cmd;
-
-	cmd = data->exec->cmds[cmd_index];
-	if (cmd_index > 0)
-	{
-		close(data->exec->pipes[cmd_index - 1][0]);
-	}
-	if (cmd_index == data->exec->cmds_amount - 1)
-	{
-		close(data->exec->pipes[cmd_index][0]);
-	}
-	close(data->exec->pipes[cmd_index][1]);
-}
-
-static void	close_files(int *files)
-{
-	int	i;
-
-	i = 0;
-	if (files)
-	{
-		while (files[i])
-		{
-			if (files[i] != -1)
-				close (files[i]);
-			i++;
-		}
-	}
-}
-
-static int	close_all_fds(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	if (!data->exec)
-		return (0);
-	while (data->exec->pipes[i])
-	{
-		if (data->exec->pipes[i][1] != -1)
-			close(data->exec->pipes[i][1]);
-		if (data->exec->pipes[i][0] != -1)
-			close(data->exec->pipes[i][0]);
-		close_files(data->exec->cmds[i]->infiles_fd);
-		close_files(data->exec->cmds[i]->outfiles_fd);
-		i++;
-	}
-	return (0);
 }
