@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/20 18:19:53 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:05:48 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	set_initial_envp(char **envp, t_data *data);
 void	dict_add_back(t_env **dict_env, char *key, char *value);
 void	dictclear(t_env *envp);
 void	att_virtual_envp(t_data *data);
-void	att_envp_exitstatus_var(t_data *data);
+void	att_envp_exitstatus_var(int exit_status, t_data *data);
 t_env	*find_env(char *key, t_data *data);
 
 // expander

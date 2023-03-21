@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:18:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 21:16:40 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:07:04 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*test_path(int cmd, t_data *data)
 	if (!data->exec->cmds[cmd]->name)
 		return (NULL);
 	if (!data->exec->env_paths)
-		return (!data->exec->cmds[cmd]->name);
+		return (NULL);
 	while (data->exec->env_paths[i])
 	{
 		final_path = ft_strdup(data->exec->env_paths[i]);
