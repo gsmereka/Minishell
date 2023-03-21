@@ -6,13 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:49:58 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 18:07:31 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:59:56 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-static int last_fd(char **files, int *files_fd);
+static int	last_fd(char **files, int *files_fd);
 
 int	redirect_input(int cmd_index, t_data *data)
 {
@@ -25,7 +25,7 @@ int	redirect_input(int cmd_index, t_data *data)
 		if (cmd_index > 0)
 			close(data->exec->pipes[cmd_index - 1][0]);
 		last_infile = last_fd(cmd->infiles,
-			cmd->infiles_fd);
+				cmd->infiles_fd);
 		if (last_infile != -1)
 			dup2(last_infile, STDIN_FILENO);
 		else
@@ -48,7 +48,7 @@ int	redirect_output(int cmd_index, t_data *data)
 	if (cmd->outfiles)
 	{
 		last_outfile = last_fd(cmd->outfiles,
-			cmd->outfiles_fd);
+				cmd->outfiles_fd);
 		if (last_outfile != -1)
 			dup2(last_outfile, STDOUT_FILENO);
 		else
@@ -62,7 +62,7 @@ int	redirect_output(int cmd_index, t_data *data)
 	return (1);
 }
 
-static int last_fd(char **files, int *files_fd)
+static int	last_fd(char **files, int *files_fd)
 {
 	int	i;
 

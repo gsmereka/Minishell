@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/21 13:34:01 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:44:26 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ int		is_reserved(char *word, char *reserved_word);
 void	init_executor(t_data *data);
 void	clear_execution_data(t_data *data);
 void	execute_built_in(t_cmd *cmd, t_data *data);
-void	get_commands_info(t_data *data);
+int		get_commands_info(t_data *data);
 void	format_cmd(t_token *token, t_cmd *cmd, t_data *data);
 void	get_outputs(t_token *token, t_cmd *cmd, t_data *data);
 void	get_inputs(t_token *token, t_cmd *cmd, t_data *data);
-void	get_env_paths(t_data *data);
-void	set_cmds_paths(t_data *data);
+int		get_env_paths(t_data *data);
+int		set_cmds_paths(t_data *data);
 int		set_processes(t_data *data);
 void	set_files(t_cmd *cmd, t_data *data);
 int		redirect_input(int cmd, t_data *data);
@@ -78,6 +78,7 @@ void	execute(t_cmd *cmd, t_data *data);
 char	*get_next_line_with_free(int fd, int stop);
 
 // close_fds
+void	close_child_pipes_fds(int cmd_index, t_data *data);
 void	close_parent_pipes_fds(int cmd, t_data *data);
 void	close_files_fds(int *files);
 int		close_all_fds(t_data *data);

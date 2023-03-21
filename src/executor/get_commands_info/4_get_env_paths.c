@@ -12,7 +12,7 @@
 
 #include "../../../headers/minishell.h"
 
-void	get_env_paths(t_data *data)
+int	get_env_paths(t_data *data)
 {
 	char	*path_list;
 	t_env	*env_paths;
@@ -21,10 +21,15 @@ void	get_env_paths(t_data *data)
 	if (!env_paths)
 	{
 		data->exec->env_paths = NULL;
-		return ;
+		return (1);
 	}
 	path_list = find_env("PATH", data)->value;
 	data->exec->env_paths = ft_split(path_list, ':');
 	if (!data->exec->env_paths)
-		exit_error(2, "Environment pointer have not a PATH", data);
+	{
+		att_exit_status(12, data);
+		ft_putstr_fd("Fail at split paths", 2);
+		return (0);
+	}
+	return (1);
 }

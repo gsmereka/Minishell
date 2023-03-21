@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:19:11 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/21 13:28:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:40:48 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,22 @@ int	close_all_fds(t_data *data)
 }
 
 void	close_parent_pipes_fds(int cmd_index, t_data *data)
+{
+	t_cmd	*cmd;
+
+	cmd = data->exec->cmds[cmd_index];
+	if (cmd_index > 0)
+	{
+		close(data->exec->pipes[cmd_index - 1][0]);
+	}
+	if (cmd_index == data->exec->cmds_amount - 1)
+	{
+		close(data->exec->pipes[cmd_index][0]);
+	}
+	close(data->exec->pipes[cmd_index][1]);
+}
+
+void	close_child_pipes_fds(int cmd_index, t_data *data)
 {
 	t_cmd	*cmd;
 

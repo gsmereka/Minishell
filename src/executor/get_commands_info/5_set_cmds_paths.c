@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:18:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 22:07:04 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:04:50 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*test_path(int cmd, t_data *data);
 
-void	set_cmds_paths(t_data *data)
+int	set_cmds_paths(t_data *data)
 {
 	int		cmd;
 	char	*cmd_path;
@@ -30,6 +30,7 @@ void	set_cmds_paths(t_data *data)
 		}
 		cmd++;
 	}
+	return (1);
 }
 
 static char	*test_path(int cmd, t_data *data)
@@ -44,13 +45,15 @@ static char	*test_path(int cmd, t_data *data)
 		return (NULL);
 	while (data->exec->env_paths[i])
 	{
-		final_path = ft_strdup(data->exec->env_paths[i]);
-		final_path = ft_strjoin_with_free(final_path, "/");
+		final_path = ft_strjoin(data->exec->env_paths[i], "/");
 		final_path = ft_strjoin_with_free
 			(final_path, data->exec->cmds[cmd]->name);
 		if (!final_path)
-			exit_error(12,
-				"Failed to allocate memory for test a command path", data);
+		{
+			att_exit_status(12, data);
+			ft_putstr_fd("failed to allocate memory for command path", 2);
+			return (NULL);
+		}
 		if (access(final_path, X_OK) == 0)
 			return (final_path);
 		free(final_path);

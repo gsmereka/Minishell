@@ -20,6 +20,8 @@ void	att_exit_status(int exit_status, t_data *data)
 {
 	t_env	*exit_status_var;
 
+	if (data->exit_status == exit_status && exit_status != 0)
+		return ;
 	data->exit_status = exit_status;
 	exit_status_var = find_env("?", data);
 	if (exit_status_var)

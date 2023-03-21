@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:29:33 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 21:14:09 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:07:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,44 @@
 
 static t_token	*find_next_command(t_token *token);
 static int		count_cmds(t_data *data);
-static void		init_execution_structure(t_data *data);
+static int		init_execution_structure(t_data *data);
 static void		set_cmd_tokens(t_data *data);
 
-void	get_commands_info(t_data *data)
+int	get_commands_info(t_data *data)
 {
-	init_execution_structure(data);
+	if (!init_execution_structure(data))
+	{
+		att_exit_status(12, data);
+		return (0);
+	}
 	set_cmd_tokens(data);
-	get_env_paths(data);
+	if (!get_env_paths(data))
+		return (0);
 	set_cmds_paths(data);
+	return (1);
 }
 
-static void	init_execution_structure(t_data *data)
+static int	init_execution_structure(t_data *data)
 {
 	int	i;
 
 	data->exec = ft_calloc(1, sizeof(t_exec));
+	if (!data->exec)
+		return (0);
 	data->exec->cmds_amount = count_cmds(data);
 	data->exec->cmds = ft_calloc(data->exec->cmds_amount + 1, sizeof(t_cmd));
 	data->exec->pipes = ft_calloc(data->exec->cmds_amount + 1, sizeof(int *));
+	if (!data->exec->cmds || !data->exec->pipes)
+		return (0);
 	i = 0;
 	while (i < data->exec->cmds_amount)
 	{
 		data->exec->pipes[i] = ft_calloc(2, sizeof(int));
+		if (!data->exec->pipes[i])
+			return (0);
 		i++;
 	}
+	return (1);
 }
 
 static int	count_cmds(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 22:25:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:58:06 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 static void	set_pipes(int cmd, t_data *data);
 static void	set_fork(int cmd, t_data *data);
-
+static void	wait_pids(t_data *data);
 
 int	set_processes(t_data *data)
 {
 	int	cmd;
+	int	exit_status;
 
 	cmd = 0;
 	data->exec->pid = ft_calloc(data->exec->cmds_amount + 1, sizeof(int));
@@ -32,6 +33,7 @@ int	set_processes(t_data *data)
 		set_fork(cmd, data);
 		cmd++;
 	}
+	wait_pids(data);
 	close_all_fds(data);
 	return (0);
 }
@@ -56,16 +58,30 @@ static void	set_fork(int cmd, t_data *data)
 			end_program(data);
 		if (!redirect_output(cmd, data))
 			end_program(data);
+		close_child_pipes_fds(cmd, data);
 		execute(data->exec->cmds[cmd], data);
 	}
 	else
 	{
 		data->exec->pid[cmd] = pid;
-		waitpid(data->exec->pid[cmd],
-			&data->exec->status[cmd], WUNTRACED);
-			// &data->exec->status[cmd], WNOHANG | WUNTRACED);
 		close_files_fds(data->exec->cmds[cmd]->infiles_fd);
 		close_files_fds(data->exec->cmds[cmd]->outfiles_fd);
 		close_parent_pipes_fds(cmd, data);
 	}
+}
+
+static void	wait_pids(t_data *data)
+{
+	int	cmd;
+	int	exit_status;
+
+	cmd = 0;
+	while (cmd < data->exec->cmds_amount)
+	{
+		waitpid(data->exec->pid[cmd],
+			&data->exec->status[cmd], WUNTRACED);
+		cmd++;
+	}
+	exit_status = WEXITSTATUS(data->exec->status[cmd - 1]);
+	att_exit_status(exit_status, data);
 }
