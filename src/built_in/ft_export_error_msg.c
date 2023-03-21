@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 20:29:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:25:06 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void	ft_export_error_msg(int error, char *name, t_data *data)
 
 	if (error == 1)
 	{
-		error_msg = "bash: export: `1=9': not a valid identifier\n";
+		error_msg = ft_strjoin("bash: export: `", name);
 		write(2, error_msg, ft_strlen(error_msg));
-		data->exit_status = 1;
+		free(error_msg);
+		error_msg = "': not a valid identifier\n";
+		write(2, error_msg, ft_strlen(error_msg));
+		att_exit_status(1, data);
 		return ;
 	}
-	ft_printf("OK\n");
 }
