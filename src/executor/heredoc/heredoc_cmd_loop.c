@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:50:23 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 13:15:31 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:05:45 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	heredoc_cmd_loop(t_data *data)
 
 	cmd_index = 0;
 	cmd = data->exec->cmds;
-	heredoc_signals_handling(data);
 	while (cmd_index < data->exec->cmds_amount)
 	{
 		if (!heredoc_infiles_loop(cmd[cmd_index], data))

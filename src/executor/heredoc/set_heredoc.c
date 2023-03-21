@@ -20,6 +20,7 @@ int	set_heredoc(t_data *data)
 {
 	if (!alloc_heredoc_pipes(data))
 		return (0);
+	heredoc_signals_handling(data);
 	if (!heredoc_cmd_loop(data))
 		return (0);
 	return (1);
