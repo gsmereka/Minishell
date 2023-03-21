@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/20 22:37:30 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/21 13:34:01 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC 	=	src/main.c \
 			src/envp/find_env.c \
 			src/envp/set_initial_envp.c \
 			src/envp/att_virtual_envp.c \
-			src/envp/att_envp_exitstatus_var.c \
+			src/envp/att_exit_status.c \
 			src/expander/init_expander.c \
 			src/lexer/init_lexer.c \
 			src/lexer/token_utils.c \

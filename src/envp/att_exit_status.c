@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   att_envp_exitstatus_var.c                          :+:      :+:    :+:   */
+/*   att_exit_status.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,7 +16,7 @@ static t_env	*is_repeated(char *str, t_data *data);
 static void		add_new_environment_variable(int exit_status, t_data *data);
 static void		att_variable(int exit_status, t_env *new_var, t_data *data);
 
-void	att_envp_exitstatus_var(int exit_status, t_data *data)
+void	att_exit_status(int exit_status, t_data *data)
 {
 	t_env	*exit_status_var;
 

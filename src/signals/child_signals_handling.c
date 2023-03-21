@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:51 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/21 13:30:51 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:34:01 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	handle_ctrl_c(int signal)
 {
 	if (signal == SIGINT)
 	{
-		att_envp_exitstatus_var(130, g_aux_data);
+		att_exit_status(130, g_aux_data);
 		ft_putstr_fd("\n", 1);
 		if (g_aux_data->exec)
 			g_aux_data->exec->need_interrupt = 1;
@@ -46,7 +46,7 @@ static void	handle_backslash(int signal)
 {
 	if (signal == SIGQUIT)
 	{
-		att_envp_exitstatus_var(131, g_aux_data);
+		att_exit_status(131, g_aux_data);
 		ft_putstr_fd("Quit\n", 1);
 		if (g_aux_data->exec)
 			g_aux_data->exec->need_interrupt = 1;
