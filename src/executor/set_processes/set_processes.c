@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:04:33 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:23:45 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,12 @@ static void	set_fork(int cmd, t_data *data)
 	else
 	{
 		data->exec->pid[cmd] = pid;
-		close_all_fds(data);
+		close_parent_pipes_fds(cmd, data);
+		close_individual_heredoc_pipes(data->exec->cmds[cmd]);
+		close_files_fds(data->exec->cmds[cmd]->infiles,
+			data->exec->cmds[cmd]->infiles_fd);
+		close_files_fds(data->exec->cmds[cmd]->outfiles,
+			data->exec->cmds[cmd]->outfiles_fd);
 	}
 }
 

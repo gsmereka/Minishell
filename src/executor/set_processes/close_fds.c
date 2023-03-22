@@ -6,11 +6,13 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:19:11 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:11:06 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:22:32 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
+
+static void	close_individual_heredoc_pipes(t_cmd *cmd);
 
 int	close_all_fds(t_data *data)
 {
@@ -46,15 +48,12 @@ void	close_parent_pipes_fds(int cmd_index, t_data *data)
 
 	cmd = data->exec->cmds[cmd_index];
 	if (cmd_index > 0)
-	{
 		close(data->exec->pipes[cmd_index - 1][0]);
-	}
 	if (cmd_index == data->exec->cmds_amount - 1)
-	{
 		close(data->exec->pipes[cmd_index][0]);
-	}
 	close(data->exec->pipes[cmd_index][1]);
 }
+
 
 void	close_files_fds(char **paths, int *files)
 {

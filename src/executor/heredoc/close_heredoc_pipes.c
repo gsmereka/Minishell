@@ -6,13 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:05:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/16 13:37:32 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:22:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
-
-static void	close_individual_heredoc_pipes(t_cmd *cmd);
 
 void	close_heredoc_pipes(t_data *data)
 {
@@ -32,7 +30,7 @@ void	close_heredoc_pipes(t_data *data)
 	}
 }
 
-static void	close_individual_heredoc_pipes(t_cmd *cmd)
+void	close_individual_heredoc_pipes(t_cmd *cmd)
 {
 	int	i;
 

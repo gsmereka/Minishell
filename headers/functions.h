@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/22 15:59:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:24:21 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int		set_heredoc(t_data *data);
 int		heredoc_cmd_loop(t_data *data);
 int		heredoc_eof_delimitation(char *input, char *limiter, t_data *data);
 void	close_heredoc_pipes(t_data *data);
+void	close_individual_heredoc_pipes(t_cmd *cmd);
 
 // built_in
 void	ft_cd(char **args, t_data *data);
