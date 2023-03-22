@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:19:11 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:41:30 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:52:12 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,17 @@ void	close_parent_pipes_fds(int cmd_index, t_data *data)
 
 void	close_cmd_pipes(int cmd_index, t_data *data)
 {
-	t_cmd	*cmd;
+	int	*current_pipe;
+	int	*previous_pipe;
 
-	cmd = data->exec->cmds[cmd_index];
+	current_pipe = data->exec->pipes[cmd_index];
 	if (cmd_index > 0)
-		close(data->exec->pipes[cmd_index - 1][0]);
+		previous_pipe = data->exec->pipes[cmd_index - 1];
+	if (cmd_index > 0)
+		close(previous_pipe[0]);
 	if (cmd_index == data->exec->cmds_amount - 1)
-		close(data->exec->pipes[cmd_index][0]);
-	close(data->exec->pipes[cmd_index][1]);
+		close(current_pipe[0]);
+	close(current_pipe[1]);
 }
 
 void	close_files_fds(char **paths, int *files)

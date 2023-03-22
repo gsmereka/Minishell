@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/22 16:41:26 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/22 16:43:29 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,8 +68,8 @@ LIBFT_A =	./libft/libft.a
 
 HEADERS =	./headers/minishell.h ./headers/functions.h ./headers/structs.h
 
-CCFLAGS =	-g3
-# -Wall -Wextra -Werror 
+CCFLAGS =	-Wall -Wextra -Werror 
+
 READLINE_FLAG	=	-lreadline
 
 RM		=	rm -f

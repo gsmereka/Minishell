@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:12:36 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 11:50:44 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:52:04 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	init_fds(int *fds, int amount);
 static int	count_outputs(t_token *token);
 static void	get_outputs_details(t_token *token, t_cmd *cmd);
 
-void	get_outputs(t_token *token, t_cmd *cmd, t_data *data)
+void	get_outputs(t_token *token, t_cmd *cmd)
 {
 	int	outputs_amount;
 

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:50:23 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 22:36:37 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:54:50 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	heredoc_cmd_loop(t_data *data)
 {
 	t_cmd	**cmd;
 	int		cmd_index;
-	int		fd_index;
 
 	cmd_index = 0;
 	cmd = data->exec->cmds;
@@ -107,8 +106,9 @@ static int	compare_input_with_limiter(char *input, char *limiter, t_data *data)
 	if (!limiter_with_new_line)
 	{
 		free(input);
-		write(2, "Error at simulate heredoc", ft_strlen("Error at simulate heredoc"));
-		// definir erro 12
+		write(2, "error at simulate heredoc",
+			ft_strlen("error at simulate heredoc"));
+		att_exit_status(12, data);
 		return (1);
 	}
 	size = ft_strlen(limiter_with_new_line);

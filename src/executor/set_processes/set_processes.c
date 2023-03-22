@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:34:21 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:55:10 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	wait_pids(t_data *data);
 int	set_processes(t_data *data)
 {
 	int	cmd;
-	int	exit_status;
 
 	cmd = 0;
 	while (cmd < data->exec->cmds_amount)

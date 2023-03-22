@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:12:05 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 11:49:25 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:51:56 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	init_fds(int *fds, int amount);
 static int	count_inputs(t_token *token);
 static void	get_inputs_details(t_token *token, t_cmd *cmd);
 
-void	get_inputs(t_token *token, t_cmd *cmd, t_data *data)
+void	get_inputs(t_token *token, t_cmd *cmd)
 {
 	int	inputs_amount;
 

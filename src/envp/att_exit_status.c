@@ -12,9 +12,8 @@
 
 #include "../../headers/minishell.h"
 
-static t_env	*is_repeated(char *str, t_data *data);
 static void		add_new_environment_variable(int exit_status, t_data *data);
-static void		att_variable(int exit_status, t_env *new_var, t_data *data);
+static void		att_variable(int exit_status, t_env *new_var);
 
 void	att_exit_status(int exit_status, t_data *data)
 {
@@ -25,7 +24,7 @@ void	att_exit_status(int exit_status, t_data *data)
 	data->exit_status = exit_status;
 	exit_status_var = find_env("?", data);
 	if (exit_status_var)
-		att_variable(exit_status, exit_status_var, data);
+		att_variable(exit_status, exit_status_var);
 	if (!exit_status_var)
 		add_new_environment_variable(exit_status, data);
 }
@@ -42,7 +41,7 @@ static void	add_new_environment_variable(int exit_status, t_data *data)
 	free(value);
 }
 
-static void	att_variable(int exit_status, t_env *new_var, t_data *data)
+static void	att_variable(int exit_status, t_env *new_var)
 {
 	if (new_var->value)
 		free(new_var->value);

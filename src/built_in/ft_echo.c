@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/21 20:02:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:55:48 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static void	display_text_line(char **args);
 
 void	ft_echo(char **args, t_data *data)
 {
-	int		n_flag;
+	int	n_flag;
 
+	(void)data;
 	if (!args)
 		return ;
 	n_flag = identify_flags(args);

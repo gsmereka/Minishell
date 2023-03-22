@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:16:23 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/15 15:58:44 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:52:50 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ char	*get_next_line_with_free(int fd, int stop)
 {
 	static char	*save;
 	char		*line;
-	char		*aux_save;
 
 	if (stop)
 	{
@@ -108,7 +107,6 @@ char	*get_next_line_with_free(int fd, int stop)
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
 	save = read_file(fd, save);
-	aux_save = save;
 	if (!save)
 	{
 		free (save);
