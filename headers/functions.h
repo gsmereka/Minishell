@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/22 16:24:21 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:39:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,17 @@ void	execute(t_cmd *cmd, t_data *data);
 char	*get_next_line_with_free(int fd, int stop);
 
 // close_fds
-void	close_child_pipes_fds(int cmd_index, t_data *data);
-void	close_all_child_files_fds(int cmd_index, t_data *data);
+int		close_all_fds(t_data *data);
 void	close_parent_pipes_fds(int cmd, t_data *data);
 void	close_files_fds(char **paths, int *files);;
-int		close_all_fds(t_data *data);
+void	close_cmd_pipes(int cmd_index, t_data *data);
 
 // heredoc
 int		set_heredoc(t_data *data);
 int		heredoc_cmd_loop(t_data *data);
 int		heredoc_eof_delimitation(char *input, char *limiter, t_data *data);
 void	close_heredoc_pipes(t_data *data);
-void	close_individual_heredoc_pipes(t_cmd *cmd);
+void	close_cmd_heredoc_pipes(t_cmd *cmd);
 
 // built_in
 void	ft_cd(char **args, t_data *data);

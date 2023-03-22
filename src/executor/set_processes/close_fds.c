@@ -6,13 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:19:11 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:22:32 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:39:56 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
-
-static void	close_individual_heredoc_pipes(t_cmd *cmd);
 
 int	close_all_fds(t_data *data)
 {
@@ -46,6 +44,21 @@ void	close_parent_pipes_fds(int cmd_index, t_data *data)
 {
 	t_cmd	*cmd;
 
+	if (!data->exec)
+		return ;
+	if (data->exec->cmds)
+		return ;
+	cmd = data->exec->cmds[cmd_index];
+	close_cmd_heredoc_pipes(cmd);
+	close_cmd_pipes(cmd_index, data);
+	close_files_fds(cmd->infiles, cmd->infiles_fd);
+	close_files_fds(cmd->outfiles, cmd->outfiles_fd);
+}
+
+void	close_cmd_pipes(int cmd_index, t_data *data)
+{
+	t_cmd	*cmd;
+
 	cmd = data->exec->cmds[cmd_index];
 	if (cmd_index > 0)
 		close(data->exec->pipes[cmd_index - 1][0]);
@@ -53,7 +66,6 @@ void	close_parent_pipes_fds(int cmd_index, t_data *data)
 		close(data->exec->pipes[cmd_index][0]);
 	close(data->exec->pipes[cmd_index][1]);
 }
-
 
 void	close_files_fds(char **paths, int *files)
 {
