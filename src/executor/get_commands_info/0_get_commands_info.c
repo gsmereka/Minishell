@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:29:33 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:05:39 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:58:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	set_cmd_tokens(t_data *data)
 	while (token)
 	{
 		cmd[cmd_index] = ft_calloc(1, sizeof(t_cmd));
-		format_cmd(token, cmd[cmd_index], data);
+		format_cmd(token, cmd[cmd_index]);
 		token = find_next_command(token);
 		cmd_index++;
 	}
