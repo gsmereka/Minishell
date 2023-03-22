@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:05:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:38:35 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:43:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ void	close_cmd_heredoc_pipes(t_cmd *cmd)
 		{
 			if (!cmd->heredocs_pipes)
 				return ;
-			if (!cmd->heredocs_pipes[i])
-				return ;
-			if (cmd->heredocs_pipes[i][0] != -1)
-				close (cmd->heredocs_pipes[i][0]);
-			if (cmd->heredocs_pipes[i][1] != -1)
-				close (cmd->heredocs_pipes[i][1]);
+			if (cmd->heredocs_pipes[i])
+			{
+				if (cmd->heredocs_pipes[i][0] != -1)
+					close (cmd->heredocs_pipes[i][0]);
+				if (cmd->heredocs_pipes[i][1] != -1)
+					close (cmd->heredocs_pipes[i][1]);
+			}
 		}
 		i++;
 	}

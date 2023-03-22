@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:50:23 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:54:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:44:03 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	init_heredoc_pipe(t_cmd *cmd, int fd_index, t_data *data)
 	cmd->heredocs_pipes[fd_index] = ft_calloc(2, sizeof(int));
 	heredoc_pipe = cmd->heredocs_pipes[fd_index];
 	if (!heredoc_pipe)
-		exit_error(12, "Fail allocating memory for heredoc", data);
+		exit_error(12, "fail allocating memory for heredoc", data);
 	pipe(heredoc_pipe);
 }
 

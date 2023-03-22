@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:11:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:58:26 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:36:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	set_cmd_composition(t_token *token, t_cmd *cmd)
 	index = 0;
 	while (index < args_amount)
 	{
-		cmd->args[index] = ft_strdup(token->content);
+		if (cmd->args)
+			cmd->args[index] = ft_strdup(token->content);
 		token = token->next;
 		index++;
 	}

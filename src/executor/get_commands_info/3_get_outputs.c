@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:12:36 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:52:04 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:40:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,17 @@ void	get_outputs(t_token *token, t_cmd *cmd)
 	get_outputs_details(token, cmd);
 }
 
-// DICIONARIO DE OUTPUT MODES
+// OUTPUT MODES
 // 0 = Normal output '>'
-// 1 = append mode '>>'
+// 1 = Append mode '>>'
 
 static void	get_outputs_details(t_token *token, t_cmd *cmd)
 {
 	int	output;
 
 	output = 0;
+	if (!cmd->outfiles || !cmd->outputs_modes)
+		return ;
 	while (token)
 	{
 		if (is_reserved(">", token))

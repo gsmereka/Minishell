@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:12:05 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:51:56 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:38:37 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,17 @@ void	get_inputs(t_token *token, t_cmd *cmd)
 	get_inputs_details(token, cmd);
 }
 
-// DICIONARIO DE INPUT MODES
+// INPUT MODES
 // 0 = Normal input '<'
-// 1 = here doc '<<'
+// 1 = Heredoc '<<'
 
 static void	get_inputs_details(t_token *token, t_cmd *cmd)
 {
 	int	input;
 
 	input = 0;
+	if (!cmd->infiles || !cmd->inputs_modes)
+		return ;
 	while (token)
 	{
 		if (is_reserved("<", token))
