@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 21:08:51 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/21 13:34:01 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:06:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ static void	handle_backslash(int signal)
 		att_exit_status(131, g_aux_data);
 		ft_putstr_fd("Quit\n", 1);
 		if (g_aux_data->exec)
+		{
+			close_all_fds(g_aux_data);
 			g_aux_data->exec->need_interrupt = 1;
+		}
 	}
 }

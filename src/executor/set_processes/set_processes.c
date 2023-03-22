@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/21 15:12:25 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:04:33 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	set_processes(t_data *data)
 	int	exit_status;
 
 	cmd = 0;
-	data->exec->pid = ft_calloc(data->exec->cmds_amount + 1, sizeof(int));
-	data->exec->status = ft_calloc(data->exec->cmds_amount + 1, sizeof(int));
 	while (cmd < data->exec->cmds_amount)
 	{
 		if (data->exec->need_interrupt)
@@ -34,7 +32,6 @@ int	set_processes(t_data *data)
 		cmd++;
 	}
 	wait_pids(data);
-	close_all_fds(data);
 	return (0);
 }
 
@@ -58,16 +55,13 @@ static void	set_fork(int cmd, t_data *data)
 			end_program(data);
 		if (!redirect_output(cmd, data))
 			end_program(data);
-		close_child_pipes_fds(cmd, data);
-		close_all_child_files_fds(cmd, data);
+		close_all_fds(data);
 		execute(data->exec->cmds[cmd], data);
 	}
 	else
 	{
 		data->exec->pid[cmd] = pid;
-		close_files_fds(data->exec->cmds[cmd]->infiles_fd);
-		close_files_fds(data->exec->cmds[cmd]->outfiles_fd);
-		close_parent_pipes_fds(cmd, data);
+		close_all_fds(data);
 	}
 }
 

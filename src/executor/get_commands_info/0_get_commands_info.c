@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:29:33 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 11:46:33 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:05:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ static int	init_execution_structure(t_data *data)
 	data->exec->cmds_amount = count_cmds(data);
 	data->exec->cmds = ft_calloc(data->exec->cmds_amount + 1, sizeof(t_cmd));
 	data->exec->pipes = ft_calloc(data->exec->cmds_amount + 1, sizeof(int *));
-	if (!data->exec->cmds || !data->exec->pipes)
+	data->exec->pid = ft_calloc(data->exec->cmds_amount + 1, sizeof(int));
+	data->exec->status = ft_calloc(data->exec->cmds_amount + 1, sizeof(int));
+	if (!data->exec->cmds || !data->exec->pipes || !data->exec->pid
+		|| !data->exec->status)
 		return (0);
 	i = 0;
 	while (i < data->exec->cmds_amount)
