@@ -6,11 +6,11 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:19:11 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:39:56 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:41:30 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../headers/minishell.h"
 
 int	close_all_fds(t_data *data)
 {

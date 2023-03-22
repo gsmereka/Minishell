@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/22 11:41:25 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/22 16:41:26 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME 	=	minishell
 SRC 	=	src/main.c \
 			src/end_program.c \
 			src/ft_strjoin_with_free.c \
+			src/close_fds.c \
 			src/signals/init_repl_signals_handling.c \
 			src/signals/heredoc_signals_handling.c \
 			src/signals/child_signals_handling.c \
@@ -47,7 +48,6 @@ SRC 	=	src/main.c \
 			src/executor/set_processes/execute.c \
 			src/executor/set_processes/set_files.c \
 			src/executor/set_processes/redirect.c \
-			src/executor/set_processes/close_fds.c \
 			src/built_in/ft_cd.c \
 			src/built_in/ft_cd_error_msg.c \
 			src/built_in/ft_echo.c \
