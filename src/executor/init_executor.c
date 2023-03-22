@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 17:26:29 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:48:03 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_executor(t_data *data)
 {
 	if (!data->tokens)
 		return ;
+	att_exit_status(0, data);
 	get_commands_info(data);
 	if (!data->exec)
 		return ;

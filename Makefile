@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/21 13:34:01 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/22 11:41:25 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC 	=	src/main.c \
 			src/executor/execute_built_in.c \
 			src/executor/init_executor.c \
 			src/executor/get_commands_info/clear_execution_data.c \
+			src/executor/get_commands_info/is_reserved.c \
 			src/executor/get_commands_info/1_format_cmd.c \
 			src/executor/get_commands_info/0_get_commands_info.c \
 			src/executor/get_commands_info/2_get_inputs.c \

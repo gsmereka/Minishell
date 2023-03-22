@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_outputs.c                                      :+:      :+:    :+:   */
+/*   3_get_outputs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:12:36 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:50:44 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,19 @@ static void	get_outputs_details(t_token *token, t_cmd *cmd)
 	output = 0;
 	while (token)
 	{
-		if (ft_strncmp(token->content, ">", ft_strlen(token->content)) == 0)
+		if (is_reserved(">", token))
 		{
 			cmd->outfiles[output] = ft_strdup(token->next->content);
 			cmd->outputs_modes[output] = 0;
 			output++;
 		}
-		else if (ft_strncmp(token->content,
-				">>", ft_strlen(token->content)) == 0)
+		else if (is_reserved(">>", token))
 		{
 			cmd->outfiles[output] = ft_strdup(token->next->content);
 			cmd->outputs_modes[output] = 1;
 			output++;
 		}
-		else if (ft_strncmp(token->content,
-				"|", ft_strlen(token->content)) == 0)
+		else if (is_reserved("|", token))
 			break ;
 		token = token->next;
 	}
@@ -68,13 +66,11 @@ static int	count_outputs(t_token *token)
 	size = 0;
 	while (token)
 	{
-		if (ft_strncmp(token->content, ">", ft_strlen(token->content)) == 0)
+		if (is_reserved(">", token))
 			size++;
-		else if (ft_strncmp(token->content,
-				">>", ft_strlen(token->content)) == 0)
+		else if (is_reserved(">>", token))
 			size++;
-		else if (ft_strncmp(token->content,
-				"|", ft_strlen(token->content)) == 0)
+		else if (is_reserved("|", token))
 			break ;
 		token = token->next;
 	}

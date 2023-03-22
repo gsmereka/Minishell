@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:29:33 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/21 14:07:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:46:33 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ static int	count_cmds(t_data *data)
 	token = data->tokens;
 	while (token)
 	{
-		if (ft_strncmp(token->content, "|", ft_strlen(token->content)) == 0)
-		{
-			// if (reserved_word(token))
-				size++;
-		}
+		if (is_reserved("|", token))
+			size++;
 		token = token->next;
 	}
 	return (size);
@@ -95,7 +92,7 @@ static t_token	*find_next_command(t_token *token)
 {
 	while (token)
 	{
-		if (ft_strncmp(token->content, "|", ft_strlen(token->content)) == 0)
+		if (is_reserved("|", token))
 		{
 			return (token->next);
 		}
