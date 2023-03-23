@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/23 01:02:36 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/23 11:22:50 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_env	*find_env(char *key, t_data *data);
 
 // expander
 void	init_expander(t_data *data);
+int		ft_strcmp(char *s1, char *s2);
 
 // lexer
 void	init_lexer(t_data *data);
