@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   get_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 17:02:59 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/23 00:55:01 by gsmereka         ###   ########.fr       */
+/*   Created: 2023/03/23 00:54:21 by gsmereka          #+#    #+#             */
+/*   Updated: 2023/03/23 01:03:32 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,17 @@
 static char	*get_pwd(int buffer_size);
 static int	buffer_size_overflow(int buffer_size);
 
-void	ft_pwd(char **args, t_data *data)
+void	get_prompt(t_data *data)
 {
-	char	*pwd;
-	int		buffer_size;
+	char	*path;
 
-	(void)args;
-	buffer_size = 1024;
-	pwd = get_pwd(buffer_size);
-	if (!pwd)
+	path = get_pwd(1024);
+	if (path)
 	{
-		data->error_msg = "path too long\n";
-		write(2, data->error_msg, ft_strlen(data->error_msg));
-		att_exit_status(1, data);
+		data->prompt = ft_strjoin("HopeShell:~", path);
+		free(path);
+		data->prompt = ft_strjoin_with_free(data->prompt, "$ ");
 	}
-	ft_printf("%s\n", pwd);
-	free(pwd);
 }
 
 static char	*get_pwd(int buffer_size)

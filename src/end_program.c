@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/21 20:46:37 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:04:00 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	exit_error(int error_value, char *msg, t_data *data)
 
 static void	free_data(t_data *data)
 {
+	if (data->prompt)
+		free(data->prompt);
 	if (data->dict_envp)
 		dictclear(data->dict_envp);
 	if (data->user_input)

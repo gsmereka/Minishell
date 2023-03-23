@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 17:11:37 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/23 00:17:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	set_pipes(int cmd, t_data *data);
 static void	set_fork(int cmd, t_data *data);
 static void	wait_pids(t_data *data);
+static void	set_execution_exit_code(t_data *data);
 
 int	set_processes(t_data *data)
 {
@@ -32,6 +33,7 @@ int	set_processes(t_data *data)
 	}
 	close_all_fds(data);
 	wait_pids(data);
+	set_execution_exit_code(data);
 	return (0);
 }
 
@@ -68,7 +70,6 @@ static void	set_fork(int cmd, t_data *data)
 static void	wait_pids(t_data *data)
 {
 	int	cmd;
-	int	exit_status;
 
 	cmd = 0;
 	while (cmd < data->exec->cmds_amount)
@@ -77,6 +78,16 @@ static void	wait_pids(t_data *data)
 			&data->exec->status[cmd], WUNTRACED);
 		cmd++;
 	}
+}
+
+static void	set_execution_exit_code(t_data *data)
+{
+	int	exit_status;
+	int	cmd;
+
+	cmd = 0;
+	while (data->exec->cmds[cmd])
+		cmd++;
 	exit_status = WEXITSTATUS(data->exec->status[cmd - 1]);
 	att_exit_status(exit_status, data);
 }

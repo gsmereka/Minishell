@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/22 16:58:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:02:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init_repl_signals_handling(t_data *data);
 
 // REPL
 void	init_repl(t_data *data);
+void	get_prompt(t_data *data);
 
 // envp
 void	set_initial_envp(char **envp, t_data *data);

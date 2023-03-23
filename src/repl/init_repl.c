@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 18:29:52 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:01:59 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	save_input_on_history(char *user_input, t_data *data);
 
 void	init_repl(t_data *data)
 {
-	data->prompt = "HopeShell:$ ";
 	while (1)
 	{
+		get_prompt(data);
 		init_repl_signals_handling(data);
 		get_user_input(data);
 		if (!is_valid(data->user_input))
@@ -62,5 +62,8 @@ static int	is_valid(char *user_input)
 
 static void	get_user_input(t_data *data)
 {
-	data->user_input = readline(data->prompt);
+	if (data->prompt)
+		data->user_input = readline(data->prompt);
+	else
+		data->user_input = readline("HopeShell:$");
 }
