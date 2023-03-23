@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 18:28:55 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/23 00:02:12 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_exec
 	int		**pipes;
 	char	**env_paths;
 	int		need_interrupt;
-	int		is_child;
 }	t_exec;
 
 typedef struct s_data
