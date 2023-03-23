@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/23 01:04:44 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/23 11:14:15 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	init_repl(t_data *data)
 		init_executor(data);
 		clear_execution_data(data);
 		token_clear(&data->tokens); //p teste --isso vem dps --talvez no end_program e exit_error
-		free(data->prompt);
 		free(data->user_input);
 	}
 }
@@ -55,7 +54,7 @@ static int	is_valid(char *user_input)
 {
 	if (!user_input)
 	{
-		ft_printf("exit\n"); //ele deve printar exit?
+		ft_printf("exit\n"); //ele deve printar exit? // sim
 		return (0);
 	}
 	return (1);
@@ -66,5 +65,5 @@ static void	get_user_input(t_data *data)
 	if (data->prompt)
 		data->user_input = readline(data->prompt);
 	else
-		data->user_input = readline("HopeShell:$");
+		data->user_input = readline("\033[1;32mHopeShell\033[0m:$ ");
 }

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:54:21 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/23 01:03:32 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/23 11:09:54 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ void	get_prompt(t_data *data)
 {
 	char	*path;
 
+	if (data->prompt)
+		free(data->prompt);
 	path = get_pwd(1024);
-	if (path)
-	{
-		data->prompt = ft_strjoin("HopeShell:~", path);
-		free(path);
-		data->prompt = ft_strjoin_with_free(data->prompt, "$ ");
-	}
+	if (!path)
+		return ;
+	data->prompt = ft_strjoin("\033[1;32mHopeShell\033[0m:\033[1;34m~", path);
+	free(path);
+	data->prompt = ft_strjoin_with_free(data->prompt, "\033[0m$ ");
 }
 
 static char	*get_pwd(int buffer_size)
