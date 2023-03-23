@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_prompt.c                                       :+:      :+:    :+:   */
+/*   set_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:54:21 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/23 11:09:54 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/23 14:06:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	*get_pwd(int buffer_size);
 static int	buffer_size_overflow(int buffer_size);
 
-void	get_prompt(t_data *data)
+void	set_prompt(t_data *data)
 {
 	char	*path;
 

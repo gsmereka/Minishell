@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/23 01:00:17 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/23 14:07:01 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC 	=	src/main.c \
 			src/signals/heredoc_signals_handling.c \
 			src/signals/child_signals_handling.c \
 			src/repl/init_repl.c \
-			src/repl/get_prompt.c \
+			src/repl/set_prompt.c \
 			src/envp/dict_env_utils.c \
 			src/envp/find_env.c \
 			src/envp/set_initial_envp.c \
