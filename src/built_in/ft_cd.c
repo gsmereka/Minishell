@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/21 20:43:52 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/22 23:55:20 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ static int	buffer_size_overflow(int buffer_size)
 
 static void	att_envp_dictionary(char *save_pwd, t_data *data)
 {
-	static int	first_time;
 	t_env		*oldpwd;
 	t_env		*pwd;
 
@@ -101,11 +100,5 @@ static void	att_envp_dictionary(char *save_pwd, t_data *data)
 	{
 		free(oldpwd->value);
 		oldpwd->value = ft_strdup(save_pwd);
-	}
-	if (first_time == 0)
-	{
-		if (!oldpwd)
-			dict_add_back(&data->dict_envp, "OLDPWD", save_pwd);
-		first_time++;
 	}
 }
