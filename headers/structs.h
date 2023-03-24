@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/19 20:25:13 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/23 19:20:07 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_env
 
 typedef struct s_expander
 {
+	
 	//é melhor pq tem mt var (e pra passar pras funções tbm)
 }	t_expander;
 

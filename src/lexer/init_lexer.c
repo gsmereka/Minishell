@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/11 01:06:35 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/23 19:35:18 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	init_lexer(t_data *data) //oq faz: separar a string por palavras   --- atenÃ
 		i++;
 	}
 	free_mat_user_input(user_input);
-//	check_special_tokens(data);
+//	check_redirect_tokens(data);
 //	create_new_tokens(data);
 	return (1);
 }

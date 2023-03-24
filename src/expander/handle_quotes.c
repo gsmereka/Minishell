@@ -6,49 +6,74 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 01:05:13 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/19 20:34:26 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/24 23:49:37 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	set_env_value(char *mat_token, t_env *aux_env, int flag_env)
+void	find_envp_value()
 {
 
 	
 	//check_spaces();
 	
-	while (aux_env) // toda a parte da substituição q funciona. O problema é quando tem espaços // e se tiver aspas???? eu tenho q tirar elas antes? e ignorar elas tbm 
-	{
-		if (ft_strcmp(aux_env->key, &mat_token[i][1]) == 0) 
-		{
-			new_content = ft_strjoin_gnl(new_content, aux_env->value);
-			flag_env = 1;
-		}
-		aux_env = aux_env->next;
-	}
-	if (flag_env == 0)
-		new_content = ft_strjoin_gnl(new_content, " ");
+	
 }
+
+/*void	check_spaces(char *mat_token)
+{
+	char	**aux_spaces_token;
+	int		i;
+
+	aux_spaces_token = ft_split(mat_token, ' ');
+	i = 0;
+	while (aux_spaces_token[i])
+	{
+		if (aux_spaces_token[i][0] == '$')
+			find_envp_value(aux_spaces_token[i]);
+		i++;
+	}
+}*/
 
 void	expander_envp_value(t_data *data, char ***content, char **mat_token)
 {
+	//t_expander *expander;
 	char	*new_content;
 	t_env	*aux_env;
 	int		i;
-	int		flag_env;
+	char	**aux_spaces_token;
+	int		j;
 
 	aux_env = data->dict_envp;
 	i = 0;
 	new_content = NULL;
 	while (mat_token[i])
 	{
-		flag_env = 0;
+		//flag_env = 0;
 		aux_env = data->dict_envp;
 		if (mat_token[i][0] == '$')
 		{
+			j = 0;
 			//problema se tiver espaço... split no espaço :/ --pq n posso substituir td se tiver espaço -- e as aspas tbm tem q parar
-			set_env_value(&mat_token[i], aux_env, flag_env);
+			aux_spaces_token = ft_split(mat_token[i], ' ');
+			if (!aux_spaces_token)
+				return ;
+			while (aux_spaces_token[j])
+			{
+				//set_env_value(&mat_token[i], aux_env, flag_env);
+				while (aux_env) // toda a parte da substituição q funciona. O problema é quando tem espaços // e se tiver aspas???? eu tenho q tirar elas antes? e ignorar elas tbm 
+				{
+					if (ft_strcmp(aux_env->key, &aux_spaces_token[j][1]) == 0) 
+						new_content = ft_strjoin_gnl(new_content, aux_env->value);
+					aux_env = aux_env->next;
+				}
+				if (aux_spaces_token[j][0] != '$')
+					new_content = ft_strjoin_gnl(new_content, aux_spaces_token[j]);
+				new_content = ft_strjoin_gnl(new_content, " ");
+				j++;
+			}
+			free_mat(aux_spaces_token);
 		}
 		else
 			new_content = ft_strjoin_gnl(new_content, mat_token[i]);
