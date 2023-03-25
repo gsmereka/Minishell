@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/23 14:32:14 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/24 21:49:46 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	init_repl(t_data *data)
 		if (!read_user_input(data))
 			break ;
 		init_lexer(data);
-		init_expander(data); //se o usuário mandou alguma var de ambiente  --- $
-		// init_parser(data);
+		init_expander(data);
+		init_parser(data);
 		init_executor(data);
 		clear_repl(data);
 	}

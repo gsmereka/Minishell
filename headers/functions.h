@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/24 20:56:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/24 21:54:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	token_clear(t_token **tokens);
 // parser
 void	init_parser(t_data *data);
 int		check_syntax(t_data *data);
-int		is_redirect(t_token *token, t_data *data);
+int		is_redirect(t_token *token);
 
 // executor
 void	init_executor(t_data *data);

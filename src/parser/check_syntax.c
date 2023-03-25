@@ -6,14 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:26:08 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/24 21:38:26 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/24 21:56:50 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static int	print_syntax_error_msg(char *token);
-static int	search_errors(t_token *token, t_data *data);
+static int	search_errors(t_token *token);
 
 // vou fazer um loop que vai salvando os heredocs, 
 // o primeiro erro de syntax identificado é printado
@@ -21,19 +21,19 @@ static int	search_errors(t_token *token, t_data *data);
 // passada a lista com heredocs salvos
 int	check_syntax(t_data *data)
 {
-	if (search_errors(data->tokens, data))
+	if (search_errors(data->tokens))
 	{
 		att_exit_status(2, data);
-		return (0);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
-static int	search_errors(t_token *token, t_data *data)
+static int	search_errors(t_token *token)
 {
 	while (token)
 	{
-		if (is_redirect(token, data))
+		if (is_redirect(token))
 		{
 			if (!token->next)
 				return (print_syntax_error_msg(""));

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/24 21:38:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/24 21:55:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	save_heredocs(t_data *data)
 				break ;
 		}
 		else if (is_reserved("|", token) && !token->next)
+			break ;
+		else if (is_reserved("|", token) && (is_reserved("|", token->next)))
 			break ;
 		token = token->next;
 	}
