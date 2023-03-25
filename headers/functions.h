@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/24 21:54:57 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:15:30 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		ft_strcmp(char *s1, char *s2);
 // lexer
 void	init_lexer(t_data *data);
 void	add_token(t_token **tokens, char *content);
+t_token	*token_last(t_token *token);
 void	token_clear(t_token **tokens);
 
 // parser
