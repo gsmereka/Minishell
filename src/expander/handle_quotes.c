@@ -56,7 +56,7 @@ void	expander_envp_value(t_data *data, char ***content, char **mat_token)
 		{
 			j = 0;
 			//problema se tiver espaço... split no espaço :/ --pq n posso substituir td se tiver espaço -- e as aspas tbm tem q parar
-			aux_spaces_token = ft_split(mat_token[i], ' ');
+			aux_spaces_token = ft_split(mat_token[i], ' '); //mas n ta impedindo de apagar se dentro a env tiver entre ''
 			if (!aux_spaces_token)
 				return ;
 			while (aux_spaces_token[j])
