@@ -6,14 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:26:08 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/24 22:24:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 12:01:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int	print_syntax_error_msg(char *token);
-static int	search_errors(t_token *token);
+static int	print_syntax_error_msg(char *token, t_data *data);
+static int	search_errors(t_token *token, t_data *data);
 
 // vou fazer um loop que vai salvando os heredocs, 
 // o primeiro erro de syntax identificado é printado
@@ -21,7 +21,7 @@ static int	search_errors(t_token *token);
 // passada a lista com heredocs salvos
 int	check_syntax(t_data *data)
 {
-	if (search_errors(data->tokens))
+	if (search_errors(data->tokens, data))
 	{
 		att_exit_status(2, data);
 		return (1);
@@ -29,42 +29,46 @@ int	check_syntax(t_data *data)
 	return (0);
 }
 
-static int	search_errors(t_token *token)
+static int	search_errors(t_token *token, t_data *data)
 {
 	while (token)
 	{
 		if (is_redirect(token))
 		{
 			if (!token->next)
-				return (print_syntax_error_msg(""));
+				return (print_syntax_error_msg("", data));
 			if (is_reserved("<<", token->next))
-				return (print_syntax_error_msg("<<"));
+				return (print_syntax_error_msg("<<", data));
 			if (is_reserved("<", token->next))
-				return (print_syntax_error_msg("<"));
+				return (print_syntax_error_msg("<", data));
 			if (is_reserved(">>", token->next))
-				return (print_syntax_error_msg(">>"));
+				return (print_syntax_error_msg(">>", data));
 			if (is_reserved(">", token->next))
-				return (print_syntax_error_msg(">"));
+				return (print_syntax_error_msg(">", data));
 		}
 		if (is_reserved("|", token))
 		{
 			if (!token->next)
-				return (print_syntax_error_msg(""));
+				return (print_syntax_error_msg("", data));
 			if (is_reserved("|", token->next))
-				return (print_syntax_error_msg("|"));
+				return (print_syntax_error_msg("|", data));
 		}
 		token = token->next;
 	}
 	return (0);
 }
 
-static int	print_syntax_error_msg(char *token)
+static int	print_syntax_error_msg(char *token, t_data *data)
 {
 	char	*msg;
 
 	msg = "bash: syntax error near unexpected token `";
 	if (!*token)
-		token = "newline";
+	{
+		data->error_msg
+			= ft_strdup("bash: syntax error near unexpected token `newline'\n");
+		return (1);
+	}
 	msg = ft_strjoin(msg, token);
 	msg = ft_strjoin_with_free(msg, "'\n");
 	ft_putstr_fd(msg, 2);

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/23 01:04:00 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:59:40 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	end_program(t_data *data)
 {
 	int	exit_status;
 
+	if (data->error_msg)
+		ft_putstr_fd(data->error_msg, 2);
 	exit_status = data->exit_status;
 	close_all_fds(data);
 	free_data(data);
@@ -35,6 +37,8 @@ void	exit_error(int error_value, char *msg, t_data *data)
 
 static void	free_data(t_data *data)
 {
+	if (data->error_msg)
+		free(data->error_msg);
 	if (data->prompt)
 		free(data->prompt);
 	if (data->dict_envp)

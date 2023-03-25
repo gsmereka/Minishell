@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 11:20:00 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:59:57 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_data
 	char	**virtual_envp;
 	char	*prompt;
 	char	*user_input;
-	// char	*error_msg;
+	char	*error_msg;
 	int		exit_status;
 	int		lines;
 }	t_data;
