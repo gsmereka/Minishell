@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/23 00:17:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:30:05 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	set_processes(t_data *data)
 		if (data->exec->need_interrupt)
 			return (0);
 		set_pipes(cmd, data);
-		set_files(data->exec->cmds[cmd], data);
+		set_files(data->exec->cmds[cmd]);
 		set_fork(cmd, data);
 		cmd++;
 	}

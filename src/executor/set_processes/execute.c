@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:17:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 11:21:22 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:36:23 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	execute(t_cmd *cmd, t_data *data)
 		end_program(data);
 	}
 	else
+	{
+		att_exit_status(0, data);
 		normal_execution(cmd, data);
+	}
 }
 
 static void	normal_execution(t_cmd *cmd, t_data *data)
