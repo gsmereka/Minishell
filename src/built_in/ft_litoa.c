@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 21:55:25 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 19:31:12 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 20:04:30 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_litoa(long int n)
 {
 	char		*str;
 	long int	is_negative;
-	long int		str_size;
+	long int	str_size;
 
 	if (n <= -9223372036854775807)
 		return (ft_strdup("-9223372036854775807"));
@@ -36,7 +36,7 @@ char	*ft_litoa(long int n)
 
 static char	*set_str(long int is_negative, long int str_size, long int n)
 {
-	long int		limit;
+	long int	limit;
 	char		*str;
 
 	limit = 0;
