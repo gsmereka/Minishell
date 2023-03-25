@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 04:22:10 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/25 04:29:41 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,16 @@ void	init_expander(t_data *data)
 			creck_token_in_envp(data, &aux_token->content[1], &aux_token);
 		else if (aux_token->content[0] == '"')
 		{
-			check_envp_position_in_token(data, &aux_token->content);
-			aux_trim = ft_strtrim(aux_token->content, " ");
-			new_content = ft_strtrim(aux_trim, "\"");
-			free(aux_trim);
+			//
+			new_content = ft_strtrim(aux_token->content, "\"");
 			free(aux_token->content);
 			aux_token->content = ft_strdup(new_content);
 			free(new_content);
+			check_envp_position_in_token(data, &aux_token->content);
+			aux_trim = ft_strtrim(aux_token->content, " ");
+			free(aux_token->content);
+			aux_token->content = ft_strdup(aux_trim);
+			free(aux_trim);
 		}
 			//remove as aspas (só as de fora?) ft_strtrim?
 		// ---atenção para "''" e '""'
