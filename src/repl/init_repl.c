@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 12:07:56 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 12:14:43 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ static void	save_input_on_history(char *user_input, t_data *data)
 static void	clear_repl(t_data *data)
 {
 	if (data->error_msg)
+	{
 		free(data->error_msg);
+		data->error_msg = NULL;
+	}
 	clear_execution_data(data);
 	token_clear(&data->tokens);
 	free(data->user_input);

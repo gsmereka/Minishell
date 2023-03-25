@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 12:12:25 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 12:36:34 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,15 @@ static void	save_heredocs(t_data *data)
 
 static void	swap_tokens_list(t_token *save, t_data *data)
 {
+	if (!save)
+	{
+		if (data->error_msg)
+		{
+			ft_putstr_fd(data->error_msg, 2);
+			free(data->error_msg);
+			data->error_msg = NULL;
+		}
+	}
 	token_clear(&data->tokens);
 	data->tokens = save;
 }

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:26:08 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 12:10:41 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 12:29:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ static int	search_errors(t_token *token, t_data *data)
 {
 	while (token)
 	{
+		if (is_reserved("|", token) || is_redirect(token))
+		{
+			if (!token->next)
+				return (print_syntax_error_msg("", data));
+			if (is_reserved("|", token->next))
+				return (print_syntax_error_msg("|", data));
+		}
 		if (is_redirect(token))
 		{
 			if (is_reserved("<<", token->next))
@@ -43,13 +50,6 @@ static int	search_errors(t_token *token, t_data *data)
 				return (print_syntax_error_msg(">>", data));
 			if (is_reserved(">", token->next))
 				return (print_syntax_error_msg(">", data));
-		}
-		if (is_reserved("|", token) || is_redirect(token))
-		{
-			if (!token->next)
-				return (print_syntax_error_msg("", data));
-			if (is_reserved("|", token->next))
-				return (print_syntax_error_msg("|", data));
 		}
 		token = token->next;
 	}
