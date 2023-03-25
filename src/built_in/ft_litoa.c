@@ -6,23 +6,23 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 21:55:25 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 16:32:20 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 19:31:12 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static size_t	ft_calculate_str_size(long int n, long int is_negative);
-static char		*set_str(long int is_negative, size_t str_size, long int n);
+static long int	ft_calculate_str_size(long int n, long int is_negative);
+static char		*set_str(long int is_negative, long int str_size, long int n);
 
 char	*ft_litoa(long int n)
 {
 	char		*str;
 	long int	is_negative;
-	size_t		str_size;
+	long int		str_size;
 
-	if (n <= -2147483648)
-		return (ft_strdup("-2147483648"));
+	if (n <= -9223372036854775807)
+		return (ft_strdup("-9223372036854775807"));
 	if (n == 0)
 		return (ft_strdup("0"));
 	if (n < 0)
@@ -34,9 +34,9 @@ char	*ft_litoa(long int n)
 	return (str);
 }
 
-static char	*set_str(long int is_negative, size_t str_size, long int n)
+static char	*set_str(long int is_negative, long int str_size, long int n)
 {
-	size_t		limit;
+	long int		limit;
 	char		*str;
 
 	limit = 0;
@@ -58,9 +58,9 @@ static char	*set_str(long int is_negative, size_t str_size, long int n)
 	return (str);
 }
 
-static size_t	ft_calculate_str_size(long int n, long int is_negative)
+static long int	ft_calculate_str_size(long int n, long int is_negative)
 {
-	size_t	str_size;
+	long int	str_size;
 
 	str_size = 0;
 	while (n != 0)
