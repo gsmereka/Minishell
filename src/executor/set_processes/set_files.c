@@ -6,25 +6,25 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 21:06:16 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:23:33 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-static int	set_infiles(t_cmd *cmd, t_data *data);
-static int	set_outfiles(t_cmd *cmd, t_data *data);
-static void	error_msg(char *file, t_data *data);
+static int	set_infiles(t_cmd *cmd);
+static int	set_outfiles(t_cmd *cmd);
+static void	error_msg(char *file);
 
-void	set_files(t_cmd *cmd, t_data *data)
+void	set_files(t_cmd *cmd)
 {
-	if (!set_infiles(cmd, data))
+	if (!set_infiles(cmd))
 		return ;
-	if (!set_outfiles(cmd, data))
+	if (!set_outfiles(cmd))
 		return ;
 }
 
-static int	set_infiles(t_cmd *cmd, t_data *data)
+static int	set_infiles(t_cmd *cmd)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ static int	set_infiles(t_cmd *cmd, t_data *data)
 			cmd->infiles_fd[i] = open(cmd->infiles[i], O_RDWR);
 			if (cmd->infiles_fd[i] == -1)
 			{
-				error_msg(cmd->infiles[i], data);
+				error_msg(cmd->infiles[i]);
 				return (0);
 			}
 		}
@@ -52,7 +52,7 @@ static int	set_infiles(t_cmd *cmd, t_data *data)
 	return (1);
 }
 
-static int	set_outfiles(t_cmd *cmd, t_data *data)
+static int	set_outfiles(t_cmd *cmd)
 {
 	int	i;
 
@@ -69,7 +69,7 @@ static int	set_outfiles(t_cmd *cmd, t_data *data)
 					O_RDWR | O_CREAT | O_APPEND, 0777);
 		if (cmd->outfiles_fd[i] == -1)
 		{
-			error_msg(cmd->outfiles[i], data);
+			error_msg(cmd->outfiles[i]);
 			return (0);
 		}
 		i++;
@@ -77,14 +77,15 @@ static int	set_outfiles(t_cmd *cmd, t_data *data)
 	return (1);
 }
 
-static void	error_msg(char *file, t_data *data)
+static void	error_msg(char *file)
 {
 	char	*prefix;
+	char	*error_msg;
 
 	prefix = ft_strdup("bash: ");
-	data->error_msg = ft_strjoin(prefix, file);
+	error_msg = ft_strjoin(prefix, file);
 	free(prefix);
-	perror(data->error_msg);
-	free(data->error_msg);
-	data->error_msg = NULL;
+	perror(error_msg);
+	free(error_msg);
+	error_msg = NULL;
 }

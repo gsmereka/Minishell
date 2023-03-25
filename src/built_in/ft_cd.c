@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/23 00:11:15 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:24:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	validate_dir(char *dir, t_data *data)
 static char	*get_pwd(int buffer_size, t_data *data)
 {
 	char	*pwd;
+	char	*error_msg;
 
 	pwd = getcwd(NULL, buffer_size);
 	if (!pwd)
@@ -68,8 +69,8 @@ static char	*get_pwd(int buffer_size, t_data *data)
 			pwd = get_pwd(buffer_size * 2, data);
 		else
 		{
-			data->error_msg = "path too long\n";
-			write(2, data->error_msg, ft_strlen(data->error_msg));
+			error_msg = "path too long\n";
+			write(2, error_msg, ft_strlen(error_msg));
 			att_exit_status(1, data);
 			return (NULL);
 		}

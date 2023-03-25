@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:59 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/23 00:55:01 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:26:14 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	buffer_size_overflow(int buffer_size);
 void	ft_pwd(char **args, t_data *data)
 {
 	char	*pwd;
+	char	*error_msg;
 	int		buffer_size;
 
 	(void)args;
@@ -25,9 +26,10 @@ void	ft_pwd(char **args, t_data *data)
 	pwd = get_pwd(buffer_size);
 	if (!pwd)
 	{
-		data->error_msg = "path too long\n";
-		write(2, data->error_msg, ft_strlen(data->error_msg));
+		error_msg = "path too long\n";
+		write(2, error_msg, ft_strlen(error_msg));
 		att_exit_status(1, data);
+		return ;
 	}
 	ft_printf("%s\n", pwd);
 	free(pwd);

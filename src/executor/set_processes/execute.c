@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:17:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 22:19:48 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:21:22 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,18 @@ void	execute(t_cmd *cmd, t_data *data)
 
 static void	normal_execution(t_cmd *cmd, t_data *data)
 {
-	int	exec;
+	int		exec;
+	char	*error_msg;
 
 	exec = execve(cmd->name, cmd->args, data->virtual_envp);
 	if (exec == -1)
 	{
 		close_fds(cmd, data);
-		data->error_msg = ft_strjoin_with_free
+		error_msg = ft_strjoin_with_free
 			(ft_strdup(cmd->args[0]),
 				": command not found");
-		write(2, data->error_msg, ft_strlen(data->error_msg));
-		free(data->error_msg);
+		write(2, error_msg, ft_strlen(error_msg));
+		free(error_msg);
 		exit_error(127, "", data);
 	}
 }
