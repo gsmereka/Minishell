@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:26:08 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 12:29:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 13:13:18 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	check_syntax(t_data *data)
 
 static int	search_errors(t_token *token, t_data *data)
 {
+	if (is_reserved("|", token))
+		return (print_syntax_error_msg("|", data));
 	while (token)
 	{
 		if (is_reserved("|", token) || is_redirect(token))
