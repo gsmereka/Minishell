@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/24 21:47:29 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/25 15:47:32 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC 	=	src/main.c \
 			src/built_in/ft_env.c \
 			src/built_in/ft_export_error_msg.c \
 			src/built_in/ft_exit.c \
+			src/built_in/ft_exit_utils.c \
 			src/built_in/ft_export.c \
 			src/built_in/ft_pwd.c \
 			src/built_in/ft_unset.c \

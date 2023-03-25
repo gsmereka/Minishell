@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/25 11:23:44 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:46:44 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	close_heredoc_pipes(t_data *data);
 void	close_cmd_heredoc_pipes(t_cmd *cmd);
 
 // built_in
+int		check_if_is_numeric(char *arg);
+int		check_integer_size(int nbr, char *original_nbr);
 void	ft_cd(char **args, t_data *data);
 void	ft_echo(char **args, t_data *data);
 void	ft_env(char **args, t_data *data);
