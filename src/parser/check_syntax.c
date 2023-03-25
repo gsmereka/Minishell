@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:26:08 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/24 21:56:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/24 22:24:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ static int	print_syntax_error_msg(char *token)
 	msg = ft_strjoin(msg, token);
 	msg = ft_strjoin_with_free(msg, "'\n");
 	ft_putstr_fd(msg, 2);
+	free(msg);
 	return (1);
 }

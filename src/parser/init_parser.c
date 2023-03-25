@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/24 21:55:57 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/24 22:29:46 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,29 @@
 static void	save_heredocs(t_data *data);
 static void	swap_tokens_list(t_token *save, t_data *data);
 
+void	define_types(t_token *token)
+{
+	while (token)
+	{
+		if (ft_strcmp("|", token->content) == 0)
+			token->type = ft_strdup("isso ai");
+		if (ft_strcmp("<", token->content) == 0)
+			token->type = ft_strdup("isso ai");
+		if (ft_strcmp("<<", token->content) == 0)
+			token->type = ft_strdup("isso ai");
+		if (ft_strcmp(">>", token->content) == 0)
+			token->type = ft_strdup("isso ai");
+		if (ft_strcmp(">", token->content) == 0)
+			token->type = ft_strdup("isso ai");
+		token = token->next;
+	}
+}
+
 void	init_parser(t_data *data)
 {
 	if (!data->tokens)
 		return ;
+	define_types(data->tokens); /// somente pra testes
 	if (check_syntax(data))
 		save_heredocs(data);
 }
@@ -28,6 +47,7 @@ static void	save_heredocs(t_data *data)
 	t_token	*token;
 	t_token	*save;
 
+	save = NULL;
 	token = data->tokens;
 	while (token)
 	{
