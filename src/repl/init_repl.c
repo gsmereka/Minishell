@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/24 21:49:46 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 12:07:56 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	read_user_input(t_data *data)
 		data->user_input = readline("\033[1;32mHopeShell\033[0m:$ ");
 	if (!data->user_input)
 	{
-		ft_printf("exit\n"); //ele deve printar exit? // sim
+		ft_printf("exit\n");
 		return (0);
 	}
 	save_input_on_history(data->user_input, data);
@@ -69,6 +69,8 @@ static void	save_input_on_history(char *user_input, t_data *data)
 
 static void	clear_repl(t_data *data)
 {
+	if (data->error_msg)
+		free(data->error_msg);
 	clear_execution_data(data);
 	token_clear(&data->tokens);
 	free(data->user_input);
