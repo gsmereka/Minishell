@@ -12,49 +12,44 @@
 
 #include "../../headers/minishell.h"
 
-static int	compare_absolute_values(char *nbr_copy, char *original_nbr);
+static long int	compare_absolute_values(char *nbr_copy, char *original_nbr);
 
-int	check_if_is_numeric(char *arg)
+long int	check_if_is_numeric(char *arg)
 {
-	(void)arg;
-	// int	i;
+	long int	i;
 
-	// i = 0;
-	// while ((arg[i] >= '\t' && arg[i] <= '\r') || arg[i] == ' ')
-	// 	i++;
-	// if (arg[i] == '-' || arg[i] == '+')
-	// 	i++;
-	// if (!ft_isdigit(arg[i]))
-	// 	exit_error(1, data);
-	// while (ft_isdigit(arg[i]))
-	// 	i++;
-	// if (arg[i] != '\0')
-	// 	exit_error(1, data);
-	return (0);
+	i = 0;
+	while ((arg[i] >= '\t' && arg[i] <= '\r') || arg[i] == ' ')
+		i++;
+	if (arg[i] == '-' || arg[i] == '+')
+		i++;
+	if (!ft_isdigit(arg[i]))
+		return (0);
+	while (ft_isdigit(arg[i]))
+		i++;
+	if (arg[i] != '\0')
+		return (0);
+	return (1);
 }
 
-int	check_integer_size(int nbr, char *original_nbr)
+long int	check_integer_size(long int nbr, char *original_nbr)
 {
-	(void)nbr;
-	(void)original_nbr;
+	char		*nbr_copy;
+	long int	diff;
 
-	char	*nbr_copy;
-	int		diff;
-
-	nbr_copy = ft_itoa(nbr);
-	// if (!nbr_copy)
-	// 	exit_error(12, data);
+	nbr_copy = ft_litoa(nbr);
+	if (!nbr_copy)
+		return (0);
 	diff = compare_absolute_values(nbr_copy, original_nbr);
-	// free(nbr_copy);
-	// if (diff != 0)
-	// 	exit_error(1, data);
-	(void)diff;
-	return (0);
+	free(nbr_copy);
+	if (diff != 0)
+		return (0);
+	return (1);
 }
 
-static int	compare_absolute_values(char *nbr_copy, char *original_nbr)
+static long int	compare_absolute_values(char *nbr_copy, char *original_nbr)
 {
-	int	diff;
+	long int	diff;
 
 	if ((*original_nbr != '-') && *nbr_copy == '-')
 		return (-1);

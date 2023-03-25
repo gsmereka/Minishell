@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:50 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 15:33:28 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:41:51 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	ft_exit(char **args, t_data *data)
 static int	valid_args(char **args, t_data *data)
 {
 	char	*error_msg;
-	int		exit_status;
 
 	if (args && !args[1])
 		return (1);
@@ -46,14 +45,7 @@ static int	valid_args(char **args, t_data *data)
 		att_exit_status(1, data);
 		return (0);
 	}
-	exit_status = ft_atoi(args[1]);
-	if (ft_strcmp(args[1], "0") == 0)
-		exit_status = 0;
-	else if (ft_strcmp(args[1], "-0") == 0)
-		exit_status = 0;
-	else if (ft_strcmp(args[1], "+0") == 0)
-		exit_status = 0;
-	else if (exit_status == 0)
+	if (!check_if_is_numeric(args[1]))
 	{
 		error_msg = ft_strjoin("bash: exit: ", args[1]);
 		write(2, error_msg, ft_strlen(error_msg));
@@ -61,7 +53,7 @@ static int	valid_args(char **args, t_data *data)
 		write(2, error_msg, ft_strlen(error_msg));
 		att_exit_status(2, data);
 		return (0);
-	}	
+	}
 	return (1);
 }
 
@@ -71,7 +63,7 @@ static int	set_exit_status(char **args, t_data *data)
 	// char	*error_msg;
 
 	(void)data;
-	exit_status = ft_atoi(args[1]);
+	exit_status = ft_atoli(args[1]);
 	if (exit_status < 0)
 		exit_status = 156;
 	return (exit_status);

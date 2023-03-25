@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/25 15:47:32 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/25 16:41:43 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,8 @@ SRC 	=	src/main.c \
 			src/executor/set_processes/execute.c \
 			src/executor/set_processes/set_files.c \
 			src/executor/set_processes/redirect.c \
+			src/built_in/ft_litoa.c \
+			src/built_in/ft_atoli.c \
 			src/built_in/ft_cd.c \
 			src/built_in/ft_cd_error_msg.c \
 			src/built_in/ft_echo.c \

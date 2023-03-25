@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/25 15:46:44 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:41:30 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,18 +96,20 @@ void	close_heredoc_pipes(t_data *data);
 void	close_cmd_heredoc_pipes(t_cmd *cmd);
 
 // built_in
-int		check_if_is_numeric(char *arg);
-int		check_integer_size(int nbr, char *original_nbr);
-void	ft_cd(char **args, t_data *data);
-void	ft_echo(char **args, t_data *data);
-void	ft_env(char **args, t_data *data);
-void	ft_exit(char **args, t_data *data);
-void	ft_export(char **args, t_data *data);
-void	ft_pwd(char **args, t_data *data);
-void	ft_unset(char **args, t_data *data);
-void	ft_cd_error_msg(int error, char *name, t_data *data);
-void	ft_export_error_msg(int error, char *name, t_data *data);
-int		is_built_in(t_cmd *cmd);
+char		*ft_litoa(long int n);
+long int	ft_atoli(const char *nptr);
+long int	check_if_is_numeric(char *arg);
+long int	check_integer_size(long int nbr, char *original_nbr);
+void		ft_cd(char **args, t_data *data);
+void		ft_echo(char **args, t_data *data);
+void		ft_env(char **args, t_data *data);
+void		ft_exit(char **args, t_data *data);
+void		ft_export(char **args, t_data *data);
+void		ft_pwd(char **args, t_data *data);
+void		ft_unset(char **args, t_data *data);
+void		ft_cd_error_msg(int error, char *name, t_data *data);
+void		ft_export_error_msg(int error, char *name, t_data *data);
+int			is_built_in(t_cmd *cmd);
 
 // end_program
 void	end_program(t_data *data);
