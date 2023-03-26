@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 04:29:41 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/26 19:53:48 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	creck_token_in_envp(t_data *data, char *content, t_token **env_token)
 {
 	t_env	*aux_env;
 
+	//fazer split por $ no token!
 	aux_env = data->dict_envp;
 	while (aux_env)
 	{
@@ -48,7 +49,6 @@ void	init_expander(t_data *data)
 			creck_token_in_envp(data, &aux_token->content[1], &aux_token);
 		else if (aux_token->content[0] == '"')
 		{
-			//
 			new_content = ft_strtrim(aux_token->content, "\"");
 			free(aux_token->content);
 			aux_token->content = ft_strdup(new_content);
@@ -59,7 +59,8 @@ void	init_expander(t_data *data)
 			aux_token->content = ft_strdup(aux_trim);
 			free(aux_trim);
 		}
-			//remove as aspas (só as de fora?) ft_strtrim?
+	//	else if (aux_token->content[0] == '\'')
+			//ft_strtrim nas aspas simpes!
 		// ---atenção para "''" e '""'
 		//ft_printf("%s\n", aux_token->content);
 		aux_token = aux_token->next;

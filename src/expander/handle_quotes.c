@@ -6,27 +6,18 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 01:05:13 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/25 04:51:36 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/26 20:52:05 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	find_envp_value()
+/*void	check_quotes(char *mat_token)
 {
-
-	
-	//check_spaces();
-	
-	
-}
-
-/*void	check_spaces(char *mat_token)
-{
-	char	**aux_spaces_token;
+	char	**quotes;
 	int		i;
 
-	aux_spaces_token = ft_split(mat_token, ' ');
+	quotes = ft_split(mat_token, ' ');
 	i = 0;
 	while (aux_spaces_token[i])
 	{
@@ -36,48 +27,102 @@ void	find_envp_value()
 	}
 }*/
 
-void	expander_envp_value(t_data *data, char ***content, char **mat_token)
+void	expander_envp_value(t_data *data, char **content) //tenho q splitar as aspas antes de splitar os $
 {
-	//t_expander *expander;
+	char	**mat_content;
 	char	*new_content;
-	t_env	*aux_env;
+	char	*aux_content;
+	t_env	*env;
 	int		i;
-	char	**aux_spaces_token;
-	int		j;
+	int		flag_env;
 
-	aux_env = data->dict_envp;
+	mat_content = ft_split(*content, '$'); //funciona, mas vai ser o último 
+	new_content = NULL;
+	aux_content = NULL;
+	env = data->dict_envp;
+	i = 0;
+	if (*content[0] != '$')
+		i++;
+	while (mat_content[i])
+	{
+		flag_env = 0;
+		env = data->dict_envp;
+		while (env)
+		{
+			if (ft_strcmp(mat_content[i], env->key) == 0)
+			{
+				free(mat_content[i]);
+				mat_content[i] = ft_strdup(env->value);
+				flag_env = 1;
+				break ; 
+			}
+		/*	else if (ft_strlen(mat_content[i]) - 1 > 0)
+			{
+				if (mat_content[i][ft_strlen(mat_content[i]) - 1] == '\'') // e se o len < 0 nessa comparação...
+				{
+					aux_content = malloc(ft_strlen(mat_content[i]) - 1); //para o caso das aspas '$oi' .... mas n resolve '$oi'a
+					int j = 0; //arrumar norma aq
+					while (j < ft_strlen(mat_content[i]) - 1)
+					{
+						aux_content[j] = mat_content[i][j];
+						j++;
+					}
+					aux_content[j] = '\0';
+					if (ft_strcmp(aux_content, env->key) == 0)
+					{
+						free(mat_content[i]);
+						mat_content[i] = ft_strdup(env->value);
+						mat_content[i] = ft_strjoin_gnl(mat_content[i], "'");
+						free(aux_content);
+						aux_content = NULL;
+						flag_env = 1;
+						break ; 
+					}
+				}
+			}*/
+			env = env->next;
+		}
+		if (flag_env == 0)
+		{
+			free(mat_content[i]);
+			mat_content[i] = ft_strdup("");
+		}
+		i++;
+	}
+	i = 0;
+	while (mat_content[i])
+	{
+		new_content = ft_strjoin_gnl(new_content, mat_content[i]);
+		i++;
+	}
+	free(*content);
+	*content = ft_strdup(new_content);
+	free(new_content);
+	free_mat(mat_content);
+}
+
+void	expander_quotes_value(t_data *data, **content) //vai splitar por ', mas ele n pode perder as aspas
+{
+	
+}
+
+void	expander_content_value(t_data *data, char ***content, char **mat_content) //nova func
+{
+	int		i;
+	char	*new_content;
+
 	i = 0;
 	new_content = NULL;
-	while (mat_token[i])
+	while (mat_content[i])
 	{
-		//flag_env = 0;
-		aux_env = data->dict_envp;
-		if (mat_token[i][0] == '$') //tenho q dar split por espaço antes então, e depois por $
-		{
-			j = 0;
-			//problema se tiver espaço... split no espaço :/ --pq n posso substituir td se tiver espaço -- e as aspas tbm tem q parar
-			aux_spaces_token = ft_split(mat_token[i], ' '); //mas n ta impedindo de apagar se dentro a env tiver entre ''
-			if (!aux_spaces_token)
-				return ;
-			while (aux_spaces_token[j])
-			{
-				//set_env_value(&mat_token[i], aux_env, flag_env);
-				while (aux_env) // toda a parte da substituição q funciona. O problema é quando tem espaços // e se tiver aspas???? eu tenho q tirar elas antes? e ignorar elas tbm 
-				{
-					if (ft_strcmp(aux_env->key, &aux_spaces_token[j][1]) == 0) 
-						new_content = ft_strjoin_gnl(new_content, aux_env->value);
-					aux_env = aux_env->next;
-				}
-				if (aux_spaces_token[j][0] != '$')
-					new_content = ft_strjoin_gnl(new_content, aux_spaces_token[j]);
-			//	if (mat_len(aux_spaces_token) > 1)
-					new_content = ft_strjoin_gnl(new_content, " ");
-				j++;
-			}
-			free_mat(aux_spaces_token);
-		}
-		else
-			new_content = ft_strjoin_gnl(new_content, mat_token[i]);
+		expander_quotes_value(data, &mat_content[i]); //aq ele vai alterar o mat content um por um
+		i++;
+	}
+	i = 0;
+	while (mat_content[i])
+	{
+		new_content = ft_strjoin_gnl(new_content, mat_content[i]);
+		new_content = ft_strjoin_gnl(new_content, " "); //pq fiz split por espaço
 		i++;
 	}
 	free(**content);
@@ -85,38 +130,14 @@ void	expander_envp_value(t_data *data, char ***content, char **mat_token)
 	free(new_content);
 }
 
-void	check_envp_position_in_token(t_data *data, char **content) //+ 25 linhas
+void	check_envp_position_in_token(t_data *data, char **content) //nova func
 {
 	char	**mat_content;
-	int		i;
-	char	**mat_token;
 
-	mat_content = ft_split(*content, '$'); //checar *content antes?
-	if (!mat_content || !*mat_content) //assim?
-		return ;
-	mat_token = NULL;
-	i = 0;
-	if (mat_len(mat_content) > 0) // ft_strlen ** e *... warning
+	mat_content = ft_split(*content, ' '); //checar *content antes?
+	if (mat_content)
 	{
-		mat_token = (char **)malloc(sizeof(char *) * (mat_len(mat_content) + 1)); //colocar verificação aqui?
-		if ((*content)[0] != '$')
-		{
-			mat_token[i] = ft_strdup(mat_content[i]); //arruma "teste$miau" mas quebra "$miau$miau"
-			i++;
-		}
-		while (mat_content[i])
-		{
-			mat_token[i] = ft_strdup("$");
-			mat_token[i] = ft_strjoin_gnl(mat_token[i], mat_content[i]);
-			//ft_printf("%s\n", mat_token[i]);
-			i++;
-		}
-		mat_token[i] = NULL;
-		if (mat_token)
-		{
-			expander_envp_value(data, &content, mat_token);
-			free_mat(mat_token);
-		}
+		expander_content_value(data, &content, mat_content);
+		free_mat(mat_content);
 	}
-	free_mat(mat_content);
 }
