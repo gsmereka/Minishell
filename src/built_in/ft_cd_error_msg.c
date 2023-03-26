@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 20:27:57 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/21 20:29:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/26 19:22:35 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ void	ft_cd_error_msg(int error, char *name, t_data *data)
 		error_msg = ": Permission denied\n";
 		write(2, error_msg, ft_strlen(error_msg));
 	}
+	else if (error == 4)
+		write(2, "bash: cd: HOME not set\n",
+			ft_strlen("bash: cd: HOME not set\n"));
 	att_exit_status(1, data);
 }
