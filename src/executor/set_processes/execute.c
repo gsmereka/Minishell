@@ -6,14 +6,16 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:17:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 11:49:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/26 18:29:47 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
+static void	print_execution_error(char *name, char *sufix);
 static void	normal_execution(t_cmd *cmd, t_data *data);
 static void	close_execution_fds(t_data *data);
+static void	identify_error(char *name, t_data *data);
 
 void	execute(t_cmd *cmd, t_data *data)
 {
@@ -35,20 +37,54 @@ void	execute(t_cmd *cmd, t_data *data)
 static void	normal_execution(t_cmd *cmd, t_data *data)
 {
 	int		exec;
-	char	*error_msg;
+	int		error_status;
 
 	att_exit_status(0, data);
 	exec = execve(cmd->name, cmd->args, data->virtual_envp);
 	if (exec == -1)
 	{
 		close_execution_fds(data);
-		error_msg = ft_strjoin_with_free
-			(ft_strdup(cmd->args[0]),
-				": command not found");
-		write(2, error_msg, ft_strlen(error_msg));
-		free(error_msg);
-		exit_error(127, "", data);
+		identify_error(cmd->args[0], data);
+		end_program(data);
 	}
+}
+
+static void	identify_error(char *name, t_data *data)
+{
+	struct stat	dir_info;
+
+	dir_info = (struct stat){0};
+	stat(name, &dir_info);
+	if (name[0] != '/' && ft_strncmp(name, "./", 2))
+	{
+		print_execution_error(name, ": command not found");
+		att_exit_status(127, data);
+	}
+	else if (access(name, F_OK) == -1)
+	{
+		print_execution_error(name, ":  No such file or directory");
+		att_exit_status(127, data);
+	}
+	else if (S_ISDIR(dir_info.st_mode))
+	{
+		print_execution_error(name, ": Is a directory");
+		att_exit_status(126, data);
+	}
+	else if (access(name, X_OK) == -1)
+	{
+		print_execution_error(name, ":  Permission denied");
+		att_exit_status(126, data);
+	}
+}
+
+static void	print_execution_error(char *name, char *sufix)
+{
+	char	*error_msg;
+
+	error_msg = ft_strjoin(name, sufix);
+	write(2, error_msg, ft_strlen(error_msg));
+	if (error_msg)
+		free(error_msg);
 }
 
 static void	close_execution_fds(t_data *data)
