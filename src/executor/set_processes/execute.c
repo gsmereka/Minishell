@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:17:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/26 18:46:50 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/26 18:49:33 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static void	identify_error(char *name, t_data *data)
 
 	dir_info = (struct stat){0};
 	stat(name, &dir_info);
-	if (name[0] != '/' && ft_strncmp(name, "./", 2))
+	if (name[0] != '/' && ft_strncmp(name, "./", 2)
+		&& ft_strncmp(name, "..", 2))
 	{
 		print_execution_error("", name, ": command not found\n");
 		att_exit_status(127, data);
