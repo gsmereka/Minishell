@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/26 19:29:07 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/26 20:01:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,15 @@ static int	validate_dir(char **dir, t_data *data)
 	}
 	dir_info = (struct stat){0};
 	stat(*dir, &dir_info);
-	if (!S_ISDIR(dir_info.st_mode))
-	{
+	if (access(*dir, F_OK) == -1)
+		ft_cd_error_msg(5, *dir, data);
+	else if (!S_ISDIR(dir_info.st_mode))
 		ft_cd_error_msg(2, *dir, data);
-		return (0);
-	}
 	else if (access(*dir, X_OK) == -1)
-	{
 		ft_cd_error_msg(3, *dir, data);
-		return (0);
-	}
-	return (1);
+	else
+		return (1);
+	return (0);
 }
 
 static char	*get_pwd(int buffer_size, t_data *data)
