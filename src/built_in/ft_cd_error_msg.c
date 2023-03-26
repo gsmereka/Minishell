@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 20:27:57 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/26 20:05:52 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/26 20:06:45 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	ft_cd_error_msg(int error, char *name, t_data *data)
 	}
 	else if (error == 2)
 	{
-		print_cd_error("bash: cd:", name, ": Not a directory\n");
+		print_cd_error("bash: cd: ", name, ": Not a directory\n");
 	}
 	else if (error == 3)
 	{
-		print_cd_error("bash: cd:", name, ": Permission denied\n");
+		print_cd_error("bash: cd: ", name, ": Permission denied\n");
 	}
 	else if (error == 4)
 		write(2, "bash: cd: HOME not set\n",
 			ft_strlen("bash: cd: HOME not set\n"));
 	else if (error == 5)
-		print_cd_error("bash: cd:", name,
+		print_cd_error("bash: cd: ", name,
 			": No such file or directory\n");
 	att_exit_status(1, data);
 }
