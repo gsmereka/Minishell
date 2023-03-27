@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 01:05:13 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/27 06:42:57 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/27 06:49:01 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,12 @@ void	expander_quotes_value(t_data *data, char **content) //vai splitar por ', ma
 {
 	char	**mat_content;
 	char	*new_content;
-	char	*aux_quote;
-	int		quotes;
 	int		i;
 	
-	mat_content = ft_split(*content, '\'');
+	mat_content = split_with_char(*content, '\'');
 	if (!mat_content)
 		return ;
 	new_content = NULL;
-	aux_quote = NULL;
-	quotes = count_chars(*content, '\''); //mudei de count quotes p count char
 	i = 0;
 	while (mat_content[i])
 	{
@@ -98,33 +94,11 @@ void	expander_quotes_value(t_data *data, char **content) //vai splitar por ', ma
 		i++;
 	}
 	i = 0;
-	if (*content[0] == '\'') //while
-	{
-		new_content = ft_strjoin_gnl(new_content, "'");
-		quotes--;
-	}
 	while (mat_content[i])
 	{
 		new_content = ft_strjoin_gnl(new_content, mat_content[i]);
-		if (quotes > 0) //fora dps um while tbm? n sei kkk
-		{
-			new_content = ft_strjoin_gnl(new_content, "'"); //e se n tiver no final? colocar um if antes p o começo tbm
-			quotes--; //n deu certo, pq quando tem varias dentro, sobra pra dps --preciso arrumar aspas seguidas
-		}
 		i++;
 	}
-//	if (ft_strlen)
-/*	if (*content[i - 1] != '\'') //if se for negativo antes!
-	{
-		aux_quote = ft_strdup(ft_strrchr(new_content, '\''));
-		free(*content);
-		*content = ft_strdup(aux_quote);
-		free(new_content);
-		free(aux_quote);
-		free_mat(mat_content);
-		return ;
-		ft_printf("oi\n");
-	}*/
 	free(*content);
 	*content = ft_strdup(new_content);
 	free(new_content);
@@ -142,14 +116,13 @@ void	expander_content_value(t_data *data, char ***content, char **mat_content) /
 		return ;
 	while (mat_content[i])
 	{
-		expander_quotes_value(data, &mat_content[i]); //aq ele vai alterar o mat content um por um --problema com quantidade de aspas... por causa do split
+		expander_quotes_value(data, &mat_content[i]); //aq ele vai alterar o mat content um por um
 		i++;
 	}
 	i = 0;
 	while (mat_content[i])
 	{
 		new_content = ft_strjoin_gnl(new_content, mat_content[i]);
-	//	new_content = ft_strjoin_gnl(new_content, " "); //pq fiz split por espaço
 		i++;
 	}
 	free(**content);
