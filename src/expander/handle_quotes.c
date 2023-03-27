@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 01:05:13 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/27 04:08:32 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/27 05:00:49 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	expander_envp_value(t_data *data, char **content) //tenho q splitar as aspa
 	int		flag_env;
 
 	mat_content = ft_split(*content, '$'); //funciona, mas vai ser o último 
+	if (!mat_content || !*mat_content)
+		return ;
 	new_content = NULL;
 	env = data->dict_envp;
 	i = 0;
@@ -80,11 +82,15 @@ void	expander_quotes_value(t_data *data, char **content) //vai splitar por ', ma
 	char	**mat_content;
 	char	*new_content;
 	char	*aux_quote;
+	int		quotes;
 	int		i;
 	
 	mat_content = ft_split(*content, '\'');
+	if (!mat_content)
+		return ;
 	new_content = NULL;
 	aux_quote = NULL;
+	quotes = count_quotes(*content);
 	i = 0;
 	while (mat_content[i])
 	{
@@ -92,15 +98,23 @@ void	expander_quotes_value(t_data *data, char **content) //vai splitar por ', ma
 		i++;
 	}
 	i = 0;
-	if (*content[0] == '\'')
+	if (*content[0] == '\'') //while
+	{
 		new_content = ft_strjoin_gnl(new_content, "'");
+		quotes--;
+	}
 	while (mat_content[i])
 	{
 		new_content = ft_strjoin_gnl(new_content, mat_content[i]);
-		new_content = ft_strjoin_gnl(new_content, "'"); //e se n tiver no final? colocar um if antes p o começo tbm
+		if (quotes > 0) //fora dps um while tbm? n sei kkk
+		{
+			new_content = ft_strjoin_gnl(new_content, "'"); //e se n tiver no final? colocar um if antes p o começo tbm
+			quotes--; //n deu certo, pq quando tem varias dentro, sobra pra dps --preciso arrumar aspas seguidas
+		}
 		i++;
 	}
-/*	if (*content[ft_strlen(*content) - 1] != '\'') //if se for negativo antes!
+//	if (ft_strlen)
+/*	if (*content[i - 1] != '\'') //if se for negativo antes!
 	{
 		aux_quote = ft_strdup(ft_strrchr(new_content, '\''));
 		free(*content);
@@ -124,9 +138,11 @@ void	expander_content_value(t_data *data, char ***content, char **mat_content) /
 
 	i = 0;
 	new_content = NULL;
+	if (!content || !*content || !***content)
+		return ;
 	while (mat_content[i])
 	{
-		expander_quotes_value(data, &mat_content[i]); //aq ele vai alterar o mat content um por um
+		expander_quotes_value(data, &mat_content[i]); //aq ele vai alterar o mat content um por um --problema com quantidade de aspas... por causa do split
 		i++;
 	}
 	i = 0;
@@ -145,6 +161,8 @@ void	check_envp_position_in_token(t_data *data, char **content) //nova func
 {
 	char	**mat_content;
 
+	if (!(*content))
+		return ;
 	mat_content = ft_split(*content, ' '); //checar *content antes?
 	if (mat_content)
 	{

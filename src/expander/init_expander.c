@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/26 19:53:48 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/27 05:12:31 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	init_expander(t_data *data)
 		aux_trim = NULL;
 		if (aux_token->content[0] == '$')
 			creck_token_in_envp(data, &aux_token->content[1], &aux_token);
-		else if (aux_token->content[0] == '"')
+		else if (aux_token->content[0] == '"') //tenho q dar free nas matriz em caso de erro(?) --atenção leaks, checar muito!
 		{
 			new_content = ft_strtrim(aux_token->content, "\"");
 			free(aux_token->content);
@@ -59,8 +59,14 @@ void	init_expander(t_data *data)
 			aux_token->content = ft_strdup(aux_trim);
 			free(aux_trim);
 		}
-	//	else if (aux_token->content[0] == '\'')
+		else if (aux_token->content[0] == '\'')
+		{
+			new_content = ft_strtrim(aux_token->content, "\'");
+			free(aux_token->content);
+			aux_token->content = ft_strdup(new_content);
+			free(new_content);
 			//ft_strtrim nas aspas simpes!
+		}
 		// ---atenção para "''" e '""'
 		//ft_printf("%s\n", aux_token->content);
 		aux_token = aux_token->next;
