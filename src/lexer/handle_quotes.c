@@ -6,13 +6,13 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 00:42:04 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/11 01:02:46 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/27 07:32:23 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static int	substitute_spaces(char **user_input, int *i, char quote)
+static int	substitute_spaces(char **user_input, int *i, char quote) //
 {
 	while ((*user_input)[*i] && (*user_input)[*i] != quote)
 	{

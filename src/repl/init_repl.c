@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/11 01:27:51 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/27 07:32:06 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_repl(t_data *data)
 		if (!is_valid(data->user_input)) //isso faz oq?
 			break ;
 		save_input_on_history(data->user_input); //ele salva só se for valido
-		if (init_lexer(data))
+		if (init_lexer(data)) //
 		{
 			init_expander(data);
 			execute_built_in(data);

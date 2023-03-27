@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 04:17:35 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/04 23:11:34 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/27 07:32:40 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_token	*create_token(char *content)
 	return (new_node);
 }
 
-t_token	*token_last(t_token *token)
+t_token	*token_last(t_token *token) //
 {
 	t_token	*last_token;
 
