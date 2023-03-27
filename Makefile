@@ -6,7 +6,7 @@
 #    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/11 04:14:56 by gde-mora         ###   ########.fr        #
+#    Updated: 2023/03/27 05:42:10 by gde-mora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC 	=	src/main.c \
 			src/expander/init_expander.c \
 			src/expander/handle_quotes.c \
 			src/expander/handle_quotes_utils.c \
+			src/expander/split_with_char.c \
 			src/lexer/init_lexer.c \
 			src/lexer/handle_quotes.c \
 			src/lexer/token_utils.c \

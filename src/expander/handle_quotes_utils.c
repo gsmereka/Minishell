@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 04:13:09 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/27 04:41:57 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/27 06:25:56 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,20 @@ size_t mat_len(char **mat)
 	return (i);
 }
 
-int	count_quotes(char *content) //colocar size_t?
+int	count_chars(char *content, char c) //colocar size_t?
 {
 	int	i;
-	int	quotes;
+	int	counter;
 	
 	i = 0;
-	quotes = 0;
+	counter = 0;
 	if (!content || !*content)
 		return (0);
 	while (content[i])
 	{
-		if (content[i] == '\'')
-			quotes++;
+		if (content[i] == c)
+			counter++;
 		i++;
 	}
-	return (quotes);
+	return (counter);
 }

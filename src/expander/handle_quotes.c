@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 01:05:13 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/27 05:00:49 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/27 06:42:57 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	expander_quotes_value(t_data *data, char **content) //vai splitar por ', ma
 		return ;
 	new_content = NULL;
 	aux_quote = NULL;
-	quotes = count_quotes(*content);
+	quotes = count_chars(*content, '\''); //mudei de count quotes p count char
 	i = 0;
 	while (mat_content[i])
 	{
@@ -149,7 +149,7 @@ void	expander_content_value(t_data *data, char ***content, char **mat_content) /
 	while (mat_content[i])
 	{
 		new_content = ft_strjoin_gnl(new_content, mat_content[i]);
-		new_content = ft_strjoin_gnl(new_content, " "); //pq fiz split por espaço
+	//	new_content = ft_strjoin_gnl(new_content, " "); //pq fiz split por espaço
 		i++;
 	}
 	free(**content);
@@ -163,8 +163,17 @@ void	check_envp_position_in_token(t_data *data, char **content) //nova func
 
 	if (!(*content))
 		return ;
-	mat_content = ft_split(*content, ' '); //checar *content antes?
-	if (mat_content)
+	mat_content = split_with_char(*content, ' '); //checar *content antes? //teste da nova split
+	
+	/*print p teste
+	int i = 0;
+	while (mat_content[i])
+	{
+		ft_printf("%s\n", mat_content[i]);
+		i++;
+	}*/
+	
+	if (mat_content) //quando a split retorna NULL da error de double free
 	{
 		expander_content_value(data, &content, mat_content);
 		free_mat(mat_content);

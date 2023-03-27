@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/27 05:12:31 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/27 05:21:50 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	creck_token_in_envp(t_data *data, char *content, t_token **env_token)
 		aux_env = aux_env->next;
 	}
 	free((*env_token)->content);
-//	(*env_token)->prev->next = (*env_token)->next; //implementar prev? ou driblar de outra forma?
-	(*env_token)->content = ft_strdup("");  //tem problemas com espaço nas envp vazias
+//	(*env_token)->prev->next = (*env_token)->next; //implementar prev? ou driblar de outra forma? -taok ja, eu acho
+	(*env_token)->content = ft_strdup("");  //tem problemas com espaço nas envp vazias --ta normal agr
 	return (0);
 }
 
