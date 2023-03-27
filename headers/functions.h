@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/27 07:21:25 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/03 20:33:13 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,6 @@ void	init_expander(t_data *data);
 void	init_lexer(t_data *data);
 void	add_token(t_token **tokens, char *content);
 void	token_clear(t_token **tokens);
-
-// expander
-void	init_expander(t_data *data);
-void	check_envp_position_in_token(t_data *data, char **content);
-void	free_mat(char **mat);
-size_t	mat_len(char **mat);
-int		count_chars(char *content, char c);
-char	**split_with_char(char const *s, char c); //teste
 
 // parser
 void	init_parser(t_data *data);
