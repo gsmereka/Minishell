@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/27 07:22:18 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/05 00:26:50 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	creck_token_in_envp(t_data *data, char *content, t_token **env_token)
 {
 	t_env	*aux_env;
 
-	//fazer split por $ no token!
 	aux_env = data->dict_envp;
 	while (aux_env)
 	{
@@ -39,46 +38,19 @@ int	creck_token_in_envp(t_data *data, char *content, t_token **env_token)
 		aux_env = aux_env->next;
 	}
 	free((*env_token)->content);
-//	(*env_token)->prev->next = (*env_token)->next; //implementar prev? ou driblar de outra forma? -taok ja, eu acho
-	(*env_token)->content = ft_strdup("");  //tem problemas com espaço nas envp vazias --ta normal agr
+	(*env_token)->content = ft_strdup(" ");
 	return (0);
 }
 
 void	init_expander(t_data *data)
 {
 	t_token	*aux_token;
-	char	*new_content;
-	char	*aux_trim;
 
 	aux_token = data->tokens;
 	while (aux_token)
 	{
-		new_content = NULL;
-		aux_trim = NULL;
 		if (aux_token->content[0] == '$')
-			creck_token_in_envp(data, &aux_token->content[1], &aux_token);
-		else if (aux_token->content[0] == '"') //tenho q dar free nas matriz em caso de erro(?) --atenção leaks, checar muito!
-		{
-			new_content = ft_strtrim(aux_token->content, "\"");
-			free(aux_token->content);
-			aux_token->content = ft_strdup(new_content);
-			free(new_content);
-			check_envp_position_in_token(data, &aux_token->content);
-			aux_trim = ft_strtrim(aux_token->content, " ");
-			free(aux_token->content);
-			aux_token->content = ft_strdup(aux_trim);
-			free(aux_trim);
-		}
-		else if (aux_token->content[0] == '\'')
-		{
-			new_content = ft_strtrim(aux_token->content, "\'");
-			free(aux_token->content);
-			aux_token->content = ft_strdup(new_content);
-			free(new_content);
-			//ft_strtrim nas aspas simpes!
-		}
-		// ---atenção para "''" e '""'
-		//ft_printf("%s\n", aux_token->content);
+			creck_token_in_envp(data, &aux_token->content[1], &aux_token); //coloco o +1 aq ja p avançar o $? --sim
 		aux_token = aux_token->next;
 	}
 }
