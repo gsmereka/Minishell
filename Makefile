@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/26 17:42:11 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/29 17:48:37 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC 	=	src/main.c \
 			src/envp/att_exit_status.c \
 			src/expander/init_expander.c \
 			src/lexer/init_lexer.c \
+			src/lexer/slice_tokens.c \
 			src/lexer/token_utils.c \
 			src/parser/init_parser.c \
 			src/parser/check_syntax.c \

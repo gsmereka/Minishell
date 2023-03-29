@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/14 19:00:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:45:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,24 @@ void	free_mat_user_input(char **user_input)
 	user_input = NULL;
 }
 
-void	init_lexer(t_data *data) //oq faz: separar a string por palavras   --- atenção nas aspas!   
+void	init_lexer(t_data *data)
 {
-	char	**user_input;
-	int		i;
-
-	handle_quotes(data);
-	user_input = ft_split(data->user_input, ' ');
-	user_input = set_spaces(user_input);
-	i = 0;
-	while (user_input[i])
-	{
-		add_token(&data->tokens, user_input[i]);
-		i++;
-	}
-	free_mat_user_input(user_input);
+	slice_tokens(data);
 }
+
+// void	init_lexer(t_data *data) //oq faz: separar a string por palavras   --- atenção nas aspas!   
+// {
+// 	char	**user_input;
+// 	int		i;
+
+// 	handle_quotes(data);
+// 	user_input = ft_split(data->user_input, ' ');
+// 	user_input = set_spaces(user_input);
+// 	i = 0;
+// 	while (user_input[i])
+// 	{
+// 		add_token(&data->tokens, user_input[i]);
+// 		i++;
+// 	}
+// 	free_mat_user_input(user_input);
+// }
