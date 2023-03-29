@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:45:29 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/29 18:15:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/29 20:09:27 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	set_new_token(char *word, int size, t_data *data);
 static int	save_normal_word(char *input, t_data *data);
 static int	is_reserved_word(char *input);
+static int	save_reserved_word(char *input, t_data *data);
 
 void	slice_tokens(t_data *data)
 {
@@ -48,7 +49,19 @@ static int	save_normal_word(char *input, t_data *data)
 	i = 0;
 	while (input [i])
 	{
-		// if (is_reserved_word(&input[i + 1])) falta por a condição de parar quando tiver um espaço que não esta entre aspas;
+		if (input[i] == '\'')
+		{
+			while (input[i] != '\'')
+				i++;
+		}
+		else if (input[i] == '"')
+		{
+			while (input[i] != '"')
+				i++;
+		}
+		if (is_reserved_word(&input[i]))
+			break ;
+		if (input[i] == 32 || (input[i] >= 9 && input[i] <= 13))
 			break ;
 		else
 			i++;
@@ -81,4 +94,5 @@ static void	set_new_token(char *word, int size, t_data *data)
 	new_word = ft_calloc(size + 1, sizeof(char));
 	ft_strlcpy(new_word, word, size + 1);
 	add_token(&data->tokens, new_word);
+	free(new_word);
 }
