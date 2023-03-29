@@ -6,14 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:45:29 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/29 18:03:36 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/29 18:15:18 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static void	set_new_token(char *word, int size, t_data *data);
-static int	save_word(char *input, t_data *data);
+static int	save_normal_word(char *input, t_data *data);
 static int	is_reserved_word(char *input);
 
 void	slice_tokens(t_data *data)
@@ -25,20 +25,30 @@ void	slice_tokens(t_data *data)
 	input = data->user_input;
 	while (input[i])
 	{
-		// i += skip_blankspaces(&input[i], data);
-		// i += save_reserved_word(&input[i], data);
-		i += save_word(&input[i], data);
+		while (input[i] == 32 || (input[i] >= 9 && input[i] <= 13))
+			i++;
+		i += save_reserved_word(&input[i], data);
+		i += save_normal_word(&input[i], data);
 	}
 }
 
-static int	save_word(char *input, t_data *data)
+static int	save_reserved_word(char *input, t_data *data)
+{
+	int	skip;
+
+	skip = is_reserved_word(input);
+	set_new_token(input, skip, data);
+	return (skip);
+}
+
+static int	save_normal_word(char *input, t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (input [i])
 	{
-		if (is_reserved_word(&input[i + 1]))
+		// if (is_reserved_word(&input[i + 1])) falta por a condição de parar quando tiver um espaço que não esta entre aspas;
 			break ;
 		else
 			i++;
@@ -50,11 +60,11 @@ static int	save_word(char *input, t_data *data)
 static int	is_reserved_word(char *input)
 {
 	if (ft_strncmp(input, "<<", 2) == 0)
-		return (1);
+		return (2);
 	else if (ft_strncmp(input, "<", 1) == 0)
 		return (1);
 	else if (ft_strncmp(input, ">>", 2) == 0)
-		return (1);
+		return (2);
 	else if (ft_strncmp(input, ">", 1) == 0)
 		return (1);
 	else if (ft_strncmp(input, "|", 1) == 0)
@@ -66,6 +76,8 @@ static void	set_new_token(char *word, int size, t_data *data)
 {
 	char	*new_word;
 
+	if (!word || !*word || !size)
+		return ;
 	new_word = ft_calloc(size + 1, sizeof(char));
 	ft_strlcpy(new_word, word, size + 1);
 	add_token(&data->tokens, new_word);
