@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:45:29 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/29 17:58:12 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/29 18:03:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	set_new_token(char *word, int size, t_data *data);
 static int	save_word(char *input, t_data *data);
+static int	is_reserved_word(char *input);
 
 void	slice_tokens(t_data *data)
 {
@@ -37,15 +38,28 @@ static int	save_word(char *input, t_data *data)
 	i = 0;
 	while (input [i])
 	{
-		// if (input[i] == '\'' || input[i] == '"')
-		// 	i += save_quoted_word(&input[i]);
-		// else if (is_reserved(&input[i + 1]))
-		// 	break ;
-		// else
+		if (is_reserved_word(&input[i + 1]))
+			break ;
+		else
 			i++;
 	}
 	set_new_token((&input[0]), i, data);
 	return (i);
+}
+
+static int	is_reserved_word(char *input)
+{
+	if (ft_strncmp(input, "<<", 2) == 0)
+		return (1);
+	else if (ft_strncmp(input, "<", 1) == 0)
+		return (1);
+	else if (ft_strncmp(input, ">>", 2) == 0)
+		return (1);
+	else if (ft_strncmp(input, ">", 1) == 0)
+		return (1);
+	else if (ft_strncmp(input, "|", 1) == 0)
+		return (1);
+	return (0);
 }
 
 static void	set_new_token(char *word, int size, t_data *data)
