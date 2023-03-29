@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/26 21:16:24 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/29 20:42:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	set_processes(t_data *data)
 static void	set_pipes(int cmd, t_data *data)
 {
 	if (pipe(data->exec->pipes[cmd]) == -1)
-		exit_error(24, "Too much commands to pipe", data);
+		exit_error(24, "minishell: Too much commands to pipe", data);
 }
 
 static void	set_fork(int cmd, t_data *data)
@@ -50,7 +50,7 @@ static void	set_fork(int cmd, t_data *data)
 	child_signals_handling(data);
 	pid = fork();
 	if (pid == -1)
-		exit_error(24, "Error at use fork() function", data);
+		exit_error(24, "minishell: Error at use fork() function", data);
 	if (pid == 0)
 	{
 		if (!redirect_input(cmd, data))
