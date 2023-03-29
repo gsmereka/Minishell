@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:45:29 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/29 20:09:27 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/29 20:36:44 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,7 @@ static void	set_new_token(char *word, int size, t_data *data)
 	new_word = ft_calloc(size + 1, sizeof(char));
 	ft_strlcpy(new_word, word, size + 1);
 	add_token(&data->tokens, new_word);
+	// ft_printf(new_word);
+	// write(1, "\n", 1);
 	free(new_word);
 }
