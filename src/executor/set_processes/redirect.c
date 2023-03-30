@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:49:58 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 16:51:54 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:12:11 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	redirect(int cmd_index, t_data *data)
 		while (cmd->files[i])
 		{
 			if (cmd->files_modes[i] == 0 || cmd->files_modes[i] == 1)
-				last_outfile = i;
+				last_infile = i;
 			else if (cmd->files_modes[i] == 2 || cmd->files_modes[i] == 3)
 				last_outfile = i;
 			i++;
