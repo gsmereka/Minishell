@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/29 17:47:31 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:24:06 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void		clear_execution_data(t_data *data);
 void		execute_built_in(t_cmd *cmd, t_data *data);
 int			is_reserved(char *word, t_token *token);
 int			get_commands_info(t_data *data);
+void		get_files(t_token *token, t_cmd *cmd);
 void		format_cmd(t_token *token, t_cmd *cmd);
 void		get_outputs(t_token *token, t_cmd *cmd);
 void		get_inputs(t_token *token, t_cmd *cmd);
