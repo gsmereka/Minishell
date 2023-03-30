@@ -12,9 +12,10 @@
 
 #include "../../../headers/minishell.h"
 
-static void	init_fds(int *fds, int amount);
-static int	count_files(t_token *token);
-static void	get_files_details(t_token *token, t_cmd *cmd);
+static void		init_fds(int *fds, int amount);
+static int		count_files(t_token *token);
+static void		get_files_details(t_token *token, t_cmd *cmd);
+static t_token	*format_file(t_token *token, int file, int mode, t_cmd *cmd);
 
 void	get_files(t_token *token, t_cmd *cmd)
 {
@@ -27,6 +28,8 @@ void	get_files(t_token *token, t_cmd *cmd)
 	cmd->files_fd = ft_calloc(files_amount + 1, sizeof (int));
 	init_fds(cmd->files_fd, files_amount);
 	cmd->files_modes = ft_calloc(files_amount + 1, sizeof (int));
+	if (!cmd->files || !cmd->files_modes || !cmd->files_fd)
+		return ;
 	get_files_details(token, cmd);
 }
 
@@ -41,38 +44,39 @@ static void	get_files_details(t_token *token, t_cmd *cmd)
 	int	file;
 
 	file = 0;
-	if (!cmd->files || !cmd->files_modes)
-		return ;
 	while (token)
 	{
 		if (is_reserved("<", token))
 		{
-			cmd->files[file] = ft_strdup(token->next->content);
-			cmd->files_modes[file] = 0;
+			format_file(token, file, 0, cmd);
 			file++;
 		}
 		else if (is_reserved("<<", token))
 		{
-			cmd->files[file] = ft_strdup(token->next->content);
-			cmd->files_modes[file] = 1;
+			format_file(token, file, 1, cmd);
 			file++;
 		}
 		else if (is_reserved(">", token))
 		{
-			cmd->files[file] = ft_strdup(token->next->content);
-			cmd->files_modes[file] = 2;
+			format_file(token, file, 2, cmd);
 			file++;
 		}
 		else if (is_reserved(">>", token))
 		{
-			cmd->files[file] = ft_strdup(token->next->content);
-			cmd->files_modes[file] = 3;
+			format_file(token, file, 3, cmd);
 			file++;
 		}
 		else if (is_reserved("|", token))
 			break ;
 		token = token->next;
 	}
+}
+
+static t_token	*format_file(t_token *token, int file, int mode, t_cmd *cmd)
+{
+	cmd->files[file] = ft_strdup(token->next->content);
+	cmd->files_modes[file] = mode;
+	return (token);
 }
 
 static int	count_files(t_token *token)

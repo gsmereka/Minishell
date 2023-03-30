@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 12:17:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:45:04 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_cmd
 	int		**heredocs_pipes;
 	char	**infiles;
 	char	**outfiles;
-	char	*files_fd; // novo
+	int		*files_fd; // novo
 	char	**files; // novo
 	int		*files_modes; // novo
 	int		*inputs_modes;
