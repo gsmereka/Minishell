@@ -15,7 +15,7 @@
 static void		init_fds(int *fds, int amount);
 static int		count_files(t_token *token);
 static void		get_files_details(t_token *token, t_cmd *cmd);
-static t_token	*format_file(t_token *token, int file, int mode, t_cmd *cmd);
+static int	format_file(t_token *token, int file, t_cmd *cmd);
 
 void	get_files(t_token *token, t_cmd *cmd)
 {
@@ -46,37 +46,41 @@ static void	get_files_details(t_token *token, t_cmd *cmd)
 	file = 0;
 	while (token)
 	{
-		if (is_reserved("<", token))
-		{
-			format_file(token, file, 0, cmd);
+		if (format_file(token, file, cmd))
 			file++;
-		}
-		else if (is_reserved("<<", token))
-		{
-			format_file(token, file, 1, cmd);
-			file++;
-		}
-		else if (is_reserved(">", token))
-		{
-			format_file(token, file, 2, cmd);
-			file++;
-		}
-		else if (is_reserved(">>", token))
-		{
-			format_file(token, file, 3, cmd);
-			file++;
-		}
 		else if (is_reserved("|", token))
 			break ;
 		token = token->next;
 	}
 }
 
-static t_token	*format_file(t_token *token, int file, int mode, t_cmd *cmd)
+static int	format_file(t_token *token, int file, t_cmd *cmd)
 {
-	cmd->files[file] = ft_strdup(token->next->content);
-	cmd->files_modes[file] = mode;
-	return (token);
+	if (is_reserved("<", token))
+	{
+		cmd->files[file] = ft_strdup(token->next->content);
+		cmd->files_modes[file] = 0;
+		return (1);
+	}
+	else if (is_reserved("<<", token))
+	{
+		cmd->files[file] = ft_strdup(token->next->content);
+		cmd->files_modes[file] = 1;
+		return (1);
+	}
+	else if (is_reserved(">", token))
+	{
+		cmd->files[file] = ft_strdup(token->next->content);
+		cmd->files_modes[file] = 2;
+		return (1);
+	}
+	else if (is_reserved(">>", token))
+	{
+		cmd->files[file] = ft_strdup(token->next->content);
+		cmd->files_modes[file] = 3;
+		return (1);
+	}
+	return (0);
 }
 
 static int	count_files(t_token *token)
