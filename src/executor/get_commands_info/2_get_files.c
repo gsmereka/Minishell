@@ -33,12 +33,6 @@ void	get_files(t_token *token, t_cmd *cmd)
 	get_files_details(token, cmd);
 }
 
-// FILES MODES
-// 0 = Normal input '<'
-// 1 = Heredoc '<<'
-// 2 - Normal output '>'
-// 3 - Append Output '>>'
-
 static void	get_files_details(t_token *token, t_cmd *cmd)
 {
 	int	file;
@@ -53,6 +47,12 @@ static void	get_files_details(t_token *token, t_cmd *cmd)
 		token = token->next;
 	}
 }
+
+// FILES MODES
+// 0 = Normal input '<'
+// 1 = Heredoc '<<'
+// 2 - Normal output '>'
+// 3 - Append Output '>>'
 
 static int	format_file(t_token *token, int file, t_cmd *cmd)
 {
