@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:26:08 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 13:13:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:22:58 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 static int	print_syntax_error_msg(char *token, t_data *data);
 static int	search_errors(t_token *token, t_data *data);
 
-// vou fazer um loop que vai salvando os heredocs, 
-// o primeiro erro de syntax identificado é printado
-// se tiver algum erro de syntax, os tokens são limpos, e é
-// passada a lista com heredocs salvos
 int	check_syntax(t_data *data)
 {
 	if (search_errors(data->tokens, data))

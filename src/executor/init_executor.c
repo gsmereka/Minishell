@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 16:52:32 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:21:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ static int	do_not_need_fork(t_data *data)
 	first_cmd = data->exec->cmds[0];
 	if (!first_cmd->args)
 		return (0);
-	if (ft_strncmp(first_cmd->args[0], "env", // mais algum outro cmd ?
-			ft_strlen(first_cmd->args[0])) == 0)
+	if (ft_strcmp(first_cmd->args[0], "env") == 0)
+		return (0);
+	else if (ft_strcmp(first_cmd->args[0], "echo") == 0)
 		return (0);
 	if (is_built_in(first_cmd))
 		return (1);
