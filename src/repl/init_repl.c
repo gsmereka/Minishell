@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 12:14:43 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/29 22:12:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	init_repl(t_data *data)
 		if (!read_user_input(data))
 			break ;
 		init_lexer(data);
-		init_expander(data);
-		init_parser(data);
-		init_executor(data);
+		// init_expander(data);
+		// init_parser(data);
+		// init_executor(data);
 		clear_repl(data);
 	}
 }
