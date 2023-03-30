@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/30 12:24:06 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:49:34 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ int			get_env_paths(t_data *data);
 int			set_cmds_paths(t_data *data);
 int			set_processes(t_data *data);
 void		set_files(t_cmd *cmd);
-int			redirect_input(int cmd, t_data *data);
-int			redirect_output(int cmd, t_data *data);
+int			redirect(int cmd, t_data *data);
 void		execute(t_cmd *cmd, t_data *data);
 char		*get_next_line_with_free(int fd, int stop);
 

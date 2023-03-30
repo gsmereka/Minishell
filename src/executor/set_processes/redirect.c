@@ -6,96 +6,86 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:49:58 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 16:26:14 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:51:54 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-static int	last_infile_fd(char **files, int *files_fd, int *files_modes);
-static int	last_outfile_fd(char **files, int *files_fd, int *files_modes);
+static int	redirect_input(int infile, int cmd_index, t_data *data);
+static int	redirect_output(int outfile, int cmd_index, t_data *data);
 
-int	redirect_input(int cmd_index, t_data *data)
+static int	redirect_input(int infile, int cmd_index, t_data *data)
 {
-	int		last_infile;
+	int		infile_fd;
 	t_cmd	*cmd;
 
 	cmd = data->exec->cmds[cmd_index];
-	if (cmd->files)
-	{
-		last_infile = last_infile_fd(cmd->files,
-				cmd->files_fd, cmd->files_modes);
-		if (last_infile != -1)
-			dup2(cmd->files_fd[last_infile], STDIN_FILENO);
-		else
-		{
-			att_exit_status(1, data);
-			return (0);
-		}
-	}
-	else
+	if (infile == -1)
 	{
 		if (cmd_index > 0)
 			dup2(data->exec->pipes[cmd_index - 1][0], STDIN_FILENO);
+		return (1);
+	}
+	infile_fd = cmd->files_fd[infile];
+	if (infile_fd != -1)
+		dup2(infile_fd, STDIN_FILENO);
+	else
+	{
+		att_exit_status(1, data);
+		return (0);
 	}
 	return (1);
 }
 
-int	redirect_output(int cmd_index, t_data *data)
+static int	redirect_output(int outfile, int cmd_index, t_data *data)
 {
-	int		last_outfile;
+	int		outfile_fd;
 	t_cmd	*cmd;
 
 	cmd = data->exec->cmds[cmd_index];
-	if (cmd->files)
-	{
-		last_outfile = last_outfile_fd(cmd->files,
-				cmd->files_fd, cmd->files_modes);
-		if (last_outfile != -1)
-			dup2(cmd->files_fd[last_outfile], STDOUT_FILENO);
-		else
-		{
-			att_exit_status(1, data);
-			return (0);
-		}
-	}
-	else
+	if (outfile == -1)
 	{
 		if (cmd_index != data->exec->cmds_amount - 1)
 			dup2(data->exec->pipes[cmd_index][1], STDOUT_FILENO);
+		return (1);
+	}
+	outfile_fd = cmd->files_fd[outfile];
+	if (outfile_fd != -1)
+		dup2(outfile_fd, STDOUT_FILENO);
+	else
+	{
+		att_exit_status(1, data);
+		return (0);
 	}
 	return (1);
 }
 
-static int	last_infile_fd(char **files, int *files_fd, int *files_modes)
+int	redirect(int cmd_index, t_data *data)
 {
-	int	i;
-	int	last_fd;
+	int		i;
+	int		last_outfile;
+	int		last_infile;
+	t_cmd	*cmd;
 
 	i = 0;
-	last_fd = -1;
-	while (files[i])
+	last_outfile = -1;
+	last_infile = -1;
+	cmd = data->exec->cmds[cmd_index];
+	if (cmd->files)
 	{
-		if (files_modes[i] == 0 || files_modes[i] == 1)
-			last_fd = files_fd[i];
-		i++;
+		while (cmd->files[i])
+		{
+			if (cmd->files_modes[i] == 0 || cmd->files_modes[i] == 1)
+				last_outfile = i;
+			else if (cmd->files_modes[i] == 2 || cmd->files_modes[i] == 3)
+				last_outfile = i;
+			i++;
+		}
 	}
-	return (last_fd);
+	if (!redirect_input(last_infile, cmd_index, data))
+		return (0);
+	if (!redirect_output(last_outfile, cmd_index, data))
+		return (0);
+	return (1);
 }
-
-static int	last_outfile_fd(char **files, int *files_fd, int *files_modes)
-{
-	int	i;
-	int	last_fd;
-
-	i = 0;
-	last_fd = -1;
-	while (files[i])
-	{
-		if (files_modes[i] == 2 || files_modes[i] == 3)
-			last_fd = files_fd[i];
-		i++;
-	}
-	return (last_fd);
-}
-
