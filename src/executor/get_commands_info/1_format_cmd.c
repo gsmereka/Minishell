@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:11:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 13:16:43 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:04:30 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static void	set_cmd_args_composition(int args_size, t_token *token, t_cmd *cmd)
 			token = token->next;
 		else if (is_reserved(">>", token))
 			token = token->next;
+		else if (is_reserved("|", token))
+			break ;
 		else
 		{
 			cmd->args[index] = ft_strdup(token->content);
