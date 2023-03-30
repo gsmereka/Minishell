@@ -3,52 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/05 01:33:09 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:55:48 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static void	identify_flags(int *n_flag, char **args);
-static void	display_text_line(int *n_flag, t_data *data);
+static int	identify_flags(char **args);
+static void	display_text_line(char **args);
 
-// Se o primeiro argumento for -n, ele retira a quebra de linha no final.
 void	ft_echo(char **args, t_data *data)
 {
 	int	n_flag;
 
-	n_flag = 0;
-	if (!args || !args[1])
+	(void)data;
+	if (!args)
 		return ;
-	identify_flags(&n_flag, args);
-	display_text_line(&n_flag, data);
+	n_flag = identify_flags(args);
+	if (!n_flag)
+	{
+		display_text_line(args);
+		ft_putstr_fd("\n", 1);
+	}
+	else
+		display_text_line(args + 1);
 }
 
-static void	identify_flags(int *n_flag, char **args)
+static int	identify_flags(char **args)
 {
+	if (!args[1])
+		return (0);
 	if (ft_strncmp(args[1], "-n", 2) == 0)
-		*n_flag = 1;
+		return (1);
+	return (0);
 }
 
-static void	display_text_line(int *n_flag, t_data *data)
+static void	display_text_line(char **args)
 {
-	int		i;
-	t_token	*aux_token;
+	int	i;
 
 	i = 1;
-	aux_token = data->tokens->next;
-	if (*n_flag)
-		i++;
-	while (aux_token)
+	while (args[i])
 	{
-		write(1, aux_token->content, ft_strlen(aux_token->content));
-		if (aux_token->next)							 // se ainda não for a ultima palavra
+		write(1, args[i], ft_strlen(args[i]));
+		if (args[i + 1])
 			write(1, " ", 1);
-		aux_token = aux_token->next;
+		i++;
 	}
-	if (*n_flag == 0) 						// se o primeiro argumento for -n
-		write(1, "\n", 1);
 }

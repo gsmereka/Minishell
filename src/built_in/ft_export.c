@@ -6,16 +6,16 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/04 19:43:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/26 19:04:38 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static int		is_valid(char *str, t_data *data);
-static t_env	*is_repeated(char *str, t_data *data);
 static void		add_new_environment_variable(char *str, t_data *data);
 static void		att_variable(t_env *new_var, char *str);
+static void		print_vars(t_data *data);
 
 void	ft_export(char **args, t_data *data)
 {
@@ -23,13 +23,18 @@ void	ft_export(char **args, t_data *data)
 	int		i;
 
 	i = 1;
-	if (!args || !args[i])
+	if (!args)
 		return ;
+	if (!args[1])
+	{
+		print_vars(data);
+		return ;
+	}
 	while (args[i])
 	{
 		if (is_valid(args[i], data))
 		{
-			new_var = is_repeated(args[i], data);
+			new_var = find_env(args[i], data);
 			if (new_var)
 				att_variable(new_var, args[i]);
 			if (!new_var)
@@ -57,20 +62,6 @@ static void	add_new_environment_variable(char *str, t_data *data)
 	free(value);
 }
 
-static t_env	*is_repeated(char *str, t_data *data)
-{
-	t_env	*variable;
-
-	variable = data->dict_envp;
-	while (variable)
-	{
-		if (ft_strncmp(variable->key, str, ft_strlen(variable->key)) == 0)
-			return (variable);
-		variable = variable->next;
-	}
-	return (NULL);
-}
-
 static void	att_variable(t_env *new_var, char *str)
 {
 	int		j;
@@ -89,10 +80,6 @@ static void	att_variable(t_env *new_var, char *str)
 	new_var->value = value;
 }
 
-// Utilizo a verificação do parsing dos nomes de variaveis,
-// segundo o manual do bash "A word consisting solely of letters,
-// numbers, and underscores, and beginning with a letter or underscore.
-// Names are used as shell variable and function names. Also referred to as an identifier."
 static int	is_valid(char *str, t_data *data)
 {
 	int		i;
@@ -115,4 +102,26 @@ static int	is_valid(char *str, t_data *data)
 		i++;
 	}
 	return (0);
+}
+
+static void	print_vars(t_data *data)
+{
+	char	**envp;
+	int		i;
+
+	i = 0;
+	envp = data->virtual_envp;
+	if (!envp)
+		return ;
+	while (envp[i])
+	{
+		if (envp[i][0] == '?' && envp[i][1] == '=')
+			i++;
+		else
+		{
+			ft_printf("declare -x ");
+			ft_printf("%s\n", envp[i]);
+			i++;
+		}
+	}
 }

@@ -1,40 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_repl_signals_handling.c                       :+:      :+:    :+:   */
+/*   child_signals_handling.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/03 12:15:30 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/02/03 14:14:13 by gsmereka         ###   ########.fr       */
+/*   Created: 2023/03/13 21:08:51 by gsmereka          #+#    #+#             */
+/*   Updated: 2023/03/23 00:15:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static void	handle_ctrl_c(int signal);
+extern t_data	*g_aux_data;
 
-void	init_repl_signals_handling(t_data *data)
+static void	handle_ctrl_c(int signal);
+static void	handle_backslash(int signal);
+
+void	child_signals_handling(t_data *data)
 {
 	struct sigaction	ctrl_c;
-	struct sigaction	ctrl_backsslash;
+	struct sigaction	ctrl_backslash;
 
-	(void)data;
+	g_aux_data = data;
 	ft_bzero(&ctrl_c, sizeof(struct sigaction));
-	ft_bzero(&ctrl_backsslash, sizeof(struct sigaction));
+	ft_bzero(&ctrl_backslash, sizeof(struct sigaction));
 	ctrl_c.sa_handler = handle_ctrl_c;
-	ctrl_backsslash.sa_handler = SIG_IGN;
+	ctrl_backslash.sa_handler = handle_backslash;
 	sigaction(SIGINT, &ctrl_c, NULL);
-	sigaction(SIGQUIT, &ctrl_backsslash, NULL);
+	sigaction(SIGQUIT, &ctrl_backslash, NULL);
 }
 
 static void	handle_ctrl_c(int signal)
 {
 	if (signal == SIGINT)
 	{
-		ft_putchar_fd('\n', 1);
-		rl_replace_line("", 1);
-		rl_on_new_line();
-		rl_redisplay();
+		att_exit_status(130, g_aux_data);
+		ft_putstr_fd("\n", 1);
+		if (g_aux_data->exec)
+			g_aux_data->exec->need_interrupt = 1;
+	}
+}
+
+static void	handle_backslash(int signal)
+{
+	if (signal == SIGQUIT)
+	{
+		att_exit_status(131, g_aux_data);
+		ft_putstr_fd("Quit\n", 1);
+		if (g_aux_data->exec)
+			g_aux_data->exec->need_interrupt = 1;
 	}
 }

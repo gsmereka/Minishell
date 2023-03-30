@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/27 05:42:10 by gde-mora         ###   ########.fr        #
+#    Updated: 2023/03/30 20:19:26 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,33 +14,61 @@ NAME 	=	minishell
 
 SRC 	=	src/main.c \
 			src/end_program.c \
+			src/ft_strjoin_with_free.c \
+			src/close_fds.c \
+			src/signals/init_repl_signals_handling.c \
+			src/signals/heredoc_signals_handling.c \
+			src/signals/child_signals_handling.c \
 			src/repl/init_repl.c \
-			src/repl/init_repl_signals_handling.c \
+			src/repl/set_prompt.c \
 			src/envp/dict_env_utils.c \
 			src/envp/find_env.c \
 			src/envp/set_initial_envp.c \
 			src/envp/att_virtual_envp.c \
-			src/envp/att_envp_exitstatus_var.c \
+			src/envp/att_exit_status.c \
 			src/expander/init_expander.c \
 			src/expander/handle_quotes.c \
 			src/expander/handle_quotes_utils.c \
 			src/expander/split_with_char.c \
 			src/lexer/init_lexer.c \
+			src/lexer/slice_tokens.c \
 			src/lexer/handle_quotes.c \
 			src/lexer/token_utils.c \
 			src/lexer/redirect_token_utils.c \
 			src/parser/init_parser.c \
+			src/parser/check_syntax.c \
+			src/parser/is_redirect.c \
 			src/executor/execute_built_in.c \
 			src/executor/init_executor.c \
+			src/executor/get_commands_info/clear_execution_data.c \
+			src/executor/get_commands_info/is_reserved.c \
+			src/executor/get_commands_info/0_get_commands_info.c \
+			src/executor/get_commands_info/2_get_files.c \
+			src/executor/get_commands_info/1_format_cmd.c \
+			src/executor/get_commands_info/3_get_env_paths.c \
+			src/executor/get_commands_info/4_set_cmds_paths.c \
+			src/executor/heredoc/get_next_line_with_free.c \
+			src/executor/heredoc/set_heredoc.c \
+			src/executor/heredoc/heredoc_cmd_loop.c \
+			src/executor/heredoc/heredoc_eof_delimitation.c \
+			src/executor/heredoc/close_heredoc_pipes.c \
+			src/executor/set_processes/set_processes.c \
+			src/executor/set_processes/execute.c \
+			src/executor/set_processes/set_files.c \
+			src/executor/set_processes/redirect.c \
+			src/built_in/ft_litoa.c \
+			src/built_in/ft_atoli.c \
 			src/built_in/ft_cd.c \
 			src/built_in/ft_cd_error_msg.c \
 			src/built_in/ft_echo.c \
 			src/built_in/ft_env.c \
 			src/built_in/ft_export_error_msg.c \
 			src/built_in/ft_exit.c \
+			src/built_in/ft_exit_utils.c \
 			src/built_in/ft_export.c \
 			src/built_in/ft_pwd.c \
 			src/built_in/ft_unset.c \
+			src/built_in/is_built_in.c \
 
 OBJ 	=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
@@ -51,7 +79,7 @@ LIBFT_A =	./libft/libft.a
 
 HEADERS =	./headers/minishell.h ./headers/functions.h ./headers/structs.h
 
-# CCFLAGS =	-Wall -Wextra -Werror
+# CCFLAGS =	-Wall -Wextra -Werror -g3
 
 READLINE_FLAG	=	-lreadline
 
@@ -95,6 +123,10 @@ create_obj_dir:
 	@mkdir -p $(OBJ_DIR)/src/expander
 	@mkdir -p $(OBJ_DIR)/src/executor
 	@mkdir -p $(OBJ_DIR)/src/built_in
+	@mkdir -p $(OBJ_DIR)/src/executor/get_commands_info
+	@mkdir -p $(OBJ_DIR)/src/executor/heredoc
+	@mkdir -p $(OBJ_DIR)/src/executor/set_processes
+	@mkdir -p $(OBJ_DIR)/src/signals
 
 ## FULL CLEAN ALL OBJECTS AND TESTERS
 git: fclean
@@ -102,6 +134,6 @@ git: fclean
 	git add . && clear && git status
 
 valgrind: $(NAME)
-	valgrind --suppressions=tester/readline.supp --leak-check=full --show-leak-kinds=all  ./minishell
+	valgrind --suppressions=$$PWD/tester/readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
 
 .PHONY: all clean fclean re create_obj_dir git valgrind
