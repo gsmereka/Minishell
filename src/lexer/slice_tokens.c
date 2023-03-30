@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:45:29 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/29 22:21:30 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:59:12 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ static void	set_new_token(char *word, int size, t_data *data)
 		return ;
 	ft_strlcpy(new_word, word, size + 1);
 	add_token(&data->tokens, new_word);
+	// ft_printf("%s\n", new_word);
 	free(new_word);
 }
