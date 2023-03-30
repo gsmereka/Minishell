@@ -6,13 +6,14 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:49:58 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/29 20:43:11 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:26:14 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-static int	last_fd(char **files, int *files_fd);
+static int	last_infile_fd(char **files, int *files_fd, int *files_modes);
+static int	last_outfile_fd(char **files, int *files_fd, int *files_modes);
 
 int	redirect_input(int cmd_index, t_data *data)
 {
@@ -20,12 +21,12 @@ int	redirect_input(int cmd_index, t_data *data)
 	t_cmd	*cmd;
 
 	cmd = data->exec->cmds[cmd_index];
-	if (cmd->infiles)
+	if (cmd->files)
 	{
-		last_infile = last_fd(cmd->infiles,
-				cmd->infiles_fd);
+		last_infile = last_infile_fd(cmd->files,
+				cmd->files_fd, cmd->files_modes);
 		if (last_infile != -1)
-			dup2(last_infile, STDIN_FILENO);
+			dup2(cmd->files_fd[last_infile], STDIN_FILENO);
 		else
 		{
 			att_exit_status(1, data);
@@ -46,12 +47,12 @@ int	redirect_output(int cmd_index, t_data *data)
 	t_cmd	*cmd;
 
 	cmd = data->exec->cmds[cmd_index];
-	if (cmd->outfiles)
+	if (cmd->files)
 	{
-		last_outfile = last_fd(cmd->outfiles,
-				cmd->outfiles_fd);
+		last_outfile = last_outfile_fd(cmd->files,
+				cmd->files_fd, cmd->files_modes);
 		if (last_outfile != -1)
-			dup2(last_outfile, STDOUT_FILENO);
+			dup2(cmd->files_fd[last_outfile], STDOUT_FILENO);
 		else
 		{
 			att_exit_status(1, data);
@@ -66,14 +67,35 @@ int	redirect_output(int cmd_index, t_data *data)
 	return (1);
 }
 
-static int	last_fd(char **files, int *files_fd)
+static int	last_infile_fd(char **files, int *files_fd, int *files_modes)
 {
 	int	i;
+	int	last_fd;
 
 	i = 0;
+	last_fd = -1;
 	while (files[i])
 	{
+		if (files_modes[i] == 0 || files_modes[i] == 1)
+			last_fd = files_fd[i];
 		i++;
 	}
-	return (files_fd[i - 1]);
+	return (last_fd);
 }
+
+static int	last_outfile_fd(char **files, int *files_fd, int *files_modes)
+{
+	int	i;
+	int	last_fd;
+
+	i = 0;
+	last_fd = -1;
+	while (files[i])
+	{
+		if (files_modes[i] == 2 || files_modes[i] == 3)
+			last_fd = files_fd[i];
+		i++;
+	}
+	return (last_fd);
+}
+

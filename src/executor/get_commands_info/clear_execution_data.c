@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 21:50:32 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 18:19:53 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 13:51:28 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,12 @@ static void	clear_cmd(t_cmd *cmd)
 		free(cmd->name);
 	if (cmd->args)
 		free_array_list((void **)cmd->args);
-	if (cmd->infiles_fd)
-		free(cmd->infiles_fd);
-	if (cmd->outfiles_fd)
-		free(cmd->outfiles_fd);
-	if (cmd->infiles)
-		free_array_list((void **)cmd->infiles);
-	if (cmd->outfiles)
-		free_array_list((void **)cmd->outfiles);
-	if (cmd->inputs_modes)
-		free(cmd->inputs_modes);
-	if (cmd->outputs_modes)
-		free(cmd->outputs_modes);
+	if (cmd->files_fd)
+		free(cmd->files_fd);
+	if (cmd->files)
+		free_array_list((void **)cmd->files);
+	if (cmd->files_modes)
+		free(cmd->files_modes);
 	if (cmd->heredocs_pipes)
 		free_array_list((void **)cmd->heredocs_pipes);
 	if (cmd)

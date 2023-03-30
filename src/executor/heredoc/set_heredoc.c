@@ -51,9 +51,9 @@ static int	alloc_individual_heredoc_pipes(t_cmd *cmd)
 	int	size;
 
 	size = 0;
-	if (!cmd->infiles)
+	if (!cmd->files)
 		return (1);
-	while (cmd->infiles[size])
+	while (cmd->files[size])
 		size++;
 	cmd->heredocs_pipes = ft_calloc(size + 1, sizeof(int *));
 	if (!cmd->heredocs_pipes)

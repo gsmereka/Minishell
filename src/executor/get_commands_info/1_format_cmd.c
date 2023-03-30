@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:11:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 12:23:07 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 13:16:43 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static t_token	*find_actual_command(t_token *token);
 static void		set_cmd_composition(t_token *token, t_cmd *cmd);
+static void		set_cmd_args_composition(int args_size,
+					t_token *token, t_cmd *cmd);
 static int		count_args(t_token *token);
 
 void	format_cmd(t_token *token, t_cmd *cmd)
@@ -23,8 +25,6 @@ void	format_cmd(t_token *token, t_cmd *cmd)
 	get_files(token, cmd);
 	cmd_token = find_actual_command(token);
 	set_cmd_composition(cmd_token, cmd);
-	get_inputs(token, cmd);
-	get_outputs(token, cmd);
 }
 
 static void	set_cmd_composition(t_token *token, t_cmd *cmd)
@@ -37,13 +37,32 @@ static void	set_cmd_composition(t_token *token, t_cmd *cmd)
 		return ;
 	cmd->name = ft_strdup(token->content);
 	cmd->args = ft_calloc(args_amount + 1, sizeof(char *));
+	if (!cmd->name || !cmd->args)
+		return ;
+	set_cmd_args_composition(args_amount, token, cmd);
+}
+
+static void	set_cmd_args_composition(int args_size, t_token *token, t_cmd *cmd)
+{
+	int	index;
+
 	index = 0;
-	while (index < args_amount)
+	while (index < args_size)
 	{
-		if (cmd->args)
+		if (is_reserved("<", token))
+			token = token->next;
+		else if (is_reserved("<<", token))
+			token = token->next;
+		else if (is_reserved(">", token))
+			token = token->next;
+		else if (is_reserved(">>", token))
+			token = token->next;
+		else
+		{
 			cmd->args[index] = ft_strdup(token->content);
+			index++;
+		}
 		token = token->next;
-		index++;
 	}
 }
 
@@ -55,16 +74,17 @@ static int	count_args(t_token *token)
 	while (token)
 	{
 		if (is_reserved("<", token))
-			break ;
+			token = token->next;
 		else if (is_reserved("<<", token))
-			break ;
+			token = token->next;
 		else if (is_reserved(">", token))
-			break ;
+			token = token->next;
 		else if (is_reserved(">>", token))
-			break ;
+			token = token->next;
 		else if (is_reserved("|", token))
-			break ;
-		args_amount++;
+			token = token->next;
+		else
+			args_amount++;
 		token = token->next;
 	}
 	return (args_amount);

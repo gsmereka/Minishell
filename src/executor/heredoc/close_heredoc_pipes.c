@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:05:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 17:43:17 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 13:53:02 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	close_cmd_heredoc_pipes(t_cmd *cmd)
 	int	i;
 
 	i = 0;
-	if (!cmd->infiles)
+	if (!cmd->files)
 		return ;
-	while (cmd->infiles[i])
+	while (cmd->files[i])
 	{
-		if (!cmd->inputs_modes)
+		if (!cmd->files_modes)
 			break ;
-		if (cmd->inputs_modes[i] == 1)
+		if (cmd->files_modes[i] == 1)
 		{
 			if (!cmd->heredocs_pipes)
 				return ;

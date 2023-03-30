@@ -12,10 +12,10 @@
 
 #include "../../../headers/minishell.h"
 
-static void		init_fds(int *fds, int amount);
+static void		init_fds(int *fds, int files_amount);
 static int		count_files(t_token *token);
 static void		get_files_details(t_token *token, t_cmd *cmd);
-static int	format_file(t_token *token, int file, t_cmd *cmd);
+static int		format_file(t_token *token, int file, t_cmd *cmd);
 
 void	get_files(t_token *token, t_cmd *cmd)
 {
@@ -60,59 +60,57 @@ static int	format_file(t_token *token, int file, t_cmd *cmd)
 	{
 		cmd->files[file] = ft_strdup(token->next->content);
 		cmd->files_modes[file] = 0;
-		return (1);
 	}
 	else if (is_reserved("<<", token))
 	{
 		cmd->files[file] = ft_strdup(token->next->content);
 		cmd->files_modes[file] = 1;
-		return (1);
 	}
 	else if (is_reserved(">", token))
 	{
 		cmd->files[file] = ft_strdup(token->next->content);
 		cmd->files_modes[file] = 2;
-		return (1);
 	}
 	else if (is_reserved(">>", token))
 	{
 		cmd->files[file] = ft_strdup(token->next->content);
 		cmd->files_modes[file] = 3;
-		return (1);
 	}
-	return (0);
+	else
+		return (0);
+	return (1);
 }
 
 static int	count_files(t_token *token)
 {
-	int	size;
+	int	files_amount;
 
-	size = 0;
+	files_amount = 0;
 	while (token)
 	{
 		if (is_reserved("<", token))
-			size++;
+			files_amount++;
 		else if (is_reserved("<<", token))
-			size++;
+			files_amount++;
 		else if (is_reserved(">", token))
-			size++;
+			files_amount++;
 		else if (is_reserved(">>", token))
-			size++;
+			files_amount++;
 		else if (is_reserved("|", token))
 			break ;
 		token = token->next;
 	}
-	return (size);
+	return (files_amount);
 }
 
-static void	init_fds(int *fds, int amount)
+static void	init_fds(int *fds, int files_amount)
 {
 	int	i;
 
 	i = 0;
 	if (!fds)
 		return ;
-	while (i < amount)
+	while (i < files_amount)
 	{
 		fds[i] = -1;
 		i++;
