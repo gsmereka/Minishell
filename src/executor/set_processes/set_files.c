@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 11:23:33 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/29 20:52:38 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	error_msg(char *file);
 
 void	set_files(t_cmd *cmd)
 {
-	if (!set_infiles(cmd))
-		return ;
 	if (!set_outfiles(cmd))
+		return ;
+	if (!set_infiles(cmd))
 		return ;
 }
 

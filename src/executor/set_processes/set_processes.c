@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/29 20:42:36 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/29 20:52:24 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static void	set_fork(int cmd, t_data *data)
 		exit_error(24, "minishell: Error at use fork() function", data);
 	if (pid == 0)
 	{
-		if (!redirect_input(cmd, data))
-			end_program(data);
 		if (!redirect_output(cmd, data))
+			end_program(data);
+		if (!redirect_input(cmd, data))
 			end_program(data);
 		close_process_fds(cmd, data);
 		execute(data->exec->cmds[cmd], data);
