@@ -23,37 +23,51 @@ void	get_files(t_token *token, t_cmd *cmd)
 	files_amount = count_files(token);
 	if (!files_amount)
 		return ;
-	cmd->infiles = ft_calloc(files_amount + 1, sizeof (char *));
-	cmd->infiles_fd = ft_calloc(files_amount + 1, sizeof (int));
-	init_fds(cmd->infiles_fd, files_amount);
+	cmd->files = ft_calloc(files_amount + 1, sizeof (char *));
+	cmd->files_fd = ft_calloc(files_amount + 1, sizeof (int));
+	init_fds(cmd->files_fd, files_amount);
 	cmd->files_modes = ft_calloc(files_amount + 1, sizeof (int));
 	get_files_details(token, cmd);
 }
 
-// INPUT MODES
+// FILES MODES
 // 0 = Normal input '<'
 // 1 = Heredoc '<<'
+// 2 - Normal output '>'
+// 3 - Append Output '>>'
 
 static void	get_files_details(t_token *token, t_cmd *cmd)
 {
-	int	input;
+	int	file;
 
-	input = 0;
-	if (!cmd->infiles || !cmd->files_modes)
+	file = 0;
+	if (!cmd->files || !cmd->files_modes)
 		return ;
 	while (token)
 	{
 		if (is_reserved("<", token))
 		{
-			cmd->infiles[input] = ft_strdup(token->next->content);
-			cmd->files_modes[input] = 0;
-			input++;
+			cmd->files[file] = ft_strdup(token->next->content);
+			cmd->files_modes[file] = 0;
+			file++;
 		}
 		else if (is_reserved("<<", token))
 		{
-			cmd->infiles[input] = ft_strdup(token->next->content);
-			cmd->files_modes[input] = 1;
-			input++;
+			cmd->files[file] = ft_strdup(token->next->content);
+			cmd->files_modes[file] = 1;
+			file++;
+		}
+		else if (is_reserved(">", token))
+		{
+			cmd->files[file] = ft_strdup(token->next->content);
+			cmd->files_modes[file] = 2;
+			file++;
+		}
+		else if (is_reserved(">>", token))
+		{
+			cmd->files[file] = ft_strdup(token->next->content);
+			cmd->files_modes[file] = 3;
+			file++;
 		}
 		else if (is_reserved("|", token))
 			break ;
@@ -71,6 +85,10 @@ static int	count_files(t_token *token)
 		if (is_reserved("<", token))
 			size++;
 		else if (is_reserved("<<", token))
+			size++;
+		else if (is_reserved(">", token))
+			size++;
+		else if (is_reserved(">>", token))
 			size++;
 		else if (is_reserved("|", token))
 			break ;
