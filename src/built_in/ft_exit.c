@@ -6,11 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:50 by gsmereka          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/02/27 16:07:40 by gsmereka         ###   ########.fr       */
-=======
 /*   Updated: 2023/03/25 20:03:48 by gsmereka         ###   ########.fr       */
->>>>>>> executor_merged
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +19,6 @@ static void	execute_exit(t_data *data);
 
 void	ft_exit(char **args, t_data *data)
 {
-<<<<<<< HEAD
-	free_array_list((void **)args);
-=======
 	long int	exit_status;
 
 	if (!valid_args(args, data))
@@ -97,6 +90,5 @@ static void	execute_exit(t_data *data)
 	ft_putstr_fd("exit\n", 0); // precisa ser saida 2, mas o tester da problema, e ai ?
 	close(1);
 	close(0);
->>>>>>> executor_merged
 	end_program(data);
 }

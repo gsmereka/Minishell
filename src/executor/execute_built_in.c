@@ -6,27 +6,19 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:46:14 by gsmereka          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/02/27 22:46:16 by gsmereka         ###   ########.fr       */
-=======
 /*   Updated: 2023/03/30 17:37:20 by gsmereka         ###   ########.fr       */
->>>>>>> executor_merged
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	execute_built_in(t_data *data)
+void	execute_built_in(t_cmd *cmd, t_data *data)
 {
 	char	**args;
 
-	args = ft_split(data->user_input, ' ');
+	args = cmd->args;
 	if (!args || !args[0])
-	{
-		if (args)
-			free(args);
 		return ;
-	}
 	else if (ft_strncmp(args[0], "echo", ft_strlen(args[0])) == 0)
 		ft_echo(args, data);
 	else if (ft_strncmp(args[0], "cd", ft_strlen(args[0])) == 0)
@@ -41,5 +33,4 @@ void	execute_built_in(t_data *data)
 		ft_export(args, data);
 	else if (ft_strncmp(args[0], "unset", ft_strlen(args[0])) == 0)
 		ft_unset(args, data);
-	free_array_list((void **)args);
 }

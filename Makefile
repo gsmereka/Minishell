@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
+#    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/31 17:32:02 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/03/31 22:06:06 by gde-mora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,9 @@ SRC 	=	src/main.c \
 			src/envp/att_virtual_envp.c \
 			src/envp/att_exit_status.c \
 			src/expander/init_expander.c \
+			src/expander/handle_quotes.c \
+			src/expander/handle_quotes_utils.c \
+			src/expander/split_with_char.c \
 			src/lexer/init_lexer.c \
 			src/lexer/slice_tokens.c \
 			src/lexer/handle_quotes.c \
@@ -64,6 +67,7 @@ SRC 	=	src/main.c \
 			src/built_in/ft_export.c \
 			src/built_in/ft_pwd.c \
 			src/built_in/ft_unset.c \
+			src/built_in/is_built_in.c \
 
 OBJ 	=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

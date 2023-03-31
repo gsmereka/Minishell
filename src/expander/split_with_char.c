@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   split_with_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/03 07:35:59 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/11 03:11:51 by gde-mora         ###   ########.fr       */
+/*   Created: 2023/03/27 05:35:41 by gde-mora          #+#    #+#             */
+/*   Updated: 2023/03/27 06:39:40 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../headers/minishell.h"
 
 static size_t	ft_size_array(const char *s, char c)
 {
@@ -51,7 +51,7 @@ static void	*ft_free_mat(char **tab, size_t limit)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**split_with_char(char const *s, char c) //se der certo, passar pra lib  --aí colocar ft na frente (arq e func)
 {
 	char	**mat;
 	size_t	len;
@@ -60,7 +60,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	size_array = ft_size_array(s, c);
+	size_array = ft_size_array(s, c) + count_chars((char *)s, c);
 	mat = (char **)malloc(sizeof(char *) * (size_array + 1));
 	if (!mat)
 		return (NULL);
@@ -74,7 +74,15 @@ char	**ft_split(char const *s, char c)
 			if (mat[counter++] == NULL)
 				return (ft_free_mat(mat, counter - 1));
 		}
-		s += len + 1;
+		if (*s == c) //algum problema na split...
+		{
+			mat[counter] = malloc(2);
+			mat[counter][0] = c;
+			mat[counter][1] = '\0';
+			counter++;
+			s += 1;
+		}
+		s += len;
 	}
 	mat[counter] = NULL;
 	return (mat);

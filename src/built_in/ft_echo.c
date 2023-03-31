@@ -6,11 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:39 by gsmereka          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/04 19:39:16 by gsmereka         ###   ########.fr       */
-=======
 /*   Updated: 2023/03/22 16:55:48 by gsmereka         ###   ########.fr       */
->>>>>>> executor_merged
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +22,6 @@ void	ft_echo(char **args, t_data *data)
 	(void)data;
 	if (!args)
 		return ;
-<<<<<<< HEAD
-	identify_flags(&n_flag, args);
-	display_text_line(&n_flag, args);
-	(void)data;
-=======
 	n_flag = identify_flags(args);
 	if (!n_flag)
 	{
@@ -39,7 +30,6 @@ void	ft_echo(char **args, t_data *data)
 	}
 	else
 		display_text_line(args + 1);
->>>>>>> executor_merged
 }
 
 static int	identify_flags(char **args)

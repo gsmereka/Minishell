@@ -6,21 +6,12 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/02/03 13:51:02 by gsmereka         ###   ########.fr       */
-=======
 /*   Updated: 2023/03/31 11:47:35 by gsmereka         ###   ########.fr       */
->>>>>>> executor_merged
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-<<<<<<< HEAD
-void	init_executor(t_data *data)
-{
-	(void)data;
-=======
 static int	do_not_need_fork(t_data *data);
 static void	set_built_in(t_data *data);
 
@@ -55,7 +46,6 @@ static int	do_not_need_fork(t_data *data)
 	if (is_built_in(first_cmd))
 		return (1);
 	return (0);
->>>>>>> executor_merged
 }
 
 static void	set_built_in(t_data *data)
