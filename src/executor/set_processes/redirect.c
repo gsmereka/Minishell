@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:49:58 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 17:12:11 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 12:57:00 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static int	redirect_output(int outfile, int cmd_index, t_data *data)
 	t_cmd	*cmd;
 
 	cmd = data->exec->cmds[cmd_index];
+	if (cmd_index != data->exec->cmds_amount - 1)
+		close(data->exec->pipes[cmd_index - 1][1]);
 	if (outfile == -1)
 	{
 		if (cmd_index != data->exec->cmds_amount - 1)
@@ -83,9 +85,9 @@ int	redirect(int cmd_index, t_data *data)
 			i++;
 		}
 	}
-	if (!redirect_input(last_infile, cmd_index, data))
-		return (0);
 	if (!redirect_output(last_outfile, cmd_index, data))
+		return (0);
+	if (!redirect_input(last_infile, cmd_index, data))
 		return (0);
 	return (1);
 }

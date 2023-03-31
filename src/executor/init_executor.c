@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 21:54:32 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 11:47:35 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ static void	set_built_in(t_data *data)
 	int	output_save;
 	int	input_save;
 
-	output_save = dup(1);
-	input_save = dup(0);
+	// output_save = dup(1);
+	// input_save = dup(0);
 	att_exit_status(0, data);
-	set_files(data->exec->cmds[0]);
-	if (!redirect(0, data))
-	{
-		dup2(output_save, 1);
-		dup2(input_save, 0);
-		return ;
-	}
+	// set_files(data->exec->cmds[0]);
+	// if (!redirect(0, data))
+	// {
+	// 	dup2(output_save, 1);
+	// 	dup2(input_save, 0);
+	// 	return ;
+	// }
 	execute_built_in(data->exec->cmds[0], data);
-	dup2(output_save, 1);
-	dup2(input_save, 0);
+// 	dup2(output_save, 1);
+// 	dup2(input_save, 0);
 }
