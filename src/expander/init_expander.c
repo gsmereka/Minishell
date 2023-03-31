@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_expander.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 19:50:33 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/29 22:30:44 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	init_expander(t_data *data)
 	{
 		new_content = NULL;
 		aux_trim = NULL;
-		if (aux_token->content[0] == '$') //arrumar $oi$oi e $oi"teste" etc
+		if (aux_token->content[0] == '$') //arrumar $oi$oi e $oi"teste" e $oi'teste' etc --reutilizar funções
+		//	check_envp_position_in_token(data, &aux_token->content); da errado
 			creck_token_in_envp(data, &aux_token->content[1], &aux_token); //checar se encontra aspas! simples e dupla ( ) ( )
 		else if (aux_token->content[0] == '"') //tenho q dar free nas matriz em caso de erro(?) --atenção leaks, checar muito!
 		{

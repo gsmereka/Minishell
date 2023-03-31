@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 00:42:04 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/11 01:02:46 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/31 22:15:01 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	substitute_spaces(char **user_input, int *i, char quote)
 	return (1);
 }
 
-int	handle_quotes_and_spaces(t_data *data)
+int	handle_quotes_and_spaces(t_data *data) //usar isso?
 {
 	int	i;
 

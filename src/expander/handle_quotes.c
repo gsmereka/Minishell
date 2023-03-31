@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 01:05:13 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/27 06:49:01 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/29 22:16:31 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 	}
 }*/
 
-void	expander_envp_value(t_data *data, char **content) //tenho q splitar as aspas antes de splitar os $
+static void	expander_envp_value(t_data *data, char **content) //tenho q splitar as aspas antes de splitar os $
 {
 	char	**mat_content;
 	char	*new_content;
@@ -77,7 +77,7 @@ void	expander_envp_value(t_data *data, char **content) //tenho q splitar as aspa
 	free_mat(mat_content);
 }
 
-void	expander_quotes_value(t_data *data, char **content) //vai splitar por ', mas ele n pode perder as aspas
+static void	expander_simple_quotes_value(t_data *data, char **content) //vai splitar por ', mas ele n pode perder as aspas
 {
 	char	**mat_content;
 	char	*new_content;
@@ -105,7 +105,35 @@ void	expander_quotes_value(t_data *data, char **content) //vai splitar por ', ma
 	free_mat(mat_content);
 }
 
-void	expander_content_value(t_data *data, char ***content, char **mat_content) //nova func
+static void	expander_double_quotes_value(t_data *data, char **content) //vai splitar por ', mas ele n pode perder as aspas
+{
+	char	**mat_content;
+	char	*new_content;
+	int		i;
+	
+	mat_content = ft_split(*content, '"');
+	if (!mat_content)
+		return ;
+	new_content = NULL;
+	i = 0;
+	while (mat_content[i])
+	{
+		expander_simple_quotes_value(data, &mat_content[i]);
+		i++;
+	}
+	i = 0;
+	while (mat_content[i])
+	{
+		new_content = ft_strjoin_gnl(new_content, mat_content[i]);
+		i++;
+	}
+	free(*content);
+	*content = ft_strdup(new_content);
+	free(new_content);
+	free_mat(mat_content);
+}
+
+static void	expander_content_value(t_data *data, char ***content, char **mat_content) //nova func
 {
 	int		i;
 	char	*new_content;
@@ -116,7 +144,7 @@ void	expander_content_value(t_data *data, char ***content, char **mat_content) /
 		return ;
 	while (mat_content[i])
 	{
-		expander_quotes_value(data, &mat_content[i]); //aq ele vai alterar o mat content um por um
+		expander_double_quotes_value(data, &mat_content[i]); //aq ele vai alterar o mat content um por um
 		i++;
 	}
 	i = 0;

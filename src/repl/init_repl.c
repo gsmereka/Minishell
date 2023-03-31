@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_repl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/31 15:51:39 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 21:55:08 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static void	setup_repl(t_data *data)
 
 static int	read_user_input(t_data *data)
 {
-	if (data->prompt)
+/*	if (data->prompt)
 		data->user_input = readline(data->prompt);
-	else
-		data->user_input = readline("\033[1;32mHopeShell\033[0m:$ ");
+	else*/
+		data->user_input = readline("HopeShell:$ ");
 	if (!data->user_input)
 	{
 		ft_printf("exit\n"); // TEM QUE SER FD 2
