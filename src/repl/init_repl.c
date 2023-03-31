@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 21:54:49 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 11:28:23 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	save_input_on_history(char *user_input, t_data *data)
 	int	i;
 
 	i = 0;
-	while (user_input[i] == '\t' || user_input[i] == ' ')
+	while (user_input[i] == 32 || (user_input[i] >= 9 && user_input[i] <= 13))
 		i++;
 	if (user_input[i] != '\0')
 	{
