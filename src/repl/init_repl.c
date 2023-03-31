@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 20:16:40 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 21:54:49 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_repl(t_data *data)
 
 static void	setup_repl(t_data *data)
 {
+	data->need_interrupt = 0;
 	set_prompt(data);
 	init_repl_signals_handling(data);
 }

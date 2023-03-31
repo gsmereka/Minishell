@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_delimitation.c                             :+:      :+:    :+:   */
+/*   heredoc_eof_delimitation.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 21:36:18 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/20 22:37:09 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 21:53:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	heredoc_eof_delimitation(char *input, char *limiter, t_data *data)
 
 	if (input != NULL)
 		return (0);
-	if (data->exec->need_interrupt)
+	if (data->need_interrupt)
 		return (0);
 	line = ft_itoa(data->lines);
 	msg = ft_strjoin("\nbash: warning: here-document "\

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:50:23 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 13:52:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 21:53:36 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	set_heredoc_content(t_cmd *cmd, int fd_index, t_data *data)
 	{
 		write(1, "> ", 2);
 		input = get_next_line_with_free(0, 0);
-		if (data->exec->need_interrupt)
+		if (data->need_interrupt)
 		{
 			free(input);
 			return (0);

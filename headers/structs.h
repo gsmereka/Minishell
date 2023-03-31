@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 19:52:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/30 21:52:28 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_exec
 	int		*status;
 	int		**pipes;
 	char	**env_paths;
-	int		need_interrupt;
 }	t_exec;
 
 typedef struct s_expander
@@ -66,6 +65,7 @@ typedef struct s_data
 	char	*error_msg;
 	int		exit_status;
 	int		lines;
+	int		need_interrupt;
 }	t_data;
 
 #endif
