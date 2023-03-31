@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 21:53:36 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:42:37 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	set_fork(int cmd, t_data *data)
 		if (!redirect(cmd, data))
 			end_program(data);
 		close_process_fds(cmd, data);
+		close(data->exec->pipes[cmd][0]);
 		execute(data->exec->cmds[cmd], data);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 14:01:44 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 13:20:12 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	setup_files(t_cmd *cmd)
 	i = 0;
 	while (cmd->files[i])
 	{
+		// ft_putstr_fd(cmd->files[i], 2);
+		// ft_putchar_fd('\n', 2);
 		if (cmd->files_modes[i] == 0)
 			cmd->files_fd[i] = open(cmd->files[i], O_RDWR);
 		else if (cmd->files_modes[i] == 1)
