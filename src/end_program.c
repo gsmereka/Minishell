@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end_program.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:36:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/04 19:36:39 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:32:25 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,49 @@
 
 static void	free_data(t_data *data);
 
-// Saida normal do minishell, atraves do ctrl + D ou do comando exit.
-void	end_program(t_data *data) //comentarios em portugues
+void	end_program(t_data *data)
 {
 	int	exit_status;
 
+	if (data->error_msg)
+		ft_putstr_fd(data->error_msg, 2);
 	exit_status = data->exit_status;
+	close_all_fds(data);
 	free_data(data);
 	exit(exit_status);
 }
 
-// Saída pra quando houver algum erro interno,
-// como falha na alocação de memorioa e etc...
 void	exit_error(int error_value, char *msg, t_data *data)
 {
-	ft_printf("%s\n", msg);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\n", 1);
+	close_all_fds(data);
 	free_data(data);
 	exit(error_value);
 }
 
 static void	free_data(t_data *data)
 {
+	if (data->error_msg)
+		free(data->error_msg);
+	if (data->prompt)
+		free(data->prompt);
 	if (data->dict_envp)
 		dictclear(data->dict_envp);
 	if (data->user_input)
 		free(data->user_input);
 	if (data->virtual_envp)
 		free_array_list((void **)data->virtual_envp);
+	if (data->tokens)
+		token_clear(&data->tokens);
+	if (data->exec)
+		clear_execution_data(data);
 	rl_clear_history();
 }
 
 void	free_array_list(void **list)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (list[i])

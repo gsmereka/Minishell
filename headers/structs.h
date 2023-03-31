@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/04 20:14:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:31:56 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,32 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+typedef struct s_cmd
+{
+	char	*name;
+	char	**args;
+	int		**heredocs_pipes;
+	int		*files_fd;
+	char	**files;
+	int		*files_modes;
+}	t_cmd;
+
+typedef struct s_exec
+{
+	t_cmd	**cmds;
+	int		cmds_amount;
+	int		*pid;
+	int		*status;
+	int		**pipes;
+	char	**env_paths;
+}	t_exec;
+
+typedef struct s_expander
+{
+	
+	//é melhor pq tem mt var (e pra passar pras funções tbm)
+}	t_expander;
+
 typedef struct s_data
 {
 	t_token	*tokens;
@@ -37,6 +63,8 @@ typedef struct s_data
 	char	*user_input;
 	char	*error_msg;
 	int		exit_status;
+	int		lines;
+	int		need_interrupt;
 }	t_data;
 
 #endif

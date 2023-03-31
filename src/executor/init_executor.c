@@ -6,13 +6,74 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/03 13:51:02 by gsmereka         ###   ########.fr       */
+=======
+/*   Updated: 2023/03/31 11:47:35 by gsmereka         ###   ########.fr       */
+>>>>>>> executor_merged
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+<<<<<<< HEAD
 void	init_executor(t_data *data)
 {
 	(void)data;
+=======
+static int	do_not_need_fork(t_data *data);
+static void	set_built_in(t_data *data);
+
+void	init_executor(t_data *data)
+{
+	if (!data->tokens || data->need_interrupt)
+		return ;
+	get_commands_info(data);
+	if (!data->exec)
+		return ;
+	if (!set_heredoc(data))
+		return ;
+	if (do_not_need_fork(data))
+		set_built_in(data);
+	else
+		set_processes(data);
+}
+
+static int	do_not_need_fork(t_data *data)
+{
+	t_cmd	*first_cmd;
+
+	if (data->exec->cmds_amount > 1)
+		return (0);
+	first_cmd = data->exec->cmds[0];
+	if (!first_cmd->args)
+		return (0);
+	if (ft_strcmp(first_cmd->args[0], "env") == 0)
+		return (0);
+	else if (ft_strcmp(first_cmd->args[0], "echo") == 0)
+		return (0);
+	if (is_built_in(first_cmd))
+		return (1);
+	return (0);
+>>>>>>> executor_merged
+}
+
+static void	set_built_in(t_data *data)
+{
+	int	output_save;
+	int	input_save;
+
+	// output_save = dup(1);
+	// input_save = dup(0);
+	att_exit_status(0, data);
+	// set_files(data->exec->cmds[0]);
+	// if (!redirect(0, data))
+	// {
+	// 	dup2(output_save, 1);
+	// 	dup2(input_save, 0);
+	// 	return ;
+	// }
+	execute_built_in(data->exec->cmds[0], data);
+// 	dup2(output_save, 1);
+// 	dup2(input_save, 0);
 }

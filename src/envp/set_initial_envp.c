@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_initial_envp.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:51:10 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/04 21:17:54 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:02:15 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	set_initial_envp(char **envp, t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*key;
 	char	*value;
 
