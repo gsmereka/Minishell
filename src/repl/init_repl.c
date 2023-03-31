@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/31 11:43:08 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:51:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	read_user_input(t_data *data)
 		data->user_input = readline("\033[1;32mHopeShell\033[0m:$ ");
 	if (!data->user_input)
 	{
-		ft_printf("exit\n");
+		ft_printf("exit\n"); // TEM QUE SER FD 2
 		return (0);
 	}
 	save_input_on_history(data->user_input, data);

@@ -6,23 +6,21 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/26 19:04:38 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:23:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static int		is_valid(char *str, t_data *data);
-static void		add_new_environment_variable(char *str, t_data *data);
-static void		att_variable(t_env *new_var, char *str);
+static void		set_variable(char *str, t_data *data);
+static void		att_variable(t_env *new_var, char *key, char *value);
 static void		print_vars(t_data *data);
 
 void	ft_export(char **args, t_data *data)
 {
-	t_env	*new_var;
-	int		i;
+	int	i;
 
-	i = 1;
 	if (!args)
 		return ;
 	if (!args[1])
@@ -30,26 +28,22 @@ void	ft_export(char **args, t_data *data)
 		print_vars(data);
 		return ;
 	}
+	i = 1;
 	while (args[i])
 	{
 		if (is_valid(args[i], data))
-		{
-			new_var = find_env(args[i], data);
-			if (new_var)
-				att_variable(new_var, args[i]);
-			if (!new_var)
-				add_new_environment_variable(args[i], data);
-		}
+			set_variable(args[i], data);
 		i++;
 	}
 	att_virtual_envp(data);
 }
 
-static void	add_new_environment_variable(char *str, t_data *data)
+static void	set_variable(char *str, t_data *data)
 {
 	int		j;
 	char	*key;
 	char	*value;
+	t_env	*new_var;
 
 	j = 0;
 	while (str[j] != '=')
@@ -57,27 +51,23 @@ static void	add_new_environment_variable(char *str, t_data *data)
 	key = ft_calloc(j + 1, sizeof(char));
 	ft_strlcpy(key, str, j + 1);
 	value = ft_strdup(&str[j + 1]);
-	dict_add_back(&data->dict_envp, key, value);
+	new_var = find_env(key, data);
+	if (new_var)
+		att_variable(new_var, key, value);
+	else
+		dict_add_back(&data->dict_envp, key, value);
 	free(key);
 	free(value);
 }
 
-static void	att_variable(t_env *new_var, char *str)
+static void	att_variable(t_env *new_var, char *key, char *value)
 {
-	int		j;
-	char	*key;
-	char	*value;
-
-	j = 0;
-	while (str[j] != '=')
-		j++;
-	key = ft_calloc(j + 1, sizeof(char));
-	ft_strlcpy(key, str, j + 1);
-	value = ft_strdup(&str[j + 1]);
-	free(new_var->key);
-	free(new_var->value);
-	new_var->key = key;
-	new_var->value = value;
+	if (new_var->key)
+		free(new_var->key);
+	if (new_var->value)
+		free(new_var->value);
+	new_var->key = ft_strdup(key);
+	new_var->value = ft_strdup(value);
 }
 
 static int	is_valid(char *str, t_data *data)

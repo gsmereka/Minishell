@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/26 20:01:02 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:57:28 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	ft_cd(char **args, t_data *data)
 	char	*path;
 
 	if (args[1] && args[2])
+	{
 		ft_cd_error_msg(1, NULL, data);
+		return ;
+	}
 	path = args[1];
 	if (!validate_dir(&path, data))
 		return ;
