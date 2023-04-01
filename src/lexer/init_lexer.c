@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/01 17:59:06 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:23:48 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	init_lexer(t_data *data)
 {
 	slice_tokens(data);
 	define_types(data->tokens);
+	if (!data->tokens)
+		return ;
 	if (!validate_tokens_quotes(data->tokens))
 	{
 		att_exit_status(2, data);
