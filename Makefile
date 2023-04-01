@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/31 22:06:06 by gde-mora         ###   ########.fr        #
+#    Updated: 2023/04/01 19:34:46 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ SRC 	=	src/main.c \
 			src/expander/split_with_char.c \
 			src/lexer/init_lexer.c \
 			src/lexer/slice_tokens.c \
-			src/lexer/handle_quotes.c \
 			src/lexer/token_utils.c \
 			src/parser/init_parser.c \
 			src/parser/check_syntax.c \

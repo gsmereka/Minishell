@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:50 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/25 20:03:48 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/01 19:29:17 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	is_default_value(char *arg, t_data *data)
 
 static void	execute_exit(t_data *data)
 {
-	ft_putstr_fd("exit\n", 0); // precisa ser saida 2, mas o tester da problema, e ai ?
+	ft_putstr_fd("exit\n", 0);
 	close(1);
 	close(0);
 	end_program(data);
