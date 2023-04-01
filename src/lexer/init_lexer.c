@@ -6,16 +6,16 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/01 15:40:56 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:54:41 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static void	define_types(t_token *token);
-static int	is_closed_by(char quote, char *str);
+static int	is_closed(char *str);
 static int	validate_tokens_quotes(t_token *token);
-static void	print_error_msg(char *str, char quote);
+static int	print_error_msg(char *str, char quote);
 
 void	init_lexer(t_data *data)
 {
@@ -35,66 +35,48 @@ static int	validate_tokens_quotes(t_token *token)
 	str = token->content;
 	while (token && token->content)
 	{
-		if (!is_closed_by('\'', token->content))
-		{
-			print_error_msg(token->content, '\'');
+		if (!is_closed(token->content))
 			return (0);
-		}
-		if (!is_closed_by('"', token->content))
-		{
-			print_error_msg(token->content, '"');
-			return (0);
-		}
 		token = token->next;
 	}
 	return (1);
 }
 
-static int	is_closed_by(char quote, char *str)
+static int	is_closed(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[i++])
 	{
 		if (str[i] == '\'')
 		{
-			i++;
-			while (str[i] != '\'' )
+			while (str[i++] != '\'' )
 			{
 				if (!str[i])
-				{
-					print_error_msg(str, '\'');
-					return (0);
-				}
-				i++;
+					return (print_error_msg(str, '\''));
 			}
 		}
 		if (str[i] == '"')
 		{
-			i++;
-			while (str[i] != '"' )
+			while (str[i++] != '"' )
 			{
 				if (!str[i])
-				{
-					print_error_msg(str, '"');
-					return (0);
-				}
-				i++;
+					return (print_error_msg(str, '"'));
 			}
 		}
-		i++;
 	}
 	return (1);
 }
 
-static void	print_error_msg(char *str, char quote)
+static int	print_error_msg(char *str, char quote)
 {
 	ft_putstr_fd(">\n", 2);
 	ft_putstr_fd("bash: unexpected EOF while looking for matching `", 2);
 	ft_putchar_fd(quote, 2);
 	ft_putstr_fd("' \n", 2);
 	ft_putstr_fd("bash: syntax error: unexpected end of file\n", 2);
+	return (0);
 }
 
 static void	define_types(t_token *token)
