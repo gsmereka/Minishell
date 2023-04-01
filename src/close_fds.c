@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:19:11 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/31 15:40:02 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:59:15 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	close_process_fds(int cmd_index, t_data *data)
 	cmd = data->exec->cmds[cmd_index];
 	close(data->exec->pipes[cmd_index][1]);
 	close_cmd_pipes(cmd_index, data);
-	close_cmd_heredoc_pipes(cmd);
 	close_files_fds(cmd->files, cmd->files_fd);
 }
 
