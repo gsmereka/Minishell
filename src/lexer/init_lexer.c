@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/31 21:14:45 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 21:31:11 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_lexer(t_data *data)
 	define_types(data->tokens);
 	if (!validate_tokens_quotes(data->tokens))
 	{
-		att_exit_status(1, data);
+		att_exit_status(2, data);
 		data->need_interrupt = 1;
 	}
 }
@@ -71,11 +71,11 @@ static int	is_closed_by(char quote, char *str)
 
 static void	print_error_msg(char *str, char quote)
 {
-	ft_putstr_fd("minishell: syntax error: ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": was expected to be closed by `", 2);
+	ft_putstr_fd(">\n", 2);
+	ft_putstr_fd("bash: unexpected EOF while looking for matching `", 2);
 	ft_putchar_fd(quote, 2);
 	ft_putstr_fd("' \n", 2);
+	ft_putstr_fd("bash: syntax error: unexpected end of file\n", 2);
 }
 
 static void	define_types(t_token *token)
