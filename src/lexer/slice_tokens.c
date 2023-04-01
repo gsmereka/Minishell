@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:45:29 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/01 18:00:24 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:25:40 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	slice_tokens(t_data *data)
 
 	i = 0;
 	input = data->user_input;
+	if (!input)
+		return ;
 	while (input[i])
 	{
 		while (input[i] == 32 || (input[i] >= 9 && input[i] <= 13))

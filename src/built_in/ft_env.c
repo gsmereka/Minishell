@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:44 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/21 20:08:41 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:32:21 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,7 @@ void	ft_env(char **args, t_data *data)
 		return ;
 	while (envp[i])
 	{
-		if (envp[i][0] == '?' && envp[i][1] == '=')
-			i++;
-		else
-		{
-			ft_printf("%s\n", envp[i]);
-			i++;
-		}
+		ft_printf("%s\n", envp[i]);
+		i++;
 	}
 }
