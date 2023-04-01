@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:45:29 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/31 11:19:52 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 21:24:25 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	save_normal_word(char *input, t_data *data)
 			while (input[i] && input[i] != '"')
 				i++;
 		}
-		if (is_reserved_word(&input[i])
+		else if (is_reserved_word(&input[i])
 			|| (input[i] == 32 || (input[i] >= 9 && input[i] <= 13)))
 			break ;
 		else
