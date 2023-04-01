@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/01 17:54:41 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:59:06 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ static int	is_closed(char *str)
 	int	i;
 
 	i = -1;
-	while (str[i++])
+	while (str[++i])
 	{
 		if (str[i] == '\'')
 		{
-			while (str[i++] != '\'' )
+			while (str[++i] != '\'' )
 			{
 				if (!str[i])
 					return (print_error_msg(str, '\''));
@@ -59,7 +59,7 @@ static int	is_closed(char *str)
 		}
 		if (str[i] == '"')
 		{
-			while (str[i++] != '"' )
+			while (str[++i] != '"' )
 			{
 				if (!str[i])
 					return (print_error_msg(str, '"'));
