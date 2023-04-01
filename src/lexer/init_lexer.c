@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/31 21:31:11 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:40:56 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void	init_lexer(t_data *data)
 
 static int	validate_tokens_quotes(t_token *token)
 {
+	char	*str;
+
+	str = token->content;
 	while (token && token->content)
 	{
 		if (!is_closed_by('\'', token->content))
@@ -54,13 +57,29 @@ static int	is_closed_by(char quote, char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == quote)
+		if (str[i] == '\'')
 		{
 			i++;
-			while (str[i] != quote)
+			while (str[i] != '\'' )
 			{
 				if (!str[i])
+				{
+					print_error_msg(str, '\'');
 					return (0);
+				}
+				i++;
+			}
+		}
+		if (str[i] == '"')
+		{
+			i++;
+			while (str[i] != '"' )
+			{
+				if (!str[i])
+				{
+					print_error_msg(str, '"');
+					return (0);
+				}
 				i++;
 			}
 		}
