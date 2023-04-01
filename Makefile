@@ -6,7 +6,7 @@
 #    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/03/31 22:06:06 by gde-mora         ###   ########.fr        #
+#    Updated: 2023/03/31 22:41:23 by gde-mora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC 	=	src/main.c \
 			src/envp/att_virtual_envp.c \
 			src/envp/att_exit_status.c \
 			src/expander/init_expander.c \
-			src/expander/handle_quotes.c \
+			src/expander/handle_double_quotes.c \
+			src/expander/expand_content.c \
 			src/expander/handle_quotes_utils.c \
 			src/expander/split_with_char.c \
 			src/lexer/init_lexer.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/30 20:18:26 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/03/31 22:44:01 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,12 @@ void		slice_tokens(t_data *data);
 
 // expander
 void		init_expander(t_data *data);
+void		expand_content(t_data *data, char **content); //tirar
+void		separe_quotes(t_data *data, char **content);
+
 void		check_envp_position_in_token(t_data *data, char **content);
+void		check_envp_position(t_data *data, char **content);
+void		check_quote_in_envp_token(t_data *data, char **content); //tirar?
 void		free_mat(char **mat);
 size_t		mat_len(char **mat);
 int			count_chars(char *content, char c);
