@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_repl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 23:09:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/31 21:55:08 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/01 19:31:29 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static void	setup_repl(t_data *data)
 
 static int	read_user_input(t_data *data)
 {
-/*	if (data->prompt)
+	if (data->prompt)
 		data->user_input = readline(data->prompt);
-	else*/
+	else
 		data->user_input = readline("HopeShell:$ ");
 	if (!data->user_input)
 	{
-		ft_printf("exit\n"); // TEM QUE SER FD 2
+		ft_putstr_fd("exit\n", 0);
 		return (0);
 	}
 	save_input_on_history(data->user_input, data);

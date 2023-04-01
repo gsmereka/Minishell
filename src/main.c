@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:30:54 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/31 11:40:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/01 19:33:13 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,4 @@ int	main(int argc, char *argv[], char *envp[])
 	att_virtual_envp(&data);
 	init_repl(&data);
 	end_program(&data);
-
-	/* quando o export cria uma env nova, ele coloca no começo? pq no final é sempre o caminho /env
-	   remover comentarios em portugues -- ou traduzir p ingles
-	*/
 }

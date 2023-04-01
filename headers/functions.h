@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/30 20:18:26 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/01 19:35:04 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_env		*find_env(char *key, t_data *data);
 
 // lexer
 void		init_lexer(t_data *data);
-int			handle_quotes_and_spaces(t_data *data);
 void		add_token(t_token **tokens, char *content);
 t_token		*token_last(t_token *token);
 void		token_clear(t_token **tokens);
