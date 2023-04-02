@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:54:21 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/01 19:32:04 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/02 00:16:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,28 @@ static int	buffer_size_overflow(int buffer_size);
 void	set_prompt(t_data *data)
 {
 	char	*path;
+	char	*green_color;
+	char	*blue_color;
+	char	*white_color;
 
+	green_color = ft_strdup("\001\033[1;32m\002");
+	blue_color = ft_strdup("\001\033[1;34m\002");
+	white_color = ft_strdup("\001\033[0m\002");
 	if (data->prompt)
 		free(data->prompt);
 	path = get_pwd(1024);
-	if (!path)
-		return ;
-	data->prompt = ft_strjoin("HopeShell:~", path);
-	free(path);
+	data->prompt = ft_strjoin(green_color, "HopeShell");
+	data->prompt = ft_strjoin_with_free(data->prompt, white_color);
+	data->prompt = ft_strjoin_with_free(data->prompt, ":");
+	data->prompt = ft_strjoin_with_free(data->prompt, blue_color);
+	data->prompt = ft_strjoin_with_free(data->prompt, "~");
+	data->prompt = ft_strjoin_with_free(data->prompt, path);
+	data->prompt = ft_strjoin_with_free(data->prompt, white_color);
 	data->prompt = ft_strjoin_with_free(data->prompt, "$ ");
-	if (!data->prompt)
-		ft_putstr_fd("", 1);
+	free(green_color);
+	free(blue_color);
+	free(white_color);
+	free(path);
 }
 
 static char	*get_pwd(int buffer_size)
