@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/31 16:23:17 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/02 14:35:45 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,18 @@ static int	is_valid(char *str, t_data *data)
 
 static void	print_vars(t_data *data)
 {
-	char	**envp;
-	int		i;
+	t_env	*envp;
 
-	i = 0;
-	envp = data->virtual_envp;
-	if (!envp)
-		return ;
-	while (envp[i])
+	envp = data->dict_envp;
+	while (envp)
 	{
-		if (envp[i][0] == '?' && envp[i][1] == '=')
-			i++;
+		if (ft_strcmp(envp->key, "?") == 0)
+			envp = envp->next;
 		else
 		{
 			ft_printf("declare -x ");
-			ft_printf("%s\n", envp[i]);
-			i++;
+			ft_printf("%s=\"%s\"\n", envp->key, envp->value);
+			envp = envp->next;
 		}
 	}
 }
