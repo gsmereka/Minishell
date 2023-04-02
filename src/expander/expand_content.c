@@ -162,24 +162,15 @@ void	check_envp_position(t_data *data, char **content) //isso vai ser nos lugare
 {
 	char	**mat_content;
 
-	if (!(*content))
+	if (!content || !(*content))
 		return ;
-	if (ft_strcmp(*content, "\"\"") == 0)
+/*	if (ft_strcmp(*content, "\"\"") == 0)
 	{
 		free(*content);
 		*content = ft_strdup("");
 		return ;
-	}
-	mat_content = split_with_char(*content, ' '); //checar *content antes? //teste da nova split
-	
-	/*print p teste
-	int i = 0;
-	while (mat_content[i])
-	{
-		ft_printf("%s\n", mat_content[i]);
-		i++;
 	}*/
-	
+	mat_content = split_with_char(*content, ' '); //checar *content antes? //teste da nova split
 	if (mat_content) //quando a split retorna NULL da error de double free
 	{
 		expander_content_value(data, &content, mat_content);
@@ -189,53 +180,84 @@ void	check_envp_position(t_data *data, char **content) //isso vai ser nos lugare
 
 void separe_quotes(t_data *data, char **content)
 {
-	char	**mat_content;
-	char	*new_content;
 	int		i;
-	char	*new_str;
+	char	*str;
+	char	*aux;
+	char	*new_content;
 
-	if (!(*content))
-		return ;
-	//ft_bzero(new_mat, );
-	new_str = NULL;
-	new_content = NULL;
-	mat_content = split_with_char(*content, '"');
-//	new_mat = (char **)malloc(mat_len(mat_content) - count_chars(*content, '"') + 1);
 	i = 0;
-	while (mat_content[i])
+	str = NULL;
+	new_content = NULL;
+	aux = NULL;
+	while ((*content)[i])
 	{
-		if (ft_strcmp(mat_content[i], "\"") == 0)
+		while ((*content)[i] && (*content)[i] != '\"' && (*content)[i] != '\'')
 		{
-			new_str = ft_strjoin_gnl(new_str, mat_content[i]);
+			aux = malloc(2);
+			aux[0] = (*content)[i];
+			aux[1] = '\0';
+			str = ft_strjoin_gnl(str, aux); //acho q vou ter q alocar o char
+			free(aux);
+		//	ft_printf("aaaaa %s\n", str);
 			i++;
-			while (mat_content[i] && ft_strcmp(mat_content[i], "\"") != 0)
+		}
+		if (str)
+		{
+			check_envp_position(data, &str); //e se str nulo?
+			new_content = ft_strjoin_gnl(new_content, str);
+			free(str); // if (str)?   sem talvez de segfault
+			str = NULL;
+		}
+		if ((*content)[i] && (*content)[i] == '\"')
+		{
+			i++;
+			while ((*content)[i] && (*content)[i] != '\"')
 			{
-				new_str = ft_strjoin_gnl(new_str, mat_content[i]);
+				aux = malloc(2);
+				aux[0] = (*content)[i];
+				aux[1] = '\0';
+				str = ft_strjoin_gnl(str, aux); //acho q vou ter q alocar o char
+				free(aux);
 				i++;
 			}
-			new_str = ft_strjoin_gnl(new_str, mat_content[i]);
-			check_envp_position(data, &new_str);
-			new_content = ft_strjoin_gnl(new_content, new_str);
-			free(new_str);
-			new_str = NULL;
+		//	i++;
+			if (str)
+			{
+				check_envp_position(data, &str); //e se str nulo?
+				new_content = ft_strjoin_gnl(new_content, str);
+				free(str); // if (str)?   sem talvez de segfault
+				str = NULL;
+			}
 		}
-		else
+		if ((*content)[i] && (*content)[i] == '\'') //else if ou if?
 		{
-			//check_envp_position(data, &mat_content[i]);
-			new_content = ft_strjoin_gnl(new_content, mat_content[i]);
+			i++;
+			while ((*content)[i] && (*content)[i] != '\'')
+			{
+				aux = malloc(2);
+				aux[0] = (*content)[i];
+				aux[1] = '\0';
+				str = ft_strjoin_gnl(str, aux); //acho q vou ter q alocar o char
+				free(aux);
+				i++;
+			}
+		//	i++;
+		//	check_envp_position(data, &str); //e se str nulo?
+			if (str)
+			{
+				new_content = ft_strjoin_gnl(new_content, str);
+				free(str); // if (str)?   sem talvez de segfault
+				str = NULL;
+			}
 		}
-		//	ft_printf("%s\n", mat_content[i]);
-//			new_mat[i] = ft_strdup(mat_content[i]);
-		i++;
+		if ((*content)[i])
+			i++;
 	}
-
 	free(*content);
 	*content = ft_strdup(new_content);
 	free(new_content);
-/*	i = 0;
-	while (new_mat[i])
-	{
-		ft_printf("%s\n", new_mat[i]);
-		i++;
-	}*/
 }
+/*		ler o content char por char
+			armazena numa string se n for aspa dupla nem simples
+			se for dupla, enquanto n achar outra dupla armazena numa string
+			se for simples, enquanto n achar outra simples armazena numa string*/
