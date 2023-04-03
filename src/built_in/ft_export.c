@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/31 16:23:17 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:03:06 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,27 @@ static void		print_vars(t_data *data);
 
 void	ft_export(char **args, t_data *data)
 {
-	int	i;
+	int		i;
+	int		status;
 
 	if (!args)
 		return ;
 	if (!args[1])
-	{
 		print_vars(data);
-		return ;
-	}
 	i = 1;
 	while (args[i])
 	{
-		if (is_valid(args[i], data))
+		status = is_valid(args[i], data);
+		if (status == 1)
 			set_variable(args[i], data);
+		else if (status == 2)
+		{
+			if (!find_env(args[i], data))
+			{
+				dict_add_back(&data->dict_envp, args[i], "");
+				find_env(args[i], data)->hidden_status = 1;
+			}
+		}
 		i++;
 	}
 	att_virtual_envp(data);
@@ -50,7 +57,8 @@ static void	set_variable(char *str, t_data *data)
 		j++;
 	key = ft_calloc(j + 1, sizeof(char));
 	ft_strlcpy(key, str, j + 1);
-	value = ft_strdup(&str[j + 1]);
+	if (str[j] == '=')
+		value = ft_strdup(&str[j + 1]);
 	new_var = find_env(key, data);
 	if (new_var)
 		att_variable(new_var, key, value);
@@ -68,6 +76,7 @@ static void	att_variable(t_env *new_var, char *key, char *value)
 		free(new_var->value);
 	new_var->key = ft_strdup(key);
 	new_var->value = ft_strdup(value);
+	new_var->hidden_status = 0;
 }
 
 static int	is_valid(char *str, t_data *data)
@@ -91,27 +100,26 @@ static int	is_valid(char *str, t_data *data)
 		}
 		i++;
 	}
-	return (0);
+	return (2);
 }
 
 static void	print_vars(t_data *data)
 {
-	char	**envp;
-	int		i;
+	t_env	*envp;
 
-	i = 0;
-	envp = data->virtual_envp;
-	if (!envp)
-		return ;
-	while (envp[i])
+	envp = data->dict_envp;
+	while (envp)
 	{
-		if (envp[i][0] == '?' && envp[i][1] == '=')
-			i++;
+		if (envp->hidden_status == 2)
+			envp = envp->next;
 		else
 		{
 			ft_printf("declare -x ");
-			ft_printf("%s\n", envp[i]);
-			i++;
+			if (envp->hidden_status)
+				ft_printf("%s\n", envp->key);
+			else
+				ft_printf("%s=\"%s\"\n", envp->key, envp->value);
+			envp = envp->next;
 		}
 	}
 }

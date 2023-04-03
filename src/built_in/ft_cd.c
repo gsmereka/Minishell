@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/31 15:57:28 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:11:31 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	validate_dir(char **dir, t_data *data)
 {
 	struct stat	dir_info;
 
-	if (!*dir)
+	if (!*dir || ft_strcmp(*dir, "~") == 0)
 	{
 		if (find_env("HOME", data) && find_env("HOME", data)->value)
 			*dir = find_env("HOME", data)->value;
