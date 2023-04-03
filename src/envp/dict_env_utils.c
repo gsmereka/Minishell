@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dict_env_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 19:02:23 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/04 21:18:24 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/02 19:51:23 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_env	*create_dict_env(char *key, char *value)
 {
 	t_env	*new_node;
 
-	new_node = (t_env *)malloc(sizeof(t_env));
+	new_node = (t_env *)ft_calloc(1, sizeof(t_env));
 	if (!new_node)
 		return (NULL);
 	new_node->key = ft_strdup(key);

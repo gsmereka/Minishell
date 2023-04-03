@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 04:17:35 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/29 21:48:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/02 15:10:51 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_token	*create_token(char *content)
 		return (NULL);
 	new_node->type = NULL;
 	new_node->content = ft_strdup(content);
-	new_node->args = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }

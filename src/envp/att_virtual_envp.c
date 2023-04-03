@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 16:43:24 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/31 16:21:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/02 19:42:04 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	fill_virtual_envp(t_data *data)
 	dict_envp = data->dict_envp;
 	while (dict_envp)
 	{
-		if (ft_strcmp("?", dict_envp->key) != 0)
+		if (!dict_envp->hidden_status)
 		{
 			key = ft_strdup(dict_envp->key);
 			data->virtual_envp[i] = ft_strjoin_with_free(key, "=");

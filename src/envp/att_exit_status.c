@@ -37,6 +37,7 @@ static void	add_new_environment_variable(int exit_status, t_data *data)
 	key = ft_strdup("?");
 	value = ft_itoa(exit_status);
 	dict_add_back(&data->dict_envp, key, value);
+	find_env("?", data)->hidden_status = 2;
 	free(key);
 	free(value);
 }

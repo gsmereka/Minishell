@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/01 19:45:31 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/02 15:03:24 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ typedef struct s_token
 {
 	char			*type;
 	char			*content;
-	char			**args;
 	struct s_token	*next;
 }	t_token;
 
@@ -25,6 +24,7 @@ typedef struct s_env
 {
 	char			*key;
 	char			*value;
+	int				hidden_status;			
 	struct s_env	*next;
 }	t_env;
 
