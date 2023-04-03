@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:11:02 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/01 22:35:53 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:27:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	format_cmd(t_token *token, t_cmd *cmd)
 static void	set_cmd_composition(t_token *token, t_cmd *cmd)
 {
 	int	args_amount;
-	int	index;
 
 	args_amount = count_args(token);
 	if (!args_amount)

@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 22:17:43 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 21:19:27 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:28:14 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	execute(t_cmd *cmd, t_data *data)
 static void	normal_execution(t_cmd *cmd, t_data *data)
 {
 	int		exec;
-	int		error_status;
 
 	exec = execve(cmd->name, cmd->args, data->virtual_envp);
 	if (exec == -1)

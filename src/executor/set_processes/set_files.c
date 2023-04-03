@@ -6,21 +6,17 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:50:03 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/01 13:56:17 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:28:41 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
 static void	setup_files(t_cmd *cmd);
-static int	set_outfiles(t_cmd *cmd);
 static void	error_msg(char *file);
 
 void	set_files(t_cmd *cmd)
 {
-	int	i;
-
-	i = 0;
 	if (!cmd->files)
 		return ;
 	setup_files(cmd);
