@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:54:21 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/02 21:41:33 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:21:19 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*check_if_is_home(char *pwd, t_data *data)
 	i = 0;
 	while (home_env->value[i] == pwd[i])
 		i++;
-	if (!home_env->value[i] && pwd[i])
+	if (!home_env->value[i] && pwd[i] == '/')
 	{
 		save = ft_strdup(pwd + i);
 		free (pwd);

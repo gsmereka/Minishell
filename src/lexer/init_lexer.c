@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/01 18:26:04 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:26:43 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	define_types(t_token *token);
 static int	is_closed(char *str);
 static int	validate_tokens_quotes(t_token *token);
-static int	print_error_msg(char *str, char quote);
+static int	print_error_msg(char quote);
 
 void	init_lexer(t_data *data)
 {
@@ -32,9 +32,6 @@ void	init_lexer(t_data *data)
 
 static int	validate_tokens_quotes(t_token *token)
 {
-	char	*str;
-
-	str = token->content;
 	while (token && token->content)
 	{
 		if (!is_closed(token->content))
@@ -56,7 +53,7 @@ static int	is_closed(char *str)
 			while (str[++i] != '\'' )
 			{
 				if (!str[i])
-					return (print_error_msg(str, '\''));
+					return (print_error_msg('\''));
 			}
 		}
 		if (str[i] == '"')
@@ -64,14 +61,14 @@ static int	is_closed(char *str)
 			while (str[++i] != '"' )
 			{
 				if (!str[i])
-					return (print_error_msg(str, '"'));
+					return (print_error_msg('"'));
 			}
 		}
 	}
 	return (1);
 }
 
-static int	print_error_msg(char *str, char quote)
+static int	print_error_msg(char quote)
 {
 	ft_putstr_fd(">\n", 2);
 	ft_putstr_fd("bash: unexpected EOF while looking for matching `", 2);
