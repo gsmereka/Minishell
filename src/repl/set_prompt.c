@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:54:21 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/02 00:16:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:41:33 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static char	*get_pwd(int buffer_size);
 static int	buffer_size_overflow(int buffer_size);
+static char	*check_if_is_home(char *pwd, t_data *data);
 
 void	set_prompt(t_data *data)
 {
@@ -28,6 +29,7 @@ void	set_prompt(t_data *data)
 	if (data->prompt)
 		free(data->prompt);
 	path = get_pwd(1024);
+	path = check_if_is_home(path, data);
 	data->prompt = ft_strjoin(green_color, "HopeShell");
 	data->prompt = ft_strjoin_with_free(data->prompt, white_color);
 	data->prompt = ft_strjoin_with_free(data->prompt, ":");
@@ -40,6 +42,32 @@ void	set_prompt(t_data *data)
 	free(blue_color);
 	free(white_color);
 	free(path);
+}
+
+static char	*check_if_is_home(char *pwd, t_data *data)
+{
+	t_env	*home_env;
+	char	*save;
+	int		i;
+
+	home_env = find_env("HOME", data);
+	if (!home_env || !home_env->value || !pwd)
+		return (pwd);
+	if (ft_strcmp(pwd, home_env->value) == 0)
+	{
+		free (pwd);
+		return (ft_strdup(""));
+	}
+	i = 0;
+	while (home_env->value[i] == pwd[i])
+		i++;
+	if (!home_env->value[i] && pwd[i])
+	{
+		save = ft_strdup(pwd + i);
+		free (pwd);
+		return (save);
+	}
+	return (pwd);
 }
 
 static char	*get_pwd(int buffer_size)
