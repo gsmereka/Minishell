@@ -59,16 +59,11 @@ void		slice_tokens(t_data *data);
 
 // expander
 void		init_expander(t_data *data);
-void		expand_content(t_data *data, char **content); //tirar
 void		separe_quotes(t_data *data, char **content);
-
-void		check_envp_position_in_token(t_data *data, char **content);
-void		check_envp_position(t_data *data, char **content);
-void		check_quote_in_envp_token(t_data *data, char **content); //tirar?
 void		free_mat(char **mat);
 size_t		mat_len(char **mat);
 int			count_chars(char *content, char c);
-char		**split_with_char(char const *s, char c); //teste
+char		**split_with_char(char const *s, char c);
 
 // parser
 void		init_parser(t_data *data);

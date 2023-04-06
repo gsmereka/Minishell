@@ -6,39 +6,32 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 01:05:13 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/29 22:16:31 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/06 20:03:14 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-/*void	check_quotes(char *mat_token)
-{
-	char	**quotes;
-	int		i;
-
-	quotes = ft_split(mat_token, ' ');
-	i = 0;
-	while (aux_spaces_token[i])
-	{
-		if (aux_spaces_token[i][0] == '$')
-			find_envp_value(aux_spaces_token[i]);
-		i++;
-	}
-}*/
-
 static void	expander_envp_value(t_data *data, char **content) //tenho q splitar as aspas antes de splitar os $
 {
-	char	**mat_content;
+	char	**mat_content; //tem 6 funções aqui -- ATENÇÃO
 	char	*new_content;
 	t_env	*env;
 	int		i;
 	int		flag_env;
+	char	*aux;
 
 	mat_content = ft_split(*content, '$'); //funciona, mas vai ser o último 
-	if (!mat_content || !*mat_content)
+	if (!mat_content)
 		return ;
+	if (!*mat_content)
+	{
+		free(mat_content);
+		mat_content = NULL;
+		return ;
+	}
 	new_content = NULL;
+	aux = NULL;
 	env = data->dict_envp;
 	i = 0;
 	if (*content[0] != '$')
@@ -47,21 +40,33 @@ static void	expander_envp_value(t_data *data, char **content) //tenho q splitar 
 	{
 		flag_env = 0;
 		env = data->dict_envp;
-		while (env)
+		if (mat_content[i][0] == '?')
 		{
-			if (ft_strcmp(mat_content[i], env->key) == 0)
+			aux = ft_strdup(find_env("?", data)->value);
+			aux = ft_strjoin_gnl(aux, &mat_content[i][1]);
+			free(mat_content[i]);
+			mat_content[i] = ft_strdup(aux);
+			free(aux);
+			aux = NULL;
+		}
+		else
+		{
+			while (env)
+			{
+				if (ft_strcmp(mat_content[i], env->key) == 0) //usar find env
+				{
+					free(mat_content[i]);
+					mat_content[i] = ft_strdup(env->value);
+					flag_env = 1;
+					break ; 
+				}
+				env = env->next;
+			}
+			if (flag_env == 0)
 			{
 				free(mat_content[i]);
-				mat_content[i] = ft_strdup(env->value);
-				flag_env = 1;
-				break ; 
+				mat_content[i] = ft_strdup("");
 			}
-			env = env->next;
-		}
-		if (flag_env == 0)
-		{
-			free(mat_content[i]);
-			mat_content[i] = ft_strdup("");
 		}
 		i++;
 	}
@@ -158,18 +163,12 @@ static void	expander_content_value(t_data *data, char ***content, char **mat_con
 	free(new_content);
 }
 
-void	check_envp_position(t_data *data, char **content) //isso vai ser nos lugares que tem "" !
+void	check_envp_position(t_data *data, char **content)
 {
 	char	**mat_content;
 
 	if (!content || !(*content))
 		return ;
-/*	if (ft_strcmp(*content, "\"\"") == 0)
-	{
-		free(*content);
-		*content = ft_strdup("");
-		return ;
-	}*/
 	mat_content = split_with_char(*content, ' '); //checar *content antes? //teste da nova split
 	if (mat_content) //quando a split retorna NULL da error de double free
 	{
@@ -256,8 +255,9 @@ void separe_quotes(t_data *data, char **content)
 	free(*content);
 	*content = ft_strdup(new_content);
 	free(new_content);
-}
-/*		ler o content char por char
+
+	/*		ler o content char por char
 			armazena numa string se n for aspa dupla nem simples
 			se for dupla, enquanto n achar outra dupla armazena numa string
 			se for simples, enquanto n achar outra simples armazena numa string*/
+}

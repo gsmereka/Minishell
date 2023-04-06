@@ -27,7 +27,6 @@ SRC 	=	src/main.c \
 			src/envp/att_virtual_envp.c \
 			src/envp/att_exit_status.c \
 			src/expander/init_expander.c \
-			src/expander/handle_double_quotes.c \
 			src/expander/expand_content.c \
 			src/expander/handle_quotes_utils.c \
 			src/expander/split_with_char.c \
