@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/06 21:06:47 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/06 21:35:55 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,15 @@ void	init_expander(t_data *data)
 	{
 		separe_quotes(data, &aux_token->content);
 		if (ft_strlen(aux_token->content) > 0)
+		{
 			add_token(&new_token, aux_token->content);
-		//arrumar $oi$oi e $oi"teste" e $oi'teste' etc --reutilizar funções
+			if (aux_token->type)
+			{
+			//	ft_printf("%s\n", aux_token->type);
+				token_last(new_token)->type = ft_strdup(aux_token->type);
+			//	ft_printf("%s\n", new_token->type);
+			}
+		}
 		aux_token = aux_token->next;
 	}
 	token_clear(&data->tokens);
@@ -36,6 +43,9 @@ void	init_expander(t_data *data)
 	while (aux_new)
 	{
 		add_token(&data->tokens, aux_new->content);
+		if (aux_new->type)
+			token_last(data->tokens)->type = ft_strdup(aux_new->type);
+		//ft_printf("%s\n", aux_new->type);
 		aux_new = aux_new->next;
 	}
 	token_clear(&new_token);
