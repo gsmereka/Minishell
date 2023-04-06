@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 01:05:13 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/04/06 20:03:14 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/06 20:33:07 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,13 @@ static void	expander_envp_value(t_data *data, char **content) //tenho q splitar 
 	if (!*mat_content)
 	{
 		free(mat_content);
+	//	*content = ft_strdup("");
 		mat_content = NULL;
 		return ;
 	}
+
+	//deletar o $ nos casos $'oi' ...? como?
+	
 	new_content = NULL;
 	aux = NULL;
 	env = data->dict_envp;
@@ -253,7 +257,10 @@ void separe_quotes(t_data *data, char **content)
 			i++;
 	}
 	free(*content);
-	*content = ft_strdup(new_content);
+	if (new_content)
+		*content = ft_strdup(new_content);
+	else
+		*content = ft_strdup("");
 	free(new_content);
 
 	/*		ler o content char por char
