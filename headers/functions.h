@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/31 22:44:01 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/06 21:13:32 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int			handle_quotes_and_spaces(t_data *data);
 void		add_token(t_token **tokens, char *content);
 t_token		*token_last(t_token *token);
 void		token_clear(t_token **tokens);
+t_token		*token_last(t_token *token);
 void		slice_tokens(t_data *data);
 
 // expander
