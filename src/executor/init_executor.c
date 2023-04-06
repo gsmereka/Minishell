@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/01 19:46:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/06 17:18:48 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,8 @@ static void	set_built_in(t_data *data)
 	execute_built_in(data->exec->cmds[0], data);
 	dup2(data->output_save_fd, 1);
 	dup2(data->input_save_fd, 0);
+	close(data->input_save_fd);
+	close(data->output_save_fd);
+	close_files_fds(data->exec->cmds[0]->files,
+		data->exec->cmds[0]->files_fd);
 }

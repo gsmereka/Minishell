@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:54:21 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/06 15:47:35 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/06 17:13:42 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_prompt(t_data *data)
 	if (data->prompt)
 		free(data->prompt);
 	path = get_pwd(1024);
-	// path = check_if_is_home(path, data);
+	path = check_if_is_home(path, data);
 	data->prompt = ft_strjoin(green_color, "HopeShell");
 	data->prompt = ft_strjoin_with_free(data->prompt, white_color);
 	data->prompt = ft_strjoin_with_free(data->prompt, ":");
