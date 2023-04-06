@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 04:17:35 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/29 21:48:18 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/06 20:57:24 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ void	token_clear(t_token **tokens)
 	if (*tokens)
 	{
 		token_clear(&(*tokens)->next);
-		free((*tokens)->content);
-		free((*tokens)->type);
+		if ((*tokens)->content) //deixo isso?
+			free((*tokens)->content);
+		if ((*tokens)->type)
+			free((*tokens)->type);
 		free(*tokens);
 		*tokens = NULL;
 	}
