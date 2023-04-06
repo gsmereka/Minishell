@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/04/01 19:35:04 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:37:33 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ void		slice_tokens(t_data *data);
 
 // expander
 void		init_expander(t_data *data);
-void		check_envp_position_in_token(t_data *data, char **content);
+void		separe_quotes(t_data *data, char **content);
 void		free_mat(char **mat);
 size_t		mat_len(char **mat);
 int			count_chars(char *content, char c);
-char		**split_with_char(char const *s, char c); //teste
+char		**split_with_char(char const *s, char c);
 
 // parser
 void		init_parser(t_data *data);

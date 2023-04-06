@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/04/03 17:24:42 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/04/06 15:37:42 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC 	=	src/main.c \
 			src/envp/att_virtual_envp.c \
 			src/envp/att_exit_status.c \
 			src/expander/init_expander.c \
-			src/expander/handle_quotes.c \
+			src/expander/expand_content.c \
 			src/expander/handle_quotes_utils.c \
 			src/expander/split_with_char.c \
 			src/lexer/init_lexer.c \
@@ -77,7 +77,7 @@ LIBFT_A =	./libft/libft.a
 
 HEADERS =	./headers/minishell.h ./headers/functions.h ./headers/structs.h
 
-CCFLAGS =	-Wall -Wextra -Werror
+# CCFLAGS =	-Wall -Wextra -Werror
 
 READLINE_FLAG	=	-lreadline
 

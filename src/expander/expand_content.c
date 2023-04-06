@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_quotes.c                                    :+:      :+:    :+:   */
+/*   expand_content.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 01:05:13 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/29 22:16:31 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/06 20:03:14 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-/*void	check_quotes(char *mat_token)
-{
-	char	**quotes;
-	int		i;
-
-	quotes = ft_split(mat_token, ' ');
-	i = 0;
-	while (aux_spaces_token[i])
-	{
-		if (aux_spaces_token[i][0] == '$')
-			find_envp_value(aux_spaces_token[i]);
-		i++;
-	}
-}*/
-
 static void	expander_envp_value(t_data *data, char **content) //tenho q splitar as aspas antes de splitar os $
 {
-	char	**mat_content;
+	char	**mat_content; //tem 6 funções aqui -- ATENÇÃO
 	char	*new_content;
 	t_env	*env;
 	int		i;
 	int		flag_env;
+	char	*aux;
 
 	mat_content = ft_split(*content, '$'); //funciona, mas vai ser o último 
-	if (!mat_content || !*mat_content)
+	if (!mat_content)
 		return ;
+	if (!*mat_content)
+	{
+		free(mat_content);
+		mat_content = NULL;
+		return ;
+	}
 	new_content = NULL;
+	aux = NULL;
 	env = data->dict_envp;
 	i = 0;
 	if (*content[0] != '$')
@@ -47,21 +40,33 @@ static void	expander_envp_value(t_data *data, char **content) //tenho q splitar 
 	{
 		flag_env = 0;
 		env = data->dict_envp;
-		while (env)
+		if (mat_content[i][0] == '?')
 		{
-			if (ft_strcmp(mat_content[i], env->key) == 0)
+			aux = ft_strdup(find_env("?", data)->value);
+			aux = ft_strjoin_gnl(aux, &mat_content[i][1]);
+			free(mat_content[i]);
+			mat_content[i] = ft_strdup(aux);
+			free(aux);
+			aux = NULL;
+		}
+		else
+		{
+			while (env)
+			{
+				if (ft_strcmp(mat_content[i], env->key) == 0) //usar find env
+				{
+					free(mat_content[i]);
+					mat_content[i] = ft_strdup(env->value);
+					flag_env = 1;
+					break ; 
+				}
+				env = env->next;
+			}
+			if (flag_env == 0)
 			{
 				free(mat_content[i]);
-				mat_content[i] = ft_strdup(env->value);
-				flag_env = 1;
-				break ; 
+				mat_content[i] = ft_strdup("");
 			}
-			env = env->next;
-		}
-		if (flag_env == 0)
-		{
-			free(mat_content[i]);
-			mat_content[i] = ft_strdup("");
 		}
 		i++;
 	}
@@ -158,25 +163,101 @@ static void	expander_content_value(t_data *data, char ***content, char **mat_con
 	free(new_content);
 }
 
-void	check_envp_position_in_token(t_data *data, char **content) //nova func
+void	check_envp_position(t_data *data, char **content)
 {
 	char	**mat_content;
 
-	if (!(*content))
+	if (!content || !(*content))
 		return ;
 	mat_content = split_with_char(*content, ' '); //checar *content antes? //teste da nova split
-	
-	/*print p teste
-	int i = 0;
-	while (mat_content[i])
-	{
-		ft_printf("%s\n", mat_content[i]);
-		i++;
-	}*/
-	
 	if (mat_content) //quando a split retorna NULL da error de double free
 	{
 		expander_content_value(data, &content, mat_content);
 		free_mat(mat_content);
 	}
+}
+
+void separe_quotes(t_data *data, char **content)
+{
+	int		i;
+	char	*str;
+	char	*aux;
+	char	*new_content;
+
+	i = 0;
+	str = NULL;
+	new_content = NULL;
+	aux = NULL;
+	while ((*content)[i])
+	{
+		while ((*content)[i] && (*content)[i] != '\"' && (*content)[i] != '\'')
+		{
+			aux = malloc(2);
+			aux[0] = (*content)[i];
+			aux[1] = '\0';
+			str = ft_strjoin_gnl(str, aux); //acho q vou ter q alocar o char
+			free(aux);
+		//	ft_printf("aaaaa %s\n", str);
+			i++;
+		}
+		if (str)
+		{
+			check_envp_position(data, &str); //e se str nulo?
+			new_content = ft_strjoin_gnl(new_content, str);
+			free(str); // if (str)?   sem talvez de segfault
+			str = NULL;
+		}
+		if ((*content)[i] && (*content)[i] == '\"')
+		{
+			i++;
+			while ((*content)[i] && (*content)[i] != '\"')
+			{
+				aux = malloc(2);
+				aux[0] = (*content)[i];
+				aux[1] = '\0';
+				str = ft_strjoin_gnl(str, aux); //acho q vou ter q alocar o char
+				free(aux);
+				i++;
+			}
+		//	i++;
+			if (str)
+			{
+				check_envp_position(data, &str); //e se str nulo?
+				new_content = ft_strjoin_gnl(new_content, str);
+				free(str); // if (str)?   sem talvez de segfault
+				str = NULL;
+			}
+		}
+		if ((*content)[i] && (*content)[i] == '\'') //else if ou if?
+		{
+			i++;
+			while ((*content)[i] && (*content)[i] != '\'')
+			{
+				aux = malloc(2);
+				aux[0] = (*content)[i];
+				aux[1] = '\0';
+				str = ft_strjoin_gnl(str, aux); //acho q vou ter q alocar o char
+				free(aux);
+				i++;
+			}
+		//	i++;
+		//	check_envp_position(data, &str); //e se str nulo?
+			if (str)
+			{
+				new_content = ft_strjoin_gnl(new_content, str);
+				free(str); // if (str)?   sem talvez de segfault
+				str = NULL;
+			}
+		}
+		if ((*content)[i])
+			i++;
+	}
+	free(*content);
+	*content = ft_strdup(new_content);
+	free(new_content);
+
+	/*		ler o content char por char
+			armazena numa string se n for aspa dupla nem simples
+			se for dupla, enquanto n achar outra dupla armazena numa string
+			se for simples, enquanto n achar outra simples armazena numa string*/
 }
