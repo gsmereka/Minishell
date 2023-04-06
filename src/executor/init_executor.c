@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/06 17:18:48 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/06 20:09:29 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,5 @@ static void	set_built_in(t_data *data)
 	close(data->output_save_fd);
 	close_files_fds(data->exec->cmds[0]->files,
 		data->exec->cmds[0]->files_fd);
+	close_cmd_heredocs(0, data);
 }

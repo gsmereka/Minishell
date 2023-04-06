@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 21:58:47 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/06 20:18:40 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ static void	swap_tokens_list(t_token *save, t_data *data)
 	}
 	token_clear(&data->tokens);
 	data->tokens = save;
-	if (data->tokens)
+	if (save)
 	{
 		get_commands_info(data);
 		set_heredoc(data);
 		if (data->error_msg)
 			ft_putstr_fd(data->error_msg, 2);
+		close_cmd_heredocs(0, data);
 		data->need_interrupt = 1;
 	}
 }
