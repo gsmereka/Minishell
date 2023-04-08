@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 04:13:09 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/27 06:25:56 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/08 03:14:31 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_mat(char **mat)
 	mat = NULL;
 }
 
-size_t mat_len(char **mat)
+size_t	mat_len(char **mat)
 {
 	size_t	i;
 
@@ -40,7 +40,7 @@ int	count_chars(char *content, char c) //colocar size_t?
 {
 	int	i;
 	int	counter;
-	
+
 	i = 0;
 	counter = 0;
 	if (!content || !*content)
