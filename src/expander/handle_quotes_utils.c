@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 04:13:09 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/04/08 03:14:31 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/09 04:19:28 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ size_t	mat_len(char **mat)
 	return (i);
 }
 
-int	count_chars(char *content, char c) //colocar size_t?
+size_t	count_chars(char *content, char c)
 {
-	int	i;
-	int	counter;
+	size_t	i;
+	size_t	counter;
 
 	i = 0;
 	counter = 0;
