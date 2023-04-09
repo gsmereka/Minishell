@@ -82,7 +82,7 @@ void	check_envp_position(t_data *data, char **content)
 	if (!content || !(*content))
 		return ;
 	mat_content = split_with_char(*content, ' ');
-	if (mat_content) //quando a split retorna NULL da error de double free -- qual é esse caso? testar ( )
+	if (mat_content)
 	{
 		expand_content(data, &content, mat_content);
 		free_mat(mat_content);

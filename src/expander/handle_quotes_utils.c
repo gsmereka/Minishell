@@ -16,6 +16,14 @@ void	free_mat(char **mat)
 {
 	int	i;
 
+	if (!mat)
+		return ;
+	if (!*mat)
+	{
+		free(mat);
+		mat = NULL;
+		return ;
+	}
 	i = 0;
 	while (mat[i])
 	{
@@ -30,6 +38,8 @@ size_t	mat_len(char **mat)
 {
 	size_t	i;
 
+	if (!mat || !*mat)
+		return (0);
 	i = 0;
 	while (mat[i])
 		i++;
