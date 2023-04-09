@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/09 04:27:20 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/09 20:55:15 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	init_expander(t_data *data)
 		separe_quotes(data, &aux_token->content);
 		if (ft_strlen(aux_token->content) > 0)
 		{
+			//criar o remove_$ antes de adicionar o content no novo token --só apaga o $ se n tiver nd dps
 			add_token(&new_token, aux_token->content);
 			if (aux_token->type)
 				token_last(new_token)->type = ft_strdup(aux_token->type);
