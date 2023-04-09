@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
+#    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/04/06 15:37:42 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/04/08 03:10:29 by gde-mora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ SRC 	=	src/main.c \
 			src/envp/att_virtual_envp.c \
 			src/envp/att_exit_status.c \
 			src/expander/init_expander.c \
+			src/expander/separe_quotes.c \
 			src/expander/expand_content.c \
+			src/expander/expand_envp_value.c \
 			src/expander/handle_quotes_utils.c \
 			src/expander/split_with_char.c \
 			src/lexer/init_lexer.c \

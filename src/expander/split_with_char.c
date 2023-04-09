@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 05:35:41 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/03/27 06:39:40 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/08 03:37:21 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,44 @@ static size_t	ft_size_word(const char *s, char c)
 	return (i);
 }
 
-static void	*ft_free_mat(char **tab, size_t limit)
+static size_t	ft_free_mat(char **tab, size_t limit)
 {
 	while (limit--)
 		free(tab[limit]);
 	free(tab);
-	return (NULL);
+	return (0);
 }
 
-char	**split_with_char(char const *s, char c) //se der certo, passar pra lib  --aí colocar ft na frente (arq e func)
+static size_t	save_mat(char ***mat, char *s, char c, size_t size)
+{
+	size_t	len;
+	size_t	counter;
+
+	counter = 0;
+	while (counter < size)
+	{
+		len = ft_size_word(s, c);
+		if (len > 0)
+		{
+			(*mat)[counter] = ft_substr(s, 0, len);
+			if ((*mat)[counter++] == NULL)
+				return (ft_free_mat(*mat, counter - 1));
+		}
+		if (*s == c)
+		{
+			(*mat)[counter] = malloc(2);
+			(*mat)[counter][0] = c;
+			(*mat)[counter++][1] = '\0';
+			s += 1;
+		}
+		s += len;
+	}
+	return (counter);
+}
+
+char	**split_with_char(char const *s, char c)
 {
 	char	**mat;
-	size_t	len;
 	size_t	size_array;
 	size_t	counter;
 
@@ -64,26 +90,7 @@ char	**split_with_char(char const *s, char c) //se der certo, passar pra lib  --
 	mat = (char **)malloc(sizeof(char *) * (size_array + 1));
 	if (!mat)
 		return (NULL);
-	counter = 0;
-	while (counter < size_array)
-	{
-		len = ft_size_word(s, c);
-		if (len > 0)
-		{
-			mat[counter] = ft_substr(s, 0, len);
-			if (mat[counter++] == NULL)
-				return (ft_free_mat(mat, counter - 1));
-		}
-		if (*s == c) //algum problema na split...
-		{
-			mat[counter] = malloc(2);
-			mat[counter][0] = c;
-			mat[counter][1] = '\0';
-			counter++;
-			s += 1;
-		}
-		s += len;
-	}
+	counter = save_mat(&mat, (char *)s, c, size_array);
 	mat[counter] = NULL;
 	return (mat);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/02 15:03:24 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/09 21:51:11 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,6 @@ typedef struct s_exec
 	int		**pipes;
 	char	**env_paths;
 }	t_exec;
-
-typedef struct s_expander
-{
-	
-	//é melhor pq tem mt var (e pra passar pras funções tbm)
-}	t_expander;
 
 typedef struct s_data
 {
