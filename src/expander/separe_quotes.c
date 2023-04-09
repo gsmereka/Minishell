@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 02:32:10 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/04/09 21:42:01 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/09 21:51:59 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	unquoted(t_data *data, char **content, int i, char **new)
 {
 	char	*str;
 	char	*aux;
-	
+
 	str = NULL;
 	aux = NULL;
 	while ((*content)[i] && (*content)[i] != '\"' && (*content)[i] != '\'')
@@ -109,14 +109,11 @@ void	separe_quotes(t_data *data, char **content)
 			i++;
 	}
 	free(*content);
-	if (new_content) //o free deveria vir aq?
+	if (new_content)
+	{
 		*content = ft_strdup(new_content);
+		free(new_content);
+	}
 	else
 		*content = ft_strdup("");
-	free(new_content); //??
-
-	/*		ler o content char por char   --- colocar isso fora da função em ingles? sim ( )
-			armazena numa string se n for aspa dupla nem simples
-			se for dupla, enquanto n achar outra dupla armazena numa string
-			se for simples, enquanto n achar outra simples armazena numa string*/
 }
