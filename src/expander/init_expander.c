@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/09 20:55:15 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/10 00:59:11 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,41 @@ static void	set_new_tokens(t_data *data, t_token *new_token)
 	token_clear(&new_token);
 }
 
+static int	verify_char(char **content, int i)
+{
+	if (((*content)[i] == '$' && (!(*content)[i + 1] || \
+		(*content)[i + 1] == '"' || (*content)[i + 1] == '\'' || \
+		(*content)[i + 1] == '$')) || (*content)[i] != '$')
+		return (1);
+	return (0);
+}
+
+static void	remove_env_char(char **content)
+{
+	char	*new_content;
+	int		i;
+	char	*aux;
+
+	new_content = NULL;
+	aux = NULL;
+	i = -1;
+	while ((*content)[++i])
+	{
+		if (verify_char(content, i))
+		{
+			aux = malloc(2);
+			aux[0] = (*content)[i];
+			aux[1] = '\0';
+			new_content = ft_strjoin_gnl(new_content, aux);
+			free(aux);
+			aux = NULL;
+		}
+	}
+	free(*content);
+	*content = ft_strdup(new_content);
+	free(new_content);
+}
+
 void	init_expander(t_data *data)
 {
 	t_token	*aux_token;
@@ -40,7 +75,7 @@ void	init_expander(t_data *data)
 		separe_quotes(data, &aux_token->content);
 		if (ft_strlen(aux_token->content) > 0)
 		{
-			//criar o remove_$ antes de adicionar o content no novo token --só apaga o $ se n tiver nd dps
+			remove_env_char(&aux_token->content);
 			add_token(&new_token, aux_token->content);
 			if (aux_token->type)
 				token_last(new_token)->type = ft_strdup(aux_token->type);
