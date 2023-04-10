@@ -28,11 +28,16 @@ static void	set_new_tokens(t_data *data, t_token *new_token)
 	token_clear(&new_token);
 }
 
-static int	verify_char(char **content, int i)
+static int	verify_char(char **content, int i, int simpl_quote, int doubl_quote)
 {
-	if (((*content)[i] == '$' && (!(*content)[i + 1] || \
-		(*content)[i + 1] == '"' || (*content)[i + 1] == '\'' || \
-		(*content)[i + 1] == '$')) || (*content)[i] != '$')
+	if ((*content)[i] == '$' && !(*content)[i + 1])
+		return (1);
+	else if ((*content)[i] != '$')
+		return (1);
+	else if (((*content)[i + 1] != '"' || doubl_quote != 0) \
+		&& ((*content)[i + 1] != '\'' || simpl_quote != 0))
+		return (1);
+	else if ((*content)[i + 1] == '$')
 		return (1);
 	return (0);
 }
@@ -42,13 +47,31 @@ static void	remove_env_char(char **content)
 	char	*new_content;
 	int		i;
 	char	*aux;
+	int		simple_quote;
+	int		double_quote;
 
 	new_content = NULL;
 	aux = NULL;
+	simple_quote = 0;
+	double_quote = 0;
 	i = -1;
 	while ((*content)[++i])
 	{
-		if (verify_char(content, i))
+		if ((*content)[i] == '\'')
+		{
+			if (simple_quote == 0)
+				simple_quote = 1;
+			else
+				simple_quote = 0;
+		}
+		else if ((*content)[i] == '\"') //else if?
+		{
+			if (double_quote == 0)
+				double_quote = 1;
+			else
+				double_quote = 0;
+		}
+		if (verify_char(content, i, simple_quote, double_quote))
 		{
 			aux = malloc(2);
 			aux[0] = (*content)[i];
@@ -72,10 +95,10 @@ void	init_expander(t_data *data)
 	new_token = NULL;
 	while (aux_token)
 	{
+		remove_env_char(&aux_token->content);
 		separe_quotes(data, &aux_token->content);
 		if (ft_strlen(aux_token->content) > 0)
 		{
-			remove_env_char(&aux_token->content);
 			add_token(&new_token, aux_token->content);
 			if (aux_token->type)
 				token_last(new_token)->type = ft_strdup(aux_token->type);
