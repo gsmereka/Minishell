@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:54:21 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/08 10:11:28 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:39:35 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_prompt(t_data *data)
 	if (data->prompt)
 		free(data->prompt);
 	path = get_pwd(1024);
-	// path = check_if_is_home(path, data);
+	path = check_if_is_home(path, data);
 	data->prompt = ft_strjoin(green_color, "HopeShell");
 	data->prompt = ft_strjoin_with_free(data->prompt, white_color);
 	data->prompt = ft_strjoin_with_free(data->prompt, ":");

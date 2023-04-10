@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/04/08 03:10:29 by gde-mora         ###   ########.fr        #
+#    Updated: 2023/04/10 18:21:34 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,6 +143,6 @@ git: fclean
 	git add . && clear && git status
 
 valgrind: $(NAME)
-	valgrind --suppressions=$$PWD/tester/readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
+	valgrind --suppressions=$$PWD/tester/readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes bash
 
 .PHONY: all clean fclean re create_obj_dir git valgrind
