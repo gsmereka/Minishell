@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 20:14:07 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/09 21:51:11 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:31:47 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ typedef struct s_exec
 	int		**pipes;
 	char	**env_paths;
 }	t_exec;
+
+typedef struct s_expand_aux
+{
+	int		simple_quote;
+	int		double_quote;
+	char	*new_content;
+	char	*aux;
+}	t_expand_aux;
 
 typedef struct s_data
 {
