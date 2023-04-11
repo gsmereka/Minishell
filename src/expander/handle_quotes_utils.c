@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 04:13:09 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/04/09 04:19:28 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/11 04:58:26 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,26 @@ size_t	count_chars(char *content, char c)
 		i++;
 	}
 	return (counter);
+}
+
+int	is_null_cmd(char *content)
+{
+	char	simple_quote;
+	char	double_quote;
+	char	*str1;
+	char	*str2;
+	int		is_null;
+
+	simple_quote = '\'';
+	double_quote = '"';
+	str1 = ft_strtrim(content, &simple_quote);
+	str2 = ft_strtrim(content, &double_quote);
+	is_null = 0;
+	if (ft_strlen(str1) < 1 || ft_strlen(str2) < 1)
+		is_null = 1;
+	if (str1)
+		free(str1);
+	if (str2)
+		free(str2);
+	return (is_null);
 }
