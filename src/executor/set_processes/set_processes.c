@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/08 10:41:09 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:18:46 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	set_processes(t_data *data)
 	int	cmd;
 
 	cmd = 0;
+	child_signals_handling(data);
 	while (cmd < data->exec->cmds_amount)
 	{
 		if (data->need_interrupt)
@@ -34,7 +35,8 @@ int	set_processes(t_data *data)
 	}
 	wait_pids(data);
 	close_all_fds(data);
-	set_execution_exit_code(data);
+	if (!data->need_interrupt)
+		set_execution_exit_code(data);
 	return (0);
 }
 
@@ -48,7 +50,6 @@ static void	set_fork(int cmd, t_data *data)
 {
 	int	pid;
 
-	child_signals_handling(data);
 	pid = fork();
 	if (pid == -1)
 		exit_error(24, "minishell: Error at use fork() function", data);
