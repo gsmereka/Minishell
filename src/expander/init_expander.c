@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/11 05:03:39 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/11 05:18:49 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,19 +93,18 @@ void	init_expander(t_data *data)
 {
 	t_token	*aux_token;
 	t_token	*new_token;
+	int		null_flag;
 
 	aux_token = data->tokens;
 	new_token = NULL;
 	while (aux_token)
 	{
+		null_flag = 0;
 		if (is_null_cmd(aux_token->content))
-		{
-			free(aux_token->content);
-			aux_token->content = ft_strdup(" ");
-		}
+			null_flag = 1;
 		remove_env_char(&aux_token->content);
 		separe_quotes(data, &aux_token->content);
-		if (ft_strlen(aux_token->content) > 0)
+		if (ft_strlen(aux_token->content) > 0 || null_flag == 1)
 		{
 			add_token(&new_token, aux_token->content);
 			if (aux_token->type)
