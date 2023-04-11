@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:16:01 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/11 14:18:46 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:52:39 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	set_processes(t_data *data)
 	{
 		if (data->need_interrupt)
 			return (0);
-		att_exit_status(0, data);
 		set_pipes(cmd, data);
 		set_files(data->exec->cmds[cmd]);
 		set_fork(cmd, data);

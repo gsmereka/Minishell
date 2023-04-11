@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/06 20:18:40 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:54:58 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void		add_saved_token(t_token **tokens, char *content, char *type);
 
 void	init_parser(t_data *data)
 {
+	if (data->need_interrupt)
+		return ;
 	if (!data->tokens)
 		return ;
 	if (check_syntax(data))

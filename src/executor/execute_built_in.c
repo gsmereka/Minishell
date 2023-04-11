@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:46:14 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/30 17:37:20 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:52:58 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	execute_built_in(t_cmd *cmd, t_data *data)
 	args = cmd->args;
 	if (!args || !args[0])
 		return ;
-	else if (ft_strncmp(args[0], "echo", ft_strlen(args[0])) == 0)
+	att_exit_status(0, data);
+	if (ft_strncmp(args[0], "echo", ft_strlen(args[0])) == 0)
 		ft_echo(args, data);
 	else if (ft_strncmp(args[0], "cd", ft_strlen(args[0])) == 0)
 		ft_cd(args, data);

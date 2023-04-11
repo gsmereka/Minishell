@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/11 11:04:58 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:50:05 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	init_expander(t_data *data)
 	t_token	*new_token;
 	int		null_flag;
 
+	if (!data->tokens || data->need_interrupt)
+		return ;
 	aux_token = data->tokens;
 	new_token = NULL;
 	while (aux_token)
