@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_expander.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/10 18:10:57 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/11 05:03:39 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	set_new_tokens(t_data *data, t_token *new_token)
 		aux_new = aux_new->next;
 	}
 	token_clear(&new_token);
+	if (!data->tokens)
+		att_exit_status(0, data);
 }
 
 static int	verify_char(char **content, int i, t_expand_aux *expand_aux)
@@ -96,6 +98,11 @@ void	init_expander(t_data *data)
 	new_token = NULL;
 	while (aux_token)
 	{
+		if (is_null_cmd(aux_token->content))
+		{
+			free(aux_token->content);
+			aux_token->content = ft_strdup(" ");
+		}
 		remove_env_char(&aux_token->content);
 		separe_quotes(data, &aux_token->content);
 		if (ft_strlen(aux_token->content) > 0)

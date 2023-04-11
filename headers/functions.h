@@ -6,7 +6,7 @@
 /*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:23:28 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/04/09 04:19:45 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/11 04:56:36 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void		expand_envp_value(t_data *data, char **content);
 void		free_mat(char **mat);
 size_t		mat_len(char **mat);
 size_t		count_chars(char *content, char c);
+int			is_null_cmd(char *content);
 char		**split_with_char(char const *s, char c);
 
 // parser
