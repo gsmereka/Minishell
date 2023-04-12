@@ -79,7 +79,7 @@ LIBFT_A =	./libft/libft.a
 
 HEADERS =	./headers/minishell.h ./headers/functions.h ./headers/structs.h
 
-# CCFLAGS =	-Wall -Wextra -Werror
+CCFLAGS =	-Wall -Wextra -Werror
 
 READLINE_FLAG	=	-lreadline
 
