@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/12 12:26:42 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:50:24 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ static char	*get_pwd(int buffer_size, t_data *data)
 
 static void	att_envp_dictionary(char *save_pwd, t_data *data)
 {
-	static int	oldpwd_was_created_once;
 	t_env		*oldpwd;
 	t_env		*pwd;
 

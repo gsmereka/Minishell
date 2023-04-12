@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:19:11 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/08 10:39:23 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:48:12 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	close_cmd_heredocs(int cmd_index, t_data *data)
 {
 	t_cmd	*cmd;
 	int		i;
-	int		last_heredoc;
 
 	cmd = data->exec->cmds[cmd_index];
 	if (!cmd)
@@ -64,7 +63,6 @@ void	close_cmd_heredocs(int cmd_index, t_data *data)
 	if (!cmd->heredocs_pipes || !cmd->files_modes || !cmd->files)
 		return ;
 	i = 0;
-	last_heredoc = 0;
 	while (cmd->files[i])
 	{
 		if (cmd->files_modes[i] == 1)

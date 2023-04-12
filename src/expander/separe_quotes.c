@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   separe_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 02:32:10 by gde-mora          #+#    #+#             */
-/*   Updated: 2023/04/09 21:51:59 by gde-mora         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:49:59 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	double_quoted(t_data *data, char **content, int i, char **new)
 	return (i);
 }
 
-static int	simple_quoted(t_data *data, char **content, int i, char **new)
+static int	simple_quoted(char **content, int i, char **new)
 {
 	char	*str;
 	char	*aux;
@@ -104,7 +104,7 @@ void	separe_quotes(t_data *data, char **content)
 		if ((*content)[i] && (*content)[i] == '\"')
 			i = double_quoted(data, content, i, &new_content);
 		if ((*content)[i] && (*content)[i] == '\'')
-			i = simple_quoted(data, content, i, &new_content);
+			i = simple_quoted(content, i, &new_content);
 		if ((*content)[i])
 			i++;
 	}
