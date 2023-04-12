@@ -6,7 +6,7 @@
 #    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/04/10 20:28:07 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/04/12 12:47:10 by gsmereka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,9 +86,9 @@ READLINE_FLAG	=	-lreadline
 RM		=	rm -f
 
 # RULES
-all: $(NAME) ascii
+all: $(NAME) ascii_draw
 
-ascii:
+ascii_draw:
 	@echo "\033[1;35m"
 	@echo "░░┌──┐░░░░░░░░░░┌──┐░░░░░░┌──┐░░░░░░░░░░┌──┐░░░░░░┌──┐░░░░░░░░░░┌──┐░░"
 	@echo "░╔╡▐▐╞╝░░┌──┐░░╔╡▐▐╞╝░░░░╔╡▐▐╞╝░░┌──┐░░╔╡▐▐╞╝░░░░╔╡▐▐╞╝░░┌──┐░░╔╡▐▐╞╝░"
@@ -137,12 +137,8 @@ create_obj_dir:
 	@mkdir -p $(OBJ_DIR)/src/executor/set_processes
 	@mkdir -p $(OBJ_DIR)/src/signals
 
-## FULL CLEAN ALL OBJECTS AND TESTERS
+## FULL CLEAN ALL OBJECTS
 git: fclean
-	make fclean -C tester
 	git add . && clear && git status
 
-valgrind: $(NAME)
-	valgrind --suppressions=$$PWD/tester/readline.supp --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./minishell
-
-.PHONY: all clean fclean re create_obj_dir git valgrind
+.PHONY: all clean fclean re create_obj_dir git valgrind ascii_draw
