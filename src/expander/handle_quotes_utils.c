@@ -74,8 +74,8 @@ int	is_null_cmd(char *content)
 
 	if (!content)
 		return (1);
-	simple_quote = "'";
-	double_quote = "\"";
+	simple_quote = ft_strdup("'");
+	double_quote = ft_strdup("\"");
 	str1 = ft_strtrim(content, simple_quote);
 	str2 = ft_strtrim(content, double_quote);
 	is_null = 0;
@@ -85,5 +85,7 @@ int	is_null_cmd(char *content)
 		free(str1);
 	if (str2)
 		free(str2);
+	free(simple_quote);
+	free(double_quote);
 	return (is_null);
 }
