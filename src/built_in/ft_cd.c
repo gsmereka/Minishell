@@ -6,16 +6,16 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:01:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/02 21:11:31 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:50:24 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 static void		att_envp_dictionary(char *save_pwd, t_data *data);
-static int		validate_dir(char **dir, t_data *data);
+static int		validate_dir(char **dir, char *save_pwd, t_data *data);
 static char		*get_pwd(int buffer_size, t_data *data);
-static int		buffer_size_overflow(int buffer_size);
+static char		*set_home(char **dir, char *save_pwd, t_data *data);
 
 void	ft_cd(char **args, t_data *data)
 {
@@ -29,32 +29,29 @@ void	ft_cd(char **args, t_data *data)
 		return ;
 	}
 	path = args[1];
-	if (!validate_dir(&path, data))
-		return ;
 	save_pwd = get_pwd(1024, data);
+	if (!validate_dir(&path, save_pwd, data))
+	{
+		free (save_pwd);
+		return ;
+	}
 	dir_changed = chdir(path);
 	if (dir_changed != -1)
 	{
 		att_envp_dictionary(save_pwd, data);
 		att_virtual_envp(data);
 	}
-	free(save_pwd);
+	free (save_pwd);
 }
 
-static int	validate_dir(char **dir, t_data *data)
+static int	validate_dir(char **dir, char *save_pwd, t_data *data)
 {
 	struct stat	dir_info;
 
 	if (!*dir || ft_strcmp(*dir, "~") == 0)
-	{
-		if (find_env("HOME", data) && find_env("HOME", data)->value)
-			*dir = find_env("HOME", data)->value;
-		else
-		{
-			ft_cd_error_msg(4, NULL, data);
-			return (0);
-		}
-	}
+		*dir = set_home(dir, save_pwd, data);
+	if (!*dir)
+		return (0);
 	dir_info = (struct stat){0};
 	stat(*dir, &dir_info);
 	if (access(*dir, F_OK) == -1)
@@ -68,6 +65,22 @@ static int	validate_dir(char **dir, t_data *data)
 	return (0);
 }
 
+static char	*set_home(char **dir, char *save_pwd, t_data *data)
+{
+	t_env	*home;
+
+	home = find_env("HOME", data);
+	if (!home || home->hidden_status != 0)
+	{
+		ft_cd_error_msg(4, NULL, data);
+		return (NULL);
+	}
+	*dir = home->value;
+	if (*dir[0] == '\0')
+		*dir = save_pwd;
+	return (*dir);
+}
+
 static char	*get_pwd(int buffer_size, t_data *data)
 {
 	char	*pwd;
@@ -76,7 +89,7 @@ static char	*get_pwd(int buffer_size, t_data *data)
 	pwd = getcwd(NULL, buffer_size);
 	if (!pwd)
 	{
-		if (!buffer_size_overflow(buffer_size))
+		if (buffer_size > 0)
 			pwd = get_pwd(buffer_size * 2, data);
 		else
 		{
@@ -89,16 +102,8 @@ static char	*get_pwd(int buffer_size, t_data *data)
 	return (pwd);
 }
 
-static int	buffer_size_overflow(int buffer_size)
-{
-	if (buffer_size > 0)
-		return (0);
-	return (1);
-}
-
 static void	att_envp_dictionary(char *save_pwd, t_data *data)
 {
-	static int	oldpwd_was_created_once;
 	t_env		*oldpwd;
 	t_env		*pwd;
 
@@ -108,16 +113,12 @@ static void	att_envp_dictionary(char *save_pwd, t_data *data)
 	{
 		free(pwd->value);
 		pwd->value = get_pwd(1024, data);
+		pwd->hidden_status = 0;
 	}
 	if (oldpwd)
 	{
 		free(oldpwd->value);
 		oldpwd->value = ft_strdup(save_pwd);
-	}
-	if (oldpwd_was_created_once == 0)
-	{
-		if (!oldpwd)
-			dict_add_back(&data->dict_envp, "OLDPWD", save_pwd);
-		oldpwd_was_created_once++;
+		oldpwd->hidden_status = 0;
 	}
 }
