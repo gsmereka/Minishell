@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+         #
+#    By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 18:26:17 by gde-mora          #+#    #+#              #
-#    Updated: 2023/04/12 12:47:49 by gsmereka         ###   ########.fr        #
+#    Updated: 2023/04/12 22:07:40 by gde-mora         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -141,4 +141,4 @@ create_obj_dir:
 git: fclean
 	git add . && clear && git status
 
-.PHONY: all clean fclean re create_obj_dir git valgrind ascii_draw
+.PHONY: all clean fclean re create_obj_dir git ascii_draw

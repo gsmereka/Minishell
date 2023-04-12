@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gde-mora <gde-mora@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:54 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/02 21:03:06 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:17:44 by gde-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	set_variable(char *str, t_data *data)
 	t_env	*new_var;
 
 	j = 0;
+	value = NULL;
 	while (str[j] != '=')
 		j++;
 	key = ft_calloc(j + 1, sizeof(char));
@@ -64,8 +65,10 @@ static void	set_variable(char *str, t_data *data)
 		att_variable(new_var, key, value);
 	else
 		dict_add_back(&data->dict_envp, key, value);
-	free(key);
-	free(value);
+	if (key)
+		free(key);
+	if (value)
+		free(value);
 }
 
 static void	att_variable(t_env *new_var, char *key, char *value)
