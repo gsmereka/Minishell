@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:50 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/13 13:17:25 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:26:03 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	valid_args(char **args, t_data *data)
 	{
 		error_msg = ft_strjoin("bash: exit: ", args[1]);
 		write(2, error_msg, ft_strlen(error_msg));
+		free(error_msg);
 		error_msg = ": numeric argument required\n";
 		write(2, error_msg, ft_strlen(error_msg));
 		att_exit_status(2, data);
