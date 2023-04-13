@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:48:55 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/11 14:52:25 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:09:15 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ static int	do_not_need_fork(t_data *data)
 	else if (ft_strcmp(first_cmd->args[0], "echo") == 0)
 		return (0);
 	if (is_built_in(first_cmd))
+	{
+		if (ft_strcmp(first_cmd->args[0], "exit") == 0)
+			ft_putstr_fd("exit\n", 2);
 		return (1);
+	}
 	return (0);
 }
 

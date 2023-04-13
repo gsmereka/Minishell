@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:50 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/04/12 11:38:38 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:17:25 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_exit(char **args, t_data *data)
 	else if (args && args[1])
 		exit_status = set_exit_status(args, data);
 	else
-		exit_status = 0;
+		exit_status = data->exit_status;
 	att_exit_status(exit_status, data);
 	execute_exit(data);
 }
@@ -87,7 +87,6 @@ static int	is_default_value(char *arg, t_data *data)
 
 static void	execute_exit(t_data *data)
 {
-	ft_putstr_fd("exit\n", 2);
 	close(data->output_save_fd);
 	close(data->input_save_fd);
 	close(1);
