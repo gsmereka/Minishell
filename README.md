@@ -7,10 +7,12 @@ Este projeto tem o objetivo de escrever um shell simples utilizando C.
 2. [Etapas de produção](#etapas-de-produção)
     1. [Execução REPL](#execução-repl)
     2. [Lexer](#lexer)
-    3. [Parser](#parser)
-    4. [Executor](#executor)
+    3. [Expander](#expander)
+    4. [Parser](#parser)
+    5. [Executor](#executor)
 3. [Fluxograma](#fluxograma)
 4. [Funcionalidades Esperadas](#funcionalidades-esperadas)
+5. [Medalha](#medalha)
 
 ## Sobre o Projeto
 
@@ -26,7 +28,11 @@ A implementação do comportamento REPL (Read-Eval-Print Loop) é uma etapa cruc
 
 ### Lexer
 
-O Lexer é responsavel pelo processamento correto dos comandos digitados pelo usuário. O lexer irá dividir a string de entrada do usuário em palavras-chave específicas mais fáceis de gerenciar. Isso é essencial para garantir que os comandos sejam interpretados corretamente e executados da forma esperada.
+O Lexer é responsavel pelo processamento correto dos comandos digitados pelo usuário. O lexer irá dividir a string de entrada do usuário em palavras-chave (tokens) específicas e mais fáceis de gerenciar. Isso é essencial para garantir que os comandos sejam interpretados corretamente e executados da forma esperada.
+
+### Expander
+
+É o responsável por expandir o valor das variáveis de ambiente em cada token, garantindo que o comando final terá o resultado esperado. Também deve tratar as diferenças de comportamento entre aspas simples e aspas duplas.
 
 ### Parser
 
@@ -39,12 +45,16 @@ O Executor é a parte responsável por receber a lista de palavras-chave formata
 ## Fluxograma
 
 ## Funcionalidades esperadas:
-- [ ] Exibição de um prompt quando esperando por um novo comando
-- [ ] Armazenamento do histórico de comandos executados
-- [ ] Manipulação de ctrl + C, ctrl + D e ctrl + \ durante a exibição do prompt.
-- [ ] Manipulação de aspas simples e duplas
-- [ ] Manipulação de variáveis de ambiente
-- [ ] Implementação de redirecionamentos de entrada e saída e uso de pipes
-- [ ] Implementação de comandos internos como echo, cd, pwd, export, unset, env e exit
-- [ ] Procura e inicialização do programa correto
-- [ ] Manipulação de ctrl + C, ctrl + D e ctrl + \ de acordo com o bash.
+- [✔️] Exibição de um prompt quando esperando por um novo comando
+- [✔️] Armazenamento do histórico de comandos executados
+- [✔️] Manipulação de ctrl + C, ctrl + D e ctrl + \ durante a exibição do prompt.
+- [✔️] Manipulação de aspas simples e duplas
+- [✔️] Manipulação de variáveis de ambiente
+- [✔️] Implementação de redirecionamentos de entrada e saída e uso de pipes
+- [✔️] Implementação de comandos internos como echo, cd, pwd, export, unset, env e exit
+- [✔️] Procura e inicialização do programa correto
+- [✔️] Manipulação de ctrl + C, ctrl + D e ctrl + \ de acordo com o bash.
+
+## Medalha
+![minishellm](https://user-images.githubusercontent.com/90937264/232136316-9469796b-aa25-4cb9-b754-aac975f6b83a.png)
+
