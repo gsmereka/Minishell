@@ -13,6 +13,7 @@
 #include "../../headers/minishell.h"
 
 t_token	*create_token(char *content);
+t_token	*token_last(t_token *token);
 void	add_token(t_token **tokens, char *content);
 void	token_clear(t_token **tokens);
 
