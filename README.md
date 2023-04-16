@@ -1,4 +1,4 @@
-<h1 align="center"> Minishell </h1>
+<!-- <h1 align="center"> Minishell </h1> -->
 
 <div style="align:center">
   <img src="readme_content/Title.png" alt="minishellm">
