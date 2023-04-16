@@ -2,6 +2,11 @@
   <img src="readme_content/Title.png" alt="minishellm">
 </div>
 
+img {
+  display: block;
+  margin: auto;
+}
+
 # 42_Minishell
 Este projeto tem o objetivo de escrever um shell simples utilizando C.
 
