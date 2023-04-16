@@ -57,7 +57,7 @@ sudo apt-get install libreadline-dev
 
 ## Instalação:
 
-1 - Abra o terminal e digite o comando git clone https://github.com/seu-usuario/minishell.git para clonar o repositório para um diretório de sua escolha.  
+1 - Abra o terminal e digite o comando git clone https://github.com/gsmereka/42_Minishell.git para clonar o repositório para um diretório de sua escolha.  
 2 - Navegue até o diretório recém-clonado com o comando cd minishell.  
 3 - Execute o comando make para compilar o código-fonte e gerar o arquivo executável 'minishell'.  
 4 - Para executar o Minishell, navegue até o diretório onde o arquivo 'minishell' foi gerado e execute o comando ./minishell.  
