@@ -31,7 +31,7 @@ Um shell é uma interface de linha de comando que permite a interação com o si
 
 ## Utilização:
 
-Basta utilizar normalmente como o proprio bash, limitado apenas pelas [Funcionalidades](#funcionalidades).  
+Você pode usar o Minishell normalmente como o próprio Bash, mas deve estar ciente de que o Minishell tem algumas [Funcionalidades](#funcionalidades) limitadas em comparação com o Bash.  
 
 ### Demonstração:
 
