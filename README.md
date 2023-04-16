@@ -48,6 +48,8 @@ O parser é responsável por analisar a sequência de palavras-chave geradas pel
 
 O Executor é a parte responsável por receber a lista de palavras-chave formatada pelo parser, interpretar e definir a ordem de execução dos comandos. Ele também é responsável por lidar com os redirecionamentos de entrada e saída, garantindo que os dados sejam direcionados corretamente para os comandos. Ele também é responsável por realizar a execução efetiva dos comandos, garantindo que os comandos sejam executados de maneira adequada.
 
+![minishellm](readme_content/executor.bmp)  
+
 ## Funcionalidades esperadas:
 - [✔️] Exibição de um prompt quando esperando por um novo comando
 - [✔️] Armazenamento do histórico de comandos executados

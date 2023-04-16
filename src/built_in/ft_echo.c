@@ -6,7 +6,7 @@
 /*   By: gsmereka <gsmereka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:02:39 by gsmereka          #+#    #+#             */
-/*   Updated: 2023/03/22 16:55:48 by gsmereka         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:13:08 by gsmereka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	identify_flags(char **args)
 {
 	if (!args[1])
 		return (0);
-	if (ft_strcmp(args[1], "-n", 2) == 0)
+	if (ft_strcmp(args[1], "-n") == 0)
 		return (1);
 	return (0);
 }
