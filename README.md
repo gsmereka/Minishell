@@ -1,11 +1,8 @@
-<div style="text-align:center">
+<h1 align="center"> Minishell </h1>
+
+<div style="align:center">
   <img src="readme_content/Title.png" alt="minishellm">
 </div>
-
-img {
-  display: block;
-  margin: auto;
-}
 
 # 42_Minishell
 Este projeto tem o objetivo de escrever um shell simples utilizando C.
