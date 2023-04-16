@@ -10,15 +10,19 @@ Este projeto tem o objetivo de escrever um shell simples utilizando C.
 ## Índice
 
 1. [Sobre o Projeto](#sobre-o-projeto)
-2. [Etapas de produção](#etapas-de-produção)
+2. [Utilização](#utilização)
+    1. [Demonstração](#demonstração)
+3. [Dependências](#dependências)
+4. [Instalação](#instalação)
+5. [Funcionalidades](#funcionalidades)
+6. [Etapas de produção](#etapas-de-produção)
     1. [Execução REPL](#execução-repl)
     2. [Lexer](#lexer)
     3. [Expander](#expander)
     4. [Parser](#parser)
     5. [Executor](#executor)
-3. [Fluxograma](#fluxograma)
-4. [Funcionalidades Esperadas](#funcionalidades-esperadas)
-5. [Medalha](#medalha)
+7. [Fluxograma](#fluxograma)
+8. [Medalha](#medalha)
 
 ## Sobre o Projeto
 
@@ -32,7 +36,7 @@ Basta utilizar normalmente como o proprio bash, limitado apenas pelas [Funcional
 
 ![minishell](readme_content/demonstração.gif) 
 
-## Dependencias:
+## Dependências:
 
 * As seguintes bibliotecas:  
 <signal.h>  
