@@ -29,13 +29,18 @@ Um shell é uma interface de linha de comando que permite a interação com o si
 * As seguintes bibliotecas:  
 <signal.h>  
 <stdio.h>  
-<readline/readline.h>  
-<readline/history.h>  
 <sys/types.h>  
 <sys/stat.h>  
 <dirent.h>  
 <fcntl.h>  
 <sys/wait.h>  
+
+* Compilador gcc:  
+sudo apt-get update  
+sudo apt-get install build-essential  
+
+* Biblioteca Readline:
+sudo apt-get install libreadline-dev  
 
 ## Funcionalidades:
 - [✔️] Exibição de um prompt quando esperando por um novo comando
