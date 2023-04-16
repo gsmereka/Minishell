@@ -24,6 +24,30 @@ Este projeto tem o objetivo de escrever um shell simples utilizando C.
 
 Um shell é uma interface de linha de comando que permite a interação com o sistema operacional. Ele permite a execução de comandos, navegação no sistema de arquivos e automação de tarefas rotineiras. Os shells mais populares incluem o bash (usado no Linux e macOS) e o cmd (usado no Windows). Neste projeto, utilizaremos o bash como base para o desenvolvimento do minishell.
 
+## Dependencias:
+
+* As seguintes bibliotecas:  
+<signal.h>  
+<stdio.h>  
+<readline/readline.h>  
+<readline/history.h>  
+<sys/types.h>  
+<sys/stat.h>  
+<dirent.h>  
+<fcntl.h>  
+<sys/wait.h>  
+
+## Funcionalidades:
+- [✔️] Exibição de um prompt quando esperando por um novo comando
+- [✔️] Armazenamento do histórico de comandos executados
+- [✔️] Manipulação de ctrl + C, ctrl + D e ctrl + \ durante a exibição do prompt.
+- [✔️] Manipulação de ctrl + C, ctrl + D e ctrl + \ de acordo com o bash.
+- [✔️] Manipulação de aspas simples (') e duplas (").
+- [✔️] Manipulação de variáveis de ambiente.
+- [✔️] Implementação de redirecionamentos de entrada e saída e uso de pipes
+- [✔️] Implementação de comandos internos: echo, cd, pwd, export, unset, env e exit
+- [✔️] Procura e inicialização do programa correto a partir de caminhos relativos e absolutos.
+
 ## Etapas de produção
 
 Abaixo estão descritas as etapas necessárias para o desenvolvimento do minishell.
@@ -55,17 +79,6 @@ O parser é responsável por analisar a sequência de palavras-chave geradas pel
 O Executor é a parte responsável por receber a lista de palavras-chave formatada pelo parser, interpretar e definir a ordem de execução dos comandos. Ele também é responsável por lidar com os redirecionamentos de entrada e saída, garantindo que os dados sejam direcionados corretamente para os comandos. Ele também é responsável por realizar a execução efetiva dos comandos, garantindo que os comandos sejam executados de maneira adequada.
 
 ![minishellm](readme_content/executor.bmp)  
-
-## Funcionalidades esperadas:
-- [✔️] Exibição de um prompt quando esperando por um novo comando
-- [✔️] Armazenamento do histórico de comandos executados
-- [✔️] Manipulação de ctrl + C, ctrl + D e ctrl + \ durante a exibição do prompt.
-- [✔️] Manipulação de aspas simples e duplas
-- [✔️] Manipulação de variáveis de ambiente
-- [✔️] Implementação de redirecionamentos de entrada e saída e uso de pipes
-- [✔️] Implementação de comandos internos como echo, cd, pwd, export, unset, env e exit
-- [✔️] Procura e inicialização do programa correto
-- [✔️] Manipulação de ctrl + C, ctrl + D e ctrl + \ de acordo com o bash.
 
 ## Medalha
 ![minishell](https://user-images.githubusercontent.com/90937264/232136316-9469796b-aa25-4cb9-b754-aac975f6b83a.png)
