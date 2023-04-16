@@ -104,6 +104,11 @@ O Executor é a parte responsável por receber a lista de palavras-chave formata
 
 ![minishellm](readme_content/executor.bmp)  
 
+# Autores
+
+| [<img src="https://avatars.githubusercontent.com/u/102737099?s" width=115><br><sub>Gabriel Smereka</sub>](https://github.com/gsmereka) |  [<img src="https://avatars.githubusercontent.com/u/90937264?v=4" width=115><br><sub>Gabriela de Moraes da Silva</sub>](https://github.com/Gabriela-M-Silva) |
+| :---: | :---: | :---: |
+
 ## Medalha
 ![minishell](https://user-images.githubusercontent.com/90937264/232136316-9469796b-aa25-4cb9-b754-aac975f6b83a.png)
 
