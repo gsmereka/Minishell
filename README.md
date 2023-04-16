@@ -40,20 +40,24 @@ Você pode usar o Minishell normalmente como o próprio Bash, mas deve estar cie
 ## Dependências:
 
 * As seguintes bibliotecas:  
-<signal.h>  
-<stdio.h>  
-<sys/types.h>  
-<sys/stat.h>  
-<dirent.h>  
-<fcntl.h>  
-<sys/wait.h>  
+    - <signal.h>  
+    - <stdio.h>  
+    - <sys/types.h>  
+    - <sys/stat.h>  
+    - <dirent.h>  
+    - <fcntl.h>  
+    - <sys/wait.h>  
 
 * Compilador gcc:  
-sudo apt-get update  
-sudo apt-get install build-essential  
+    ```
+    sudo apt-get update  
+    sudo apt-get install build-essential  
+    ```
 
 * Biblioteca Readline:
-sudo apt-get install libreadline-dev  
+    ```
+    sudo apt-get install libreadline-dev
+    ```
 
 ## Instalação:
 
