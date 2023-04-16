@@ -24,12 +24,13 @@ Este projeto tem o objetivo de escrever um shell simples utilizando C.
 
 Um shell é uma interface de linha de comando que permite a interação com o sistema operacional. Ele permite a execução de comandos, navegação no sistema de arquivos e automação de tarefas rotineiras. Os shells mais populares incluem o bash (usado no Linux e macOS) e o cmd (usado no Windows). Neste projeto, utilizaremos o bash como base para o desenvolvimento do minishell.
 
-## Como Utilizar:
+## Utilização:
 
-1 - Abra o terminal e digite o comando git clone https://github.com/seu-usuario/minishell.git para clonar o repositório para um diretório de sua escolha.  
-2 - Navegue até o diretório recém-clonado com o comando cd minishell.  
-3 - Execute o comando make para compilar o código-fonte e gerar o arquivo executável 'minishell'.  
-4 - Para executar o Minishell, navegue até o diretório onde o arquivo 'minishell' foi gerado e execute o comando ./minishell.  
+Basta utilizar normalmente como o proprio bash, limitado apenas pelas [Funcionalidades](#funcionalidades).  
+
+### Demonstração:
+
+![minishell](readme_content/demonstração.gif) 
 
 ## Dependencias:
 
@@ -48,6 +49,13 @@ sudo apt-get install build-essential
 
 * Biblioteca Readline:
 sudo apt-get install libreadline-dev  
+
+## Instalação:
+
+1 - Abra o terminal e digite o comando git clone https://github.com/seu-usuario/minishell.git para clonar o repositório para um diretório de sua escolha.  
+2 - Navegue até o diretório recém-clonado com o comando cd minishell.  
+3 - Execute o comando make para compilar o código-fonte e gerar o arquivo executável 'minishell'.  
+4 - Para executar o Minishell, navegue até o diretório onde o arquivo 'minishell' foi gerado e execute o comando ./minishell.  
 
 ## Funcionalidades:
 - [✔️] Exibição de um prompt quando esperando por um novo comando
