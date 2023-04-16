@@ -106,7 +106,7 @@ O Executor é a parte responsável por receber a lista de palavras-chave formata
 
 # Autores
 
-| [<img src="https://avatars.githubusercontent.com/u/102737099?s" width=115><br><sub>Gabriel Smereka</sub>](https://github.com/gsmereka) |  [<img src="https://avatars.githubusercontent.com/u/90937264?v=4" width=115><br><sub>Gabriela de Moraes da Silva</sub>](https://github.com/Gabriela-M-Silva) |
+| [<img src="https://avatars.githubusercontent.com/u/102737099?s" width=115><br><sub>Gabriel Smereka</sub>](https://github.com/gsmereka) |  [<img src="https://avatars.githubusercontent.com/u/90937264?v=4" width=115><br><sub>Gabriela de Moraes da Silva</sub>](https://github.com/Gabriela-M-Silva)
 | :---: | :---: | :---: |
 
 ## Medalha
