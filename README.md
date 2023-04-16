@@ -68,7 +68,7 @@ sudo apt-get install libreadline-dev
 - [✔️] Manipulação de ctrl + C, ctrl + D e ctrl + \ de acordo com o bash.
 - [✔️] Manipulação de aspas simples (') e duplas (").
 - [✔️] Manipulação de variáveis de ambiente.
-- [✔️] Implementação de redirecionamentos de entrada e saída e uso de pipes
+- [✔️] Implementação de redirecionamentos de entrada e saída e uso de pipes (Apenas: <, <<, >>, > e |).
 - [✔️] Implementação de comandos internos: echo, cd, pwd, export, unset, env e exit
 - [✔️] Procura e inicialização do programa correto a partir de caminhos relativos e absolutos.
 
