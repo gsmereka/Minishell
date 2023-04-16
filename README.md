@@ -1,3 +1,5 @@
+![minishellm](readme_content/Title.png) 
+
 # 42_Minishell
 Este projeto tem o objetivo de escrever um shell simples utilizando C.
 
