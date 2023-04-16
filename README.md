@@ -1,4 +1,6 @@
-![minishellm](readme_content/Title.png) 
+<div style="text-align:center">
+  <img src="readme_content/Title.png" alt="minishellm">
+</div>
 
 # 42_Minishell
 Este projeto tem o objetivo de escrever um shell simples utilizando C.
