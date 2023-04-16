@@ -26,9 +26,14 @@ Abaixo estão descritas as etapas necessárias para o desenvolvimento do minishe
 
 A implementação do comportamento REPL (Read-Eval-Print Loop) é uma etapa crucial no desenvolvimento deste projeto. Ele permite a interação interativa com o usuário, lendo suas entradas, executando as demais etapas e exibindo os resultados em seguida apropriadamente. Ele então volta para o início do loop para ler a próxima entrada, permitindo ao usuário continuar a interagir com o programa.
 
+## Fluxograma
+![minishell](readme_content/fluxograma_repl.bmp)  
+
 ### Lexer
 
 O Lexer é responsavel pelo processamento correto dos comandos digitados pelo usuário. O lexer irá dividir a string de entrada do usuário em palavras-chave (tokens) específicas e mais fáceis de gerenciar. Isso é essencial para garantir que os comandos sejam interpretados corretamente e executados da forma esperada.
+
+![minishellm](readme_content/fluxograma_lexer.bmp)  
 
 ### Expander
 
@@ -42,9 +47,6 @@ O parser é responsável por analisar a sequência de palavras-chave geradas pel
 
 O Executor é a parte responsável por receber a lista de palavras-chave formatada pelo parser, interpretar e definir a ordem de execução dos comandos. Ele também é responsável por lidar com os redirecionamentos de entrada e saída, garantindo que os dados sejam direcionados corretamente para os comandos. Ele também é responsável por realizar a execução efetiva dos comandos, garantindo que os comandos sejam executados de maneira adequada.
 
-## Fluxograma
-![minishellm](readme_content/fluxograma.bmp)  
-
 ## Funcionalidades esperadas:
 - [✔️] Exibição de um prompt quando esperando por um novo comando
 - [✔️] Armazenamento do histórico de comandos executados
@@ -57,5 +59,5 @@ O Executor é a parte responsável por receber a lista de palavras-chave formata
 - [✔️] Manipulação de ctrl + C, ctrl + D e ctrl + \ de acordo com o bash.
 
 ## Medalha
-![minishellm](https://user-images.githubusercontent.com/90937264/232136316-9469796b-aa25-4cb9-b754-aac975f6b83a.png)
+![minishell](https://user-images.githubusercontent.com/90937264/232136316-9469796b-aa25-4cb9-b754-aac975f6b83a.png)
 
